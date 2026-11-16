@@ -1,0 +1,69 @@
+m53409|Shendetlie, prăjitură albaneză cu miere și nuci|Bate ouăle cu zahărul și untul, adaugă făina, praful de copt și nucile.|Coace 30 de minute la 180°C.|Toarnă sirop de miere fierbinte peste prăjitură.
+m53410|Tavă albaneză cu praz, orez și carne tocată|Călește carnea cu ceapa și prazul.|Adaugă orezul și supa.|Coace 35 de minute la 190°C.
+m53414|Kurabie, biscuiți cu unt și iaurt|Frământă untul cu zahărul, ouăle, iaurtul și făina.|Formează biscuiți și coace-i 15 minute la 180°C.|Presară zahăr pudră.
+m53419|Pește crocant cu ghimbir și boabe de soia fermentate|Dă peștele prin făină și prăjește-l până e crocant.|Călește ghimbirul, usturoiul și boabele de soia.|Toarnă sosul peste pește și presară ceapă verde.
+m53420|Num poum, vafe cambodgiene cu cocos|Amestecă făina cu ouăle, laptele de cocos și zahărul.|Coace vafele în fierul de vafe până sunt aurii.
+m53427|Naem khao, salată laoțiană de orez crocant cu cârnați|Formează bile din orez fiert cu pastă de curry și prăjește-le.|Sfărâmă-le și amestecă cu cârnații, ceapa, ierburile și lime.|Presară alune.
+m53428|Creveți la grătar cu sos de ceapă verde|Marinează creveții cu usturoi și chimen.|Frige-i 2 minute pe parte.|Amestecă ceapa verde cu oțetul și uleiul și toarnă peste creveți.
+m53437|Pulpă de miel în stil armenesc|Freacă mielul cu usturoi, oțet balsamic, ulei și piper.|Pune-l pe ceapă în tavă.|Coace 2 ore la 170°C.|Presară pătrunjel.
+m53440|Chiftele de pește din Curaçao|Toacă peștele fiert cu cartofi, ceapă și ardei.|Leagă cu ou.|Prăjește chiftele până sunt aurii.|Servește cu sos de roșii.
+m53443|Satay de vită|Taie vita fâșii și marinează-o cu soia, lime, usturoi și zahăr.|Pune-o pe bețe și frige-o.|Servește cu sos de arahide.
+m53444|Găluște tiroleze cu șuncă|Înmoaie pâinea cuburi în lapte cu ouă.|Adaugă șunca, ceapa călită și pătrunjelul și puțină făină.|Formează găluște și fierbe-le 15 minute.|Servește în supă sau cu unt.
+m53445|Kaspressknödel, chiftele austriece cu brânză|Amestecă pâinea cuburi cu laptele, ouăle, brânza și ceapa.|Formează turtițe și prăjește-le în unt.|Servește-le în supă sau cu salată.
+m53449|Kelem dolmasi, sarmale azere în foi de varză|Amestecă carnea cu orezul, năutul, ceapa și coriandrul.|Învelește în frunze de varză opărite.|Fierbe-le acoperite 1 oră cu puțină apă.
+m53451|Curry de pește din Bangladesh cu ridiche|Călește ceapa cu turmeric și ardei iute.|Pune ridichea tăiată și apă și fierbe 10 minute.|Adaugă peștele și gătește 8 minute.|Presară coriandru.
+m53459|Roti cu pui și cartofi cu curry|Fă un curry din pui, cartofi, ceapă și usturoi.|Fă lipii subțiri din făină și unt și coace-le în tigaie.|Învelește curry-ul în lipii.
+m53461|Plăcintă cu macaroane și brânză|Fierbe macaroanele.|Amestecă cu cașcavalul, laptele, ouăle și ceapa călită.|Pune în tavă, presară pesmet și coace 35 de minute la 180°C.
+m53462|Biscuiți melc cu scorțișoară|Fă un aluat din unt, zahăr, ou și făină.|Întinde-l, presară zahăr cu scorțișoară și rulează-l.|Taie felii și coace 12 minute la 180°C.
+m53464|Hutsepot flamand, tocană cu legume și cârnați|Pune în oală cârnații, prazul, morcovii, păstârnacul și ceapa.|Adaugă apă și fierbe 30 de minute.|Pune cartofii și gătește încă 25 de minute.
+m53466|Waterzooi belgian cu pui|Fierbe puiul cu prazul, morcovul și țelina 40 de minute.|Desprinde carnea, adaugă cartofii în supă.|Leagă cu smântână și gălbenuș.|Pune carnea înapoi și presară pătrunjel.
+m53467|Salată de Liège cu fasole verde, cartofi și bacon|Fierbe cartofii și fasolea verde.|Prăjește baconul cu ceapa și stinge cu oțet.|Amestecă totul cât e cald și pune ouăle fierte.
+m53470|Seswaa, vită fiartă și destrămată din Botswana|Fierbe vita cu ceapa și dafinul 3 ore, până se destramă.|Bate-o cu o lingură de lemn până devine fire.|Servește cu mămăligă.
+m53475|Brigadeiro, trufe braziliene|Fierbe laptele condensat cu cacao și unt, amestecând, până se desprinde de vas.|Răcește.|Formează bile și tăvălește-le prin nuci sau cacao.
+m53477|Quindim, desert brazilian cu cocos|Amestecă gălbenușurile cu zahărul, cocosul și untul.|Toarnă în forme unse cu zahăr.|Coace pe baie de apă 40 de minute la 180°C și răcește.
+m53481|Moqueca de creveți din Bahia|Călește ceapa și ardeiul.|Adaugă roșiile și laptele de cocos și fierbe 10 minute.|Pune creveții și gătește 4 minute.|Stoarce lime și presară coriandru.
+m53482|Feijoada cu fasole neagră și porc|Fierbe fasolea înmuiată cu costița și coastele 1 oră.|Adaugă cârnații, ceafa și ceapa cu usturoi călite.|Fierbe încă 1 oră.|Servește cu orez și portocale.
+m53483|Acarajé, chiftele braziliene cu creveți|Macină fasolea cu ochi negri cu ceapa și prăjește chiftele.|Fă o umplutură din creveți cu roșii și ardei iute.|Despică chiftelele și umple-le.
+m53485|Chec brazilian cu morcovi și glazură de ciocolată|Mixează morcovii cu ouăle, uleiul și zahărul.|Încorporează făina și coace 40 de minute la 180°C.|Toarnă glazură de cacao, lapte și zahăr.
+m53493|Biscuiți bulgărești cu miere|Încălzește mierea cu zahărul și uleiul.|Adaugă ouăle și făina și frământă.|Formează biscuiți și coace 12 minute la 180°C.|Glazurează cu ciocolată.
+m53495|Amok trey, curry cambodgian de pește la abur|Amestecă pasta de curry cu laptele de cocos și oul.|Adaugă peștele cuburi.|Pune în boluri și gătește la abur 20 de minute.
+m53496|Bai sach chrouk, porc la grătar cu orez|Marinează felii de ceafă cu lapte de cocos, usturoi, soia și miere.|Frige-le la grătar.|Servește cu orez și castraveți murați.
+m53497|Nom banh chok, supă cambodgiană cu tăiței|Fierbe puiul cu lemongrass și ghimbir.|Desprinde carnea și pune-o înapoi în supă.|Servește peste tăiței de orez cu legume crude și mentă.
+m53498|Samlar kari, curry roșu khmer cu pui|Călește pasta de curry, pune puiul și laptele de cocos.|Adaugă legumele și cartofii dulci și fierbe 20 de minute.|Servește cu orez sau baghetă.
+m53501|Num pang, sandviș cambodgian cu pui|Marinează puiul și coace-l 25 de minute la 200°C.|Murează morcovul și ridichea în oțet.|Umple bagheta cu pui, legume și coriandru.
+m53502|Banh xeo khmer, clătită crocantă cu porc|Fă un aluat din făină de orez, lapte de cocos și turmeric.|Prăjește porcul și ceapa, toarnă aluatul peste ele.|Pune legumele, împăturește și servește cu salată.
+m53503|Samlar machu kreung, tocană acră cambodgiană|Călește pasta de lemongrass, pune puiul.|Adaugă apă, ananas, roșii și fasole verde.|Fierbe 20 de minute și acrește cu tamarind sau lime.
+m53504|Budincă de macaroane cu stafide|Fierbe macaroanele în lapte.|Amestecă cu ouăle, zahărul, stafidele și vanilia.|Coace 40 de minute la 180°C.
+m53508|Prăjitură filipineză cu cassava|Amestecă cassava rasă cu laptele de cocos, zahărul și condimentele.|Coace 50 de minute la 180°C.|Pune un strat de cremă de cocos și rumenește sub grill.
+m53510|Homar în stil Cayman|Călește ceapa, ardeiul și usturoiul.|Pune carnea de homar bucăți și supa.|Leagă cu puțin amidon și gătește 5 minute.
+m53511|Vită sărată cu fasole roșie și cocos|Fierbe carnea cu fasolea 1 oră.|Adaugă laptele de cocos, ceapa verde, usturoiul și ardeiul iute.|Fierbe încă 30 de minute.
+m53514|Empanadas chiliene cu porc, ou și măsline|Călește carnea cu ceapa.|Umple cercuri de aluat cu carne, ou fiert, stafide și măsline.|Închide, unge cu ou și coace 25 de minute la 200°C.
+m53517|Pastel de papas, plăcintă chiliană cu piure|Călește carnea cu ceapa și roșiile.|Pune-o în tavă cu ouă fierte felii.|Acoperă cu piure și coace 25 de minute la 200°C.
+m53518|Empanadas prăjite cu brânză|Fă un aluat din făină, lapte, unt și praf de copt.|Umple cercuri cu brânză și închide-le.|Prăjește-le până se umflă și se auresc.
+m53519|Leche asada, cremă chiliană la cuptor|Bate ouăle cu zahărul și laptele, cu coajă de lămâie și scorțișoară.|Toarnă în formă.|Coace 45 de minute la 180°C, până se rumenește deasupra.
+m53520|Pastel de choclo, plăcintă chiliană cu porumb|Călește carnea cu ceapa, pune deasupra pui fiert, ouă și stafide.|Mixează porumbul cu laptele și busuiocul și gătește până se îngroașă.|Toarnă peste carne, presară zahăr și coace 30 de minute la 200°C.
+m53521|Porotos granados, tocană chiliană cu fasole și porumb|Călește ceapa cu boia.|Adaugă fasolea, dovleacul și apă și fierbe 30 de minute.|Pune porumbul și busuiocul și fierbe 10 minute.
+m53524|Natilla columbiană cu cocos|Fierbe laptele cu laptele de cocos și scorțișoara.|Leagă cu amidon și zahăr, amestecând până se îngroașă.|Toarnă în tavă, presară cocos și răcește.
+m53526|Cartofi umpluți columbieni (papas rellenas)|Fă piure de cartofi.|Călește carnea cu ceapă și roșii.|Învelește carnea în piure, formează bile și dă-le prin aluat de făină și ou.|Prăjește-le până sunt aurii.
+m53531|Pui în sos de portocale|Rumenește puiul.|Adaugă ceapa, ardeiul, zeama de portocale și zahărul.|Fierbe 30 de minute, până sosul se îngroașă.|Presară coriandru.
+m53535|Tamal de maicena, budincă cubaneză|Fierbe laptele cu zahărul și untul.|Leagă cu amidon dizolvat și gălbenușuri, amestecând.|Toarnă în boluri, presară scorțișoară și răcește.
+m53536|Tocană cubaneză de fasole neagră|Fierbe fasolea neagră până se înmoaie.|Călește ceapa, ardeiul, țelina și usturoiul cu oregano.|Pune-le în fasole și fierbe 20 de minute.|Servește cu orez.
+m53537|Pan de yuca, chifle cu cassava și brânză|Amestecă piureul de cassava cu brânza, oul, untul și făina.|Formează chifle.|Coace 20 de minute la 200°C.
+m53540|Pollo en salsa, pui în sos de roșii|Rumenește puiul.|Adaugă ceapa, ardeiul, usturoiul și roșiile.|Fierbe 30 de minute cu oregano.|Servește cu orez.
+m53545|Ropa vieja, vită destrămată cubaneză|Fierbe carnea până se destramă și desfă-o fâșii.|Călește ceapa și ardeii, pune roșiile și vinul.|Adaugă carnea și măslinele și fierbe 20 de minute.|Servește cu orez și fasole.
+m53550|Tartă cu căpșuni și cremă de vanilie|Coace o bază de aluat fraged cu migdale.|Umple-o cu cremă de vanilie.|Așază căpșunile deasupra și glazurează-le.
+m53551|Trifle danez cu mere|Fierbe merele cu zahărul și lămâia până devin piure.|Prăjește pesmetul în unt cu zahăr.|Pune straturi de mere, pesmet și frișcă.
+m53554|Sandviș deschis cu cartofi și bacon|Fierbe cartofii și feliază-i.|Prăjește baconul și ceapa.|Pune pe pâine maioneză, cartofi, bacon și ceapă.
+m53565|Pui „lollipop” cu usturoi și boia|Împinge carnea aripioarelor spre un capăt.|Marinează cu usturoi, boia, piper și amidon.|Coace-le 25 de minute la 220°C sau prăjește-le.
+m53568|Mini plăcinte cu mere pe băț|Taie cercuri de aluat.|Pune mere cu zahăr și scorțișoară și acoperă cu alt cerc, cu un băț între ele.|Unge cu ou și coace 20 de minute la 190°C.
+m53570|Cremă stratificată cu mango|Fă o cremă din lapte, zahăr și vanilie.|Pune straturi de cremă, frișcă și mango în pahare.|Răcește și decorează cu mentă.
+m53571|Prăjitură cu cocos și ovăz din Dominica|Amestecă făina cu cocosul, ovăzul, zahărul și stafidele.|Leagă cu lapte de cocos.|Formează grămăjoare și coace 20 de minute la 180°C.
+m53578|Vafe cu turtă dulce|Bate ouăle cu zahărul, untul, laptele și ghimbirul.|Adaugă făina.|Coace vafele în fierul de vafe.
+uadobo|Adobo de pui filipinez|Pune puiul în oală cu soia, oțet, usturoi, piper și dafin; lasă 30 de minute.|Fierbe acoperit 30 de minute.|Scoate puiul, rumenește-l în ulei și redu sosul.|Servește cu orez.
+ualfajores|Alfajores cu dulce de leche|Frământă untul cu zahărul, gălbenușurile, făina și amidonul.|Taie cercuri și coace 10 minute la 170°C.|Lipește-le câte doi cu dulce de leche și tăvălește marginile prin cocos.
+uanzac-biscuits|Biscuiți Anzac cu ovăz și cocos|Amestecă ovăzul, făina, cocosul și zahărul.|Topește untul cu mierea și bicarbonatul.|Formează biscuiți și coace 12 minute la 170°C.
+uapfelstrudel|Strudel cu mere|Amestecă merele feliate cu zahăr, scorțișoară, stafide și lămâie.|Întinde aluatul foarte subțire și unge-l cu unt.|Presară pesmet prăjit, pune merele și rulează.|Coace 40 de minute la 190°C.
+uappelkaka|Prăjitură suedeză cu mere și ovăz|Pune merele feliate în formă.|Amestecă ovăzul cu făina, zahărul și untul topit și presară peste mere.|Coace 35 de minute la 190°C.|Servește cu sos de vanilie.
+uarroz-con-pollo-cubano|Arroz con pollo, orez cubanez cu pui|Rumenește puiul, apoi călește ceapa și ardeiul.|Pune orezul, roșiile, vinul și supa.|Fierbe acoperit 25 de minute și adaugă mazărea la final.
+uasado-negro|Asado negro, vită venezueleană cu sos dulce-închis|Caramelizează zahărul și rumenește bucata de vită în el.|Pune ceapa, ardeiul, morcovul și vinul roșu.|Fierbe acoperit 2 ore și jumătate.|Feliază și servește cu orez.
+ubacalhau-a-bras|Bacalhau à brás, cod cu cartofi pai și ou|Prăjește cartofii pai.|Călește ceapa și codul desărat, desfăcut fulgi.|Adaugă cartofii și ouăle bătute și amestecă până se leagă.|Presară măsline și pătrunjel.

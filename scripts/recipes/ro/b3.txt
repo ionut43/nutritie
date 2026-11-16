@@ -1,0 +1,82 @@
+m53206|Chiftele thailandeze de pui cu sos dulce-picant|Toacă puiul cu ceapa, ghimbirul, coriandrul și ardeiul iute.|Formează chiftele plate.|Prăjește-le în puțin ulei câte 4 minute pe parte.|Servește cu sos dulce de chili și ceapă verde.
+m53209|Tăiței thailandezi picanți cu creveți|Opărește tăițeii de orez.|Prăjește creveții cu ghimbir și ardei iute, apoi jumări un ou în tigaie.|Adaugă tăițeii, sos de pește și lime și amestecă.|Presară arahide și coriandru.
+m53211|Tocană de vită cu lemongrass și tăiței|Rumenește vita cu ghimbir și lemongrass.|Pune soia, anason și apă și fierbe 2 ore.|Servește peste tăiței de orez cu coriandru și ardei iute.
+m53213|Supă thailandeză de pește cu verdețuri|Fierbe supa cu pasta de curry și lime.|Pune peștele cuburi și creveții și gătește 3 minute.|Adaugă varza chinezească și tăițeii.|Presară coriandru.
+m53214|Supă thailandeză verde cu pui|Călește pasta de curry verde, pune laptele de cocos și supa.|Adaugă puiul fâșii și fierbe 10 minute.|Pune fasolea verde și legumele 3 minute.|Stoarce lime.
+m53220|Kabsa, orez saudit cu pui și condimente|Rumenește puiul cu ceapa și condimentele (cardamom, scorțișoară, piper).|Adaugă roșiile, morcovul și apa și fierbe 30 de minute.|Pune orezul și gătește acoperit 20 de minute.|Presară stafide și migdale prăjite.
+m53221|Ma'amoul, biscuiți umpluți cu curmale|Frământă grișul și făina cu untul și lasă peste noapte.|Adaugă laptele și formează bile.|Umple-le cu pastă de curmale și presează-le în formă.|Coace 15 minute la 190°C.
+m53223|Mutabbaq, plăcintă umplută la tigaie|Bate ouăle cu ceapa verde, roșiile și usturoiul.|Întinde aluatul foarte subțire, pune umplutura și împăturește pachet.|Rumenește-l în unt pe ambele părți.
+m53225|Lahsa yemenită cu ouă, roșii și brânză|Călește ceapa, adaugă roșiile și condimentele.|Sparge ouăle și amestecă ușor.|Presară cașcavalul și lasă să se topească.|Servește cu pâine.
+m53227|Colțunași în foi de orez cu porc|Amestecă carnea tocată cu ciupercile, morcovul, varza și ceapa verde.|Înmoaie foile de orez și învelește umplutura.|Prăjește-le în puțin ulei până devin aurii.|Servește cu sos de soia și lime.
+m53230|Broccoli tempura cu sos vietnamez|Fă un aluat rece din făină, amidon și apă minerală.|Dă broccoli prin aluat și prăjește-l scurt.|Amestecă lime, sos de pește, zahăr și ardei iute pentru sos.
+m53231|Pulpe de miel vietnameze cu cartofi dulci|Rumenește pulpele de miel.|Pune ceapa, ghimbirul, scorțișoara, anasonul și supă.|Coace acoperit 2 ore la 160°C, adaugă cartofii dulci în ultimele 45 de minute.
+m53233|Calamar crocant cu sare și piper, în stil vietnamez|Taie calamarul și dă-l prin amidon cu sare și piper.|Prăjește-l scurt.|Servește cu castraveți și ceapă murate rapid în oțet și ardei iute.
+m53237|Salată vietnameză cu porc|Coace mușchiul de porc marinat cu ghimbir 20 de minute la 200°C.|Taie fâșii varza, castravetele și țelina.|Amestecă cu dressing de lime, sos de pește și zahăr.|Pune porcul feliat și coriandru.
+m53239|Salată de creveți „bang bang”|Opărește tăițeii de orez.|Amestecă untul de arahide cu laptele de cocos și sosul de chili.|Pune tăițeii, legumele, castravetele și creveții în bol.|Toarnă sosul deasupra.
+m53241|Rulouri vietnameze cu pui și legume|Fierbe puiul și taie-l fâșii.|Taie legumele bețișoare.|Învelește în foi de orez înmuiate.|Servește cu sos de soia și lime.
+m53242|Chifle cu porc caramelizat la grătar|Marinează costița în miere, soia și pasta de roșii.|Coace-o 40 de minute la 180°C, ungând cu marinadă.|Feliază-o și pune-o în chifle cu legume murate.
+m53243|Rulouri cu creveți și spirale de dovlecel|Taie dovlecelul și morcovul spirale.|Opărește creveții.|Învelește în foi de orez cu ierburi.|Servește cu sos de soia, oțet și lime.
+m53244|Salată de tăiței cu creveți și ceapă crocantă|Prăjește ceapa feliată subțire până e crocantă.|Opărește tăițeii de orez.|Amestecă cu creveții, castravetele, menta și coriandrul.|Toarnă dressing de lime și sos de pește și presară ceapa.
+m53245|Bol cu tăiței și somon glazurat|Glazurează somonul cu miere și soia și coace-l 12 minute la 200°C.|Opărește tăițeii de orez.|Pune-i în boluri cu ceapă verde și coriandru.|Așază somonul deasupra.
+m53250|Banh mi vegan cu tofu|Marinează tofu în soia și prăjește-l.|Murează rapid legumele în oțet.|Umple bagheta cu tofu, legume, coriandru și mentă.
+m53253|Imam bayildi cu miel la grătar și tzatziki|Coace vinetele umplute cu ceapă și roșii 45 de minute la 180°C.|Frige mielul.|Fă tzatziki din iaurt, castravete și lămâie.|Servește totul împreună.
+m53260|Miel la cuptor cu scorțișoară, fenicul și citrice|Freacă mielul cu miere, scorțișoară, chimen, lămâie și ulei.|Pune-l pe fenicul feliat în tavă.|Coace acoperit 4 ore la 150°C.
+m53265|Cotlete de miel cu ghimbir și chili|Marinează cotletele cu usturoi, ghimbir, chili, chimen și lămâie.|Frige-le la foc mare 3 minute pe parte.|Servește cu salată.
+m53270|Miel în stil turcesc cu iaurt și pâine|Marinează mielul în iaurt, usturoi și chimen.|Frige-l la grătar sau în tigaie.|Servește pe pâine cu salată, ceapă, iaurt cu mentă și lămâie.
+m53271|Chec cu nuci, curmale și miere|Bate untul cu zahărul și ouăle, adaugă banana pasată.|Încorporează făina, curmalele și nucile.|Coace 50 de minute la 170°C și unge cu miere caldă.
+m53273|Vinete la cuptor cu brânză de capră și lipie|Coace vinetele felii cu ulei 25 de minute.|Adaugă roșiile și ceapa în ultimele 10 minute.|Pune brânza și oțetul balsamic.|Servește cu lipie prăjită.
+m53274|Vinete la grătar cu dressing de tahini|Frige feliile de vinete în tigaia grill.|Amestecă tahini cu iaurt, lămâie și usturoi.|Toarnă peste vinete și presară verdeață.
+m53277|Chiftele de miel cu caise în sos de roșii|Amestecă carnea cu pesmetul, ceapa și condimentele și formează chiftele.|Rumenește-le în ulei.|Pune roșiile și caisele uscate și fierbe 20 de minute.
+m53278|Vinete la grătar cu hummus și roșii|Frige feliile de vinete.|Unge-le cu hummus.|Pune roșii, pătrunjel, nuci și lămâie deasupra.|Servește cu pâine.
+m53283|Chtitha batata, tocană algeriană de cartofi|Călește usturoiul cu pasta de roșii, boia și chimen.|Adaugă cartofii și apă și fierbe 25 de minute.|Presară pătrunjel.
+m53285|Dziriat, tarte algeriene cu migdale|Fă un aluat din făină și ulei și taie cercuri.|Amestecă migdalele măcinate cu zahărul, ouăle și coaja de lămâie.|Umple formele și coace 15 minute la 170°C.|Însiropează cu miere.
+m53289|Chorba algeriană cu miel, roșii și bulgur|Rumenește mielul cu ceapa.|Pune roșiile, năutul, dovlecelul, cartofii și apă și fierbe 40 de minute.|Adaugă bulgurul și fierbe 15 minute.|Presară coriandru și menta.
+m53291|Cornulețe gazelă cu migdale|Fă pastă din migdale, zahăr, unt și apă de flori de portocal.|Întinde aluatul subțire, pune pastă și formează cornulețe.|Coace 15 minute la 170°C.
+m53292|Piernik, turtă dulce poloneză|Încălzește mierea cu untul și condimentele.|Amestecă cu făina, ouăle și smântâna.|Coace 50 de minute la 170°C.|Taie pe orizontală, umple cu gem de prune și glazurează cu ciocolată.
+m53293|Prăjitură cu fistic și mascarpone|Bate untul cu zahărul, ouăle și fisticul măcinat.|Coace 30 de minute la 170°C.|Acoperă cu cremă de mascarpone și frișcă și fructe de pădure.
+m53304|Mini guguluf cu cacao|Bate untul cu zahărul și ouăle, adaugă făina, laptele și praful de copt.|Pune cacao în jumătate din aluat.|Umple formele cu ambele aluaturi și coace 20 de minute la 180°C.
+m53314|Pierogi cu varză murată|Fă un aluat din făină, ou și apă.|Călește varza murată tocată cu ceapa.|Umple cercuri de aluat și fierbe-i 4 minute.|Servește cu unt, ceapă prăjită și smântână.
+m53316|Clătite cu sfeclă și iaurt|Amestecă sfecla rasă cu făina, ouăle și laptele.|Prăjește clătite mici.|Servește cu iaurt, miere și fructe de pădure.
+m53318|Tort de fiambre, plăcintă uruguayană cu șuncă și brânză|Fă un aluat din făină, lapte, ulei și praf de copt.|Pune jumătate în tavă, apoi șunca, brânza și ouăle fierte.|Acoperă cu restul de aluat și coace 35 de minute la 190°C.
+m53320|Alfajores cu ciocolată|Fă biscuiți din făină, amidon, unt, zahăr și cacao.|Lipește-i câte doi cu cremă de lapte caramelizat.|Înmoaie-i în ciocolată topită.
+m53321|Alfajores cu vanilie și cocos|Frământă untul cu zahărul, făina și amidonul.|Coace cercuri 10 minute la 170°C.|Lipește-le cu cremă de lapte caramelizat și tăvălește marginile prin cocos.
+m53323|Postre chajá, tort uruguayan cu bezea și piersici|Taie pandișpanul în straturi și însiropează-l.|Pune frișcă, piersici și bezea sfărâmată între straturi.|Acoperă cu frișcă și bezea și răcește.
+m53324|Empanadas dulci cu ciocolată|Fă un aluat din făină, unt, zahăr și ou.|Umple cercuri cu cremă de ciocolată și scorțișoară.|Închide semilună și coace 18 minute la 190°C.
+m53327|Pui venezuelan cu lapte de cocos|Călește ceapa, ghimbirul și roșiile.|Pune puiul cuburi și rumenește-l.|Toarnă laptele de cocos și fierbe 20 de minute.
+m53328|Carne mechada, vită destrămată venezueleană|Fierbe vita până se destramă ușor, apoi desfă-o fâșii.|Călește ceapa, ardeiul și roșiile.|Pune carnea, pasta de roșii și puțină supă și gătește 15 minute.|Servește cu orez și fasole neagră.
+m53329|Arepa pelúa cu vită și brânză|Fă arepas din făină de porumb și apă și coace-le în tigaie.|Despică-le și umple-le cu vită destrămată și cașcaval ras.
+m53333|Mousse de fructul pasiunii|Amestecă pulpa de fruct cu laptele condensat.|Încorporează frișca bătută.|Pune în pahare și răcește 3 ore.
+m53335|Jiggs dinner, vită fiartă cu legume|Fierbe vita sărată 2 ore.|Pune mazărea uscată într-un săculeț în aceeași oală.|Adaugă cartofii, morcovii, păstârnacul și varza în ultimele 40 de minute.
+m53336|Fasole la cuptor cu bacon și melasă|Pune fasolea cu costița, ceapa, mierea, muștarul și oțetul în vas.|Acoperă cu apă.|Coace acoperit 3 ore la 150°C.
+m53337|Plăcintă cu fructe de pădure|Amestecă fructele cu zahărul și amidonul.|Pune-le într-un aluat fraged și acoperă cu aluat.|Coace 50 de minute la 190°C.
+m53339|Biscuiți dubli cu gem|Frământă untul cu zahărul, mierea, oul și făina.|Taie cercuri și coace 10 minute la 180°C.|Lipește-le câte doi cu gem.
+m53340|Hodge podge, legume noi cu unt și smântână|Fierbe cartofii noi, morcovii, fasolea verde și mazărea.|Scurge apa, pune untul și smântâna.|Încălzește 2 minute și presară piper.
+m53342|Figgy duff, budincă cu stafide|Amestecă făina cu untul, zahărul, stafidele și condimentele.|Leagă cu melasă și apă.|Leagă în pânză și fierbe 1 oră și jumătate.
+m53343|Tourtière clasică cu vită și porc|Călește carnea cu ceapa și condimentele.|Amestecă cu piure de cartofi.|Pune între două foi de aluat și coace 45 de minute la 190°C.
+m53344|Budincă jamaicană de cartofi dulci|Rade cartofii dulci.|Amestecă cu laptele de cocos, zahărul, făina, stafidele și condimentele.|Coace 1 oră și jumătate la 170°C.
+m53348|Chec jamaican condimentat (spice bun)|Amestecă făina cu zahărul, condimentele și fructele uscate.|Leagă cu ouă, lapte și vin.|Coace 1 oră la 170°C și glazurează cu miere.
+m53350|Vită sărată jamaicană cu varză|Călește ceapa și ardeiul.|Adaugă carnea, roșiile și ketchup-ul.|Pune varza și gătește 10 minute.
+m53351|Gogoși jamaicane cu banane|Pasează bananele și amestecă cu făina, zahărul și condimentele.|Prăjește linguri de aluat în ulei.|Presară zahăr.
+m53352|Orez cu fasole roșie în stil jamaican, rapid|Călește ceapa.|Adaugă orezul, fasolea, laptele de cocos, cimbrul și apa.|Fierbe acoperit 20 de minute.
+m53354|Curry jamaican de miel|Marinează carnea cu curry, usturoi și ardei iute.|Rumenește-o, adaugă apă și fierbe 1 oră și jumătate.|Pune cartofii și gătește 25 de minute.
+m53357|Orez cu fasole roșie (rice and peas)|Fierbe fasolea, apoi adaugă laptele de cocos, ceapa verde, cimbrul și ardeiul întreg.|Pune orezul și gătește acoperit 20 de minute.
+m53359|Mandi, orez arăbesc cu vită|Fierbe carnea cu condimente până se înmoaie.|Călește ceapa, pune orezul și supa de carne.|Gătește 20 de minute, așază carnea deasupra și coace 15 minute.
+m53362|Creveți cu curry jamaican|Călește ceapa, usturoiul și ardeiul cu curry.|Pune laptele de cocos și fierbe 5 minute.|Adaugă creveții și gătește 3 minute.|Servește cu orez.
+m53368|Tăiței Singapore cu creveți|Opărește tăițeii de orez subțiri.|Prăjește creveții, șunca și legumele cu curry.|Pune tăițeii și ouăle bătute și amestecă.|Stropește cu soia.
+m53370|Egg foo young, omletă chinezească cu creveți|Bate ouăle cu creveții tocați și legumele.|Prăjește omlete mici.|Fă un sos din supă, soia și amidon și toarnă-l deasupra.
+m53375|Creveți cu mazăre dulce|Prăjește creveții cu ghimbir și usturoi.|Adaugă păstăile de mazăre și ceapa verde.|Stinge cu vin de orez și soia.
+m53377|Varză chinezească cu creveți uscați|Călește ghimbirul și creveții.|Pune varza tăiată și gătește la foc mare 4 minute.|Leagă cu soia și puțin amidon.
+m53381|Speculaas umplut cu migdale|Frământă aluatul cu unt, zahăr și condimente de speculaas.|Pune jumătate în tavă, apoi pasta de migdale, apoi restul.|Coace 40 de minute la 175°C.
+m53385|Boterkoek, prăjitură olandeză cu unt|Frământă untul cu zahărul, făina și oul.|Presează în tavă și fă un model cu furculița.|Coace 30 de minute la 175°C.
+m53386|Plăcintă olandeză cu mere|Fă un aluat din unt, zahăr și făină.|Amestecă merele cu stafide și scorțișoară.|Pune în formă și acoperă cu grilaj de aluat.|Coace 1 oră la 175°C.
+m53387|Ontbijtkoek, chec olandez condimentat|Amestecă făina cu zahărul brun, condimentele și praful de copt.|Adaugă laptele și mierea.|Coace 1 oră la 160°C.
+m53392|Arnhemse meisjes, biscuiți olandezi din foietaj|Întinde foietajul și presară zahăr cu scorțișoară.|Taie ovale și întinde-le încă o dată.|Coace 12 minute la 200°C, până se caramelizează.
+m53393|Oliebollen, gogoși olandeze|Fă un aluat moale din făină, lapte și drojdie.|Lasă-l să crească 1 oră.|Prăjește linguri de aluat și presară zahăr pudră.
+m53394|Zeeuwse bolussen, melci cu zahăr brun|Fă un aluat dospit din făină, lapte, unt și ou.|Tăvălește fâșii prin zahăr brun și scorțișoară și rulează-le melci.|Coace 15 minute la 200°C.
+m53396|Baghlava afgană|Fă straturi de aluat subțire cu nuci tocate între ele.|Coace 40 de minute la 180°C.|Toarnă sirop cu cardamom peste baghlava caldă.
+m53398|Kadu borani, dovleac afgan cu iaurt|Rumenește dovleacul felii cu ceapa.|Adaugă turmericul, zahărul și puțină apă și fierbe 20 de minute.|Servește cu iaurt cu usturoi.
+m53400|Mastawa, orez afgan cu miel și năut|Fierbe mielul cu ceapa.|Adaugă orezul, năutul și coaja de portocală.|Gătește 20 de minute și servește cu iaurt.
+m53402|Mantu, colțunași afgani cu miel|Umple pătrate de aluat cu miel tocat și ceapă.|Gătește-i la abur 30 de minute.|Servește cu iaurt cu usturoi și sos de roșii.
+m53404|Tavë kosi, miel albanez cu iaurt la cuptor|Rumenește mielul și pune-l în tavă cu orez.|Bate iaurtul cu ouăle și făina prăjită în unt.|Toarnă peste carne și coace 45 de minute la 180°C.
+m53405|Tavă albaneză cu praz și orez|Călește prazul și ardeiul cu boia.|Adaugă orezul și supa.|Coace 40 de minute la 180°C.
+m53407|Plăcintă albaneză cu dovlecel (lakror)|Rade dovlecelul și stoarce-l.|Fă un aluat din făină, ou și ulei.|Pune straturi de aluat și umplutură.|Coace 40 de minute la 190°C.

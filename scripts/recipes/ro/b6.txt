@@ -1,0 +1,37 @@
+m52769|Kapsalon, cartofi prăjiți cu miel, brânză și salată|Prăjește cartofii sau coace-i la cuptor.|Rumenește carnea de miel condimentată fâșii.|Pune în tavă cartofi, carne și cașcaval și gratinează 5 minute.|Acoperă cu salată, roșii și castraveți.
+m52786|Rocky road, fudge cu ciocolată și arahide|Topește ciocolata cu untul și untul de arahide.|Amestecă arahidele și vanilia.|Toarnă în tavă tapetată și răcește 3 ore, apoi taie pătrate.
+m52794|Tort de ciocolată fără lactate|Amestecă făina, zahărul, cacao și praful de copt.|Adaugă laptele de soia, ouăle și uleiul.|Coace 30 de minute la 180°C.|Acoperă cu glazură de ciocolată.
+m52833|Cheesecake cu caramel sărat|Fă o bază din biscuiți și unt.|Bate crema de brânză cu zahărul și frișca și întinde peste bază.|Răcește 4 ore.|Toarnă caramel sărat deasupra.
+m52888|Eccles cakes, plăcințele englezești cu stafide|Amestecă stafidele cu untul topit, zahărul și coaja de lămâie.|Pune umplutura pe cercuri de aluat și strânge-le.|Întoarce-le, crestează, unge cu albuș și presară zahăr.|Coace 20 de minute la 200°C.
+m52889|Summer pudding cu fructe de pădure|Fierbe fructele cu zahărul 3 minute.|Căptușește un bol cu felii de pâine.|Umple cu fructe, acoperă cu pâine și pune o greutate deasupra.|Răcește peste noapte și răstoarnă.
+m52947|Mapo tofu|Rumenește carnea cu ghimbir și usturoi.|Adaugă pasta de ardei iute și supa.|Pune tofu cuburi și fierbe 5 minute.|Leagă cu amidon și presară ceapă verde.
+m52971|Kafteji tunisian, legume prăjite cu ou|Prăjește cartofii, dovleacul și ardeii.|Toacă-le mărunt.|Prăjește ouăle și toacă-le cu legumele.|Condimentează cu harissa și chimen.
+m53029|Mulukhiyah egipteană cu vită|Fierbe vita cu ceapa până se înmoaie.|Adaugă frunzele verzi tocate mărunt în supă.|Prăjește usturoiul cu coriandru și pune-l peste.|Servește cu orez.
+m53063|Chivito uruguayan la farfurie|Frige felii subțiri de vită.|Pune pe ele șuncă, brânză și un ou ochi.|Servește cu salată, roșii, ardei și ceapă.
+m53071|Beef asado filipinez|Rumenește vita.|Adaugă ceapa, sosul de soia, pasta de roșii și lămâia.|Fierbe acoperit 1 oră și jumătate.|Servește cu orez.
+m53224|Prăjitură cu fistic și kunafa|Prăjește firele de kunafa în unt până devin aurii.|Amestecă cu crema de fistic.|Pune straturi peste blatul de ciocolată.|Acoperă cu ciocolată topită.
+m53248|Rulouri cu somon și tăiței de orez|Coace somonul 12 minute la 200°C.|Fierbe tăițeii.|Învelește somon, tăiței, mazăre, ierburi și ardei iute în foi de orez.|Servește cu sos de lime.
+m53276|Desert turcesc cu caise și rahat|Amestecă iaurtul grecesc cu mascarponele și zahărul.|Pune caisele uscate fierte în zeamă de portocale.|Adaugă rahat tăiat și mentă.
+m53326|Sancocho venezuelan cu vită|Fierbe vita 1 oră.|Adaugă cartofii, dovleacul, porumbul și cassava.|Fierbe încă 40 de minute.|Presară coriandru.
+m53334|Arepa pabellón|Fă arepe din mălai, apă și sare și coace-le în tigaie.|Despică-le.|Umple cu vită destrămată, fasole neagră, banană prăjită și brânză.
+m53341|Flapper pie, tartă canadiană cu cremă|Fă o bază din biscuiți și unt.|Fierbe laptele cu zahărul, gălbenușurile și amidonul până se îngroașă.|Toarnă crema, acoperă cu bezea și coace 15 minute la 180°C.
+m53349|Creveți picanți jamaicani|Fierbe creveții 3 minute în apă cu sare.|Amestecă-i cu oțet, ardei iute, ceapă, usturoi și ienibahar.|Lasă-i la frigider o noapte.
+m53382|Stroopwafels olandeze|Fă un aluat cu drojdie, unt și zahăr.|Coace turte subțiri în fierul de vafe și despică-le cât sunt calde.|Umple-le cu sirop de caramel cu scorțișoară.
+m53391|Rijstevlaai, tartă olandeză cu orez|Fierbe orezul în lapte cu zahăr și scorțișoară până se îngroașă.|Leagă cu gălbenușuri.|Toarnă în aluat cu drojdie și coace 25 de minute la 200°C.
+m53395|Slagroomtaart, tort olandez cu frișcă și fructe|Coace un pandișpan și taie-l în 3 foi.|Unge foile cu gem și frișcă.|Acoperă tot cu frișcă și decorează cu fructe.
+m53418|Spanac de apă cu porc la wok în stil cambodgian|Călește usturoiul și carnea tocată.|Adaugă pasta de soia, zahărul și ardeiul iute.|Pune frunzele verzi și călește 2 minute.
+m53421|Lok lak, vită cambodgiană cu ou|Marinează vita cuburi cu soia, zahăr și usturoi.|Călește-o la foc mare.|Servește pe salată cu roșii, ceapă, ou ochi și sos de lime cu piper.
+m53425|Budincă laoțiană cu tapioca și banane|Fierbe tapioca în apă până devine transparentă.|Adaugă laptele de cocos, zahărul și sarea.|Pune bananele felii și fierbe 3 minute.
+m53430|Mic dejun din Antigua cu spanac și ou|Călește ceapa și usturoiul în unt.|Adaugă spanacul și dovleacul și fierbe 15 minute.|Zdrobește-le și servește cu ouă.
+m53463|Chiftele belgiene în sos de Liège|Amestecă carnea cu pesmetul, ouăle și ceapa.|Rumenește chiftelele.|Fă sosul din ceapă, sirop de mere și pere și supă.|Fierbe chiftelele în sos 20 de minute.
+m53505|Chiftele caraibiene cu fructe de mare|Toacă fructele de mare cu ceapă și ardei.|Amestecă cu făina, oul și lămâia.|Prăjește grămăjoare până se rumenesc.
+m53512|Tocană de fructe de mare din Bahamas|Călește ceapa și ardeiul.|Adaugă rântaș și supă.|Pune fructele de mare și fierbe 20 de minute.
+m53541|Gallo pinto cu orez și fasole neagră|Călește ceapa și ardeiul.|Adaugă fasolea cu zeamă și sosul.|Amestecă orezul și coriandrul.
+m53543|Cheesecake cu dulce de leche și biscuiți|Fă baza din biscuiți și unt.|Bate crema de brânză cu ouăle și dulce de leche.|Coace 50 de minute la 160°C și răcește.
+ubuffalo-wings|Aripioare Buffalo|Usucă aripioarele și tăvălește-le prin praf de copt.|Coace-le 50 de minute la 220°C.|Amestecă-le cu sos iute cu unt.|Servește cu țelină.
+uceviche|Ceviche peruan|Taie peștele cuburi.|Marinează-l 10 minute în zeamă de lime cu ardei iute.|Adaugă ceapă roșie și coriandru.|Servește cu cartof dulce și porumb.
+uchiles-en-nogada|Chiles rellenos, ardei umpluți mexicani|Coace ardeii și curăță-i.|Umple-i cu brânză.|Dă-i prin făină și ou bătut spumă și prăjește-i.|Servește cu sos de roșii.
+uciorba-de-burta|Ciorbă de burtă|Fierbe burta și oasele 3 ore, cu spumare.|Adaugă morcovul, țelina și ceapa și fierbe 30 de minute.|Taie burta fâșii.|Leagă cu smântână, gălbenușuri și usturoi și acrește cu oțet.
+ukak-ik|Kak'ik, supă guatemaleză de curcan|Prăjește roșiile, ardeii și usturoiul și mixează-le.|Fierbe curcanul în supă cu pasta 1 oră.|Servește cu orez.
+utacos-al-pastor|Tacos al pastor|Marinează ceafa cu ardei uscați, ananas, oțet și condimente.|Frige-o și taie-o mărunt.|Servește în tortilla cu ananas, ceapă și coriandru.
+utiramisu|Tiramisu|Bate gălbenușurile cu zahărul și mascarponele.|Încorporează albușurile spumă.|Înmoaie pișcoturile în cafea și pune straturi cu crema.|Răcește 6 ore și presară cacao.
