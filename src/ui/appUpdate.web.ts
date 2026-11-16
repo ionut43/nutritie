@@ -3,3 +3,4 @@ export type Update = { versionCode: number; url: string; sizeMB: number; notes: 
 export const currentVersion = () => 0;
 export async function checkForUpdate(): Promise<Update | null> { return null; }
 export async function installUpdate(): Promise<void> { /* nimic */ }
+export const lastUpdateError = '';

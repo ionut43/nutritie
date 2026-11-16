@@ -26,6 +26,8 @@ jobs:
         with: { node-version: 22, cache: npm }
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 21 }
+      # numărul versiunii pentru tot job-ul (și pentru prebuild, și pentru Gradle): +100 trece peste versiunile instalate de mână
+      - run: echo "BUILD_NUMBER=$((GITHUB_RUN_NUMBER + 100))" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm test
       - name: Cheia de semnare (pentru actualizări fără pierderea datelor)
@@ -42,8 +44,9 @@ jobs:
           else
             echo "::warning::Lipsesc secretele ANDROID_KEYSTORE_*; APK-ul se semnează cu cheia de test."
           fi
-      # +100: trece peste versiunile instalate până acum, ca actualizarea să se poată pune peste ele
-      - run: BUILD_NUMBER=$((GITHUB_RUN_NUMBER + 100)) npx expo prebuild --platform android --no-install
+      - run: npx expo prebuild --platform android --no-install
+      # doar pentru telefoanele de azi (arm64): aplicația are ~75 MB în loc de ~200 MB și se construiește de două ori mai repede
+      - run: sed -i 's/^reactNativeArchitectures=.*/reactNativeArchitectures=arm64-v8a/' android/gradle.properties
       - run: ./gradlew assembleRelease --no-daemon
         working-directory: android
       - run: cp android/app/build/outputs/apk/release/app-release.apk Nutritie.apk

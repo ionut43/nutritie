@@ -15,6 +15,7 @@ import { autoBackups, exportBackup, pickBackup, readBackup } from '../ui/backup'
 import { ToggleRow } from '../ui/forms';
 import { Btn, Card, DISPLAY, Divider, FoodImage, Header, Icon, type IconName, NumberField, Pill, Row, Screen, Section, T, useTheme } from '../ui/kit';
 import { biometricsAvailable, confirmIdentity } from '../ui/LockGate';
+import { AppVersionRow } from '../ui/UpdateBanner';
 import { ensurePermission } from '../ui/notify';
 import { Avatar } from '../ui/shared';
 import { ThemePicker } from '../ui/ThemePicker';
@@ -192,6 +193,7 @@ export default function Profile() {
             if (v && !(await biometricsAvailable())) { Alert.alert('Nu e disponibil', 'Activează Face ID, amprenta sau un cod în setările telefonului.'); return; }
             if (await confirmIdentity()) setLock(v);
           }} />
+        {Platform.OS === 'android' && <Card style={{ gap: 6 }}><AppVersionRow /></Card>}
         <Card style={{ gap: 10 }}>
           <T v="h3">Backup</T>
           <T v="small">{lastBackupISO ? `Ultimul backup: acum ${Math.max(0, daysBetween(lastBackupISO.slice(0, 10), todayISO()))} zile` : 'Nu ai făcut încă niciun backup.'} Salvează-l în iCloud Drive, Google Drive sau pe e-mail.</T>

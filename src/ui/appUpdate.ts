@@ -1,3 +1,4 @@
+import * as Application from 'expo-application';
 import Constants from 'expo-constants';
 import { File, Paths } from 'expo-file-system';
 import { getContentUriAsync } from 'expo-file-system/legacy';
@@ -11,20 +12,23 @@ import { Platform } from 'react-native';
  */
 export type Update = { versionCode: number; url: string; sizeMB: number; notes: string };
 
-const repo = (): string | undefined => (Constants.expoConfig?.extra as { updateRepo?: string } | undefined)?.updateRepo;
-export const currentVersion = (): number => Number(Constants.expoConfig?.android?.versionCode ?? 0);
+// dacă configurația nu e în aplicație (unele build-uri o omit), folosesc valorile știute
+const repo = (): string => (Constants.expoConfig?.extra as { updateRepo?: string } | undefined)?.updateRepo ?? 'ionut43/nutritie';
+// versiunea reală, din aplicația instalată (cea din configurație poate rămâne 1 dacă build-ul n-a primit numărul)
+export const currentVersion = (): number => Number(Application.nativeBuildVersion ?? 0);
+export let lastUpdateError = '';
 
 let lastCheck = 0;
 let cached: Update | null = null;
 
 /** versiunea nouă, dacă există (cel mult o verificare la 6 ore) */
 export async function checkForUpdate(force = false): Promise<Update | null> {
-  if (Platform.OS !== 'android' || !repo()) return null;
+  if (Platform.OS !== 'android') return null;
   if (!force && Date.now() - lastCheck < 6 * 3600_000) return cached;
   lastCheck = Date.now();
   try {
     const r = await fetch(`https://api.github.com/repos/${repo()}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' } });
-    if (!r.ok) return cached;
+    if (!r.ok) { lastUpdateError = `GitHub a răspuns ${r.status}`; return cached; }
     const rel = (await r.json()) as { tag_name?: string; body?: string; assets?: { name: string; browser_download_url: string; size: number }[] };
     // tag-ul e build-N, iar versionCode = N + 100 (vezi .github/workflows/build.yml)
     const n = Number(String(rel.tag_name ?? '').replace(/^\D+/, ''));
@@ -33,7 +37,8 @@ export async function checkForUpdate(force = false): Promise<Update | null> {
     const vc = n + 100;
     cached = vc > currentVersion() ? { versionCode: vc, url: apk.browser_download_url, sizeMB: Math.round(apk.size / 1e6), notes: rel.body ?? '' } : null;
     return cached;
-  } catch {
+  } catch (e) {
+    lastUpdateError = e instanceof Error ? e.message : String(e);
     return cached;
   }
 }

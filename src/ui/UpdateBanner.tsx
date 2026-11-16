@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Pressable, View } from 'react-native';
-import { checkForUpdate, installUpdate, type Update } from './appUpdate';
+import { Platform, Pressable, View } from 'react-native';
+import { checkForUpdate, currentVersion, installUpdate, lastUpdateError, type Update } from './appUpdate';
 import { Icon, Progress, T, useTheme } from './kit';
 
 /** o bandă discretă pe „Azi” când există o versiune nouă; o atingi și se instalează peste, cu datele păstrate */
@@ -33,5 +33,32 @@ export function UpdateBanner() {
         {!!err && <T v="small" color={t.danger}>{err}</T>}
       </View>
     </Pressable>
+  );
+}
+
+/** în Profil: ce versiune ai și un buton „Caută actualizări” (doar pe Android) */
+export function AppVersionRow() {
+  const t = useTheme();
+  const [msg, setMsg] = useState('');
+  const [u, setU] = useState<Update | null>(null);
+  const [pct, setPct] = useState<number | null>(null);
+  if (Platform.OS !== 'android') return null;
+  const check = async () => {
+    setMsg('Caut…');
+    const x = await checkForUpdate(true);
+    setU(x);
+    setMsg(x ? `Versiunea ${x.versionCode} e gata de instalat (${x.sizeMB} MB).` : lastUpdateError ? `Nu am putut verifica: ${lastUpdateError}` : 'Ai ultima versiune.');
+  };
+  return (
+    <View style={{ gap: 6 }}>
+      <T v="small">Versiunea aplicației: {currentVersion() || '?'}</T>
+      {pct !== null ? <Progress value={pct} max={1} height={5} /> : null}
+      <Pressable onPress={async () => {
+        if (u) { setPct(0); try { await installUpdate(u, setPct); } catch (e) { setMsg(e instanceof Error ? e.message : 'Nu s-a putut descărca.'); } setPct(null); } else check();
+      }} hitSlop={8}>
+        <T v="small" color={t.primary} style={{ fontWeight: '700' }}>{u ? 'Instalează actualizarea' : 'Caută actualizări'}</T>
+      </Pressable>
+      {!!msg && <T v="small">{msg}</T>}
+    </View>
   );
 }
