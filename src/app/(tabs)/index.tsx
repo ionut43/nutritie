@@ -12,6 +12,7 @@ import { perServing } from '../../logic/nutrition';
 import { recipeOfEntry, slotOfEntry as slotOf } from '../../logic/foods';
 import { daysLeft } from '../../logic/pantry';
 import { mealLabel, mealMacros, sessionMeals, sidesLabel, SLOT_ORDER } from '../../logic/planner';
+import { UpdateBanner } from '../../ui/UpdateBanner';
 import type { FoodLogEntry, PlannedMeal, Slot, WeekPlan } from '../../logic/types';
 import { eatenKey, ownedBy, planForDate, useActiveMember, useFeature, useStore } from '../../store/useStore';
 import { Btn, DISPLAY, DISPLAY_X, FoodImage, Icon, Row, T, useTheme } from '../../ui/kit';
@@ -124,6 +125,8 @@ export default function Today() {
             <Avatar name={main.name} color={t.primary} size={40} />
           </Pressable>
         </Row>
+
+        <UpdateBanner />
 
         <View style={{ alignItems: 'center', gap: 12 }}>
           <MealArc target={tg.kcal} pieces={pieces} ghost={ghost} size={300} stroke={22}
