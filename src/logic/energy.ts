@@ -156,10 +156,12 @@ export function computeTargets(m: Member, at = new Date()): Targets {
   kcal += m.kcalAdjust;
   kcal = round10(kcal);
 
-  // Proteine: pentru IMC > 30 se folosește greutatea ajustată
-  const refW = bmi > 30 ? 25 * hM * hM + 0.25 * (w - 25 * hM * hM) : w;
-  const gPerKg = isChild ? 1.0 : m.pregnancy !== 'nu' ? 1.3 : (goal === 'mentinere' ? 1.4 : 1.8) + (m.highProtein ? 0.4 : 0);
-  const protein = Math.round(refW * gPerKg);
+  // Proteine: peste IMC 25 se socotesc pe greutatea ajustată (nu pe tot surplusul), și cel mult ~32% din calorii,
+  // cât se poate mânca din mâncare obișnuită. Sub 0,8 g/kg nu coboară niciodată.
+  const refW = bmi > 25 ? 25 * hM * hM + 0.25 * (w - 25 * hM * hM) : w;
+  const gPerKg = isChild ? 1.0 : m.pregnancy !== 'nu' ? 1.3 : (goal === 'mentinere' ? 1.2 : 1.6) + (m.highProtein ? 0.4 : 0);
+  const capPct = m.highProtein ? 0.38 : 0.32;
+  const protein = Math.round(Math.max(0.8 * refW, Math.min(refW * gPerKg, (kcal * capPct) / 4)));
   const fat = Math.round(Math.max((kcal * 0.3) / 9, 0.6 * w));
   const carbs = Math.max(0, Math.round((kcal - protein * 4 - fat * 9) / 4));
   const fiber = Math.round((kcal / 1000) * 14);

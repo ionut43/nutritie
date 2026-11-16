@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, Modal, Pressable, Share, TextInput, View } from 'react-native';
+import { Alert, Modal, Platform, Pressable, Share, TextInput, View } from 'react-native';
 import Svg, { Circle, Path, Line as SvgLine } from 'react-native-svg';
 import { ING } from '../data/ingredients';
 import { RECIPE } from '../data/recipes';
@@ -181,12 +181,12 @@ export default function Profile() {
         )}
       </Section>}
 
-      <Section title="Notificări și siguranță">
-        <ToggleRow title="Când expiră alimentele" desc="Cu o zi înainte la 18:00 și în ziua expirării la 9:00."
+      <Section title={Platform.OS === 'web' ? 'Siguranță' : 'Notificări și siguranță'}>
+        {Platform.OS !== 'web' && <ToggleRow title="Când expiră alimentele" desc="Cu o zi înainte la 18:00 și în ziua expirării la 9:00."
           value={notifyExpiry} onChange={async (v) => {
             if (v && !(await ensurePermission())) { Alert.alert('Notificările sunt oprite', 'Pornește-le din Setările telefonului → Nutriție → Notificări.'); return; }
             setNotifyExpiry(v);
-          }} />
+          }} />}
         <ToggleRow title="Blocare cu Face ID / amprentă" desc="Datele nu pleacă niciodată de pe telefon."
           value={lockEnabled} onChange={async (v) => {
             if (v && !(await biometricsAvailable())) { Alert.alert('Nu e disponibil', 'Activează Face ID, amprenta sau un cod în setările telefonului.'); return; }

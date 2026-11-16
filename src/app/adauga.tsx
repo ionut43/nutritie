@@ -8,7 +8,7 @@ import { computeTargets } from '../logic/energy';
 import { amountLabel, foodFromRef, macrosFor, recentFoods, recipeOfEntry, searchFoods, type FoodItem } from '../logic/foods';
 import { parseMealText } from '../logic/freeText';
 import { perServing } from '../logic/nutrition';
-import { mealLabel, SLOT_ORDER } from '../logic/planner';
+import { mealLabel, mealMacros, sidesLabel, SLOT_ORDER } from '../logic/planner';
 import type { Slot } from '../logic/types';
 import { eatenKey, ownedBy, planForDate, useActiveMember, useStore } from '../store/useStore';
 import { success, tick } from '../ui/haptics';
@@ -59,7 +59,7 @@ export default function AddFood() {
   const dayLog = myLog.filter((f) => f.dateISO === dateISO);
   const pieces = dayLog.map((f) => ({ kcal: f.kcal, recipe: recipeOfEntry(f, plans), color: f.mealKey ? t.primary : t.arcMid }));
   const eatenK = pieces.reduce((a, p) => a + p.kcal, 0);
-  const selKcal = sel ? perServing(RECIPE[sel.recipeId]).kcal * por : 0;
+  const selKcal = sel && main ? mealMacros(sel, main.id, por).kcal : 0;
   const parsedKcal = parsed.reduce((a, p) => a + p.kcal, 0);
   const preview = mode === 'plan' ? selKcal : parsedKcal;
   const left = Math.round(tg.kcal - eatenK - preview);
@@ -112,6 +112,7 @@ export default function AddFood() {
                     <View style={{ flex: 1 }}>
                       <T v="small">{mealLabel(m.slot)} din plan</T>
                       <T numberOfLines={2} style={{ fontFamily: DISPLAY, fontSize: 16 }}>{r?.name}</T>
+                      {sidesLabel(m) ? <T v="small" numberOfLines={1}>{sidesLabel(m)}</T> : null}
                     </View>
                     <T v="small">{Math.round(perServing(r).kcal).toLocaleString('ro-RO')} / porție</T>
                   </Pressable>

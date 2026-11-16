@@ -1,4 +1,5 @@
 # Construiește gratuit aplicația pe serverele GitHub: APK pentru Android și IPA nesemnat pentru iPhone (Sideloadly).
+# Varianta pentru iPhone din Safari (fără nimic instalat) o face web.yml.
 # Pornire: GitHub → Actions → „Construiește aplicația” → Run workflow.
 name: Construiește aplicația
 
@@ -19,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - uses: actions/setup-java@v4
-        with: { distribution: temurin, java-version: 17 }
+        with: { distribution: temurin, java-version: 21 }
       - run: npm ci
       - run: npm test
       - name: Cheia de semnare (pentru actualizări fără pierderea datelor)

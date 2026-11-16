@@ -45,8 +45,45 @@ export async function pickBackup(): Promise<unknown | null> {
  */
 const autoDir = () => new Directory(Paths.document, 'copii');
 
+/* În Safari (varianta web) copiile stau în IndexedDB, nu în fișiere. */
+type WebCopy = { name: string; dateISO: string; json: string };
+let webCopies: WebCopy[] = [];
+function idb(): Promise<IDBDatabase> {
+  return new Promise((res, rej) => {
+    const r = indexedDB.open('nutritie', 1);
+    r.onupgradeneeded = () => r.result.createObjectStore('copii', { keyPath: 'name' });
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+  });
+}
+async function idbAll(): Promise<WebCopy[]> {
+  const db = await idb();
+  return new Promise((res, rej) => {
+    const q = db.transaction('copii').objectStore('copii').getAll();
+    q.onsuccess = () => res((q.result as WebCopy[]).sort((a, b) => b.dateISO.localeCompare(a.dateISO)));
+    q.onerror = () => rej(q.error);
+  });
+}
+async function webAutoBackup(force: boolean) {
+  try {
+    webCopies = await idbAll();
+    const st = useStore.getState();
+    if (!st.onboarded) return;
+    const today = new Date().toISOString().slice(0, 10);
+    const last = webCopies[0];
+    if (!force && last && (Date.parse(today) - Date.parse(last.dateISO)) / 86400000 < 7) return;
+    const db = await idb();
+    const tx = db.transaction('copii', 'readwrite');
+    const os = tx.objectStore('copii');
+    os.put({ name: `nutritie-auto-${today}.json`, dateISO: today, json: JSON.stringify(exportData()) });
+    for (const old of [{ name: `nutritie-auto-${today}.json`, dateISO: today, json: '' }, ...webCopies.filter((c) => c.dateISO !== today)].slice(4)) os.delete(old.name);
+    await new Promise((res) => { tx.oncomplete = res; tx.onerror = res; });
+    webCopies = await idbAll();
+  } catch { /* nimic */ }
+}
+
 export function autoBackups(): { name: string; uri: string; dateISO: string }[] {
-  if (Platform.OS === 'web') return [];
+  if (Platform.OS === 'web') return webCopies.map((c) => ({ name: c.name, uri: `idb:${c.name}`, dateISO: c.dateISO }));
   try {
     const d = autoDir();
     if (!d.exists) return [];
@@ -59,7 +96,7 @@ export function autoBackups(): { name: string; uri: string; dateISO: string }[] 
 }
 
 export function autoBackup(force = false): boolean {
-  if (Platform.OS === 'web') return false;
+  if (Platform.OS === 'web') { void webAutoBackup(force); return true; }
   try {
     const st = useStore.getState();
     if (!st.onboarded) return false;
@@ -80,7 +117,8 @@ export function autoBackup(force = false): boolean {
 
 export async function readBackup(uri: string): Promise<unknown | null> {
   try {
-    const d = JSON.parse(await new File(uri).text());
+    const text = uri.startsWith('idb:') ? (await idbAll()).find((c) => `idb:${c.name}` === uri)?.json ?? '' : await new File(uri).text();
+    const d = JSON.parse(text);
     return d?.app === 'nutritie' && d?.state ? d : null;
   } catch {
     return null;

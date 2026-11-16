@@ -18,6 +18,9 @@ import urllib.request
 
 from PIL import Image
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from origin import EXOTIC, ingredient_familiar, origin  # noqa: E402
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 cand = json.load(open(sys.argv[1]))
 data = json.load(open(sys.argv[2]))
@@ -166,6 +169,11 @@ for key, (name, steps) in RO.items():
         r['freezable'] = True
     if c['cat'].lower() == 'dessert':
         r['tags'] = ['desert']
+    # cât de familiară e pentru cineva din România (planul pune mai des ce-ți vine să gătești)
+    fam = max(origin(c.get('area'))[2], ingredient_familiar(ing) or 0)
+    if 'principal' in meal:
+        fam -= sum(v for k, v in EXOTIC.items() if any(k == x for x, _ in ing))
+    r['familiar'] = round(max(0.15, min(1.0, fam)), 2)
     out.append(r)
 
 print('importate:', len(out), '| deja existente după nume:', len(skipped_dup), skipped_dup[:20])

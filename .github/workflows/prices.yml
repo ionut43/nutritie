@@ -31,3 +31,12 @@ jobs:
           git add src/data/prices_live.json
           git diff --cached --quiet || git commit -m "Prețuri de azi din Monitorul Prețurilor"
           git push
+
+  # prețurile noi ajung și în varianta din Safari
+  web:
+    needs: prices
+    uses: ./.github/workflows/web.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

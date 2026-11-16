@@ -90,6 +90,8 @@ export interface Recipe {
   img?: string;
   /** cine a făcut poza (rețetele importate) */
   credit?: string;
+  /** cât de familiară e pentru cineva din România, 0–1 (lipsă = după bucătărie) */
+  familiar?: number;
   /** rețetă adăugată de utilizator */
   custom?: boolean;
   /** cale locală către poza făcută de utilizator */
@@ -199,6 +201,8 @@ export interface PlannedMeal {
   shares: PortionShare[];
   /** porție decongelată */
   frozen?: boolean;
+  /** ce vine lângă felul principal la o masă mare: ciorbă, pâine sau salată (ca acasă, nu porție dublă) */
+  sides?: { recipeId: string; sessionId: string; shares: PortionShare[] }[];
 }
 
 export interface CookSession {
@@ -212,6 +216,8 @@ export interface CookSession {
   extra?: boolean;
   freeze?: boolean;
   done?: boolean;
+  /** nu se gătește (pâine): doar se cumpără */
+  nocook?: boolean;
 }
 
 export interface ShoppingItem {

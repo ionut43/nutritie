@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, ScrollView, View } from 'react-native';
+import { Alert, Platform, ScrollView, View } from 'react-native';
 import { daysBetween, todayISO } from '../logic/dates';
 import { CITIES } from '../logic/livePrices';
 import { useStore } from '../store/useStore';
@@ -31,6 +31,16 @@ export function LivePricesCard({ compact }: { compact?: boolean }) {
       setBusy(null);
     }
   };
+
+  // în Safari serverul de prețuri nu răspunde direct (lipsește permisiunea CORS); prețurile vin de la GitHub, în fiecare luni
+  if (Platform.OS === 'web') {
+    return (
+      <T v="small" color={t.muted}>
+        {d ? `Prețuri reale din magazine (Monitorul Prețurilor), din ${d.getDate()} ${MONTHS[d.getMonth()]}. ` : ''}Se actualizează singure în fiecare luni.
+        {compact ? '' : ' Pe bon poate ieși puțin diferit; bonurile scanate devin prețurile tale.'}
+      </T>
+    );
+  }
 
   return (
     <View style={{ gap: 8 }}>

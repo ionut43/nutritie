@@ -30,6 +30,7 @@ export default function Recipes() {
   const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
   const list = useMemo(() => RECIPES.filter((r) => {
+    if (r.tags?.includes('garnitura')) return false;
     if (q && !norm(r.name).includes(norm(q)) && !norm(r.en ?? '').includes(norm(q)) && !r.ing.some(([id]) => norm(id).includes(norm(q)))) return false;
     if (fitOnly && (!recipeFits(r, rs) || !hasEquipment(r, settings.equipment))) return false;
     if (cu !== 'all' && r.cuisine !== cu) return false;
@@ -65,7 +66,7 @@ export default function Recipes() {
         windowSize={7}
         ListHeaderComponent={(
           <View style={{ gap: 12 }}>
-            <Header title="Rețete" sub={`${list.length} din ${RECIPES.length}`} right={<IconBtn icon="add" tone="primary" onPress={() => router.push('/reteta-noua')} />} />
+            <Header title="Rețete" sub={`${list.length} din ${RECIPES.filter((r) => !r.tags?.includes('garnitura')).length}`} right={<IconBtn icon="add" tone="primary" onPress={() => router.push('/reteta-noua')} />} />
             <Field value={q} onChangeText={setQ} placeholder="Caută rețete sau ingrediente" icon="search" />
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
               {FILTERS.map(([v, l]) => <Chip key={v} label={l} selected={f === v} onPress={() => setF(v)} />)}

@@ -209,6 +209,14 @@ function kindTargets(style: 'des' | 'echilibrat' | 'rar', eligible: Recipe[]): P
 /** câte mese principale poate acoperi aceeași rețetă gătită o dată */
 export const MAX_USES: Record<'mare' | 'echilibrat' | 'rar', number> = { mare: 2, echilibrat: 3, rar: 5 };
 const CUISINE_DEFAULT: Partial<Record<string, number>> = { ro: 0.4, eu: 0.15, it: 0.15, med: 0.1 };
+/** cât de familiară e o bucătărie pentru cineva din România, când rețeta nu spune altfel */
+const CUISINE_FAM: Record<string, number> = { ro: 1, it: 0.9, eu: 0.85, med: 0.8, us: 0.65, mx: 0.5, or: 0.55, as: 0.45, in: 0.45 };
+export const familiarity = (r: Recipe) => r.familiar ?? CUISINE_FAM[r.cuisine ?? 'eu'] ?? 0.7;
+/** dulce: desert declarat sau gustare cu mult zahăr (gogoși, prăjituri) */
+const SOUP = /^(Ciorb|Sup[ăa] |Supă-|Borș|Bors|Zeam)/;
+export const isSoup = (r: Recipe) => SOUP.test(r.name);
+export const isSweet = (r: Recipe) => !!r.tags?.includes('desert') || (r.meal.includes('gustare') && perServing(r).sug >= 18);
+const clamp = (x: number, a: number, b: number) => Math.max(a, Math.min(b, x));
 
 function round05(x: number) { return Math.round(x * 20) / 20; }
 const round025 = (x: number) => Math.round(x * 4) / 4;
@@ -224,18 +232,35 @@ export function fitDailyKcal(meals: PlannedMeal[], people: { id: string; kcal: n
       const day = meals.filter((m) => m.day === d);
       if (!day.length) continue;
       const share = (m: PlannedMeal) => m.shares.find((x) => x.memberId === p.id);
-      const total = () => day.reduce((a, m) => a + kcalOf(m) * (share(m)?.factor ?? 0), 0);
-      for (let guard = 0; guard < 40; guard++) {
+      const sideK = (m: PlannedMeal) => (m.sides ?? []).reduce((a, x) => a + (RECIPE[x.recipeId] ? perServing(RECIPE[x.recipeId]).kcal * (x.shares.find((y) => y.memberId === p.id)?.factor ?? 0) : 0), 0);
+      const total = () => day.reduce((a, m) => a + kcalOf(m) * (share(m)?.factor ?? 0) + sideK(m), 0);
+      // ce se poate ajusta: felul principal (în pași de ¼) și pâinea de lângă el (în pași de ½ = 50 g)
+      type Knob = { get: () => number; set: (v: number) => void; k: number; step: number; min: number; max: number; bread: boolean };
+      const knobs: Knob[] = [];
+      for (const m of day) {
+        const sh = share(m);
+        if (sh) knobs.push({ get: () => sh.factor, set: (v) => { sh.factor = v; }, k: kcalOf(m), step: 0.25, min: 0.5, max: m.sides?.length ? Math.min(m.sides.some((x) => x.recipeId === 'garnitura_paine') ? 1.5 : 2, maxFactor) : maxFactor, bread: false });
+        for (const sd of m.sides ?? []) {
+          const x = sd.shares.find((y) => y.memberId === p.id);
+          if (!x || !RECIPE[sd.recipeId]) continue;
+          // pâinea se ajustează întâi (pași de 50 g); ciorba doar în jos, pentru cine mănâncă mai puțin
+          if (sd.recipeId === 'garnitura_paine') knobs.push({ get: () => x.factor, set: (v) => { x.factor = v; }, k: perServing(RECIPE[sd.recipeId]).kcal, step: 0.5, min: 0.5, max: 2, bread: true });
+          else knobs.push({ get: () => x.factor, set: (v) => { x.factor = v; }, k: perServing(RECIPE[sd.recipeId]).kcal, step: 0.25, min: 0.5, max: x.factor, bread: true });
+        }
+      }
+      for (let guard = 0; guard < 60; guard++) {
         const t = total();
         if (t > p.kcal * 1.05) {
-          // cobor cu ¼ porția mesei care aduce cele mai multe calorii și mai poate coborî
-          const m = [...day].filter((x) => (share(x)?.factor ?? 0) > 0.5).sort((a, b) => kcalOf(b) * share(b)!.factor - kcalOf(a) * share(a)!.factor)[0];
-          if (!m) break;
-          share(m)!.factor = Math.max(0.5, share(m)!.factor - 0.25);
+          // cobor întâi pâinea, apoi felul care aduce cele mai multe calorii
+          const c = knobs.filter((x) => x.get() - x.step >= x.min).sort((a, b) => Number(b.bread) - Number(a.bread) || b.k * b.get() - a.k * a.get())[0];
+          if (!c) break;
+          c.set(Math.max(c.min, c.get() - c.step));
         } else if (t < p.kcal * 0.93) {
-          const m = [...day].filter((x) => (share(x)?.factor ?? 0) < maxFactor && kcalOf(x) * 0.25 <= p.kcal * 1.05 - t).sort((a, b) => kcalOf(a) * share(a)!.factor - kcalOf(b) * share(b)!.factor)[0];
-          if (!m) break;
-          share(m)!.factor = Math.min(maxFactor, share(m)!.factor + 0.25);
+          // urc întâi felul principal până la porția lui firească, apoi pâinea
+          const c = knobs.filter((x) => x.get() + x.step <= x.max && x.k * x.step <= p.kcal * 1.05 - t)
+            .sort((a, b) => Number(a.bread) - Number(b.bread) || a.k * a.get() - b.k * b.get())[0];
+          if (!c) break;
+          c.set(Math.min(c.max, c.get() + c.step));
         } else break;
       }
     }
@@ -251,12 +276,25 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
   const people = presentPeople(input.members, input.household, start);
   const mainPerson = people.find((p) => p.isMain) ?? people[0];
   const mainMember = input.members.find((m) => m.id === mainPerson?.id);
-  const mainGoal = mainMember ? computeTargets(mainMember, start).goal : 'mentinere';
+  const mainTg = mainMember ? computeTargets(mainMember, start) : undefined;
+  const mainGoal = mainTg?.goal ?? 'mentinere';
+  // proteinele și fibrele țintă, ca densitate (cât din calorii / la 1000 kcal): rețetele se aleg să le atingă
+  const pTarget = mainTg && mainTg.kcal ? (mainTg.protein * 4) / mainTg.kcal : 0.2;
+  const fibTarget = mainTg && mainTg.kcal ? (mainTg.fiber * 1000) / mainTg.kcal : 14;
+  const fTarget = mainTg && mainTg.kcal ? (mainTg.fat * 9) / mainTg.kcal : 0.3;
+  // ce s-a strâns până acum în plan (pentru persoana principală): următoarea rețetă compensează, ca săptămâna să iasă echilibrată
+  const acc = { kcal: 0, p: 0, f: 0 };
+  const desired = (target: number, got: number) => (acc.kcal > 0 ? clamp(target + (target - got / acc.kcal), target * 0.6, target * 1.5) : target);
   const hasKids = people.some((p) => p.isChild);
   const rs: Restrictions = mergeRestrictions(presentMembers(input.members, input.household));
-  const eligible = recipes.filter(
+  const fitting = recipes.filter(
     (r) => recipeFits(r, rs) && hasEquipment(r, st.equipment) && !input.disliked.includes(r.id),
   );
+  // rețetele exotice intră doar dacă le-ai cerut: bucătăria aleasă, o rețetă care ți-a plăcut sau pe care ai ales-o
+  const optedIn = (r: Recipe) => input.liked.includes(r.id) || !!input.wanted?.includes(r.id) || (input.swipes?.[r.id] ?? 0) > 0
+    || !!input.weekCuisines?.includes(r.cuisine ?? 'eu') || st.cuisines?.[r.cuisine ?? 'eu'] === 1;
+  const familiarOnly = fitting.filter((r) => familiarity(r) >= 0.55 || optedIn(r));
+  const eligible = familiarOnly.filter((r) => r.meal.includes('principal')).length >= 25 ? familiarOnly : fitting;
   const variety = st.variety ?? 'mare';
   const targets = kindTargets(st.meatStyle ?? 'echilibrat', eligible);
   const kindUse: Partial<Record<ProteinKind, number>> = {};
@@ -327,6 +365,7 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
     for (const [id, g] of r.ing) need[id] = (need[id] ?? 0) + (g * portions) / r.servings;
   };
 
+  const isWantedOrLiked = (r: Recipe) => input.liked.includes(r.id) || !!input.wanted?.includes(r.id) || (input.swipes?.[r.id] ?? 0) > 0;
   const score = (r: Recipe, slot: Slot, kind: 'main' | 'quick', avoid: (string | undefined)[]) => {
     const sh = sharesFor(r, slot);
     const portions = sum(sh);
@@ -348,6 +387,10 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
     else if (!input.taste?.seen?.[r.id]) s += 0.6;
     s -= (newUse[r.id] ?? 0) * (kind === 'main' ? 6 : 0.4);
     const pref = st.cuisines?.[r.cuisine ?? 'eu'];
+    // rețete familiare, care îți vin să le gătești: cele exotice apar doar dacă alegi bucătăria lor sau ți-au plăcut
+    const fam = familiarity(r);
+    const chose = pref === 1 || !!input.weekCuisines?.includes(r.cuisine ?? 'eu');
+    if (!isWantedOrLiked(r)) s += chose ? Math.max(0, fam - 0.8) * 4 : (fam - 0.8) * 10;
     s += pref === 1 ? 1 : pref === -1 ? -2.5 : CUISINE_DEFAULT[r.cuisine ?? 'eu'] ?? 0;
     if (kind === 'main' && input.weekCuisines?.length) s += input.weekCuisines.includes(r.cuisine ?? 'eu') ? 4 : -4;
     if (kind === 'main') {
@@ -362,21 +405,41 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
       if (mainKinds[mainKinds.length - 1] === k) s -= 1.5;
       if (mainKinds[mainKinds.length - 2] === k) s -= 0.6;
     }
-    if (r.tags?.includes('desert')) s -= desserts >= dessertCap ? 8 : 0.5;
+    const sweet = isSweet(r);
+    if (sweet) s -= desserts >= dessertCap ? 8 : 0.5;
     if (avoid[0] === r.id) s -= 5;
     if (avoid[1] === r.id) s -= 2.5;
     s += pantryBonus(r, portions);
-    const kcal = perServing(r).kcal * portions || 1;
-    // costul contează puțin cât timp rețeta e în ritmul bugetului și mult când îl depășește
-    const ratio = marginalCost(r, portions) / (kcal * budgetPerKcal);
+    const ps0 = perServing(r);
+    const kcal = ps0.kcal * portions || 1;
+    // costul contează puțin cât timp rețeta e în ritmul bugetului și mult când îl depășește.
+    // Banii se judecă pe valoare, nu doar pe calorii: o masă cu proteine are voie să coste ceva mai mult decât paste goale.
+    const pVal = ps0.kcal ? clamp((ps0.p * 4) / ps0.kcal / pTarget, 0.4, 1.5) : 1;
+    const ratio = marginalCost(r, portions) / (kcal * budgetPerKcal * (0.55 + 0.45 * pVal));
     // ce ai ales tu nu e scos din cauza prețului (swipe-ul ți-a arătat deja cât costă); bugetul îl strâng pe restul
     if (!isWanted) s -= 0.3 * ratio + costWeight * Math.max(0, ratio - 1.1);
     const ps = perServing(r);
-    if (mainGoal === 'slabire' && ps.kcal > 0) s += ((ps.p * 4) / ps.kcal - 0.2) * 6;
+    if (ps.kcal > 0) {
+      // proteine cât ținta ta (nu paste goale la fiecare masă), fibre, puțin zahăr și sare
+      const pShare = (ps.p * 4) / ps.kcal;
+      const fShare = (ps.f * 9) / ps.kcal;
+      s += clamp(2.5 - Math.abs(pShare - desired(pTarget, acc.p * 4)) * (kind === 'main' ? 20 : 12), -4, 2.5);
+      s += clamp(1 - Math.abs(fShare - desired(fTarget, acc.f * 9)) * 8, -2, 1);
+      // masă principală aproape fără proteine (paste simple, cartofi): rar, nu de bază
+      if (kind === 'main' && pShare < 0.14) s -= 2;
+      s += clamp(((ps.fib * 1000) / ps.kcal - fibTarget) * 0.1, -1, 1);
+      if (!sweet) s -= clamp((ps.sug - (kind === 'main' ? 12 : 20)) * 0.08, 0, 2);
+      s -= clamp((ps.salt - 2.2) * 0.8, 0, 2);
+    }
     if (hasKids && r.tags?.includes('copii')) s += 0.7;
     if (mainPerson) {
-      const raw = (mainPerson.kcal * shares[slot]) / (ps.kcal || 1);
-      if (raw < 0.5 || raw > 2) s -= 1.5;
+      // o porție normală, nu dublă sau jumătate: rețeta potrivită ca mărime pentru masa asta
+      const slotK = mainPerson.kcal * shares[slot];
+      // la o masă mare, felul principal vine cu ciorbă și pâine: îl judec pe ce rămâne după ele
+      const raw = (kind === 'main' && slotK > 1000 ? Math.max(slotK * 0.55, slotK - 600) : slotK) / (ps.kcal || 1);
+      s -= 2.2 * Math.abs(Math.log(Math.max(0.2, raw)));
+      // la mese mari, paste/orez simple ar însemna farfurie dublă: rar
+      if (kind === 'main' && slotK > 1000 && ps.kcal && (ps.c * 4) / ps.kcal > 0.5) s -= 1.2;
     }
     return s;
   };
@@ -384,10 +447,14 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
   const best = (cands: Recipe[], slot: Slot, kind: 'main' | 'quick', avoid: (string | undefined)[]) => {
     let top: Recipe | undefined;
     let topS = -Infinity;
+    const dbg = (globalThis as { __planDebug?: (x: { slot: Slot; kind: string; costWeight: number; list: [string, number][] }) => void }).__planDebug;
+    const list: [string, number][] = [];
     for (const r of cands) {
       const s = score(r, slot, kind, avoid);
+      if (dbg) list.push([r.id, s]);
       if (s > topS) { topS = s; top = r; }
     }
+    if (dbg) dbg({ slot, kind, costWeight, list: list.sort((a, b) => b[1] - a[1]).slice(0, 8) });
     return top;
   };
 
@@ -395,7 +462,6 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
     const s: CookSession = { id: `s${sid++}`, day, recipeId: r.id, portions: 0, extra };
     sessions.push(s);
     newUse[r.id] = (newUse[r.id] ?? 0) + 1;
-    if (r.tags?.includes('desert')) desserts++;
     return s;
   };
   const addMeal = (s: CookSession, r: Recipe, day: number, slot: Slot, frozen = false) => {
@@ -405,6 +471,9 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
     commit(r, p);
     if (frozen) s.freeze = true;
     meals.push({ day, slot, recipeId: r.id, sessionId: s.id, shares: sh, frozen: frozen || undefined });
+    if (isSweet(r)) desserts++; // dulciurile se numără pe mese, nu pe gătiri
+    const mf = sh.find((x) => x.memberId === mainPerson?.id)?.factor ?? 0;
+    if (mf) { const ps = perServing(r); acc.kcal += ps.kcal * mf; acc.p += ps.p * mf; acc.f += ps.f * mf; }
     if (MAIN_SLOTS.includes(slot)) {
       const k = proteinKind(r);
       mainKinds.push(k);
@@ -508,8 +577,10 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
       // mic dejun și gustări: o rutină de 2–3 variante pe săptămână, ca în viața reală.
       // Mai puține ingrediente diferite = listă mai scurtă și bani mai puțini pe ambalaje începute.
       const rot = (rotation[slot] ??= []);
-      const inRot = all.filter((r) => rot.includes(r.id));
-      const cands = rot.length >= ROUTINE[variety] && inRot.length ? inRot : all;
+      // după ce s-au strâns dulciurile săptămânii, nu mai intră altele (dacă există altceva)
+      const notSweet = (xs: Recipe[]) => { const ns = xs.filter((x) => !isSweet(x)); return desserts >= dessertCap && ns.length ? ns : xs; };
+      const inRot = notSweet(all).filter((r) => rot.includes(r.id));
+      const cands = rot.length >= ROUTINE[variety] && inRot.length ? inRot : notSweet(all);
       const yesterday = meals.find((m) => m.day === d - 1 && m.slot === slot)?.recipeId;
       const sameDayOther = meals.find((m) => m.day === d && !MAIN_SLOTS.includes(m.slot))?.recipeId;
       const lockedQ = input.locked?.find((l) => l.day === d && l.slot === slot);
@@ -543,11 +614,80 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
     }
   }
 
+  // ── Masa întreagă, ca acasă ──
+  // La o masă mare (de obicei la 2 mese pe zi) felul principal vine cu ciorbă, pâine sau salată,
+  // nu cu două porții și jumătate din același fel. Ciorba se face într-o oală pe ziua de gătit și ține câteva zile.
+  if (mainPerson) {
+    const cookDayFor = (d: number) => { let c = 0; for (let x = 0; x <= d; x++) if (isCookingDay(x)) c = x; return c; };
+    const firstMain = mainSlots[0];
+    const pots: { s: CookSession; r: Recipe; uses: number }[] = [];
+    const breadBy: Record<number, CookSession> = {};
+    // garniturile respectă și ele alergiile, dieta și postul (fără pâine la cine n-are voie gluten)
+    const okSide = (r: Recipe | undefined) => (r && recipeFits(r, rs) ? r : undefined);
+    const bread = okSide(recipes.find((r) => r.id === 'garnitura_paine') ?? RECIPE.garnitura_paine);
+    const salad = okSide(recipes.find((r) => r.id === 'garnitura_salata') ?? RECIPE.garnitura_salata);
+    const soups = eligible.filter((r) => isSoup(r) && r.meal.includes('principal') && familiarity(r) >= 0.7);
+    for (const m of meals.filter((x) => MAIN_SLOTS.includes(x.slot))) {
+      const r = RECIPE[m.recipeId] ?? recipes.find((x) => x.id === m.recipeId);
+      const ps = r ? perServing(r) : undefined;
+      if (!r || !ps?.kcal) continue;
+      const want = mainPerson.kcal * shares[m.slot];
+      if (want / ps.kcal <= 1.45) continue;
+      const cd = cookDayFor(m.day);
+      const sides: NonNullable<PlannedMeal['sides']> = [];
+      const all = () => people.map((p) => ({ memberId: p.id, factor: 1 }));
+      let left = want - 1.25 * ps.kcal; // felul principal rămâne cam o porție și ceva
+      // 1) ciorbă, la prima masă principală a zilei, din oala zilei de gătit
+      if (!isSoup(r) && m.slot === firstMain && left >= 250 && soups.length) {
+        const level = fastDays[m.day];
+        const pot = pots.find((x) => x.s.day === cd && m.day - cd <= x.r.keepsDays && fastAllows(level, x.r) && x.r.id !== r.id && proteinKind(x.r) !== proteinKind(r));
+        let soup: { s: CookSession; r: Recipe } | undefined = pot;
+        if (pot) pot.uses++;
+        else {
+          // nu fasole lângă fasole: ciorba are alt fel de proteină decât felul principal
+          const cands = soups.filter((x) => fastAllows(level, x) && x.id !== r.id && x.prep <= maxPrep(cd) && m.day - cd <= x.keepsDays && proteinKind(x) !== proteinKind(r));
+          const pick = best(cands, m.slot, 'quick', [pots[pots.length - 1]?.r.id]);
+          if (pick) { soup = { s: newSession(pick, cd), r: pick }; pots.push({ ...soup, uses: 1 }); }
+        }
+        if (soup) { const sh = all(); sides.push({ recipeId: soup.r.id, sessionId: soup.s.id, shares: sh }); commit(soup.r, sum(sh)); left -= perServing(soup.r).kcal; }
+      }
+      // 2) pâine (sau salată, lângă paste și orez), cât să nu mănânci porție dublă din felul principal
+      const carbHeavy = (ps.c * 4) / ps.kcal > 0.5 && !isSoup(r);
+      if (left >= 120 && !carbHeavy && bread && fastAllows(fastDays[m.day], bread)) {
+        // pâinea se cumpără la ziua de gătit și ține 4 zile; după aceea, alta proaspătă
+        const bd = m.day - cd <= bread.keepsDays ? cd : m.day;
+        const ses = (breadBy[bd] ??= newSession(bread, bd));
+        ses.nocook = true;
+        const f = clamp(Math.round((left / perServing(bread).kcal) * 2) / 2, 0.5, 1.5);
+        const sh = people.map((p) => ({ memberId: p.id, factor: f }));
+        sides.push({ recipeId: bread.id, sessionId: ses.id, shares: sh });
+        commit(bread, sum(sh));
+      } else if (carbHeavy && salad && !sides.length && fastAllows(fastDays[m.day], salad)) {
+        const ses = newSession(salad, m.day);
+        ses.nocook = true; // o salată se face pe loc, nu e „zi de gătit”
+        const sh = all();
+        sides.push({ recipeId: salad.id, sessionId: ses.id, shares: sh });
+        commit(salad, sum(sh));
+      }
+      if (sides.length) {
+        m.sides = sides;
+        // felul principal cât o porție și ceva; restul vine din ciorbă și pâine (fitDailyKcal ajustează pâinea)
+        for (const sh of m.shares) {
+          const pp = people.find((x) => x.id === sh.memberId);
+          if (!pp) continue;
+          const sk = sides.reduce((a, x) => a + perServing(RECIPE[x.recipeId] ?? r).kcal * (x.shares.find((y) => y.memberId === sh.memberId)?.factor ?? 0), 0);
+          sh.factor = clamp(round025((pp.kcal * shares[m.slot] - sk) / ps.kcal), 0.5, carbHeavy ? 2 : 1.5);
+        }
+      }
+    }
+  }
+
   fitDailyKcal(meals, people, 2.5);
-  // porțiile de gătit urmează porțiile ajustate
+  // porțiile de gătit urmează porțiile ajustate (și garniturile, care au sesiunea lor)
   for (const s of sessions) {
-    const own = meals.filter((m) => m.sessionId === s.id);
-    if (own.length) s.portions = round05(own.reduce((a, m) => a + sum(m.shares), 0));
+    const own = meals.filter((m) => m.sessionId === s.id).reduce((a, m) => a + sum(m.shares), 0)
+      + meals.reduce((a, m) => a + (m.sides ?? []).filter((x) => x.sessionId === s.id).reduce((b, x) => b + sum(x.shares), 0), 0);
+    if (own) s.portions = round05(own);
   }
   for (const s of sessions) { s.eat = s.portions; s.portions = wholePortions(s.portions); }
   const { shopping, staples, basics, cost } = shoppingFromSessions(sessions, input.pantry, input.prices, [], input.store, input.storePrices);
@@ -563,7 +703,7 @@ export function generatePlan(input: PlanInput): WeekPlan {
   // până intră în buget (cu o marjă de cel mult BUDGET_SLACK lei).
   const budget = input.settings.budgetRon;
   // cu alegeri din swipe pornesc de unde a pornit și estimarea din swipe, ca prețul să fie cel pe care l-ai văzut
-  const ws = input.wanted?.length ? [3.5, 7, 12, 20, 35] : [0.5, 1.5, 3.5, 7, 12, 20, 35];
+  const ws = input.wanted?.length ? [3.5, 5, 7, 10, 14, 20, 35] : [0.5, 1, 1.5, 2.5, 3.5, 5, 7, 10, 14, 20, 35];
   for (const w of ws) {
     const p = buildOnce(input, w);
     if (!bestPlan || p.cost < bestPlan.cost) bestPlan = p;
@@ -594,15 +734,18 @@ function reshare(plan: WeekPlan, input: PlanInput, sessionId: string, r: Recipe)
     const k = perServing(r).kcal || 1;
     const sh = people.map((p) => ({ memberId: p.id, factor: round025(Math.min(2, Math.max(0.5, (p.kcal * shares[m.slot]) / k))) }));
     const age = m.day - session.day;
-    return { ...m, recipeId: r.id, shares: sh, frozen: age > r.keepsDays && r.freezable ? true : undefined };
+    // ciorba de lângă rămâne doar dacă se potrivește cu felul nou (nu ciorbă lângă ciorbă, nu fasole lângă fasole)
+    const sides = m.sides?.filter((x) => !isSoup(RECIPE[x.recipeId]) || (!isSoup(r) && proteinKind(RECIPE[x.recipeId]) !== proteinKind(r)));
+    return { ...m, recipeId: r.id, shares: sh, sides: sides?.length ? sides : undefined, frozen: age > r.keepsDays && r.freezable ? true : undefined };
   });
   // copie a porțiilor, apoi ziua se potrivește din nou pe ținta de calorii
-  const fitted = meals.map((m) => ({ ...m, shares: m.shares.map((x) => ({ ...x })) }));
+  const fitted = meals.map((m) => ({ ...m, shares: m.shares.map((x) => ({ ...x })), sides: m.sides?.map((sd) => ({ ...sd, shares: sd.shares.map((x) => ({ ...x })) })) }));
   fitDailyKcal(fitted, people);
-  const sessions = plan.sessions.map((s) => {
+  const sessions = plan.sessions.filter((s) => s.done || fitted.some((m) => m.sessionId === s.id || m.sides?.some((x) => x.sessionId === s.id))).map((s) => {
     const own = fitted.filter((m) => m.sessionId === s.id);
-    if (s.done || !own.length) return s;
-    const portions = own.reduce((a, m) => a + m.shares.reduce((x, y) => x + y.factor, 0), 0);
+    const asSide = fitted.flatMap((m) => (m.sides ?? []).filter((x) => x.sessionId === s.id));
+    if (s.done || (!own.length && !asSide.length)) return s;
+    const portions = own.reduce((a, m) => a + m.shares.reduce((x, y) => x + y.factor, 0), 0) + asSide.reduce((a, x) => a + x.shares.reduce((y, z) => y + z.factor, 0), 0);
     return s.id === sessionId
       ? { ...s, recipeId: r.id, eat: round05(portions), portions: wholePortions(portions), freeze: own.some((m) => m.frozen) || undefined }
       : { ...s, eat: round05(portions), portions: wholePortions(portions) };
@@ -692,9 +835,11 @@ export function swipeDeck(input: PlanInput, n = 30): Recipe[] {
     input.household.applyFasting ? fastLevel(addDays(start, d), st.fasting, st.fishOnDispensation) : 'none');
   const fastCount = levels.filter((l) => l !== 'none').length;
   const fastAt: FastLevel | undefined = fastCount >= 4 ? (levels.filter((l) => l === 'strict').length >= fastCount / 2 ? 'strict' : levels.find((l) => l !== 'none')) : undefined;
-  const eligible = recipes.filter((r) => r.meal.includes('principal') && !r.tags?.includes('desert')
+  const fitting = recipes.filter((r) => r.meal.includes('principal') && !r.tags?.includes('desert')
     && recipeFits(r, rs) && hasEquipment(r, st.equipment) && !input.disliked.includes(r.id) && r.prep <= maxPrep
     && (!fastAt || fastAllows(fastAt, r)));
+  const fam = fitting.filter((r) => familiarity(r) >= 0.55 || st.cuisines?.[r.cuisine ?? 'eu'] === 1);
+  const eligible = fam.length >= n ? fam : fitting;
   const rand = mulberry32(input.seed ^ 0x5bd1e995);
   const history = input.history ?? {};
   const sc = (r: Recipe) => {
@@ -706,6 +851,8 @@ export function swipeDeck(input: PlanInput, n = 30): Recipe[] {
     const pref = st.cuisines?.[r.cuisine ?? 'eu'];
     s += pref === 1 ? 1 : pref === -1 ? -2.5 : CUISINE_DEFAULT[r.cuisine ?? 'eu'] ?? 0;
     if (r.img) s += 0.4;
+    // în pachet apar mai ales felurile familiare; cele exotice doar dacă îți plac bucătăriile lor
+    if (pref !== 1) s += (familiarity(r) - 0.8) * 6;
     return s;
   };
   const buckets: Partial<Record<ProteinKind, Recipe[]>> = {};
@@ -743,13 +890,16 @@ export function mainsNeeded(input: PlanInput): number {
 export function trimPlanSlots(plan: WeekPlan, slots: Slot[], input: PlanInput): WeekPlan {
   const start = fromISO(plan.startISO);
   const people = presentPeople(input.members, plan.household, start);
-  const meals = plan.meals.filter((m) => slots.includes(m.slot)).map((m) => ({ ...m, shares: m.shares.map((x) => ({ ...x })) }));
+  const meals = plan.meals.filter((m) => slots.includes(m.slot)).map((m) => ({
+    ...m, shares: m.shares.map((x) => ({ ...x })), sides: m.sides?.map((sd) => ({ ...sd, shares: sd.shares.map((x) => ({ ...x })) })),
+  }));
   fitDailyKcal(meals, people, 2.5);
   const sessions = plan.sessions.flatMap((s) => {
     const own = meals.filter((m) => m.sessionId === s.id);
-    if (!own.length) return s.done ? [s] : [];
+    const asSide = meals.flatMap((m) => (m.sides ?? []).filter((x) => x.sessionId === s.id));
+    if (!own.length && !asSide.length) return s.done ? [s] : [];
     if (s.done) return [s];
-    const portions = own.reduce((a, m) => a + m.shares.reduce((x, y) => x + y.factor, 0), 0);
+    const portions = own.reduce((a, m) => a + m.shares.reduce((x, y) => x + y.factor, 0), 0) + asSide.reduce((a, x) => a + x.shares.reduce((y, z) => y + z.factor, 0), 0);
     return [{ ...s, eat: round05(portions), portions: wholePortions(portions) }];
   });
   const key = (k: string) => k.split('|').slice(1).join('|');
@@ -759,4 +909,37 @@ export function trimPlanSlots(plan: WeekPlan, slots: Slot[], input: PlanInput): 
     eaten: plan.eaten.filter((k) => keep.has(key(k))),
     skipped: plan.skipped?.filter((k) => keep.has(key(k))),
   }, input);
+}
+
+/** felul principal și garniturile unei mese, ca bucăți separate */
+export function mealParts(m: PlannedMeal): { recipeId: string; sessionId: string; shares: PortionShare[] }[] {
+  return [{ recipeId: m.recipeId, sessionId: m.sessionId, shares: m.shares }, ...(m.sides ?? [])];
+}
+
+/** caloriile și macro-urile unei mese pentru o persoană (felul principal × porție + garniturile); scale = cât din ea */
+export function mealMacros(m: PlannedMeal, memberId: string, mainFactor?: number) {
+  const out = { kcal: 0, p: 0, c: 0, f: 0, fib: 0, sug: 0, salt: 0 };
+  const planned = m.shares.find((x) => x.memberId === memberId)?.factor ?? 0;
+  const scale = mainFactor != null && planned ? mainFactor / planned : 1;
+  mealParts(m).forEach((part, i) => {
+    const r = RECIPE[part.recipeId];
+    if (!r) return;
+    const ps = perServing(r);
+    const f = i === 0 && mainFactor != null ? mainFactor : (part.shares.find((x) => x.memberId === memberId)?.factor ?? 0) * scale;
+    out.kcal += ps.kcal * f; out.p += ps.p * f; out.c += ps.c * f; out.f += ps.f * f;
+    out.fib += ps.fib * f; out.sug += ps.sug * f; out.salt += ps.salt * f;
+  });
+  return out;
+}
+
+/** „cu ciorbă de fasole și pâine” (gol dacă masa n-are garnituri) */
+export function sidesLabel(m: PlannedMeal): string {
+  const names = (m.sides ?? []).map((x) => RECIPE[x.recipeId]?.name.toLowerCase()).filter(Boolean) as string[];
+  if (!names.length) return '';
+  return `cu ${names.length > 1 ? `${names.slice(0, -1).join(', ')} și ${names[names.length - 1]}` : names[0]}`;
+}
+
+/** mesele care folosesc o gătire (ca fel principal sau ca garnitură, ex. oala de ciorbă) */
+export function sessionMeals(plan: WeekPlan, sessionId: string): PlannedMeal[] {
+  return plan.meals.filter((m) => m.sessionId === sessionId || m.sides?.some((x) => x.sessionId === sessionId));
 }

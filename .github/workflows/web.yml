@@ -1,0 +1,39 @@
+# Varianta pentru iPhone din Safari, fără nimic instalat: se publică pe GitHub Pages la fiecare schimbare în cod.
+# O singură dată: Settings → Pages → Source: GitHub Actions.
+name: Aplicația web (iPhone din Safari)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: { name: github-pages, url: '${{ steps.deploy.outputs.page_url }}' }
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: |
+          export WEB_BASE="/${GITHUB_REPOSITORY#*/}"
+          npx expo export --platform web --output-dir dist
+          pip install pillow
+          python3 scripts/web_pwa.py dist "$WEB_BASE"
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist }
+      - id: deploy
+        uses: actions/deploy-pages@v4

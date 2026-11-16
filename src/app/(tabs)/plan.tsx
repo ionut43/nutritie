@@ -6,7 +6,7 @@ import { RECIPE } from '../../data/recipes';
 import { addDays, DAY_NAMES, fmtDate, fromISO, todayISO, toISO, weekdayMon } from '../../logic/dates';
 import { fastInfo } from '../../logic/fasting';
 import { fmtRon } from '../../logic/format';
-import { BUDGET_SLACK, MAIN_SLOTS, mealLabel, SLOT_ORDER } from '../../logic/planner';
+import { BUDGET_SLACK, MAIN_SLOTS, mealLabel, sessionMeals, sidesLabel, SLOT_ORDER } from '../../logic/planner';
 import { STORE } from '../../logic/stores';
 import type { PlannedMeal, WeekHousehold, WeekPlan } from '../../logic/types';
 import { planForDate, useActiveMember, useStore } from '../../store/useStore';
@@ -26,6 +26,14 @@ export default function WeekScreen() {
   const [viewId, setViewId] = useState<string | undefined>();
   const plan = viewable.find((p) => p.id === viewId) ?? viewable[0];
   const [newWeek, setNewWeek] = useState(false);
+  // un plan nou (din bucătării, din glisare sau „Fă-l tu”): închid formularul și arăt planul nou
+  const ids = Object.keys(plans).sort().join(',');
+  const [seenIds, setSeenIds] = useState(ids);
+  if (ids !== seenIds) {
+    const fresh = Object.values(plans).filter((p) => !seenIds.split(',').includes(p.id)).sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0];
+    setSeenIds(ids);
+    if (fresh) { setNewWeek(false); setViewId(fresh.id); }
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: t.bg }} edges={['top']}>
@@ -54,7 +62,8 @@ function NewWeek({ defaultStart, onCancel }: { defaultStart: string; onCancel?: 
   const router = useRouter();
   const { members, settings, plans, generate } = useStore();
   const today = todayISO();
-  const [start, setStart] = useState(defaultStart < today ? today : defaultStart);
+  // cu un plan deja în curs, planul nou începe implicit de azi și îl înlocuiește; „de luni” rămâne o alegere la vedere
+  const [start, setStart] = useState(onCancel ? today : defaultStart < today ? today : defaultStart);
   const lastHh = Object.values(plans).sort((a, b) => b.startISO.localeCompare(a.startISO))[0]?.household;
   const [ids, setIds] = useState<string[]>(lastHh?.memberIds.filter((id) => members.some((m) => m.id === id)) ?? members.map((m) => m.id));
   const [guests, setGuests] = useState(0);
@@ -67,6 +76,13 @@ function NewWeek({ defaultStart, onCancel }: { defaultStart: string; onCancel?: 
   return (
     <View style={{ gap: 16 }}>
       <T color={t.muted}>Alegi ce bucătării ai chef, iar eu pun mâncarea pe zile, în bugetul de {fmtRon(settings.budgetRon)}, și fac lista pentru {STORE[settings.mainStore ?? 'lidl'].name}.</T>
+      {onCancel && defaultStart > today && (
+        <View style={{ gap: 6 }}>
+          <Segmented options={[{ label: 'De azi', value: today }, { label: `De ${DAY_NAMES[weekdayMon(fromISO(defaultStart))].toLowerCase()}, ${fmtDate(fromISO(defaultStart))}`, value: defaultStart }]}
+            value={start === today ? today : defaultStart} onChange={setStart} />
+          <T v="small">{start === today ? 'Planul de acum se înlocuiește de azi, iar lista de cumpărături se reface.' : 'Planul de acum rămâne până atunci; cel nou apare în „Azi” din prima lui zi.'}</T>
+        </View>
+      )}
       <Btn title="Alege bucătăriile" icon="restaurant" onPress={() => router.push({
         pathname: '/bucatarii', params: { start, ids: hh.memberIds.join(','), guests: String(guests), fast: applyFasting ? '1' : '0' },
       })} />
@@ -114,8 +130,7 @@ function WeekView({ plan, onNew }: { plan: WeekPlan; onNew: () => void }) {
   const [showWarn, setShowWarn] = useState(false);
   const store = plan.store ?? settings.mainStore ?? 'lidl';
   const start = fromISO(plan.startISO);
-  const over = plan.cost > plan.budget + BUDGET_SLACK;
-  const cookDays = new Set(plan.sessions.filter((x) => plan.meals.some((m) => m.sessionId === x.id && MAIN_SLOTS.includes(m.slot))).map((x) => x.day)).size;
+  const cookDays = new Set(plan.sessions.filter((x) => !x.nocook && sessionMeals(plan, x.id).some((m) => MAIN_SLOTS.includes(m.slot))).map((x) => x.day)).size;
   const lockedList = (plan.locked ?? []).map((k) => {
     const [d, slot] = k.split('|');
     const m = plan.meals.find((x) => x.day === Number(d) && x.slot === slot);
@@ -155,7 +170,7 @@ function WeekView({ plan, onNew }: { plan: WeekPlan; onNew: () => void }) {
         const meals = plan.meals.filter((m) => m.day === d).sort((a, b) => SLOT_ORDER.indexOf(a.slot) - SLOT_ORDER.indexOf(b.slot));
         const mains = meals.filter((m) => MAIN_SLOTS.includes(m.slot));
         const small = meals.filter((m) => !MAIN_SLOTS.includes(m.slot));
-        const cooks = plan.sessions.filter((s) => s.day === d && plan.meals.filter((m) => m.sessionId === s.id && MAIN_SLOTS.includes(m.slot)).length > 0 && !s.extra);
+        const cooks = plan.sessions.filter((s) => s.day === d && !s.nocook && sessionMeals(plan, s.id).some((m) => MAIN_SLOTS.includes(m.slot)) && !s.extra);
         const fast = plan.fastDays[d] !== 'none';
         return (
           <View key={d} style={{ gap: 10 }}>
@@ -181,6 +196,7 @@ function WeekView({ plan, onNew }: { plan: WeekPlan; onNew: () => void }) {
                     </View>
                     <T v="small" color={t.muted} style={{ fontSize: 12 }}>{mealLabel(m.slot)}</T>
                     <T numberOfLines={2} style={{ fontWeight: '600', fontSize: 14, lineHeight: 18, marginTop: -4 }}>{r?.name}</T>
+                    {sidesLabel(m) ? <T v="small" numberOfLines={2} style={{ fontSize: 12, lineHeight: 16, marginTop: -4 }}>{sidesLabel(m)}</T> : null}
                   </Pressable>
                 );
               })}
@@ -197,7 +213,7 @@ function WeekView({ plan, onNew }: { plan: WeekPlan; onNew: () => void }) {
       })}
 
       <View style={{ gap: 4, marginTop: 6 }}>
-        <Btn title="Plan pentru săptămâna următoare" variant="secondary" onPress={onNew} />
+        <Btn title="Plan nou" icon="add" variant="secondary" onPress={onNew} />
         <Row style={{ justifyContent: 'center', gap: 22, marginTop: 6 }}>
           <Pressable hitSlop={8} onPress={() => Alert.alert('Alte mâncăruri?', lockedList.length
             ? `Păstrez bucătăriile și cele ${lockedList.length} mese fixate cu lacătul, restul se schimbă. Lista de cumpărături se reface.`

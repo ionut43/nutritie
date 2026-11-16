@@ -25,7 +25,7 @@ export function PantryView() {
   const staples = pantry.filter((p) => ING[p.ingId]?.staple);
   const rs = mergeRestrictions(members);
   const suggestions = useMemo(() => {
-    const ok = RECIPES.filter((r) => recipeFits(r, rs) && hasEquipment(r, settings.equipment) && !disliked.includes(r.id));
+    const ok = RECIPES.filter((r) => r.meal.length > 0 && recipeFits(r, rs) && hasEquipment(r, settings.equipment) && !disliked.includes(r.id));
     return recipesFromPantry(real, ok, today).slice(0, 8);
   }, [real, rs, settings.equipment, disliked, today]);
 

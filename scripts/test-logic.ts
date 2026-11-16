@@ -342,8 +342,10 @@ t('fără ore: „Ieri: ai mâncat ce era în plan?” notează tot, doar prima 
   const m = useStore.getState().plans[plan.id].meals.find((x: { day: number; slot: string }) => x.day === 2 && x.slot === 'pranz');
   useStore.getState().toggleEaten(plan.id, 2, 'pranz', false, 1.5);
   const e = useStore.getState().foodLog.find((f: { mealKey?: string }) => f.mealKey?.endsWith('|2|pranz'));
-  const { RECIPE } = require('../src/data/recipes');
-  assert.ok(Math.abs(e.kcal - perServing(RECIPE[m.recipeId]).kcal * 1.5) < 1);
+  // felul principal la porția aleasă, iar garniturile (ciorbă, pâine) în aceeași proporție
+  const { mealMacros } = require('../src/logic/planner');
+  const mainId = useStore.getState().members.find((x: { isMain: boolean }) => x.isMain).id;
+  assert.ok(Math.abs(e.kcal - mealMacros(m, mainId, 1.5).kcal) < 1);
 });
 
 t('scrii normal ce ai mâncat: „o shaorma mare și un ayran”', () => {
@@ -466,7 +468,7 @@ import { offToIngredient, suggestIngredient } from '../src/logic/products';
 t('recunoaștere farfurie: descriere + poza rețetei', () => {
   const emb = JSON.parse(fs.readFileSync('src/data/vision_embeddings.json', 'utf8'));
   const labels = loadLabels(emb);
-  for (const r of RECIPES) assert.ok(labels.ids.includes(r.id), `fără vector: ${r.id}`);
+  for (const r of RECIPES.filter((x) => !x.tags?.includes('garnitura'))) assert.ok(labels.ids.includes(r.id), `fără vector: ${r.id}`);
   assert.ok(labels.hasImg.filter(Boolean).length >= 270);
   const fx = JSON.parse(fs.readFileSync('scripts/fixtures/clip_fixture.json', 'utf8'));
   for (const [name, x] of Object.entries(fx) as [string, { emb: number[]; top: string }][]) {
@@ -485,8 +487,9 @@ import { trimPlanSlots } from '../src/logic/planner';
 t('suma meselor dintr-o zi = ținta de calorii (±5%), oricâte mese', () => {
   const solo = { ...noFast, members: [me], household: { memberIds: ['me'], guests: 0, applyFasting: false } };
   const target = computeTargets(me, new Date('2026-11-15')).kcal;
+  const { mealMacros: mm } = require('../src/logic/planner');
   const dayKcal = (p: ReturnType<typeof generatePlan>, d: number) => p.meals.filter((m) => m.day === d)
-    .reduce((a, m) => a + perServing(RECIPE[m.recipeId]).kcal * (m.shares.find((x) => x.memberId === 'me')?.factor ?? 0), 0);
+    .reduce((a, m) => a + mm(m, 'me').kcal, 0);
   const out: string[] = [];
   for (const slots of [['pranz', 'cina'], ['mic_dejun', 'pranz', 'cina'], ['mic_dejun', 'pranz', 'gustare2', 'cina']] as Settings['slots'][]) {
     const p = generatePlan({ ...solo, settings: { ...solo.settings, slots } });
@@ -500,7 +503,7 @@ t('suma meselor dintr-o zi = ținta de calorii (±5%), oricâte mese', () => {
       assert.equal(tp.meals.length, 14);
       assert.ok(tp.meals.every((m) => m.slot === 'pranz' || m.slot === 'cina'));
       for (let d = 0; d < 7; d++) assert.ok(dayKcal(tp, d) <= target * 1.05 + 1);
-      for (const s of tp.sessions) assert.ok(tp.meals.some((m) => m.sessionId === s.id) || s.done);
+      for (const s of tp.sessions) assert.ok(tp.meals.some((m) => m.sessionId === s.id || m.sides?.some((x) => x.sessionId === s.id)) || s.done);
       out.push(`4→2 ${Math.round(Math.min(...[0, 1, 2, 3, 4, 5, 6].map((d) => dayKcal(tp, d))))}–${Math.round(Math.max(...[0, 1, 2, 3, 4, 5, 6].map((d) => dayKcal(tp, d))))}`);
     }
   }

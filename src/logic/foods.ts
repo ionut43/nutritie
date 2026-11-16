@@ -71,7 +71,7 @@ export function searchFoods(q: string, limit = 40): FoodItem[] {
   const out: { f: FoodItem; s: number }[] = [];
   for (const g of GENERIC_FOODS) if (hit(g.name)) out.push({ f: foodFromRef(`g:${g.id}`)!, s: score(g.name) });
   for (const i of INGREDIENTS) if (!i.staple && hit(i.name)) out.push({ f: foodFromRef(`i:${i.id}`)!, s: score(i.name) + (i.custom ? -0.5 : 0.2) });
-  for (const r of RECIPES) if (hit(r.name)) out.push({ f: foodFromRef(`r:${r.id}`)!, s: score(r.name) + 0.4 });
+  for (const r of RECIPES) if (!r.tags?.includes('garnitura') && hit(r.name)) out.push({ f: foodFromRef(`r:${r.id}`)!, s: score(r.name) + 0.4 });
   return out.filter((x) => x.f).sort((a, b) => a.s - b.s || a.f.name.length - b.f.name.length).slice(0, limit).map((x) => x.f);
 }
 

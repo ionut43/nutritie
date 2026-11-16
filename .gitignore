@@ -49,3 +49,4 @@ build/
 Payload/
 *.ipa
 *.apk
+__pycache__/

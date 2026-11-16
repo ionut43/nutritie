@@ -10,6 +10,14 @@ Plan de mese pe săptămână, listă de cumpărături, cămară și calorii. Me
 2. Deschide fișierul și permite „Instalare din surse necunoscute” când ți se cere.
 3. Versiunile noi se instalează peste cea veche și datele rămân, pentru că toate sunt semnate cu aceeași cheie.
 
+## Pe iPhone fără nimic instalat (varianta web)
+
+1. O singură dată: pe GitHub, în repo, *Settings → Pages → Source: GitHub Actions*. Apoi *Actions → Aplicația web → Run workflow*. După asta se publică singură la fiecare schimbare.
+2. Pe iPhone deschide în **Safari** `https://<cont>.github.io/<repo>/`, apasă **Partajează → Adaugă pe ecranul principal** și deschide-o de acolo.
+3. Se deschide pe tot ecranul, ca o aplicație. Datele rămân pe telefon (în memoria Safari a aplicației).
+
+Are aceleași funcții ca aplicația instalată: recunoașterea mâncării din poză (același model, în WebAssembly), citirea bonurilor și a etichetelor (Tesseract), codurile de bare, blocarea cu Face ID (passkey local), backup automat săptămânal. Prețurile reale vin din Monitorul Prețurilor prin GitHub, în fiecare luni. Singura diferență: fără notificări când expiră ceva în cămară (în aplicație vezi oricum ce expiră).
+
 ## Instalare pe iPhone (gratuit, fără Mac)
 
 Apple nu permite instalarea gratuită direct dintr-un fișier, așa că sunt doi pași. Ambii sunt gratuiți.
@@ -79,7 +87,7 @@ Versiunile noi: în SideStore, **+** → noul `Nutritie.ipa`. Se instalează pes
 | 📅 Plan | Gătești în zilele alese, resturile acoperă zilele următoare, ce nu ține se congelează. Nu repetă felurile din ultimele 4 săptămâni, nu pune aceeași carne la mese consecutive, „cât de variat” e reglabil |
 | 🍽️ Mese pe zi | Alegi 2–5 mese; suma calorică a fiecărei zile din plan iese cât ținta ta (±5%). Schimbarea se aplică și planului de acum: mesele în plus dispar, porțiile celorlalte cresc |
 | 👍👎 Gusturi | Notezi mesele după ce le mănânci; aplicația învață ce ingrediente, ce carne și ce bucătării îți plac |
-| 🍲 813 rețete, 765 cu poze reale + rețetele tale | Rețete din toată lumea (TheMealDB, UniTools), cu text în română. Majoritatea cu carne (pui, porc, vită, miel), plus pește, vegetariene și de post. Caloriile, macro-urile, fibrele, zaharurile, sarea, alergenii, dieta și postul se calculează automat |
+| 🍲 813 rețete, 765 cu poze reale + rețetele tale | Rețete din toată lumea (TheMealDB, UniTools), cu text în română. Planul pune mai ales feluri familiare; cele exotice doar dacă alegi bucătăria lor. La mesele mari, felul principal vine cu ciorbă, pâine sau salată, ca acasă. Majoritatea cu carne (pui, porc, vită, miel), plus pește, vegetariene și de post. Caloriile, macro-urile, fibrele, zaharurile, sarea, alergenii, dieta și postul se calculează automat |
 | 🏪 Magazine | Alegi unde cumperi (Lidl, Kaufland, Mega Image, Carrefour, Penny, Profi, Auchan, Selgros, Freshful). Lista săptămânii e pentru un singur magazin, cu comparația costului la celelalte. Prețurile de pe bonuri se țin minte separat pe magazin |
 | 💸 Cheltuieli | Suma de pe bon sau confirmată la final de listă; grafic pe săptămâni și pe magazine, rezumat în fiecare luni |
 | ❤️ Alegi prin swipe | Rețete una câte una: dreapta vreau, stânga nu. Din alegeri se fac planul și lista; swipe-urile învață gustul |

@@ -5,5 +5,7 @@ module.exports = ({ config }) => {
     ...config,
     android: { ...config.android, versionCode: build },
     ios: { ...config.ios, buildNumber: String(build) },
+    // varianta web pe GitHub Pages stă sub /<repo>/
+    ...(process.env.WEB_BASE ? { experiments: { ...config.experiments, baseUrl: process.env.WEB_BASE } } : {}),
   };
 };

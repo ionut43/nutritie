@@ -16,6 +16,8 @@ used = set(re.findall(r"'(\d{5})'", open(os.path.join(ROOT, 'src/data/mealdb_ids
 norm = lambda s: unicodedata.normalize('NFKD', s).encode('ascii', 'ignore').decode().lower()
 existing = norm(' '.join(open(f).read() for f in glob.glob(os.path.join(ROOT, 'src/data/retete/*.ts')) if not f.endswith('importate.ts')))
 
+from origin import origin  # noqa: E402
+
 AREA = {
     'Italian': 'it', 'Greek': 'med', 'Spanish': 'med', 'Portuguese': 'med', 'Croatian': 'med',
     'Turkish': 'or', 'Moroccan': 'or', 'Egyptian': 'or', 'Tunisian': 'or', 'Algerian': 'or', 'Syrian': 'or', 'Saudi Arabian': 'or', 'Lebanese': 'or', 'Kenyan': 'or',
@@ -79,7 +81,7 @@ for m in meals:
     cat = m['strCategory']
     meal = ['gustare'] if cat in ('Dessert', 'Starter') else ['mic_dejun'] if cat == 'Breakfast' else ['principal']
     serv = max(4, min(12, round(kcal / 350))) if cat == 'Dessert' else max(2, min(6, round(kcal / 650))) if kcal else 4
-    out.append({'src': 'm', 'key': 'm' + m['idMeal'], 'en': m['strMeal'], 'cat': cat, 'area': m['strArea'], 'cuisine': AREA.get(m['strArea'] or '', 'eu'),
+    out.append({'src': 'm', 'key': 'm' + m['idMeal'], 'en': m['strMeal'], 'cat': cat, 'area': m['strArea'] or m.get('strCountry'), 'cuisine': origin(m['strArea'] or m.get('strCountry'))[1],
                 'meal': meal, 'serv': serv, 'prep': minutes(m['strInstructions'] or ''), 'oven': oven(m['strInstructions'] or ''),
                 'ing': ing, 'miss': miss, 'kcalServ': round(kcal / serv) if serv else 0, 'img': m['strMealThumb'], 'n': len(items),
                 'text': (m['strInstructions'] or '')[:700]})
@@ -97,7 +99,7 @@ for r in uni:
         items.append((x['name']['en'], grams(meas, x['name']['en'])))
     ing, miss, kcal = finish(items)
     out.append({'src': 'u', 'key': 'u' + r['slug'], 'en': r['name']['en'], 'native': r.get('nativeName'), 'cat': r['category'], 'area': r['country'],
-                'cuisine': CC.get(r['country'], 'eu'), 'meal': meal, 'serv': r['baseServings'], 'prep': r['prepMinutes'] + r['cookMinutes'],
+                'cuisine': origin(r['country'])[1], 'meal': meal, 'serv': r['baseServings'], 'prep': r['prepMinutes'] + r['cookMinutes'],
                 'oven': oven(' '.join(s['text']['en'] for s in r['steps'])), 'ing': ing, 'miss': miss,
                 'kcalServ': round(kcal / r['baseServings']), 'kcalSrc': r['nutritionPerServing']['calories'], 'img': r['photo']['url'],
                 'credit': f"{r['photo']['author']}, {r['photo']['license']}", 'n': len(r['ingredients']),

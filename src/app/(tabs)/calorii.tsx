@@ -7,7 +7,7 @@ import { computeTargets, dailyBase, exerciseKcal } from '../../logic/energy';
 import { recipeOfEntry, slotOfEntry } from '../../logic/foods';
 import { nf } from '../../logic/format';
 import { perServing } from '../../logic/nutrition';
-import { mealLabel, SLOT_ORDER } from '../../logic/planner';
+import { mealLabel, mealMacros, sidesLabel, SLOT_ORDER } from '../../logic/planner';
 import type { PlannedMeal } from '../../logic/types';
 import { eatenKey, ownedBy, planForDate, useActiveMember, useStore } from '../../store/useStore';
 import { DISPLAY, DISPLAY_X, Divider, FoodImage, Icon, IconBtn, Row, T, useTheme } from '../../ui/kit';
@@ -41,7 +41,7 @@ export default function Calories() {
   const upcoming = day === today && found ? found.plan.meals.filter((m) => m.day === found.day && m.shares.some((x) => x.memberId === main.id)
     && !found.plan.eaten.includes(eatenKey(main.id, m.day, m.slot)) && !found.plan.skipped?.includes(eatenKey(main.id, m.day, m.slot))
     && !log.some((f) => !f.mealKey && f.slot === m.slot)) : [];
-  const kcalOf = (m: PlannedMeal) => perServing(RECIPE[m.recipeId]).kcal * (m.shares.find((x) => x.memberId === main.id)?.factor ?? 1);
+  const kcalOf = (m: PlannedMeal) => mealMacros(m, main.id).kcal;
   const ghost = upcoming.reduce((a, m) => a + kcalOf(m), 0);
 
   // cât arzi într-o zi, pe bucăți
@@ -142,7 +142,7 @@ export default function Calories() {
               <View style={{ opacity: 0.55 }}><FoodImage recipe={RECIPE[m.recipeId]} size={52} radius={12} /></View>
               <View style={{ flex: 1 }}>
                 <T numberOfLines={1} color={t.muted} style={{ fontFamily: DISPLAY, fontSize: 16 }}>{RECIPE[m.recipeId]?.name}</T>
-                <T v="small">{mealLabel(m.slot)}, urmează</T>
+                <T v="small" numberOfLines={1}>{mealLabel(m.slot)}, urmează{sidesLabel(m) ? `, ${sidesLabel(m)}` : ''}</T>
               </View>
               <T color={t.muted} style={{ fontFamily: DISPLAY_X, fontSize: 18, fontVariant: ['tabular-nums'] }}>{Math.round(kcalOf(m)).toLocaleString('ro-RO')}</T>
             </Row>

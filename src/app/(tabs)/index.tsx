@@ -11,7 +11,7 @@ import { fmtRon, nf } from '../../logic/format';
 import { perServing } from '../../logic/nutrition';
 import { recipeOfEntry, slotOfEntry as slotOf } from '../../logic/foods';
 import { daysLeft } from '../../logic/pantry';
-import { mealLabel, SLOT_ORDER } from '../../logic/planner';
+import { mealLabel, mealMacros, sessionMeals, sidesLabel, SLOT_ORDER } from '../../logic/planner';
 import type { FoodLogEntry, PlannedMeal, Slot, WeekPlan } from '../../logic/types';
 import { eatenKey, ownedBy, planForDate, useActiveMember, useFeature, useStore } from '../../store/useStore';
 import { Btn, DISPLAY, DISPLAY_X, FoodImage, Icon, Row, T, useTheme } from '../../ui/kit';
@@ -84,7 +84,7 @@ export default function Today() {
   }
   for (const e of extras.filter((f) => !f.slot || !SLOT_ORDER.includes(f.slot as Slot))) rows.push({ kind: 'extra', entry: e });
   const next = rows.find((r) => r.kind === 'plan' && r.state === 'todo') as Extract<DayRow, { kind: 'plan' }> | undefined;
-  const kcalOf = (m: PlannedMeal) => { const r = RECIPE[m.recipeId]; return r ? perServing(r).kcal * (m.shares.find((x) => x.memberId === main.id)?.factor ?? 0) : 0; };
+  const kcalOf = (m: PlannedMeal) => mealMacros(m, main.id).kcal;
   const ghost = rows.reduce((a, r) => a + (r.kind === 'plan' && r.state === 'todo' ? kcalOf(r.meal) : 0), 0);
 
   // bucățile arcului: ce ai mâncat azi, în ordinea meselor
@@ -95,7 +95,7 @@ export default function Today() {
   const ate = Math.round(eatenKcal);
 
   const pendingY = pendingMeals(yesterdayISO);
-  const cookToday = plan ? plan.sessions.filter((s) => s.day === day && !s.done && plan.meals.filter((m) => m.sessionId === s.id).length > 1) : [];
+  const cookToday = plan ? plan.sessions.filter((s) => s.day === day && !s.done && !s.nocook && sessionMeals(plan, s.id).length > 1) : [];
   const expiring = pantry.filter((p) => daysLeft(p, today) <= 2 && !ING[p.ingId]?.staple);
   const monday = toISO(addDays(fromISO(today), -weekdayMon(now)));
   const spentWeek = spend.filter((x) => x.dateISO >= monday).reduce((a, x) => a + x.amount, 0);
@@ -245,7 +245,8 @@ function MealCard({ row, next, cooking, mainId, plan, onOpen, onCheck }: {
   const t = useTheme();
   const r = RECIPE[row.meal.recipeId];
   const f = row.meal.shares.find((x) => x.memberId === mainId)?.factor ?? 1;
-  const kcal = r ? Math.round(perServing(r).kcal * f) : 0;
+  const kcal = Math.round(mealMacros(row.meal, mainId).kcal);
+  const sidesTxt = sidesLabel(row.meal);
   const leftover = plan.sessions.find((s) => s.id === row.meal.sessionId)?.day !== row.meal.day;
   const label = mealLabel(row.meal.slot);
   const status = row.state === 'done' ? `${label}, mâncată` : row.state === 'replaced' ? `${label}, ai mâncat altceva`
@@ -259,6 +260,7 @@ function MealCard({ row, next, cooking, mainId, plan, onOpen, onCheck }: {
       <View style={{ flex: 1, gap: 1 }}>
         <T v="small" color={row.state === 'done' ? t.accent : next ? t.primary : t.muted} style={{ fontWeight: '600' }}>{status}</T>
         <T numberOfLines={2} style={{ fontFamily: DISPLAY, fontSize: 16, textDecorationLine: dim ? 'line-through' : 'none' }}>{r?.name}</T>
+        {sidesTxt ? <T v="small" numberOfLines={1} color={t.text}>{sidesTxt}</T> : null}
         <T v="small">{kcal.toLocaleString('ro-RO')} kcal{f !== 1 ? `, porția ×${nf(f)}` : ''}{extra}</T>
       </View>
       <CheckDot done={row.state === 'done'} active={next} onPress={onCheck} label={row.state === 'done' ? 'Nu am mâncat-o' : 'Am mâncat-o'} />

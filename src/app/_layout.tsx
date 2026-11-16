@@ -14,8 +14,11 @@ import { DISPLAY, useTheme } from '../ui/kit';
 import { crumb, installErrorLog } from '../ui/diag';
 import { LockGate } from '../ui/LockGate';
 import { autoBackup } from '../ui/backup';
+import { installWebShims } from '../ui/webShims';
 import { rescheduleExpiry, setupNotifications } from '../ui/notify';
 import { useEffect } from 'react';
+
+installWebShims();
 
 export default function RootLayout() {
   const hydrated = useStore((s) => s.hydrated);

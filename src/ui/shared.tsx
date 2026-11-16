@@ -4,7 +4,7 @@ import { Pressable, Text, View } from 'react-native';
 import { RECIPE } from '../data/recipes';
 import { FAST_LABEL } from '../logic/fasting';
 import { perServing } from '../logic/nutrition';
-import { MAIN_SLOTS, mealKey, mealLabel } from '../logic/planner';
+import { MAIN_SLOTS, mealKey, mealLabel, mealMacros, sidesLabel } from '../logic/planner';
 import { STORE, type StoreId } from '../logic/stores';
 import { eatenKey } from '../store/useStore';
 import type { FastLevel, PlannedMeal, Recipe, WeekPlan } from '../logic/types';
@@ -82,8 +82,9 @@ export function MealCard({ plan, meal, mainId, onSwap, showEaten, onToggleEaten,
         <T v="label" color={t.primary}>{mealLabel(meal.slot)}</T>
         <T v="h3" numberOfLines={2} style={{ textDecorationLine: eaten ? 'line-through' : 'none' }}>{r.name}</T>
         <Row gap={6} wrap>
-          <T v="small">{fmtPortion(share)} {share === 1 ? 'porție' : 'porții'} · {Math.round(ps.kcal * share)} kcal · {Math.round(ps.p * share)} g prot.</T>
+          <T v="small">{fmtPortion(share)} {share === 1 ? 'porție' : 'porții'} · {Math.round(mainId ? mealMacros(meal, mainId).kcal : ps.kcal * share)} kcal · {Math.round(mainId ? mealMacros(meal, mainId).p : ps.p * share)} g prot.</T>
         </Row>
+        {sidesLabel(meal) ? <T v="small" color={t.text}>{sidesLabel(meal)}</T> : null}
         <Row gap={6} wrap>
           {meal.frozen ? <Pill text="din congelator" icon="snow" color={t.protein} /> : leftover ? <Pill text="gătit deja" icon="checkmark-done" color={t.accent} /> : null}
           {session?.extra ? <Pill text="gătești azi" icon="flame" color={t.primary} /> : null}

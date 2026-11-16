@@ -10,6 +10,7 @@ import { addToPantry, consumeRecipe, uid } from '../logic/pantry';
 import {
   generatePlan, replaceSessionRecipe, replaceSingleMeal, SLOT_ORDER, setLabelSlots, withShopping, type PlanInput,
   trimPlanSlots,
+  mealMacros, mealParts, sessionMeals, sidesLabel,
 } from '../logic/planner';
 import type {
   Cuisine,
@@ -524,18 +525,20 @@ export const useStore = create<State>()(
             return;
           }
           // o masă care se pregătește pe loc (mic dejun, gustare) se consideră pregătită când e mâncată
-          const ses = p.sessions.find((x) => x.id === meal.sessionId);
-          if (ses && !ses.done && p.meals.filter((m) => m.sessionId === ses.id).length === 1) get().cookSession(planId, ses.id);
+          // ce se pregătește pe loc (mic dejun, gustare, salata de lângă) se consideră pregătit când e mâncat
+          for (const part of mealParts(meal)) {
+            const ses = p.sessions.find((x) => x.id === part.sessionId);
+            if (ses && !ses.done && sessionMeals(p, ses.id).length === 1) get().cookSession(planId, ses.id);
+          }
           const r = RECIPE[meal.recipeId];
-          const factor = override ?? meal.shares.find((x) => x.memberId === main.id)?.factor ?? 1;
-          const ps = perServing(r);
+          const mm = mealMacros(meal, main.id, override);
+          const extra = sidesLabel(meal);
           const cur = get().plans[planId];
           set((st) => ({
             plans: { ...st.plans, [planId]: { ...cur, eaten: [...cur.eaten, key], skipped: cur.skipped?.filter((k) => k !== key) } },
             foodLog: [...st.foodLog, {
-              id: uid('f'), memberId: main.id, dateISO: toISO(addDays(fromISO(p.startISO), day)), label: r.name,
-              kcal: ps.kcal * factor, p: ps.p * factor, c: ps.c * factor, f: ps.f * factor,
-              fib: ps.fib * factor, sug: ps.sug * factor, salt: ps.salt * factor, mealKey: key, planId,
+              id: uid('f'), memberId: main.id, dateISO: toISO(addDays(fromISO(p.startISO), day)), label: extra ? `${r.name}, ${extra}` : r.name,
+              kcal: mm.kcal, p: mm.p, c: mm.c, f: mm.f, fib: mm.fib, sug: mm.sug, salt: mm.salt, mealKey: key, planId,
             }],
           }));
         },
@@ -619,7 +622,7 @@ export const useStore = create<State>()(
         favFoods: s.favFoods, lastRecapISO: s.lastRecapISO, swipes: s.swipes, livePrices: s.livePrices, priceProducts: s.priceProducts,
       }),
       onRehydrateStorage: () => (state) => {
-        if (state) { syncRegistry(state.customRecipes ?? [], state.customIngredients ?? []); setLivePrices(state.livePrices?.prices ?? (BUNDLED_PRICES.fetchedAt ? BUNDLED_PRICES.prices as never : undefined)); }
+        if (state) { syncRegistry(state.customRecipes ?? [], state.customIngredients ?? []); const own = state.livePrices; const bundledNewer = !!BUNDLED_PRICES.fetchedAt && (!own || String(BUNDLED_PRICES.fetchedAt) > own.fetchedAt); setLivePrices(bundledNewer ? BUNDLED_PRICES.prices as never : own?.prices); }
         useStore.setState({ hydrated: true });
       },
     },

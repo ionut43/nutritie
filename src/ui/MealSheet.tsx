@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { RECIPE } from '../data/recipes';
 import { addDays, DAY_NAMES, fromISO, todayISO, toISO, weekdayMon } from '../logic/dates';
 import { perServing } from '../logic/nutrition';
-import { mealKey, mealLabel } from '../logic/planner';
+import { mealKey, mealLabel, mealMacros } from '../logic/planner';
 import type { PlannedMeal, WeekPlan } from '../logic/types';
 import { eatenKey, useStore } from '../store/useStore';
 import { success, tick } from './haptics';
@@ -35,9 +35,31 @@ export function MealSheet({ open, mainId, onClose }: { open: { plan: WeekPlan; m
           <FoodImage recipe={r} size={72} radius={16} />
           <View style={{ flex: 1 }}>
             <T v="h2" numberOfLines={2}>{r?.name}</T>
-            <T v="small">{DAY_NAMES[weekdayMon(addDays(fromISO(plan.startISO), m.day))]}, {mealLabel(m.slot).toLowerCase()}, {r ? Math.round(perServing(r).kcal * f) : 0} kcal</T>
+            <T v="small">{DAY_NAMES[weekdayMon(addDays(fromISO(plan.startISO), m.day))]}, {mealLabel(m.slot).toLowerCase()}, {Math.round(mealMacros(m, mainId).kcal)} kcal{f !== 1 ? `, felul principal ×${String(f).replace('.', ',')}` : ''}</T>
           </View>
         </Row>
+        {(m.sides ?? []).length > 0 && (
+          <View style={{ gap: 8 }}>
+            {(m.sides ?? []).map((sd) => {
+              const sr = RECIPE[sd.recipeId];
+              if (!sr) return null;
+              const sf = sd.shares.find((x) => x.memberId === mainId)?.factor ?? 1;
+              const sses = plan.sessions.find((x) => x.id === sd.sessionId);
+              const tappable = !sr.tags?.includes('garnitura');
+              return (
+                <Pressable key={sd.recipeId} disabled={!tappable} onPress={() => go(() => router.push({ pathname: '/reteta/[id]', params: { id: sr.id, portions: String(sses?.portions ?? 1) } }))}>
+                  <Row gap={12}>
+                    <FoodImage recipe={sr} size={44} radius={12} />
+                    <View style={{ flex: 1 }}>
+                      <T numberOfLines={1} style={{ fontWeight: '600' }}>+ {sr.name}{sr.id === 'garnitura_paine' ? `, ${Math.round(sf * 100)} g` : ''}</T>
+                      <T v="small">{Math.round(perServing(sr).kcal * sf)} kcal{tappable ? ', atinge pentru rețetă' : ''}</T>
+                    </View>
+                  </Row>
+                </Pressable>
+              );
+            })}
+          </View>
+        )}
         {!past ? null : done ? (
           <Btn title="N-am mâncat-o" variant="secondary" icon="close" onPress={() => { tick(); skipMeal(plan.id, m.day, m.slot); onClose(); }} />
         ) : (
