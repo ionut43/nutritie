@@ -92,10 +92,18 @@ export interface Recipe {
   credit?: string;
   /** cât de familiară e pentru cineva din România, 0–1 (lipsă = după bucătărie) */
   familiar?: number;
+  /** video-ul rețetei pe YouTube (id-ul de 11 caractere); imaginea lui ține loc de poză */
+  video?: string;
+  /** de unde e rețeta (ingredientele); pașii din aplicație sunt rezumați, rețeta completă e la sursă */
+  source?: { name: string; url: string };
   /** rețetă adăugată de utilizator */
   custom?: boolean;
   /** cale locală către poza făcută de utilizator */
   photo?: string;
+  /** cine a făcut rețeta (rețetele tale și cele primite) */
+  author?: string;
+  /** pentru ce moment al zilei e (rețetele tale): mic dejun, prânz, cină, gustare, desert */
+  moments?: ('mic_dejun' | 'pranz' | 'cina' | 'gustare' | 'desert')[];
 }
 
 /** ce nu mănânci (preferință, nu alergie) */
@@ -280,6 +288,13 @@ export interface FoodLogEntry {
 }
 
 /** o cumpărătură (din bon, din listă sau scrisă de mână) */
-export interface SpendEntry { id: string; dateISO: string; store: StoreId; amount: number; source: 'bon' | 'lista' | 'manual'; note?: string }
+export interface SpendEntry {
+  id: string; dateISO: string; store: StoreId; amount: number; source: 'bon' | 'lista' | 'manual'; note?: string;
+  /** din `amount`, cât n-a fost mâncare (detergent, hârtie, vase…), de pe bon */
+  nonFood?: number;
+}
+
+/** cât s-a dat pe mâncare dintr-o cheltuială (fără ce nu se mănâncă) */
+export const foodSpent = (e: Pick<SpendEntry, 'amount' | 'nonFood'>) => Math.max(0, e.amount - (e.nonFood ?? 0));
 
 export interface WeightEntry { dateISO: string; kg: number; memberId?: string }

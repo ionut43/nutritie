@@ -9,7 +9,7 @@ import { computeTargets } from '../src/logic/energy';
 import { fastInfo, orthodoxEaster } from '../src/logic/fasting';
 import { fastAllows, perServing, recipeAllergens, recipeDiet } from '../src/logic/nutrition';
 import { addToPantry, consumeFromPantry, recipesFromPantry } from '../src/logic/pantry';
-import { generatePlan, replaceSessionRecipe, alternativesFor, replaceSingleMeal, type PlanInput } from '../src/logic/planner';
+import { generatePlan, replaceSessionRecipe, alternativesFor, replaceSingleMeal, refitPlan, type PlanInput } from '../src/logic/planner';
 import type { Member, Settings } from '../src/logic/types';
 
 let passed = 0;
@@ -27,7 +27,7 @@ t('integritate date', () => {
 });
 
 t('poze reale doar unde există, fără imagini generate', () => {
-  const photos = fs.readFileSync('src/data/photos.ts', 'utf8') + fs.readFileSync('src/data/photos_import.ts', 'utf8');
+  const photos = fs.readFileSync('src/data/photos.ts', 'utf8') + fs.readFileSync('src/data/photos_import.ts', 'utf8') + fs.readFileSync('src/data/photos_ro.ts', 'utf8') + fs.readFileSync('src/data/photos_extra.ts', 'utf8');
   for (const r of RECIPES) {
     const has = fs.existsSync(`assets/food/r/${r.id}.jpg`) || fs.existsSync(`assets/food/r/${r.id}.webp`);
     // o rețetă are poză doar dacă e o fotografie reală a felului
@@ -39,6 +39,20 @@ t('poze reale doar unde există, fără imagini generate', () => {
   const withPhoto = RECIPES.filter((r) => r.img).length;
   assert.ok(RECIPES.length >= 800 && withPhoto >= 750, `${RECIPES.length} rețete, ${withPhoto} cu poză`);
   console.log(`   ${RECIPES.length} rețete, ${withPhoto} cu poză reală`);
+});
+
+t('rețetele de pe site-uri românești: sursă, pași proprii, video valid', () => {
+  const ro = RECIPES.filter((r) => r.source);
+  assert.ok(ro.length >= 300, `doar ${ro.length} rețete românești`);
+  for (const r of ro) {
+    assert.ok(/^https:\/\/(www\.)?(lauralaurentiu|e-retete)\.ro\//.test(r.source!.url), `${r.id}: sursă necunoscută ${r.source!.url}`);
+    assert.ok(r.steps.length >= 2 && r.steps.every((s) => s.length < 220), `${r.id}: pașii lipsesc sau sunt prea lungi`);
+    if (r.video) assert.match(r.video, /^[\w-]{11}$/, `${r.id}: id video greșit`);
+    if (r.img) assert.ok(r.credit && /CC|domeniu public/.test(r.credit), `${r.id}: poza fără licență`);
+    const k = perServing(r).kcal;
+    assert.ok(k > 40 && k < 1100, `${r.id}: ${Math.round(k)} kcal pe porție`);
+  }
+  console.log(`   ${ro.length} rețete românești, ${ro.filter((r) => r.video).length} cu video, ${ro.filter((r) => r.img).length} cu poză liberă`);
 });
 
 t('Paște ortodox', () => {
@@ -182,6 +196,82 @@ import { weekRecap } from '../src/logic/recap';
 
 const noFast: PlanInput = { ...base, household: { memberIds: ['me', 'p'], guests: 0, applyFasting: false }, settings: { ...settings, fasting: 'niciunul' } };
 
+t('schimbi ce mănânci: planul se reface singur de azi înainte, ce ai mâncat rămâne', () => {
+  for (const seed of [11, 12, 13]) {
+    const p0 = generatePlan({ ...noFast, seed });
+    // ziua 2: ai mâncat deja mesele zilelor 0–1; acum „nu mai mănânc” ingredientul principal al unui fel de joi
+    const target = p0.meals.find((m) => m.day >= 3 && ['pranz', 'cina'].includes(m.slot))!;
+    const main = RECIPE[target.recipeId].ing.filter(([id]) => !ING[id]?.staple).sort((a, b) => b[1] - a[1])[0][0];
+    const eaten = p0.meals.filter((m) => m.day < 2).map((m) => `${m.day}|${m.slot}`);
+    const plan = { ...p0, eaten };
+    const input: PlanInput = { ...noFast, seed, members: noFast.members.map((m) => (m.id === 'me' ? { ...m, dislikes: [main] } : m)) };
+    const { plan: p1, changed } = refitPlan(plan, input, 2);
+    assert.ok(changed > 0, 'nu s-a schimbat nimic');
+    const rs = mergeRestrictions(input.members.filter((m) => ['me', 'p'].includes(m.id)));
+    for (const m of p1.meals) {
+      const before = p0.meals.find((x) => x.day === m.day && x.slot === m.slot)!;
+      if (m.day < 2) assert.equal(m.recipeId, before.recipeId, 's-a schimbat o masă deja mâncată');
+      else for (const id of [m.recipeId, ...(m.sides ?? []).map((x) => x.recipeId)]) assert.ok(recipeFits(RECIPE[id], rs), `${RECIPE[id].name} conține ${main}`);
+    }
+    assert.ok(p1.shopping.every((x) => x.ingId !== main || p1.meals.some((m) => m.day < 2 && [m.recipeId, ...(m.sides ?? []).map((y) => y.recipeId)].some((id) => RECIPE[id].ing.some(([i]) => i === main)))), `${main} a rămas pe listă`);
+  }
+});
+
+t('pornești postul: zilele rămase devin de post și mesele lor se schimbă', () => {
+  const p0 = generatePlan({ ...base, household: { ...base.household, applyFasting: true }, settings: { ...settings, fasting: 'niciunul' }, seed: 21 });
+  assert.ok(p0.fastDays.every((x) => x === 'none'));
+  const input: PlanInput = { ...base, household: { ...base.household, applyFasting: true }, settings: { ...settings, fasting: 'miercuri_vineri' }, seed: 21 };
+  const { plan: p1 } = refitPlan(p0, input, 0);
+  assert.ok(p1.fastDays.some((x) => x !== 'none'), 'zilele de post nu s-au recalculat');
+  for (const m of p1.meals) for (const id of [m.recipeId, ...(m.sides ?? []).map((x) => x.recipeId)]) assert.ok(fastAllows(p1.fastDays[m.day], RECIPE[id]), `${RECIPE[id].name} în zi de post`);
+});
+
+t('2 mese pe zi: mic dejun + cină înseamnă mic dejun adevărat, nu încă un fel greu', () => {
+  for (const slots of [['mic_dejun', 'cina'], ['mic_dejun', 'pranz']] as const) {
+    const p = generatePlan({ ...noFast, settings: { ...noFast.settings, slots: [...slots] }, seed: 5 });
+    const md = p.meals.filter((m) => m.slot === 'mic_dejun');
+    assert.equal(md.length, 7);
+    for (const m of md) assert.ok(RECIPE[m.recipeId].meal.includes('mic_dejun'), `${RECIPE[m.recipeId].name} la micul dejun`);
+    assert.ok(p.meals.every((m) => (slots as readonly string[]).includes(m.slot)));
+  }
+});
+
+t('4 săptămâni la rând: același fel principal nu revine în săptămâna imediat următoare', () => {
+  const history: Record<string, number> = {};
+  const weeks: Set<string>[] = [];
+  for (let w = 0; w < 4; w++) {
+    const start = toISO(new Date(Date.UTC(2026, 10, 16 + 7 * w)));
+    const p = generatePlan({ ...noFast, startISO: start, history: { ...history }, seed: 100 + w });
+    const mains = new Set(p.meals.filter((m) => ['pranz', 'cina'].includes(m.slot)).map((m) => m.recipeId));
+    weeks.push(mains);
+    for (const k of Object.keys(history)) history[k] += 1;
+    for (const id of mains) history[id] = 1;
+  }
+  for (let w = 1; w < 4; w++) {
+    const again = [...weeks[w]].filter((id) => weeks[w - 1].has(id));
+    assert.ok(again.length <= 1, `săptămâna ${w + 1} repetă: ${again.map((id) => RECIPE[id].name).join(', ')}`);
+  }
+});
+
+t('„nu mănânc cârnați”: scoate cârnații și atât (crenvurștii, salamul, mititeii rămân)', () => {
+  const noCarnati: PlanInput = { ...noFast, members: noFast.members.map((m) => (m.id === 'me' ? { ...m, dislikes: ['carnati'] } : m)) };
+  for (const seed of [1, 2, 3, 4, 5, 6]) {
+    const p = generatePlan({ ...noCarnati, seed });
+    for (const m of p.meals) {
+      for (const id of [m.recipeId, ...(m.sides ?? []).map((x) => x.recipeId)]) {
+        const r = RECIPE[id];
+        assert.ok(!r.ing.some(([i]) => ['carnati', 'carnati_proaspeti'].includes(i)), `${r.name} are cârnați`);
+        assert.ok(!/c[âa]rna[țt]/i.test(r.name), `${r.name}`);
+      }
+    }
+  }
+  const rs = mergeRestrictions(noCarnati.members);
+  const kept = RECIPES.filter((r) => !r.ing.some(([i]) => i === 'carnati' || i === 'carnati_proaspeti') && (r.ing.some(([i]) => i === 'crenvursti') || /\b(mici|mititei|salam)\b/i.test(r.name)));
+  assert.ok(kept.length > 0);
+  for (const r of kept) assert.ok(recipeFits(r, rs), `${r.name} a fost scoasă deși nu are cârnați`);
+});
+
+
 t('„ce nu mănânci”: fără pește și fără porc în plan', () => {
   const picky = { ...me, avoid: ['peste', 'fructe_mare', 'porc'] as Member['avoid'] };
   const p = generatePlan({ ...noFast, members: [picky, partner], household: { memberIds: ['me', 'p'], guests: 0, applyFasting: false } });
@@ -206,7 +296,7 @@ t('varietate: multe feluri diferite, nu de două ori în aceeași zi, nu aceeaș
   for (const m of mains) counts[m.recipeId] = (counts[m.recipeId] ?? 0) + 1;
   assert.ok(Math.max(...Object.values(counts)) <= 3, 'un fel apare de mai mult de 3 ori');
   const kinds = mains.map((m) => proteinKind(RECIPE[m.recipeId]));
-  const meat = kinds.filter((k) => ['pui', 'porc', 'vita', 'curcan', 'miel'].includes(k)).length;
+  const meat = kinds.filter((k) => ['pui', 'porc', 'vita', 'curcan', 'miel', 'organe'].includes(k)).length;
   assert.ok(meat >= mains.length * 0.5, `prea puțină carne pentru cineva care nu ține post: ${meat}/${mains.length}`);
   const mare = generatePlan({ ...noFast, settings: { ...noFast.settings, variety: 'mare' } });
   const dm = new Set(mare.meals.filter((m) => m.slot === 'pranz' || m.slot === 'cina').map((m) => m.recipeId)).size;
@@ -390,7 +480,7 @@ plan.warnings.forEach((w) => console.log('  ! ' + w));
 
 // ── Parsere OCR ──
 import { parseNutritionLabel } from '../src/logic/labelParser';
-import { parseReceipt, pricePerPackage } from '../src/logic/receiptParser';
+import { parseReceipt, pricePerPackage, splitReceipt } from '../src/logic/receiptParser';
 import { linesToRows } from '../src/logic/ocr';
 import { buildTaste, tasteBonus } from '../src/logic/taste';
 import { RECIPE as RMAP } from '../src/data/recipes';
@@ -448,6 +538,64 @@ t('bon de cumpărături', () => {
   assert.equal(pricePerPackage(byIng.pui_piept), 33); // 28,24 / 856 g × 1000 g
   const lidl = parseReceipt(['Piept pui 0,756 kg x 31,99   24,18 A', 'Banane 1,2 kg x 6,99   8,39 A']);
   assert.equal(lidl.length, 2); assert.equal(lidl[0].ingId, 'pui_piept'); assert.equal(lidl[0].grams, 756); assert.equal(lidl[1].ingId, 'banana');
+});
+
+t('bon cu de toate: detergentul și hârtia nu sunt mâncare, ciocolata și sucul da', () => {
+  const rows = [
+    'MEGA IMAGE SRL', 'CIF RO6719278',
+    'LAPTE ZUZU 3,5% 1L   8,49 B',
+    'DETERGENT ARIEL GEL 2,2L   54,99 A',
+    'HARTIE IGIENICA ZEWA 10 ROLE   27,99 A',
+    'CIOCOLATA MILKA 100G   6,49 B',
+    'SUC NATURA PORTOCALE 1L   9,99 B',
+    'OUA M 10 BUC   14,99 B',
+    'FAIRY LAMAIE 450ML   9,49 A',
+    'CASCAVAL MATURAT 300G   19,99 B',
+    'SAPUN DOVE   5,99 A',
+    'ULEI SPRAY GATIT 200ML   12,99 B',
+    'PUNGA   0,50 A',
+    'TOTAL   171,90',
+  ];
+  const items = parseReceipt(rows);
+  const kind = (n: string) => items.find((i) => i.name.includes(n))!.kind;
+  for (const n of ['DETERGENT', 'HARTIE IGIENICA', 'FAIRY', 'SAPUN', 'PUNGA']) assert.equal(kind(n), 'nealimentar', n);
+  for (const n of ['LAPTE', 'OUA', 'CASCAVAL', 'ULEI SPRAY']) assert.equal(kind(n), 'aliment', n);
+  for (const n of ['SUC']) assert.equal(kind(n), 'altele', n);
+  assert.ok(items.filter((i) => i.kind === 'nealimentar').every((i) => !i.ingId), 'detergentul n-are ce căuta în cămară');
+  const sp = splitReceipt(items, 171.9);
+  assert.equal(sp.nonFood, 98.96);
+  assert.equal(sp.food, 72.94);
+});
+
+import { parseShared, shareLink } from '../src/logic/recipeShare';
+t('rețeta ta trimisă ca link ajunge întreagă (autor, moment, ingrediente, pași, diacritice)', () => {
+  const mine = { ...RECIPE.sarmale_vita_cuptor, id: 'u_test', custom: true, author: 'Cosmin', moments: ['pranz', 'cina'] as ('pranz' | 'cina')[], name: 'Sarmalele mamei, cu smântână și mămăligă' };
+  const custom = { ...ING.oua, id: 'c_branza_bunicii', name: 'Brânza bunicii' };
+  mine.ing = [...mine.ing, [custom.id, 150]];
+  const link = shareLink(mine, [custom]);
+  assert.ok(link.startsWith('https://ionut43.github.io/nutritie/import?r='));
+  assert.ok(link.length < 4000, `link prea lung: ${link.length}`);
+  const got = parseShared(`Uite rețeta: ${link} poftă bună`)!;
+  assert.equal(got.recipe.name, mine.name);
+  assert.equal(got.recipe.author, 'Cosmin');
+  assert.deepEqual(got.recipe.moments, ['pranz', 'cina']);
+  assert.deepEqual(got.recipe.meal, ['principal']);
+  assert.deepEqual(got.recipe.ing, mine.ing);
+  assert.deepEqual(got.recipe.steps, mine.steps);
+  assert.equal(got.ingredients[0].name, 'Brânza bunicii');
+  assert.notEqual(got.recipe.id, mine.id);
+  assert.equal(parseShared('https://ionut43.github.io/nutritie/import?r=stricat'), null);
+});
+
+import { BREAKFAST_FAVORITES, NOT_FAMILIAR, PLAIN_NAME } from '../src/data/curation';
+t('lista făcută de mână (familiare, nume, mic dejun) arată doar rețete care există', () => {
+  for (const id of [...BREAKFAST_FAVORITES, ...NOT_FAMILIAR, ...Object.keys(PLAIN_NAME)]) assert.ok(RECIPE[id], `nu există ${id}`);
+  for (const id of BREAKFAST_FAVORITES) assert.ok(RECIPE[id].meal.includes('mic_dejun'), `${id} nu e mic dejun`);
+  // planul implicit nu pune feluri cu nume pe care nu le știe nimeni
+  for (const seed of [1, 2, 3, 4]) {
+    const p = generatePlan({ ...noFast, seed });
+    for (const m of p.meals) assert.ok(!NOT_FAMILIAR.has(m.recipeId), `${RECIPE[m.recipeId].name} în plan`);
+  }
 });
 
 t('învățarea gusturilor', () => {
@@ -521,6 +669,32 @@ t('lacătul: mesele fixate rămân exact acolo când refaci planul; la 2 mese g�
   const cookDays = new Set(p1.sessions.filter((x) => p1.meals.some((m) => m.sessionId === x.id)).map((x) => x.day)).size;
   assert.ok(cookDays <= 4, `gătești de ${cookDays} ori`);
   console.log(`   gătești de ${cookDays} ori, ${new Set(p1.meals.map((m) => m.recipeId)).size} rețete`);
+});
+
+t('mic dejun variat și puțină linte la cine mănâncă de toate', () => {
+  let rare = 0, mains = 0;
+  const kinds = new Map<string, number>();
+  // 4 săptămâni la rând pentru fiecare buget, cu istoricul săptămânilor dinainte (ca în aplicație)
+  for (const budget of [200, 300, 450]) {
+    let history: Record<string, number> = {};
+    for (const seed of [1, 2, 3, 4]) {
+    const p = generatePlan({ ...base, members: [{ ...me, diet: 'omnivor' }], household: { memberIds: ['me'], guests: 0, applyFasting: false },
+      settings: { ...settings, slots: ['mic_dejun', 'pranz', 'cina'], budgetRon: budget, fasting: 'niciunul' }, seed, history });
+    history = Object.fromEntries(Object.entries(history).map(([k, v]) => [k, v + 1]));
+    for (const m of p.meals) history[m.recipeId] = 1;
+    for (const m of p.meals) {
+      const r = RECIPE[m.recipeId];
+      if (m.slot === 'mic_dejun') kinds.set(r.id, (kinds.get(r.id) ?? 0) + 1);
+      if (m.slot !== 'mic_dejun' && r.meal.includes('principal')) { mains++; if (r.tags?.includes('mai_rar')) rare++; }
+    }
+    }
+  }
+  // 12 săptămâni: multe feluri de mic dejun, niciunul nu domină; linte/năut cel mult ~o dată pe săptămână
+  const top = Math.max(...kinds.values()), total = [...kinds.values()].reduce((a, b) => a + b, 0);
+  assert.ok(kinds.size >= 15, `doar ${kinds.size} feluri de mic dejun în 12 săptămâni`);
+  assert.ok(top / total <= 0.2, `un mic dejun e ${Math.round((100 * top) / total)}% din toate`);
+  assert.ok(rare <= 16, `${rare} mese cu linte/năut/bulgur din ${mains}`);
+  console.log(`   12 săptămâni: ${kinds.size} feluri de mic dejun (cel mai des ${top}/${total}), ${rare}/${mains} mese cu linte, năut sau bulgur`);
 });
 
 console.log(`\n${passed} teste trecute`);

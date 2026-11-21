@@ -83,6 +83,7 @@ export default function RootLayout() {
         <Stack.Screen name="setari" options={{ title: 'Setări plan' }} />
         <Stack.Screen name="preturi" options={{ title: 'Prețuri ingrediente' }} />
         <Stack.Screen name="reteta-noua" options={{ title: 'Rețetă nouă' }} />
+        <Stack.Screen name="import" options={{ title: 'Rețetă primită' }} />
         <Stack.Screen name="gatit/[id]" options={{ title: 'Mod de gătit', presentation: 'fullScreenModal', headerShown: false }} />
         <Stack.Screen name="scanare" options={{ title: 'Scanează', headerShown: false }} />
         <Stack.Screen name="adauga" options={{ headerShown: false, presentation: 'modal' }} />

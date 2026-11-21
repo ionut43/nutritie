@@ -1,6 +1,6 @@
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Pressable, ScrollView, View } from 'react-native';
+import { Linking, Pressable, ScrollView, Share, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ING } from '../../data/ingredients';
 import { RECIPE } from '../../data/recipes';
@@ -10,6 +10,7 @@ import {
 } from '../../logic/nutrition';
 import { pantryTotals } from '../../logic/pantry';
 import { costPerPortion } from '../../logic/planner';
+import { MOMENT_LABEL, shareLink, shareText } from '../../logic/recipeShare';
 import { STORE } from '../../logic/stores';
 import { useStore } from '../../store/useStore';
 import { Btn, Card, Chip, DISPLAY, Divider, FoodImage, Icon, IconBtn, MacroBar, Notice, NumberField, Pill, Row, Section, T, useTheme } from '../../ui/kit';
@@ -56,6 +57,9 @@ export default function RecipeDetail() {
           <View style={{ gap: 8 }}>
             {r.cuisine ? <T v="label" color={t.primary}>{CUISINE_LABEL[r.cuisine]}</T> : null}
             <T v="h1">{r.name}</T>
+            {r.custom && (r.author || r.moments?.length) ? (
+              <T v="small">{r.author ? `Făcută de ${r.author}` : ''}{r.author && r.moments?.length ? ' · ' : ''}{r.moments?.map((m) => MOMENT_LABEL[m].toLowerCase()).join(', ')}</T>
+            ) : null}
             <Row wrap gap={6}>
               <Pill text={`${r.prep} min`} icon="time" />
               <Pill text={`${Math.round(ps.kcal)} kcal/porție`} icon="flame" color={t.primary} bg={t.primarySoft} />
@@ -67,6 +71,18 @@ export default function RecipeDetail() {
           </View>
 
           <Btn title="Gătește acum" icon="flame" onPress={() => router.push({ pathname: '/gatit/[id]', params: { id: r.id, portions: String(portions) } })} />
+          {r.custom && (
+            <Btn title="Trimite rețeta" icon="share-social-outline" variant="secondary"
+              onPress={() => Share.share({ message: shareText(r, shareLink(r, useStore.getState().customIngredients)) }).catch(() => {})} />
+          )}
+          {(r.video || r.source) && (
+            <Row>
+              {r.video && <Btn title="Video" icon="logo-youtube" variant="secondary" small style={{ flex: 1 }}
+                onPress={() => Linking.openURL(`https://www.youtube.com/watch?v=${r.video}`)} />}
+              {r.source && <Btn title={`Rețeta pe ${r.source.name}`} icon="open-outline" variant="secondary" small style={{ flex: 1 }}
+                onPress={() => Linking.openURL(r.source!.url)} />}
+            </Row>
+          )}
 
           {conflict && <Notice tone="danger" icon="warning" text="Rețeta nu respectă dieta, alergiile sau ce nu mănâncă cineva din casă. Nu apare în planuri." />}
 
@@ -140,6 +156,7 @@ export default function RecipeDetail() {
             </Row>
           </Pressable>
           {r.img && <T v="small" style={{ textAlign: 'center' }}>Foto: {r.credit ?? 'TheMealDB'}</T>}
+          {r.source && <T v="small" style={{ textAlign: 'center' }}>Ingredientele: {r.source.name}. Pașii sunt rezumați; rețeta completă e la sursă.{r.video ? ' Imaginea e din video-ul rețetei.' : ''}</T>}
         </View>
       </ScrollView>
     </View>

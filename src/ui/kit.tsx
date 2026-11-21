@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useState, useSyncExternalStore } from 'react';
 import {
   Image, Pressable, ScrollView, StyleSheet, Text, TextInput, useColorScheme, View,
-  type StyleProp, type TextStyle, type ViewStyle,
+  type StyleProp, type ImageStyle, type TextStyle, type ViewStyle,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Circle as SvgCircle } from 'react-native-svg';
@@ -529,6 +529,8 @@ export function FoodImage({ recipe, size, width, height, radius = 18, style }: {
   const h = height ?? size ?? 56;
   const src = recipe ? (recipe.photo ? { uri: recipe.photo } : RECIPE_PHOTO[recipe.id]) : undefined;
   if (src) return <Image source={src} style={[{ width: w, height: h, borderRadius: radius, backgroundColor: t.chip }, style as object]} />;
+  // rețetele cu video: imaginea video-ului de pe YouTube, ca la un link (se încarcă de pe internet)
+  if (recipe?.video) return <VideoThumb id={recipe.video} big={(typeof w === 'number' ? w : 300) > 160} style={[{ width: w, height: h, borderRadius: radius, backgroundColor: t.chip }, style as object]} />;
   // fără poză reală nu inventăm una: o plăcuță tipografică, colorată după felul mâncării
   const tones = [[t.primarySoft, t.primary], [t.accentSoft, t.accent], [t.heatSoft, t.heat], [t.warnSoft, t.warn]];
   const k = recipe ? [...recipe.id].reduce((a, ch) => a + ch.charCodeAt(0), 0) % tones.length : 0;
@@ -542,6 +544,11 @@ export function FoodImage({ recipe, size, width, height, radius = 18, style }: {
       </Text>
     </View>
   );
+}
+
+function VideoThumb({ id, big, style }: { id: string; big: boolean; style: StyleProp<ImageStyle> }) {
+  const [q, setQ] = useState(big ? 'hq720' : 'mqdefault');
+  return <Image source={{ uri: `https://i.ytimg.com/vi/${id}/${q}.jpg` }} onError={() => { if (q !== 'mqdefault') setQ('mqdefault'); }} resizeMode="cover" style={style} />;
 }
 
 const AISLE_ICON: Record<Aisle, IconName> = {

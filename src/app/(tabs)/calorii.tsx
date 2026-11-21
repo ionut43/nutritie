@@ -98,6 +98,11 @@ export default function Calories() {
                 {diff !== 0 && <Line label={diff < 0 ? 'Deficit, ca să slăbești' : 'Surplus, ca să crești'} value={diff} sign />}
                 <Line label="Ținta ta" value={tg.kcal} bold color={t.primary} />
                 {diff < 0 && <T v="small">Un deficit de {Math.abs(diff)} kcal pe zi înseamnă cam {nf(Math.abs(diff) * 7 / 7700)} kg pe săptămână.</T>}
+                <T v="small">
+                  Calculat pentru {main.sex === 'm' ? 'bărbat' : 'femeie'}, {tg.age} ani, {main.heightCm} cm, {nf(main.weightKg)} kg, cu formula {tg.method}.
+                  {' '}Două persoane diferite pot avea ținte apropiate: un bărbat greu care stă mult jos arde cam cât o femeie activă, iar deficitul nu trece de un sfert din ce arzi.
+                </T>
+                {tg.warnings.map((w) => <T key={w} v="small" color={t.danger}>{w}</T>)}
               </View>
             )}
           </Pressable>

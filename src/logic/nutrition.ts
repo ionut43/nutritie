@@ -100,11 +100,45 @@ export function mergeRestrictions(members: Member[]): Restrictions {
   return { diet: strictestDiet(members.map((m) => m.diet)), allergies: [...allergies], dislikes: [...dislikes], avoid: [...avoid] };
 }
 
+/*
+ * „Nu mănânc cârnați” înseamnă toți cârnații, nu doar cei afumați: ingredientele înrudite merg împreună.
+ * Pe lângă ingrediente mă uit și în numele rețetei („Frigărui din cârnați”).
+ */
+// doar același aliment sub alt nume din listă (cârnați afumați / proaspeți); salamul, crenvurștii, mititeii rămân
+const FAMILIES: string[][] = [
+  ['carnati', 'carnati_proaspeti'],
+  ['somon', 'somon_afumat'],
+];
+const plain = (x: string) => x.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+export function expandDislikes(ids: string[]): Set<string> {
+  const out = new Set(ids);
+  for (const f of FAMILIES) if (f.some((x) => out.has(x))) f.forEach((x) => out.add(x));
+  return out;
+}
+/** rădăcina numelui ingredientului („Cârnați afumați” → „carnat”), ca să-l găsesc în numele rețetelor */
+function nameStem(id: string): string | null {
+  const w = plain(ING[id]?.name ?? '').split(/[^a-z]+/)[0] ?? '';
+  return w.length >= 5 ? w.slice(0, -1) : null;
+}
+const stemCache = new Map<string, RegExp | null>();
+function dislikedByName(r: Recipe, dislikes: string[]): boolean {
+  const n = plain(r.name);
+  return [...expandDislikes(dislikes)].some((id) => {
+    if (!stemCache.has(id)) { const st = nameStem(id); stemCache.set(id, st ? new RegExp(`\\b${st}`) : null); }
+    const rx = stemCache.get(id);
+    return !!rx && rx.test(n);
+  });
+}
+
 export function recipeFits(r: Recipe, rs: Restrictions): boolean {
   if (!dietAllows(rs.diet, recipeDiet(r))) return false;
   const al = recipeAllergens(r);
   if (al.some((a) => rs.allergies.includes(a))) return false;
-  if (r.ing.some(([id]) => rs.dislikes.includes(id))) return false;
+  if (rs.dislikes.length) {
+    const dl = expandDislikes(rs.dislikes);
+    if (r.ing.some(([id]) => dl.has(id))) return false;
+    if (dislikedByName(r, rs.dislikes)) return false;
+  }
   if (rs.avoid?.length && r.ing.some(([id]) => avoidedBy(ING[id], rs.avoid))) return false;
   return true;
 }

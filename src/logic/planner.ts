@@ -1,4 +1,6 @@
 import { ING } from '../data/ingredients';
+import { BREAKFAST_FAVORITES } from '../data/curation';
+import { HAS_PHOTO } from '../data/photo_ids';
 import { RECIPES, RECIPE } from '../data/recipes';
 import { addDays, DAY_NAMES, fromISO, toISO, weekdayMon } from './dates';
 import { computeTargets } from './energy';
@@ -177,6 +179,21 @@ export const SLOT_TIME: Record<Slot, { at: string; done: number }> = {
   cina: { at: '20:00', done: 21.5 },
 };
 
+/** felul micului dejun, ca rutina săptămânii să fie variată */
+export function breakfastKind(r: Recipe): string {
+  const n = r.name.toLowerCase();
+  const total = r.ing.reduce((a, [, g]) => a + g, 0) || 1;
+  const g = (id: string) => r.ing.filter(([i]) => i === id).reduce((a, [, x]) => a + x, 0);
+  if (/clătit|pancake|gofre/.test(n)) return 'clatite';
+  if (g('avocado') / r.servings >= 50) return 'avocado';
+  if (g('oua') / total >= 0.2 || /omlet|ochiur|ouă|jumări|shakshuka/.test(n)) return 'oua';
+  if (/terci|griș|orez cu lapte|ovăz|ovaz|budinc|chia|cereale|musli|granola/.test(n)) return 'terci';
+  if (/iaurt|kefir|brânză de vaci/.test(n)) return 'lactate';
+  if (/mămălig|plăcint|pateu/.test(n)) return 'romanesc';
+  if (/tartin|sandvi|brusch|toast|pâine|bagel|wrap/.test(n)) return 'paine';
+  return 'altele';
+}
+
 /** câte variante de mic dejun / gustare pe săptămână */
 const ROUTINE: Record<'mare' | 'echilibrat' | 'rar', number> = { mare: 3, echilibrat: 2, rar: 2 };
 
@@ -287,8 +304,11 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
   const desired = (target: number, got: number) => (acc.kcal > 0 ? clamp(target + (target - got / acc.kcal), target * 0.6, target * 1.5) : target);
   const hasKids = people.some((p) => p.isChild);
   const rs: Restrictions = mergeRestrictions(presentMembers(input.members, input.household));
+  // urzicile și loboda se găsesc doar primăvara: nu le pun în plan în noiembrie
+  const month = fromISO(input.startISO).getMonth() + 1;
+  const inSeason = (r: Recipe) => !r.tags?.includes('primavara') || (month >= 3 && month <= 6) || input.liked.includes(r.id);
   const fitting = recipes.filter(
-    (r) => recipeFits(r, rs) && hasEquipment(r, st.equipment) && !input.disliked.includes(r.id),
+    (r) => recipeFits(r, rs) && hasEquipment(r, st.equipment) && !input.disliked.includes(r.id) && inSeason(r),
   );
   // rețetele exotice intră doar dacă le-ai cerut: bucătăria aleasă, o rețetă care ți-a plăcut sau pe care ai ales-o
   const optedIn = (r: Recipe) => input.liked.includes(r.id) || !!input.wanted?.includes(r.id) || (input.swipes?.[r.id] ?? 0) > 0
@@ -369,7 +389,8 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
   const score = (r: Recipe, slot: Slot, kind: 'main' | 'quick', avoid: (string | undefined)[]) => {
     const sh = sharesFor(r, slot);
     const portions = sum(sh);
-    let s = rand() * 1.5;
+    // micul dejun: mai mult noroc, ca rutina să fie alta de la o săptămână/persoană la alta
+    let s = rand() * (slot === 'mic_dejun' ? 3 : 1.5);
     if (input.liked.includes(r.id)) s += 2;
     s += tasteBonus(r, input.taste);
     // ce ai ales tu prin swipe intră sigur, chiar dacă e mai scump: depășirea de buget e semnalată
@@ -383,15 +404,19 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
     const ago = history[r.id] ?? (input.previousRecipeIds.includes(r.id) ? 1 : 0);
     // rețetele tale de bază (cu „îmi place”) revin singure la 2–3 săptămâni, dar nu săptămână de săptămână
     if (input.liked.includes(r.id)) s += ago === 1 ? -3 : ago >= 2 ? 3 : 0;
-    else if (ago > 0) s -= 4 / ago;
+    // același fel principal cel mult o dată la 2–3 săptămâni (nu chiftele de linte în fiecare plan)
+    else if (ago > 0) s -= kind === 'main' ? ([0, 8, 5, 2, 1][ago] ?? 0) : 4 / ago;
     else if (!input.taste?.seen?.[r.id]) s += 0.6;
     s -= (newUse[r.id] ?? 0) * (kind === 'main' ? 6 : 0.4);
     const pref = st.cuisines?.[r.cuisine ?? 'eu'];
     // rețete familiare, care îți vin să le gătești: cele exotice apar doar dacă alegi bucătăria lor sau ți-au plăcut
-    const fam = familiarity(r);
+    // dimineața nu mai urc „clasicele” (terci, griș, orez cu lapte) peste restul: toate cele cunoscute au aceeași șansă
+    const fam = slot === 'mic_dejun' ? Math.min(familiarity(r), 0.9) : familiarity(r);
     const chose = pref === 1 || !!input.weekCuisines?.includes(r.cuisine ?? 'eu');
     if (!isWantedOrLiked(r)) s += chose ? Math.max(0, fam - 0.8) * 4 : (fam - 0.8) * 10;
     s += pref === 1 ? 1 : pref === -1 ? -2.5 : CUISINE_DEFAULT[r.cuisine ?? 'eu'] ?? 0;
+    // linte, năut, bulgur: cine mănâncă de toate le vrea rar (fasolea și mazărea rămân)
+    if (r.tags?.includes('mai_rar') && !isWantedOrLiked(r) && mainMember?.diet === 'omnivor') s -= 3 + 0.3 * costWeight;
     if (kind === 'main' && input.weekCuisines?.length) s += input.weekCuisines.includes(r.cuisine ?? 'eu') ? 4 : -4;
     if (kind === 'main') {
       // echilibru între felurile de proteină (pui, porc, vită, pește, leguminoase…), după cât de des vrei carne
@@ -400,11 +425,22 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
       const deficit = (targets[k] ?? 0) * (n + 1) - (kindUse[k] ?? 0);
       // când bugetul strânge, echilibrul contează la fel de mult: carne ieftină (pulpe, tocătură), nu doar fasole
       const kw = 2.5 + (st.meatStyle === 'rar' ? 0 : 0.18 * costWeight);
-      s += Math.max(-4 - costWeight * 0.1, Math.min(3 + costWeight * 0.15, deficit * kw));
+      // peste cota unui fel (ex. al treilea fel de post într-o săptămână cu carne) scade mai apăsat
+      s += deficit < 0 ? Math.max(-7 - costWeight * 0.1, deficit * kw * 1.6) : Math.min(3 + costWeight * 0.15, deficit * kw);
+      // carnea în ansamblu (nu doar fiecare fel în parte): cine mănâncă de toate vrea carne la cel puțin jumătate din mese
+      const MEAT = ['pui', 'curcan', 'porc', 'vita', 'miel', 'organe'];
+      const meatTarget = MEAT.reduce((a, m) => a + (targets[m as ProteinKind] ?? 0), 0);
+      const meatUsed = MEAT.reduce((a, m) => a + (kindUse[m as ProteinKind] ?? 0), 0);
+      const meatDeficit = meatTarget * (n + 1) - meatUsed;
+      if (meatTarget > 0.4) s += (MEAT.includes(k) ? 1 : -1) * clamp(meatDeficit * (1.5 + 0.12 * costWeight), -3, 3 + 0.1 * costWeight);
       // nu aceeași carne la mese consecutive
       if (mainKinds[mainKinds.length - 1] === k) s -= 1.5;
       if (mainKinds[mainKinds.length - 2] === k) s -= 0.6;
     }
+    // ce are poză apare mai des (poza te face să vrei să gătești); dimineața contează și mai mult
+    if (!HAS_PHOTO.has(r.id) && !r.img && !r.video && !r.photo) s -= slot === 'mic_dejun' ? 1.2 : 0.8;
+    // micul dejun care te scoală din pat: ouă, avocado, clătite, sandviș cald (nu doar terci)
+    if (slot === 'mic_dejun' && BREAKFAST_FAVORITES.has(r.id)) s += 1.5;
     const sweet = isSweet(r);
     if (sweet) s -= desserts >= dessertCap ? 8 : 0.5;
     if (avoid[0] === r.id) s -= 5;
@@ -417,7 +453,8 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
     const pVal = ps0.kcal ? clamp((ps0.p * 4) / ps0.kcal / pTarget, 0.4, 1.5) : 1;
     const ratio = marginalCost(r, portions) / (kcal * budgetPerKcal * (0.55 + 0.45 * pVal));
     // ce ai ales tu nu e scos din cauza prețului (swipe-ul ți-a arătat deja cât costă); bugetul îl strâng pe restul
-    if (!isWanted) s -= 0.3 * ratio + costWeight * Math.max(0, ratio - 1.1);
+    // micul dejun costă puțin oricum: prețul contează mai puțin, ca să nu fie terci în fiecare săptămână
+    if (!isWanted) s -= (slot === 'mic_dejun' ? 0.6 : 1) * (0.3 * ratio + costWeight * Math.max(0, ratio - 1.1));
     const ps = perServing(r);
     if (ps.kcal > 0) {
       // proteine cât ținta ta (nu paste goale la fiecare masă), fibre, puțin zahăr și sare
@@ -437,7 +474,10 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
       const slotK = mainPerson.kcal * shares[slot];
       // la o masă mare, felul principal vine cu ciorbă și pâine: îl judec pe ce rămâne după ele
       const raw = (kind === 'main' && slotK > 1000 ? Math.max(slotK * 0.55, slotK - 600) : slotK) / (ps.kcal || 1);
-      s -= 2.2 * Math.abs(Math.log(Math.max(0.2, raw)));
+      // micul dejun și gustările se fac ușor în porție mai mare (3 ouă în loc de 2): contează mai puțin
+      s -= (kind === 'main' ? 2.2 : 1.1) * Math.abs(Math.log(Math.max(0.2, raw)));
+      // o porție prea mică pentru masă (supă de ceapă la prânz) nu se poate mări oricât: ziua ar rămâne sub țintă
+      if (kind === 'main' && raw > 1.6) s -= Math.min(6, 3 * (raw - 1.6));
       // la mese mari, paste/orez simple ar însemna farfurie dublă: rar
       if (kind === 'main' && slotK > 1000 && ps.kcal && (ps.c * 4) / ps.kcal > 0.5) s -= 1.2;
     }
@@ -454,7 +494,7 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
       if (dbg) list.push([r.id, s]);
       if (s > topS) { topS = s; top = r; }
     }
-    if (dbg) dbg({ slot, kind, costWeight, list: list.sort((a, b) => b[1] - a[1]).slice(0, 8) });
+    if (dbg) dbg({ slot, kind, costWeight, list: list.sort((a, b) => b[1] - a[1]).slice(0, 40) });
     return top;
   };
 
@@ -573,14 +613,21 @@ export function buildOnce(input: PlanInput, costWeight: number): WeekPlan {
       const reusableIds = new Set(quickSessions
         .filter((q) => q.slot === slot && d - q.s.day <= q.r.keepsDays && q.r.keepsDays > 0 && q.uses < (variety === 'rar' ? 4 : 2) && fastAllows(level, q.r))
         .map((q) => q.r.id));
-      const all = eligible.filter((r) => r.meal.includes(type) && fastAllows(level, r) && (r.prep <= limit || reusableIds.has(r.id)));
+      // garniturile (piure, cartofi la cuptor, gălușcuțe) nu sunt gustări
+      const all = eligible.filter((r) => r.meal.includes(type) && !r.tags?.includes('side') && fastAllows(level, r) && (r.prep <= limit || reusableIds.has(r.id)));
       // mic dejun și gustări: o rutină de 2–3 variante pe săptămână, ca în viața reală.
       // Mai puține ingrediente diferite = listă mai scurtă și bani mai puțini pe ambalaje începute.
       const rot = (rotation[slot] ??= []);
       // după ce s-au strâns dulciurile săptămânii, nu mai intră altele (dacă există altceva)
       const notSweet = (xs: Recipe[]) => { const ns = xs.filter((x) => !isSweet(x)); return desserts >= dessertCap && ns.length ? ns : xs; };
       const inRot = notSweet(all).filter((r) => rot.includes(r.id));
-      const cands = rot.length >= ROUTINE[variety] && inRot.length ? inRot : notSweet(all);
+      let cands = rot.length >= ROUTINE[variety] && inRot.length ? inRot : notSweet(all);
+      // o variantă nouă în rutina de dimineață e de alt fel decât cele deja alese (nu terci + ovăz, nu două cu avocado)
+      if (slot === 'mic_dejun' && rot.length < ROUTINE[variety] && rot.length) {
+        const have = new Set(rot.map((id) => breakfastKind(recipes.find((x) => x.id === id)!)));
+        const other = cands.filter((c) => !have.has(breakfastKind(c)));
+        if (other.length) cands = other;
+      }
       const yesterday = meals.find((m) => m.day === d - 1 && m.slot === slot)?.recipeId;
       const sameDayOther = meals.find((m) => m.day === d && !MAIN_SLOTS.includes(m.slot))?.recipeId;
       const lockedQ = input.locked?.find((l) => l.day === d && l.slot === slot);
@@ -850,7 +897,8 @@ export function swipeDeck(input: PlanInput, n = 30): Recipe[] {
     if (sw) s += sw > 0 ? 0.8 : -2;
     const pref = st.cuisines?.[r.cuisine ?? 'eu'];
     s += pref === 1 ? 1 : pref === -1 ? -2.5 : CUISINE_DEFAULT[r.cuisine ?? 'eu'] ?? 0;
-    if (r.img) s += 0.4;
+    if (HAS_PHOTO.has(r.id) || r.img || r.video || r.photo) s += 0.4;
+    else s -= 0.6;
     // în pachet apar mai ales felurile familiare; cele exotice doar dacă îți plac bucătăriile lor
     if (pref !== 1) s += (familiarity(r) - 0.8) * 6;
     return s;
@@ -942,4 +990,60 @@ export function sidesLabel(m: PlannedMeal): string {
 /** mesele care folosesc o gătire (ca fel principal sau ca garnitură, ex. oala de ciorbă) */
 export function sessionMeals(plan: WeekPlan, sessionId: string): PlannedMeal[] {
   return plan.meals.filter((m) => m.sessionId === sessionId || m.sides?.some((x) => x.sessionId === sessionId));
+}
+
+/**
+ * Ai schimbat ce mănânci (alergii, „nu mănânc”, dietă, post, aparate): de azi înainte, mesele care nu se mai potrivesc
+ * se înlocuiesc singure cu altele din aceeași categorie. Ce ai mâncat sau gătit deja rămâne.
+ */
+export function refitPlan(plan0: WeekPlan, input: PlanInput, fromDay: number): { plan: WeekPlan; changed: number } {
+  // postul se recalculează pentru zilele rămase (ai pornit sau oprit postul, sau dezlegarea la pește)
+  const apply = input.household?.applyFasting ?? plan0.household.applyFasting;
+  const fd = plan0.fastDays.map((lv, d) => (d < fromDay ? lv : apply ? fastLevel(addDays(fromISO(plan0.startISO), d), input.settings.fasting, input.settings.fishOnDispensation) : 'none'));
+  const plan: WeekPlan = fd.some((x, d) => x !== plan0.fastDays[d]) ? { ...plan0, fastDays: fd } : plan0;
+  const rs = mergeRestrictions(presentMembers(input.members, plan.household));
+  const bad = (id: string, days: number[]) => {
+    const r = RECIPE[id];
+    if (!r) return false;
+    return !recipeFits(r, rs) || input.disliked.includes(id) || !hasEquipment(r, input.settings.equipment) || days.some((d) => !fastAllows(plan.fastDays[d], r));
+  };
+  const eaten = new Set(plan.eaten);
+  const open = (m: PlannedMeal) => m.day >= fromDay && !eaten.has(mealKey(m.day, m.slot));
+  let changed = 0;
+  // 1. ciorba sau garnitura de lângă felul principal: o scot
+  let p: WeekPlan = {
+    ...plan,
+    meals: plan.meals.map((m) => {
+      if (!open(m) || !m.sides) return m;
+      const sides = m.sides.filter((x) => !bad(x.recipeId, [m.day]));
+      if (sides.length === m.sides.length) return m;
+      changed += m.sides.length - sides.length;
+      return { ...m, sides: sides.length ? sides : undefined };
+    }),
+  };
+  const sidesGone = changed > 0;
+  // 2. felurile care nu mai merg: altă rețetă (toată sesiunea dacă n-ai mâncat nimic din ea, altfel doar mesele rămase)
+  for (const s of plan.sessions) {
+    if (s.done || s.nocook) continue;
+    const own = p.meals.filter((m) => m.sessionId === s.id);
+    if (!own.length || !bad(s.recipeId, own.map((m) => m.day))) continue;
+    const left = own.filter(open);
+    if (!left.length) continue;
+    if (left.length === own.length) {
+      const alt = alternativesFor(p, { sessionId: s.id }, input, 1)[0];
+      if (alt) { p = replaceSessionRecipe(p, s.id, alt.id, input); changed += own.length; }
+    } else {
+      for (const m of left) {
+        const k = mealKey(m.day, m.slot);
+        const alt = alternativesFor(p, { key: k }, input, 1)[0];
+        if (alt) { p = replaceSingleMeal(p, k, alt.id, input); changed++; }
+      }
+    }
+  }
+  // porțiile se potrivesc din nou pe ținta zilei când a dispărut doar o garnitură
+  if (sidesGone) {
+    const m = p.meals.find((x) => open(x) && !p.sessions.find((s) => s.id === x.sessionId)?.done);
+    if (m) p = replaceSessionRecipe(p, m.sessionId, m.recipeId, input);
+  }
+  return { plan: p, changed };
 }

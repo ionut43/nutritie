@@ -87,7 +87,7 @@ Versiunile noi: în SideStore, **+** → noul `Nutritie.ipa`. Se instalează pes
 | 📅 Plan | Gătești în zilele alese, resturile acoperă zilele următoare, ce nu ține se congelează. Nu repetă felurile din ultimele 4 săptămâni, nu pune aceeași carne la mese consecutive, „cât de variat” e reglabil |
 | 🍽️ Mese pe zi | Alegi 2–5 mese; suma calorică a fiecărei zile din plan iese cât ținta ta (±5%). Schimbarea se aplică și planului de acum: mesele în plus dispar, porțiile celorlalte cresc |
 | 👍👎 Gusturi | Notezi mesele după ce le mănânci; aplicația învață ce ingrediente, ce carne și ce bucătării îți plac |
-| 🍲 813 rețete, 765 cu poze reale + rețetele tale | Rețete din toată lumea (TheMealDB, UniTools), cu text în română. Planul pune mai ales feluri familiare; cele exotice doar dacă alegi bucătăria lor. La mesele mari, felul principal vine cu ciorbă, pâine sau salată, ca acasă. Majoritatea cu carne (pui, porc, vită, miel), plus pește, vegetariene și de post. Caloriile, macro-urile, fibrele, zaharurile, sarea, alergenii, dieta și postul se calculează automat |
+| 🍲 1500 de rețete + rețetele tale | Rețete din toată lumea (TheMealDB, UniTools) și ~690 de rețete românești după Laura Laurențiu și e-retete.ro (ingredientele lor, pașii scriși de noi, cu link la rețeta completă și la video-ul de YouTube). Planul pune mai ales feluri familiare; cele exotice doar dacă alegi bucătăria lor. La mesele mari, felul principal vine cu ciorbă, pâine sau salată, ca acasă. Majoritatea cu carne (pui, porc, vită, miel), plus pește, vegetariene și de post. Caloriile, macro-urile, fibrele, zaharurile, sarea, alergenii, dieta și postul se calculează automat |
 | 🏪 Magazine | Alegi unde cumperi (Lidl, Kaufland, Mega Image, Carrefour, Penny, Profi, Auchan, Selgros, Freshful). Lista săptămânii e pentru un singur magazin, cu comparația costului la celelalte. Prețurile de pe bonuri se țin minte separat pe magazin |
 | 💸 Cheltuieli | Suma de pe bon sau confirmată la final de listă; grafic pe săptămâni și pe magazine, rezumat în fiecare luni |
 | ❤️ Alegi prin swipe | Rețete una câte una: dreapta vreau, stânga nu. Din alegeri se fac planul și lista; swipe-urile învață gustul |
@@ -125,7 +125,7 @@ npx expo start --web   # previzualizare rapidă în browser (fără cameră, OCR
 Structură:
 - `src/app/`: ecranele
 - `src/logic/`: logica, testată în `scripts/test-logic.ts`
-- `src/data/`: ingrediente (USDA), rețete (`retete/importate.ts` e generat de `scripts/recipes/build_import.py` din `scripts/recipes/ro/*.txt`), vectori CLIP
+- `src/data/`: ingrediente (USDA), rețete (`retete/importate.ts` e generat de `scripts/recipes/build_import.py` din `scripts/recipes/ro/*.txt`; `retete/romanesti.ts` de `scripts/recipes/build_ro.py` din `scripts/recipes/ro_src/*.txt`), vectori CLIP
 - `modules/nutri-ocr/`: modulul nativ: OCR (Apple Vision / Google ML Kit) și recunoașterea pozelor (ONNX Runtime 1.30)
 - `.github/workflows/build.yml`: build-urile gratuite
 
@@ -133,7 +133,7 @@ Pentru o rețetă nouă inclusă în aplicație:
 1. Adaug-o într-unul din fișierele din `src/data/retete/` (cu numele în engleză și, dacă are, indexul pozei din `mealdb_ids.ts`).
 2. `npx tsx scripts/dump_data.ts > data.json`, apoi `python3 scripts/build_photos.py data.json <folder poze>` și `python3 scripts/build_vision.py data.json <folder model CLIP>`.
 
-Doar fotografii reale de mâncare (nicio imagine generată); rețetele fără poză au o plăcuță cu numele. Pozele: [TheMealDB](https://www.themealdb.com) (gratuit pentru uz personal; pentru publicare în magazine e nevoie de licența lor).
+Doar fotografii reale de mâncare (nicio imagine generată); rețetele fără poză au o plăcuță cu numele. Pozele: [TheMealDB](https://www.themealdb.com) (gratuit pentru uz personal; pentru publicare în magazine e nevoie de licența lor). La rețetele românești: miniatura video-ului de YouTube al rețetei sau fotografii cu licență Creative Commons de pe [Openverse](https://openverse.org), verificate una câte una (autorul și licența apar pe pagina rețetei). Pozele site-urilor de rețete nu sunt folosite.
 
 ## Prețurile de azi
 

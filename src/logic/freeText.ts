@@ -24,18 +24,22 @@ const PIECES: Record<string, number> = { 'g:g_mici': 4, 'g:g_nuggets': 6, 'g:g_a
 const stems = (w: string) => [w, w.replace(/(urile|ului|ele|ile|uri|lor|ii|ul|le|i|e|a)$/, '')].filter((x, i, a) => x.length >= 3 && a.indexOf(x) === i);
 
 function bestMatch(words: string[]): FoodItem | undefined {
-  // încerc tot textul, apoi tot mai puține cuvinte de la sfârșit, apoi fiecare cuvânt
+  // încerc tot textul, apoi tot mai puține cuvinte de la sfârșit, apoi fiecare cuvânt la forma de bază.
+  // „2 covrigi” e un covrig, nu rețeta „Covrigi pufoși cu unt”: alimentele simple au întâietate față de rețete
+  let recipe: FoodItem | undefined;
   for (let n = words.length; n >= 1; n--) {
     const hit = searchFoods(words.slice(0, n).join(' '), 1)[0];
-    if (hit) return hit;
+    if (hit && !hit.ref.startsWith('r:')) return hit;
+    recipe ??= hit;
   }
   for (const w of words) {
     for (const x of stems(w)) {
       const hit = searchFoods(x, 1)[0];
-      if (hit) return hit;
+      if (hit && !hit.ref.startsWith('r:')) return hit;
+      recipe ??= hit;
     }
   }
-  return undefined;
+  return recipe;
 }
 
 export function parseMealText(text: string): ParsedFood[] {

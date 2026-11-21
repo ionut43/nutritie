@@ -6,7 +6,7 @@ import { AISLE_LABEL, AISLE_ORDER, ING } from '../data/ingredients';
 import { addDays, fmtDate, fromISO, todayISO, toISO, weekdayMon } from '../logic/dates';
 import { fmtPackage, fmtQty, fmtRon } from '../logic/format';
 import { compareStores, learnedCount, priceAt, STORE, type StoreId } from '../logic/stores';
-import type { ShoppingItem } from '../logic/types';
+import { foodSpent, type ShoppingItem } from '../logic/types';
 import { useFeature, useStore } from '../store/useStore';
 import { Btn, Card, Chip, DISPLAY, DISPLAY_X, Empty, Icon, IconBtn, NumberField, Pill, Row, Section, T, useTheme } from './kit';
 import { success, tick } from './haptics';
@@ -31,7 +31,7 @@ export function ShoppingView() {
   const plan = active.find((p) => p.id === sel) ?? active.find((p) => p.shopping.some((s) => s.packages > 0)) ?? active[0];
 
   const monday = toISO(addDays(fromISO(today), -weekdayMon(new Date())));
-  const spentWeek = spend.filter((s) => s.dateISO >= monday).reduce((a, s) => a + s.amount, 0);
+  const spentWeek = spend.filter((s) => s.dateISO >= monday).reduce((a, s) => a + foodSpent(s), 0);
 
   if (!plan) {
     return (

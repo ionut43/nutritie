@@ -60,7 +60,8 @@
     "typecheck": "tsc --noEmit",
     "postinstall": "patch-package",
     "lint": "expo lint",
-    "audit": "tsx scripts/audit-plans.ts 80 --names"
+    "audit": "tsx scripts/audit-plans.ts 80 --names",
+    "audit-buget": "tsx scripts/audit-budget.ts"
   },
   "private": true
 }

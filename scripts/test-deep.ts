@@ -36,6 +36,7 @@ function member(id: string, isMain: boolean, child = false): Member {
 
 const fails: string[] = [];
 const check = (cond: boolean, msg: string) => { if (!cond && fails.length < 60) fails.push(msg); };
+const UNDER: Record<string, number> = {};
 const stats = { plans: 0, days: 0, dayOk: 0, weekP: 0, weekPOk: 0, overBudget: 0, warnedBudget: 0, exotic: 0, meals: 0, sides: 0, sweetsOver: 0 };
 
 function verifyPlan(name: string, input: PlanInput, p: WeekPlan) {
@@ -96,7 +97,11 @@ function verifyPlan(name: string, input: PlanInput, p: WeekPlan) {
       wp += day.reduce((a, m) => a + mealMacros(m, per.id).p, 0);
       check(k <= tg.kcal * 1.06 + 5, `${name}: ${per.id} ziua ${d} ${Math.round(k)} > ${tg.kcal}`);
       check(Number.isFinite(k), `${name}: kcal NaN`);
-      if (input.settings.slots.length > 1) { stats.days++; if (k >= tg.kcal * 0.88) stats.dayOk++; }
+      if (input.settings.slots.length > 1) {
+        stats.days++;
+        if (k >= tg.kcal * 0.88) stats.dayOk++;
+        else if (process.argv.includes('--under')) for (const m of day) UNDER[RECIPE[m.recipeId].id] = (UNDER[RECIPE[m.recipeId].id] ?? 0) + 1;
+      }
       else if (process.argv.includes('--low') && d === 0) console.log(`LOW ${name} ${per.id} ${Math.round(k)}/${tg.kcal} sloturi ${input.settings.slots.join(',')} dietă ${per.diet} ${day.map((m) => `${RECIPE[m.recipeId].name}×${m.shares.find((x) => x.memberId === per.id)?.factor}`).join(' | ')}`);
     }
     if (per.isMain) { stats.weekP++; if (wp / 7 >= tg.protein * 0.75) stats.weekPOk++; }
@@ -217,6 +222,7 @@ for (const r of RECIPES) {
 
 const pct = (a: number, b: number) => `${Math.round((100 * a) / Math.max(1, b))}%`;
 console.log(`${stats.plans} planuri (+ schimbări), ${stats.meals} mese, ${stats.sides} garnituri, ${((Date.now() - t0) / 1000).toFixed(1)} s`);
+if (process.argv.includes('--under')) console.log(Object.entries(UNDER).sort((a, b) => b[1] - a[1]).slice(0, 25).map(([k, v]) => `${RECIPE[k].name} (${k}) ${v}`).join('\n'));
 console.log(`zile cu cel puțin 88% din calorii: ${pct(stats.dayOk, stats.days)}; săptămâni cu proteine ≥75% din țintă: ${pct(stats.weekPOk, stats.weekP)}`);
 console.log(`planuri peste buget+${BUDGET_SLACK} (toate cu avertisment): ${stats.overBudget}; mese exotice nealese: ${pct(stats.exotic, stats.meals)}; planuri cu prea multe dulciuri: ${stats.sweetsOver}`);
 if (fails.length) {

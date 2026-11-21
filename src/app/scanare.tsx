@@ -13,7 +13,7 @@ import { parseNutritionLabel, type LabelValues } from '../logic/labelParser';
 import { norm } from '../logic/ocr';
 import { perServing } from '../logic/nutrition';
 import { fetchProduct, offToIngredient, suggestIngredient, type OffProduct } from '../logic/products';
-import { parseReceipt, pricePerPackage, type ReceiptItem } from '../logic/receiptParser';
+import { itemKind, parseReceipt, pricePerPackage, splitReceipt, type ReceiptItem } from '../logic/receiptParser';
 import type { Ingredient } from '../logic/types';
 import type { StoreId } from '../logic/stores';
 import { eatenKey, planForDate, useMain, useStore } from '../store/useStore';
@@ -541,9 +541,9 @@ function ReceiptMode() {
       if (tot) setPaid(tot);
       const parsed = parseReceipt(rows).map((it) => {
         const alias = receiptAliases[it.name];
-        const ingId = alias ?? it.ingId;
+        const ingId = it.kind === 'nealimentar' ? undefined : alias ?? it.ingId;
         const grams = it.grams ?? (ingId ? ING[ingId].pkg * (it.qty ?? 1) : undefined);
-        return { ...it, ingId, grams, on: !!ingId };
+        return { ...it, ingId, grams, kind: itemKind(it.name, ingId), on: !!ingId };
       });
       if (!parsed.length) setErr('Nu am găsit produse pe bon. Fotografiază-l întins, de aproape, cu lumină bună.');
       setItems((prev) => [...prev, ...parsed]);
@@ -556,6 +556,7 @@ function ReceiptMode() {
 
   const chosen = items.filter((i) => i.on && i.ingId && i.grams);
   const total = items.reduce((a, i) => a + i.total, 0);
+  const split = splitReceipt(items, paid);
 
   return (
     <Scroll>
@@ -578,6 +579,9 @@ function ReceiptMode() {
               <T v="small">{items.length} produse găsite · suma lor ~{fmtRon(total)}</T>
               {paid ? <T style={{ fontFamily: DISPLAY }}>Total bon {fmtRon(paid)}</T> : null}
             </Row>
+            <T v="small" color={t.text}>
+              Mâncare {fmtRon(split.food)}{split.nonFood > 0 ? `, altele (nu se mănâncă) ${fmtRon(split.nonFood)}` : ''}. La cheltuielile pe mâncare intră doar {fmtRon(split.food)}.
+            </T>
           </Card>
           <Card style={{ gap: 0, paddingVertical: 4 }}>
             {items.map((it, i) => (
@@ -590,9 +594,15 @@ function ReceiptMode() {
                     </Pressable>
                     <View style={{ flex: 1 }}>
                       <T v="small">{it.name}</T>
-                      <Pressable onPress={() => setPick(i)}>
-                        <T style={{ fontWeight: '700' }} color={it.ingId ? t.text : t.accent}>{it.ingId ? ING[it.ingId].name : 'Alege ingredientul'} ›</T>
-                      </Pressable>
+                      {it.kind === 'nealimentar' ? (
+                        <Pressable onPress={() => setItems(items.map((x, j) => (j === i ? { ...x, kind: 'altele' } : x)))}>
+                          <T v="small" color={t.muted}>Nu e mâncare: nu intră în cămară și nici la cheltuielile pe mâncare. E mâncare? Atinge aici.</T>
+                        </Pressable>
+                      ) : (
+                        <Pressable onPress={() => setPick(i)}>
+                          <T style={{ fontWeight: '700' }} color={it.ingId ? t.text : t.accent}>{it.ingId ? ING[it.ingId].name : 'Alege ingredientul (sau lasă, dacă e dulce, suc etc.)'} ›</T>
+                        </Pressable>
+                      )}
                     </View>
                     <T style={{ fontWeight: '700' }}>{fmtRon(it.total)}</T>
                   </Row>
@@ -612,7 +622,7 @@ function ReceiptMode() {
             applyReceipt(chosen.map((it) => ({
               ingId: it.ingId!, g: it.grams!, name: it.name,
               price: updatePrices ? pricePerPackage({ ...it, grams: it.grams }) : undefined,
-            })), store ?? settings.mainStore, paid ?? total);
+            })), store ?? settings.mainStore, paid ?? total, split.nonFood);
             setDone(true);
             setItems([]);
           }} />
@@ -628,7 +638,7 @@ function ReceiptMode() {
       <IngredientPicker visible={pick !== null} onClose={() => setPick(null)}
         onPick={(id) => {
           if (pick === null) return;
-          setItems(items.map((x, j) => (j === pick ? { ...x, ingId: id, on: true, grams: x.unit === 'kg' && x.qty ? x.qty * 1000 : ING[id].pkg * (x.qty ?? 1) } : x)));
+          setItems(items.map((x, j) => (j === pick ? { ...x, ingId: id, kind: 'aliment', on: true, grams: x.unit === 'kg' && x.qty ? x.qty * 1000 : ING[id].pkg * (x.qty ?? 1) } : x)));
           setPick(null);
         }} />
     </Scroll>

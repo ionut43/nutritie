@@ -1,0 +1,78 @@
+eorez-indian-cu-creveti|P|Orez cu creveți și condimente|Călește ceapa cu condimentele.|Adaugă orezul și apă și fierbe 15 minute.|Pune creveții și gătește încă 5 minute.
+eorzo-cu-dovlecei|P|Orzo cu dovlecei și telemea|Sotează dovleceii cu usturoi.|Adaugă pastele orzo fierte.|Presară telemea și mentă.
+epapricas-de-ciuperci|P|Papricaș de ciuperci|Călește ceapa cu boia.|Adaugă ciupercile și fierbe 15 minute.|Leagă cu smântână și servește cu mămăligă.
+epapricas-de-pui-cu-galuscute-de-faina|P|Papricaș de pui cu gălușcuțe|Călește ceapa, adaugă boiaua și puiul.|Fierbe 40 de minute cu puțină apă.|Fă gălușcuțe din făină și ou și fierbe-le în sos.
+epasta-aglio-olio-e-peperoncino|P|Spaghete aglio, olio e peperoncino|Fierbe spaghetele.|Încălzește uleiul cu usturoiul și ardeiul iute.|Amestecă cu pastele și pătrunjelul.
+epaste-cu-iaurt-si-urzici|P|Paste cu iaurt și urzici|Opărește urzicile și toacă-le.|Amestecă-le cu iaurtul și usturoiul.|Amestecă sosul cu pastele.
+epastitsio|P|Pastitsio|Fă un sos de carne cu roșii și scorțișoară.|Pune straturi de paste și carne în tavă.|Acoperă cu sos bechamel și coace 45 de minute.
+epastrav-la-tigaie|P|Păstrăv la tigaie cu unt și lămâie|Sărează păstrăvii.|Rumenește-i în unt câte 5 minute pe parte.|Stropește cu lămâie.
+epastrav-umplut-cu-verdeturi-pe-piure-de-linte|P|Păstrăv umplut cu verdețuri pe piure de linte|Fierbe lintea și pasează-o cu unt.|Umple păstrăvii cu verdețuri și coace-i 20 de minute.|Servește-i pe piure.
+epeste-cu-legume-la-cuptor|P|Pește cu legume la cuptor|Pune legumele în tavă.|Așază peștele deasupra.|Coace 30 de minute la 200°C.
+eplachie-de-peste|P|Plachie de pește|Călește multă ceapă.|Adaugă roșiile și puțină apă.|Pune peștele deasupra și coace 25 de minute.
+epelmeni|P|Pelmeni|Fă un aluat din făină, ou și apă.|Umple-l cu carne tocată cu ceapă.|Fierbe colțunașii și servește cu smântână.
+epiept-de-pui-cu-salsa-de-rosii-cherry-coapte|P|Piept de pui cu roșii cherry coapte|Coace roșiile cu usturoi.|Frige pieptul.|Servește cu roșiile și lămâie.
+epiept-de-pui-marinat-in-iaurt-si-curry|P|Piept de pui marinat în iaurt și curry|Marinează pieptul în iaurt cu curry.|Coace-l 25 de minute la 200°C.|Servește cu orez.
+epilaf-cu-carne-de-porc|P|Pilaf cu carne de porc|Rumenește carnea și ardeii.|Adaugă orezul și apă.|Fierbe acoperit 20 de minute.
+epilaf-de-orez-cu-praz|P|Pilaf cu praz|Călește prazul și morcovul.|Adaugă orezul și apă.|Fierbe acoperit 20 de minute.
+epilaf-de-orez-la-cuptor-cu-vinete|P|Pilaf la cuptor cu vinete|Prăjește vinetele cuburi.|Amestecă-le cu orezul și roșiile.|Coace acoperit 35 de minute.
+epiure-cu-legume|G|Piure cu legume|Fierbe cartofii, morcovii și ceapa.|Pasează cu puțin unt.
+epiure-de-cartofi-cu-busuioc|G|Piure de cartofi cu busuioc|Fierbe cartofii.|Pasează-i cu lapte, unt și busuioc.
+epiure-de-conopida|G|Piure de conopidă|Fierbe conopida cu ceapa.|Pasează-o cu unt.
+epizza|P|Pizza de casă|Fă un aluat dospit.|Întinde-l, pune sos de roșii și mozzarella.|Coace 12 minute la 250°C.
+epizza-turceasca|P|Pizza turcească cu carne tocată|Amestecă carnea cu ardeii și ceapa.|Întinde-o pe felii de pâine.|Coace 15 minute la 220°C.
+epui-cu-ardei|P|Pui cu ardei|Rumenește puiul.|Adaugă ceapa și ardeii.|Fierbe 30 de minute.
+epui-cu-dovlecei|P|Pui cu dovlecei în sos de roșii|Rumenește puiul.|Adaugă dovleceii și roșiile.|Fierbe 25 de minute.
+epui-cu-rosii-si-vinete|P|Pui cu roșii și vinete|Rumenește puiul și vinetele.|Adaugă roșiile.|Fierbe 30 de minute.
+epui-cu-tarhon|P|Pui cu tarhon și smântână|Rumenește puiul.|Stinge cu vin și adaugă tarhonul.|Fierbe 30 de minute și leagă cu smântână.
+epui-cu-vinegreta-de-ceapa-verde-si-cartofi-copti|P|Pui cu cartofi copți și vinegretă de ceapă verde|Coace pulpele cu cartofii.|Fă o vinegretă din ceapă verde, ulei și oțet.|Toarnă peste pui și presară telemea.
+epui-dulce-acrisor|P|Pui dulce-acrișor cu portocale|Rumenește puiul.|Adaugă sucul de portocale și vinul.|Fierbe 25 de minute până se îngroașă sosul.
+epui-la-gratar|P|Pui întreg la grătar|Desfă puiul pe spate și unge-l cu usturoi și unt.|Frige-l pe grătar cu capac o oră.
+epui-manastiresc|P|Pui mănăstiresc cu ciuperci|Rumenește puiul.|Adaugă ciupercile și smântâna.|Coace 40 de minute.
+epui-cajun-la-cuptor|P|Pui picant la cuptor|Freacă puiul cu condimente.|Coace o oră și 20 de minute la 190°C.
+epulpe-de-pui-la-cuptor-cu-naut-si-ceapa-marinata|P|Pulpe de pui la cuptor cu năut|Pune pulpele condimentate în tavă cu năut.|Coace 50 de minute.|Servește cu ceapă marinată.
+epulpe-de-pui-la-cuptor-fragede-si-aromate|P|Pulpe de pui fragede la cuptor|Marinează pulpele cu iaurt și usturoi.|Coace o oră la 190°C.
+epulpe-de-rata-cu-varza-rosie-calita|P|Pulpe de rață cu varză roșie călită|Coace pulpele 2 ore la foc mic.|Călește varza roșie cu ceapă.|Servește împreună.
+erisotto-cu-rosii|P|Risotto cu roșii|Călește ceapa și orezul.|Adaugă roșiile și supa câte puțin.|Gătește 18 minute amestecând.
+erosii-umplute-cu-orez|P|Roșii umplute cu orez|Scobește roșiile.|Umple-le cu orez călit cu ceapă și verdeață.|Coace 45 de minute.
+erulouri-de-carne-mozaic|P|Rulouri de porc umplute|Bate feliile de cotlet.|Umple-le cu ouă fierte și morcov și rulează.|Coace o oră.
+esaramura-de-pui|P|Saramură de pui|Frige puiul.|Fă o saramură din ardei, roșii și usturoi.|Fierbe puiul în saramură 10 minute.
+esarmale-sparte|P|Sarmale sparte (varză cu carne și orez)|Călește carnea cu ceapa.|Adaugă varza tocată, orezul și roșiile.|Fierbe acoperit o oră.
+esarmale-de-post|P|Sarmale de post cu ciuperci și bulgur|Călește ciupercile cu ceapa și bulgurul.|Învelește în foi de varză.|Fierbe 1 oră și jumătate.
+eshakshouka-cu-carne-de-miel|M|Shakshuka cu carne|Călește carnea cu ceapa.|Adaugă roșiile.|Sparge ouăle în sos și gătește acoperit.
+esnitele-de-porc|P|Șnițele de porc în sos de smântână|Pane feliile de mușchi și prăjește-le.|Fă un sos din smântână.|Servește cu sosul.
+esomon-cu-broccoli-la-cuptor|P|Somon cu broccoli la cuptor|Pune somonul și broccoli în tavă.|Stropește cu sos de soia.|Coace 15 minute.
+esomon-in-pergament|P|Somon în pergament cu legume|Pune somonul pe spanac și roșii.|Închide hârtia.|Coace 20 de minute.
+esomon-teriyaki|P|Somon teriyaki|Fă un sos din soia și oțet.|Rumenește somonul.|Glasează-l cu sosul.
+espaghete-carbonara|P|Spaghete carbonara|Prăjește costița.|Bate ouăle cu parmezan.|Amestecă cu spaghetele fierbinți, fără să fiarbă ouăle.
+espanac-cu-naut|P|Spanac cu năut|Călește usturoiul.|Adaugă spanacul și năutul.|Fierbe 10 minute.
+espanac-si-cartofi-sote|P|Spanac și cartofi sote|Fierbe cartofii.|Sotează-i cu spanacul.|Stropește cu ulei de măsline.
+etocanita-de-cartofi-cu-carne-de-porc|P|Tocăniță de cartofi cu porc|Rumenește carnea cu ceapa.|Adaugă cartofii și apă.|Fierbe 40 de minute.
+etocanita-de-cartofi-cu-chorizo-si-leustean|P|Tocăniță de cartofi cu chorizo și leuștean|Rumenește chorizo și ardeiul.|Adaugă cartofii și apă.|Fierbe 30 de minute și presară leuștean.
+etocanita-de-peste-cu-legume|P|Tocăniță de pește cu legume|Fierbe cartofii cu roșiile.|Adaugă peștele.|Fierbe 10 minute.
+etocanita-de-vita-si-vinete|P|Tocăniță de vită cu vinete|Rumenește carnea.|Adaugă vinetele și cartofii.|Fierbe 1 oră și jumătate.
+etocanita-din-carne-de-porc|P|Tocăniță de porc cu ardei|Rumenește carnea.|Adaugă ceapa și ardeiul.|Fierbe o oră.
+etocanita-irlandeza|P|Tocăniță irlandeză|Rumenește carnea.|Adaugă cartofii, ceapa și morcovii.|Fierbe 2 ore.
+etocanita-ungureasca-porkolt|P|Pörkölt (tocăniță ungurească)|Călește ceapa cu boia.|Adaugă carnea.|Fierbe 1 oră și jumătate.
+epui-chinezesc-cu-ardei-si-ciuperci|P|Pui cu ardei și ciuperci la wok|Sotează puiul fâșii.|Adaugă ardeii și ciupercile.|Stropește cu sos de soia.
+esupa-de-conopida|P|Supă de conopidă cu legume|Fierbe conopida, morcovii și cartofii.|Pasează pe jumătate.|Presară pătrunjel.
+esupa-de-mazare|P|Supă de mazăre cu crutoane|Fierbe mazărea cu ceapa.|Pasează.|Servește cu crutoane.
+esupa-de-varza|P|Supă de varză cu costiță și smântână|Prăjește costița.|Adaugă varza și apă și fierbe 30 de minute.|Leagă cu smântână.
+esupa-de-ceapa|P|Supă de ceapă|Călește ceapa până se caramelizează.|Adaugă apă și cimbru.|Fierbe 20 de minute.
+epapanasi|D|Papanași cu smântână|Amestecă brânza cu ouăle și făina.|Formează și prăjește papanașii.|Servește cu smântână și dulceață.
+etartine-cu-ton-si-fasole|M|Tartine cu ton și fasole|Amestecă tonul cu fasolea și roșiile.|Pune pe pâine prăjită.
+etartine-cu-rosii-si-branza-feta-dakos|M|Tartine cu roșii și telemea|Rade roșiile.|Pune-le pe pâine.|Presară telemea și oregano.
+etelemea-cu-rosii-la-cuptor|G|Telemea cu roșii și ardei la cuptor|Pune brânza în vas cu roșii și ardei.|Coace 20 de minute.
+epate-de-fasole-cu-legume|G|Pateu de fasole cu legume|Pasează fasolea cu ceapa călită și morcovul.|Servește pe pâine.
+epate-de-linte-rosie|G|Pateu de linte roșie|Fierbe lintea cu ardeiul.|Pasează-o cu ceapă călită.
+estrudel-cu-mere|D|Ștrudel cu mere|Întinde aluatul subțire.|Pune merele cu zahăr și scorțișoară.|Rulează și coace 40 de minute.
+etarta-cu-branza|D|Tartă cu brânză|Fă un aluat fraged.|Umple-l cu brânză dulce cu ouă și lapte.|Coace 45 de minute.
+etarta-rasturnata-cu-mere|D|Tartă răsturnată cu mere|Caramelizează zahărul cu merele.|Toarnă aluatul deasupra.|Coace și răstoarnă.
+etarta-cu-nuca|D|Tartă cu nucă|Fă un aluat fraged.|Umple-l cu nucă, ouă și zahăr.|Coace 35 de minute.
+epavlova|D|Pavlova cu căpșuni|Bate albușurile cu zahăr.|Coace bezeaua 1 oră și jumătate la 120°C.|Pune frișca și căpșunile.
+esorbet-de-iaurt|D|Sorbet de iaurt cu căpșuni|Mixează căpșunile cu iaurtul și zahărul.|Pune la congelator 4 ore.
+eparfait-cu-nuca|D|Parfait cu nucă|Bate ouăle cu zahăr și smântână.|Amestecă nuca.|Pune la congelator 6 ore.
+epanna-cotta-de-vanilie-cu-capsuni-si-sirop-de|D|Panna cotta cu căpșuni|Încălzește smântâna cu laptele și gelatina.|Toarnă în pahare și lasă la rece.|Servește cu căpșuni.
+erosti|G|Rösti|Dă cartofii pe răzătoare.|Prăjește-i ca o turtă până se rumenesc.
+espanac-cu-iaurt|G|Spanac cu iaurt|Călește spanacul.|Amestecă-l cu iaurt și usturoi.
+eporumb-cu-bacon-si-smantana|G|Porumb cu bacon și smântână|Prăjește baconul cu ceapa.|Adaugă porumbul și smântâna.
+erosii-cherry-provensale|G|Roșii provensale|Taie roșiile în două.|Presară pesmet cu usturoi și ierburi.|Coace 20 de minute.

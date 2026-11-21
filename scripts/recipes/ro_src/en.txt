@@ -1,0 +1,709 @@
+# cheie|numele în engleză (pentru recunoașterea din poză și căutarea fotografiei)
+lpaturata-pe-crumpi|Romanian potato and onion pie
+lciorba-de-miel-a-la-grec-reteta-greceasca|Greek lamb soup with egg and lemon
+lsupa-crema-de-cartofi-cu-praz-supa-vichyssoise|Potato leek soup
+lsupa-crema-de-dovleac|Pumpkin cream soup
+eciorba-taraneasca-de-pui|Chicken vegetable sour soup
+esupa-crema-de-ardei-copti-cu-ricotta|Roasted red pepper soup
+esupa-crema-de-conopida-cu-mustar|Cauliflower cream soup
+esupa-crema-de-dovlecei-cu-crema-de-ricotta-si-tarhon|Zucchini cream soup
+esupa-de-pui-cu-taietei-si-broccoli|Chicken noodle soup with broccoli
+esupa-picanta-de-vita|Spicy pork and roasted vegetable soup
+lrata-pe-varza-la-cuptor|Roast duck with sauerkraut
+lsarmalute-de-gasca-in-foi-de-varza-rosie|Red cabbage rolls
+eardei-copti-cu-rosii-cherry-si-pesmet-aromat|Roasted peppers with cherry tomatoes and breadcrumbs
+ebaba-ganoush|Baba ganoush
+ebabka-cu-ciocolata|Chocolate babka
+eberbecut-cu-legume-la-tava|Roast lamb with vegetables
+ebol-grecesc-cu-pulpe-de-pui-in-air-fryer|Greek chicken bowl
+ebroccoli-cu-iaurt|Broccoli with yogurt and fried onions
+ecarne-de-vita-cu-cartofi-la-tava|Ground beef and potato bake
+ecartofi-copti-cu-ricotta-si-somon-afumat|Baked potatoes with ricotta and smoked salmon
+lciorba-de-cartofi-cu-oua-intregi-si-carnati-afumati-reteta-v|Potato soup with poached eggs and smoked sausage
+lsupa-crema-de-vinete-cu-rosii-coapte|Roasted eggplant and tomato soup
+lsupa-de-chimen|Caraway soup
+lsupa-de-pui-cu-galuste|Chicken soup with semolina dumplings
+lsupa-de-rosii|Tomato soup
+lsupa-de-rosii-cu-paste-de-casa-tarhana|Tomato soup with homemade pasta
+esupa-crema-de-mazare-cu-rucola-si-parmezan|Green pea soup
+esupa-crema-de-morcovi-cu-ricotta|Carrot cream soup
+esupa-de-linte-cu-spanac-si-lapte-de-cocos|Lentil spinach coconut soup
+lfriptura-de-vita-marinata|Marinated roast beef
+lsouvlaki-de-pui-cu-legume|Chicken souvlaki skewers
+ebol-de-orez-cu-cocos-pui-dulce-picant-si-mango|Coconut rice bowl with sweet chili chicken
+ebudinca-de-orez-cu-ciocolata-2253|Chocolate rice pudding
+echec-de-morcovi-carrot-cake-de-la-ottolenghi|Carrot cake
+echifle-cu-crema-de-vanilie-si-mere|Sweet buns with custard and apple
+echifle-dulci-cu-crema-de-branza-si-coacaze-negre|Cheese buns with blackcurrants
+echiftele-de-pui-in-air-fryer|Chicken meatballs
+echiftele-de-rosii-cu-feta|Tomato fritters with feta
+echili-con-carne-reteta-simpla|Chili con carne
+eciuperci-portobello-la-cuptor-cu-piure-de-fasole|Roasted portobello mushrooms with bean puree
+econopida-la-cuptor|Roasted cauliflower
+ecrema-de-feta-cu-ardei-copt|Feta and roasted pepper dip
+ecrema-de-mascarpone-cu-lamaie-si-zmeura-macerata-in-vin|Lemon posset with raspberries
+ecuburi-de-somon-la-tigaie-cu-salsa-de-mango|Salmon bites with rice and mango salsa
+ecuiburi-cu-afine|Blueberry cheese danish
+ecurmale-umplute-trase-n-ciocolata|Chocolate covered stuffed dates
+ecurry-de-conopida-cu-orez|Cauliflower curry with rice
+ecurry-de-pui-cu-ceapa-si-ardei-verde|Chicken curry with onion and pepper
+edegetele-de-pui-crocante-in-air-fryer|Crispy chicken tenders
+edovlecei-la-cuptor-cu-rosii-si-parmezan|Baked zucchini with tomatoes and parmesan
+lgaluste-gomboti-knedle-cu-prune|Plum dumplings
+lgaluste-slovacesti-reteta-traditionala-a-slovacilor-din-bana|Steamed yeast dumplings
+lmancarica-de-urzici|Creamed nettles
+lpapricas-de-pui-cu-smantana|Chicken paprikash
+lpljeskavica-sarbeasca-plescavita-banateana|Pljeskavica grilled meat patty
+lspatzle-sau-noknedli-galuscute-servite-ca-atare-sau-ca-garni|Spaetzle
+ltaitei-cu-cartofi-grenadiermarsch-reteta-veche-din-banat|Noodles with potatoes and sausage
+ltaitei-de-casa-cu-pesmet-reteta-traditionala-video|Sweet noodles with toasted breadcrumbs
+ltasche-cu-pegmez|Plum jam pockets
+ltocinei-de-cartofi-cu-branza-reteta-de-tocinei-bucovineni-pr|Potato pancakes
+lbab-gulyas|Bean goulash soup
+lciorba-ardeleneasca-de-fasole-verde|Green bean soup
+lciorba-ardeleneasca-de-urzici-reteta-video|Nettle soup
+lciorba-ardeleneasca-de-varza|Cabbage soup
+lciorba-de-afumatura-ca-in-ardeal-cu-tarhon-si-smantana-retet|Smoked pork soup with tarragon
+lciorba-de-burta|Tripe soup
+lciorba-de-cartofi-cu-afumatura-si-tarhon-ca-in-ardeal|Potato soup with smoked pork
+lciorba-de-cartofi-cu-tarhon-reteta-de-post|Potato soup with tarragon
+lciorba-de-conopida-reteta-fara-carne|Cauliflower sour soup
+lciorba-de-dovlecei-cu-cartofi-reteta-simpla-si-rapida|Zucchini and potato soup
+lciorba-de-fasole-boabe-de-post|Bean soup
+lciorba-de-fasole-cu-tarhon-si-afumatura|Bean soup with smoked pork
+lciorba-de-fasole-verde-fara-carne|Vegetarian green bean soup
+lciorba-de-legume-a-la-grec-reteta-simpla-si-rapida|Vegetable soup with egg and lemon
+lciorba-de-legume-reteta-de-post-simpla|Vegetable soup
+lciorba-de-loboda-ca-in-ardeal|Orache greens soup
+lciorba-de-miel-cu-bors-si-leustean|Lamb sour soup with lovage
+lciorba-de-miel-turceasca|Lamb yogurt soup
+lciorba-de-perisoare-de-pui-si-dovlecei|Chicken meatball soup with zucchini
+lciorba-de-pleurotus-reteta-de-post-de-ciorba-falsa-de-burta|Oyster mushroom soup
+lciorba-de-pui-a-la-grec|Chicken egg lemon soup
+lciorba-de-salata-cu-afumatura-reteta-ardeleneasca|Lettuce soup with smoked bacon
+lciorba-radauteana|Creamy chicken sour soup
+lciorba-taraneasca-de-vacuta-reteta-pas-cu-pas|Beef vegetable soup
+lgazpacho-reteta-de-supa-rece-ideala-in-vremuri-fierbinti|Gazpacho
+llucskos-reteta-ungureasca-de-zama-de-varza-cu-afumatura-spec|Sauerkraut soup with smoked ribs
+lsupa-crema-de-ardei-copti|Roasted pepper cream soup
+lsupa-crema-de-cartofi-si-sfecla-rosie|Beetroot and potato soup
+lsupa-crema-de-ciuperci|Cream of mushroom soup
+lsupa-crema-de-conopida|Cauliflower soup
+lsupa-crema-de-dovleac-cu-mustar-dijon|Pumpkin soup with mustard
+lsupa-crema-de-dovlecei|Zucchini soup
+lsupa-crema-de-mazare-cu-oua-de-prepelita|Pea soup with poached egg
+lsupa-crema-de-spanac-cu-crutoane-de-casa-cu-parmezan|Spinach soup with croutons
+lsupa-de-linte-rosie|Red lentil soup
+lsupa-de-mazare-cu-galuste|Pea soup with dumplings
+lsupa-de-mere-reteta-nemteasca-explicata-pas-cu-pas|Apple soup
+lsupa-de-rosii-si-legume-coapte-reteta-simpla-rapida-si-savur|Roasted tomato soup
+lsupa-deasa-de-varza-reteta-saseasca-gustoasa-si-consistenta|Beef and cabbage soup
+lsupa-minestrone-reteta-italiana-de-supa-de-legume-video|Minestrone soup
+lsupa-reginei-koniginsuppe-reteta-saseasca-de-supa-de-pui-cu-|Cream of chicken soup
+lsupa-ungureasca-de-oua-tojasleves-reteta-ardeleneasca|Egg drop paprika soup
+ltarator-supa-rece-cu-castraveti-si-usturoi|Tarator cold cucumber yogurt soup
+eciorba-cu-naut-pui-si-frunze-de-sfecla|Chickpea chicken soup with chard
+eciorba-de-conopida|Cauliflower soup with caraway
+eciorba-de-miel-cu-leustean|Lamb soup with lovage
+eciorba-de-perisoare-a-la-grec|Meatball soup with egg and lemon
+esupa-crema-de-conopida-cu-chorizo|Cauliflower soup with chorizo
+esupa-crema-de-dovleac-copt-cu-fenicul|Roasted pumpkin soup
+esupa-crema-de-dovleac-cu-bulgur|Pumpkin soup with bulgur
+esupa-crema-de-dovleac-cu-parmezan|Pumpkin parmesan soup
+esupa-crema-de-dovleac-si-rosii|Pumpkin tomato soup
+esupa-crema-de-linte-cu-chimen|Cumin lentil soup
+esupa-crema-de-sfecla-coapta-cu-mere|Roasted beet and apple soup
+esupa-crema-de-telina-cu-nuca|Celeriac soup with walnuts
+esupa-de-coada-de-vita|Oxtail soup
+esupa-de-dovlecei|Zucchini parmesan soup
+esupa-de-legume-cu-iaurt|Vegetable soup with yogurt
+esupa-de-linte-verde|Green lentil soup
+esupa-de-mazare-cu-galuste|Pea soup with semolina dumplings
+esupa-de-naut-cu-spanac|Chickpea spinach soup
+esupa-de-pui-cu-mazare-si-galuscute|Chicken pea soup with dumplings
+esupa-de-rosii-si-ardei-copti|Tomato and roasted pepper soup
+esupa-de-varza-cu-carne-tocata|Cabbage soup with ground meat
+esupa-rece-de-rosii|Cold tomato soup
+esupa-rustica-de-rosii|Rustic roasted tomato soup
+lantricot-de-vita-la-gratar|Grilled ribeye steak
+lardei-copti-cu-smantana-si-usturoi-reteta-pas-cu-pas-video|Roasted peppers with sour cream and garlic
+lardei-umpluti|Stuffed peppers
+lardei-umpluti-cu-carne-de-pui-in-sos-de-rosii|Chicken stuffed peppers in tomato sauce
+lardei-umpluti-de-post|Vegan stuffed peppers
+laripi-de-curcan-la-cuptor-marinate-reteta-detaliata|Roast turkey wings
+laripioare-de-pui-la-cuptor-crocante-si-picante|Crispy baked chicken wings
+laripioare-de-pui-la-gratar|Grilled chicken wings
+laripioare-la-friteuza-cu-aer-cald-gustoase-rumene-si-crocant|Air fryer chicken wings
+lbeef-wellington|Beef Wellington
+lboeuf-stroganoff|Beef stroganoff
+lbogracs-gulyas|Hungarian beef goulash
+lbroccoli-cu-cartofi-la-cuptor-gratinati-reteta-video|Broccoli potato gratin
+lbudinca-de-cartofi-si-dovlecei-rasi-la-cuptor-reteta-de-kuge|Potato zucchini kugel
+lbudinca-de-dovlecei|Zucchini cheese bake
+lcarnaciori-din-carne-de-pui|Homemade chicken sausages
+lcartofi-copti-umpluti-cu-branza-si-bacon|Twice baked potatoes with bacon
+lcartofi-copti-zdrobiti-cu-branza-si-bacon-reteta-simpla-si-d|Smashed potatoes with cheese and bacon
+lcartofi-cu-bacon-si-smantana-la-cuptor-reteta-video|Potato bacon cream bake
+lcartofi-frantuzesti-la-cuptor-reteta-simpla|Layered potato egg casserole
+lcartofi-gratinati-cu-afumatura-si-ceapa-reteta-detaliata|Potato gratin with bacon and onion
+lcartofi-la-cuptor-cu-bacon-si-ceapa-reteta-rapida|Roast potatoes with bacon
+lceafa-de-porc-cu-moare-de-varza-gatita-la-slow-cooker|Braised pork neck
+lchiftele-de-legume|Vegetable patties
+lchiftele-de-linte-la-cuptor-reteta-de-post-video|Baked lentil patties
+lchiftele-de-post-din-ciuperci-si-vinete-coapte|Mushroom eggplant patties
+lchiftele-gratinate-cu-cartofi-si-sos-de-rosii-cu-legume|Meatball potato bake
+lchiftele-marinate-reteta-ca-la-mama|Meatballs in tomato sauce
+lchiftelute-de-naut-cu-sos-de-rosii-aromat|Chickpea balls in tomato sauce
+lchiftelute-de-pui-cu-dovlecei|Chicken zucchini meatballs
+lchiftelute-nemtesti-in-sos-de-mustar-si-smantana|Meatballs in mustard cream sauce
+lciulama-de-pui-cu-ciuperci-si-smantana|Chicken mushroom cream stew
+lcoaste-de-porc-la-gratar-cu-marinada-picanta|Grilled pork ribs
+lconopida-gratinata-budinca-de-conopida-fara-oua|Cauliflower gratin
+lconopida-la-cuptor-cu-crusta-de-pesmet|Roasted whole cauliflower
+lcotlet-de-miel-in-crusta-de-ierburi-aromate|Herb crusted rack of lamb
+lcotlet-de-porc-afumat-la-gratar|Smoked pork loin
+lcotlet-de-porc-cu-sos-de-rosii-reteta-rapida-si-gustoasa|Pork chops in tomato sauce
+lcotlet-de-porc-dezosat-la-cuptor-reteta-pentru-o-friptura-ru|Roast pork loin
+lcotlet-de-porc-la-tigaie-secretele-unei-fripturi-suculente-s|Pan seared pork chops
+lcotlet-de-porc-rumen-cartofi-aurii-si-salata-de-ardei-copti-|Pork chops with roast potatoes and roasted peppers
+lcrispy-de-pui-la-air-fryer-reteta-video|Crispy chicken strips
+lcrumpi-cu-galuste|Potatoes with dumplings and paprika onion
+ldovlecei-crocanti-la-cuptor|Baked zucchini fries
+ldovlecei-cu-branza-si-rosii-la-cuptor|Zucchini tomato mozzarella bake
+ldovlecei-gratinati-fara-carne-la-cuptor-reteta-video|Zucchini gratin
+ldovlecei-umpluti-cu-carne|Stuffed zucchini with meat
+ldovlecei-umpluti-cu-carne-de-pui-in-sos-de-rosii-la-cuptor|Chicken stuffed zucchini in tomato sauce
+lescalop-de-porc-cu-ciuperci|Pork escalope with mushrooms
+lfasole-batuta-cu-ceapa-calita-reteta-ca-n-banat-cu-ulei-de-d|Mashed white beans with fried onions
+lfasole-boabe-cu-ciolan-afumat|Bean stew with smoked ham hock
+lfasole-cu-afumatura|Baked beans with smoked pork
+lfasole-cu-carnati|Bean stew with sausages
+lfasole-pastai-cu-usturoi-si-rosii-pastai-aiti|Green beans with garlic and tomatoes
+lfasole-scazuta-de-post-la-cuptor-reteta-greceasca-gigandes-p|Greek baked giant beans
+lficatei-de-pui-cu-ceapa-caramelizata-si-bacon|Chicken livers with caramelized onions and bacon
+lficatei-de-pui-cu-ceapa-la-tigaie|Fried chicken livers with onions
+lfrigarui-din-carnati-cu-ciuperci-si-legume-reteta-video|Sausage and mushroom skewers
+lfriptura-de-miel-cu-usturoi-si-rozmarin|Roast lamb with garlic and rosemary
+lfriptura-de-miel-la-cuptor|Roast lamb with potatoes
+lfriptura-de-porc-cu-bere|Beer braised pork
+lfriptura-de-porc-cu-glazura-aromata|Glazed pork neck slices
+lfriptura-de-turda-reteta-de-friptura-de-porc-ca-la-turda-det|Fried pork chops
+lfriptura-de-vita-la-foc-mic-cu-doua-feluri-de-mamaliga|Braised beef with polenta
+lfriptura-de-vitel-la-cuptor-spata-de-vitel-la-tava-reteta-de|Roast veal shoulder
+lfriptura-de-zalau-reteta|Pork neck steak with paprika
+lfriptura-inabusita-de-porc-cu-ceapa-si-mustar|Braised pork with onion and mustard
+lgaluste-pe-varza-kraut-und-knedl|Dumplings with braised sauerkraut
+lghici-ce-i-in-ulcele|Veal stew pot pie
+lghiveci-calugaresc-reteta-de-post-sanatoasa-plina-de-arome|Baked vegetable stew
+lghiveci-de-legume-cu-orez-reteta-simpla-de-vara|Vegetable stew with rice
+lghiveci-de-legume-de-iarna-de-post|Winter vegetable stew
+lgratin-de-dovlecei|Zucchini cheese gratin
+lgulas-de-vitel-cu-galuste-si-cartofi-reteta-ungureasca|Veal goulash with dumplings and potatoes
+lgulas-secuiesc-cu-carne-de-porc-reteta-simpla-de-mancare-gus|Szekely goulash with sauerkraut
+liahnie-de-fasole-boabe-reteta-de-post|White bean stew
+linvoltini-de-vinete-cu-ricotta-si-mozzarella-in-sos-de-rosii|Eggplant rolls with ricotta in tomato sauce
+lmancare-de-ardei-copti-de-post|Roasted pepper stew
+lmancare-de-cartofi-cu-carne-tocata-la-cuptor-gulas-rapid|Baked potatoes with ground meat
+lmancare-de-cartofi-tocanita-simpla-de-post|Potato stew
+lmancare-de-fasole|Bean stew
+lmancare-de-fasole-verde-cu-pui|Green bean and chicken stew
+lmancare-de-fasole-verde-pastai-cu-carne-de-porc|Green bean and pork stew
+lmancare-de-linte-de-post-cu-rosii-si-legume-reteta|Lentil stew with tomatoes
+lmancare-de-mazare-cu-morcovi|Pea and carrot stew
+lmancare-de-mazare-cu-pui-si-galuste|Chicken pea stew with dumplings
+lmancare-de-praz-cu-carne|Leek and beef stew
+lmancare-de-rosii-tocanita-de-rosii-olteneasca-reteta-simpla-|Tomato stew with eggs
+lmancare-de-vara-cu-ardei-peperonata|Peperonata
+lmancare-de-vinete-reteta-turceasca-soslu-patlican|Eggplant in tomato sauce
+lmititei-reteta-de-pasta-de-mici-facuta-acasa|Mici grilled skinless sausages
+lmusaca-de-cartofi-cu-carne-tocata|Potato moussaka
+lmusaca-de-cartofi-de-post|Vegetarian potato moussaka
+lmusaca-de-varza-cu-carne-tocata-reteta-de-varza-in-straturi-|Cabbage moussaka with ground meat
+lmuschiulet-de-porc-in-crusta-de-verdeturi-reteta-video|Herb crusted pork tenderloin
+eciorba-de-cartofi-cu-zeama-de-varza|Potato soup with sauerkraut juice
+eciorba-de-fasole-cu-tarhon|Bean soup with ribs and tarragon
+eciorba-de-legume|Creamy vegetable sour soup
+eciorba-de-loboda|Orache soup with rice
+eciorba-de-peste|Fish soup
+eciorba-de-vacuta|Beef and vegetable sour soup
+esupa-crema-de-cartofi-cu-somon-afumat|Potato soup with smoked salmon
+esupa-crema-de-dovlecei|Zucchini soup with yogurt
+esupa-crema-de-hribi|Porcini mushroom soup
+esupa-crema-de-linte-galbena-cu-menta|Lentil soup with mint
+esupa-crema-de-mazare|Pea soup with feta and mint
+esupa-crema-de-morcovi|Carrot ginger soup
+esupa-de-cartofi-si-broccoli-cu-carnati|Potato broccoli soup with sausage
+esupa-de-pui-cu-legume-si-orez|Chicken rice soup
+esupa-de-rosii-cu-paine-si-tarhon|Tomato bread soup
+lmamaliga-fiarta-in-lapte-cu-branza-si-ou-la-cuptor-reteta-si|Baked polenta with cheese and egg
+lmuschiulet-de-porc-la-cuptor-reteta-cu-toate-secretele|Roast pork tenderloin
+lmuschiulet-de-porc-umplut-cu-ciuperci-rulada-reteta-video|Pork tenderloin stuffed with mushrooms
+lmuschiulet-impletit-cu-bacon-la-cuptor-cu-garnitura-de-carto|Bacon wrapped pork tenderloin with potatoes
+lorez-prajit-cu-legume-si-ou-reteta-detaliata|Egg fried rice with vegetables
+lostropel-de-pui|Chicken in garlic tomato sauce
+lpapricas-de-pui-cu-cartofi-reteta-simpla-si-gustoasa|Chicken paprikash with potatoes
+lparjoale-moldovenesti-reteta-simpla-de-parjoale-prajite-sau-|Breaded meat patties
+lpiept-de-curcan-cu-sos-de-piper-rosu-o-reteta-rapida-si-rafi|Turkey breast in red pepper sauce
+lpiept-de-curcan-umplut-invelit-in-bacon|Bacon wrapped stuffed turkey breast
+lpiept-de-porc-la-gratar-marinat-in-bere|Grilled pork belly
+lpiept-de-porc-la-tigaie-cu-cimbru-si-usturoi-reteta-simpla|Crispy pan fried pork belly
+lpiept-de-pui-cordon-bleu|Chicken cordon bleu
+lpiept-de-pui-cu-ciuperci-si-smantana-reteta-rapida|Chicken breast with mushroom cream sauce
+lpiept-de-pui-cu-legume|Roasted chicken breast with vegetables
+lpiept-de-pui-in-sos-de-rosii-cu-usturoi-reteta-rapida|Chicken breast in garlic tomato sauce
+lpiept-de-pui-in-sos-de-smantana-si-mustar|Chicken in mustard cream sauce
+lpiept-de-pui-kiev|Chicken Kiev
+lpiept-de-pui-la-gratar|Grilled chicken breast
+lpiept-de-pui-umplut-cu-feta-si-spanac-reteta-video-sfaturi-d|Spinach feta stuffed chicken breast
+lpiept-de-rata-cu-portocale-reteta-clasica|Duck breast with orange sauce
+lpiept-de-rata-cu-vin-rosu-si-prune-caramelizate-reteta-video|Duck breast with red wine and plums
+lpilaf-de-orez-cu-ciuperci-reteta-de-post|Mushroom rice pilaf
+lpilaf-de-orez-cu-pui|Baked chicken rice pilaf
+lpilaf-de-orez-cu-pui-si-mazare-reteta-simpla|Chicken and pea pilaf
+lpui-cu-40-de-catei-de-usturoi|Chicken with forty cloves of garlic
+lpui-cu-sos-de-ardei-copti-reteta-video-si-pas-cu-pas|Chicken in roasted pepper sauce
+lpui-fript-ca-la-rotiserie-la-friteuza-cu-aer-cald|Air fryer rotisserie chicken
+lpui-fript-la-perfectie-metoda-cuptorului-rece-reteta-pas-cu-|Whole roast chicken
+lpui-la-capac-reteta-din-vremuri-mai-bune|Pan pressed chicken with garlic sauce
+lpui-la-cuptor-in-punga-de-hartie-reteta-video|Roast chicken in a bag
+lpui-marinat-in-suc-de-mere-cu-legume-radacinoase-coapte-rete|Apple marinated chicken with root vegetables
+lpui-pe-sticla-la-cuptor-reteta-simpla-explicata-detaliat|Beer can roast chicken
+lpulled-pork-sandwich|Pulled pork
+lpulpa-de-porc-la-cuptor-cu-sorici-crocant-si-otet-balsamic|Roast pork leg with crackling
+lpulpe-de-curcan-la-cuptor-marinate-cu-usturoi-servite-cu-car|Roast turkey legs with potatoes
+lpulpe-de-pui-cu-cartofi-la-cuptor|Baked chicken legs with potatoes
+lpulpe-de-pui-la-cuptor|Bacon wrapped chicken legs
+lpulpe-de-pui-la-cuptor-cu-rosii-si-cartofi|Chicken thighs with potatoes and cherry tomatoes
+lpulpe-de-pui-marinate-in-iaurt-la-cuptor-reteta-video|Yogurt marinated chicken legs
+lpulpe-de-pui-umplute|Stuffed chicken legs
+lpulpe-de-rata-cu-portocale-la-multicooker-sau-cuptor|Duck legs with orange
+lpulpe-si-aripioare-de-pui-in-crusta-crocanta|Crispy fried chicken
+lpunjeni-cevapi|Stuffed cevapi
+lrata-pe-varza-calita-dulce-sau-acra-la-cuptor|Roast duck on braised cabbage
+lratatouille|Ratatouille
+lrisotto-cu-ciuperci-si-piure-de-mazare|Mushroom risotto with pea puree
+lrulada-de-pui-dezosat|Stuffed chicken roulade
+eciorba-de-peste-a-la-grec|Fish soup with egg and lemon
+eciorba-de-potroace|Chicken giblet sour soup
+eciorba-de-pui|Chicken sour soup
+esupa-ceheasca-de-usturoi|Czech garlic potato soup
+esupa-crema-de-broccoli|Broccoli cream soup
+esupa-crema-de-cartofi|Potato soup with bacon
+esupa-crema-de-legume|Vegetable cream soup
+esupa-de-vita-cu-fidea|Beef noodle soup
+lrulouri-de-dovlecei-la-cuptor-cu-umplutura-de-sarmale-reteta|Zucchini rolls stuffed with meat and rice
+lrulouri-de-vinete-cu-carne-si-sos-de-rosii-la-cuptor-reteta-|Eggplant rolls with meat in tomato sauce
+lrulouri-din-piept-de-pui-la-airfryer-cu-garnitura-de-fasole-|Chicken rolls with green beans
+lsarmale-cu-varza-dulce|Cabbage rolls
+lsarmale-de-post-manastiresti-cu-nuca-si-stafide|Vegan cabbage rolls with walnuts
+lsarmale-in-foi-de-varza-murata|Sour cabbage rolls
+lsarmale-in-foi-de-vita-cu-sos-de-marar-reteta-traditionala-d|Stuffed grape leaves with dill sauce
+lsarmale-traditionale-in-foi-de-varza-murata-reteta-video|Romanian sarmale cabbage rolls
+lshaorma-cu-pui-reteta-video|Chicken shawarma wrap
+lsnitel-de-porc|Pork schnitzel
+lsnitel-din-piept-de-pui-in-pesmet-reteta-simpla|Chicken schnitzel
+lsnitel-vienez-reteta-autentica|Wiener schnitzel
+lspanac-cu-usturoi-si-lapte-reteta-video-pas-cu-pas|Creamed spinach with garlic
+lsteak-de-conopida-la-cuptor-reteta-pas-cu-pas|Roasted cauliflower steaks
+lstufat-de-miel-reteta-pas-cu-pas|Lamb stew with green onions
+lsufleu-de-conopida|Cauliflower souffle
+ltocanita-de-porc-reteta-traditionala|Pork stew
+ltocanita-de-pui-cu-ceapa-reteta-simpla-traditionala|Chicken and onion stew
+ltocanita-de-vita-cu-ciuperci|Beef mushroom stew
+lvarza-a-la-cluj|Layered sauerkraut and meat casserole
+lvarza-calita-cu-carnati-de-casa|Braised cabbage with sausages
+lvarza-calita-cu-coaste-de-porc-la-cuptor|Braised cabbage with pork ribs
+lvarza-murata-cu-carne-de-porc-reteta-simpla-de-toros-ardelen|Sauerkraut with pork
+lvinete-a-la-parmigiana-vinete-cu-parmezan|Eggplant parmigiana
+lvinete-alla-pizzaiola-vinete-cu-mozzarella-si-sos-de-rosii-r|Eggplant pizzaiola
+lvinete-papoutsakia-la-air-fryer-sau-la-cuptor|Papoutsakia stuffed eggplant
+lvinete-umplute-la-cuptor-reteta-turceasca-imam-bayildi|Imam bayildi stuffed eggplant
+ealivanca-cu-boabe-crocante-de-porumb|Cornmeal cheese pie
+eardei-fripti-umpluti-cu-feta|Roasted peppers stuffed with feta
+eardei-umpluti-cu-carne-si-bulgur|Stuffed peppers with meat and bulgur
+earipioare-in-stil-spaniol-cu-cartofi-la-cuptor|Baked chicken wings with potatoes
+ebaghete-umplute-cu-bacon-si-cascaval|Stuffed baguette with bacon and cheese
+ebanuti-de-cartofi-stil-pizza|Potato pizza bites
+ebatoane-de-ciocolata-si-unt-de-arahide|Chocolate peanut butter bars
+ebomboane-de-prune-uscate|Prune walnut truffles
+ebrownie-cu-cacao-si-nuca|Walnut brownies
+ebruschetta-cu-ciuperci|Mushroom bruschetta
+ebudinca-de-orez-caramelizata|Creme brulee rice pudding
+ebudinca-de-ovaz-cu-cacao|Baked chocolate oatmeal
+ebulgur-cu-naut|Bulgur with chickpeas and sausage
+ebulgur-cu-verdeturi|Bulgur herb salad
+ebulgur-cu-verdeturi-si-somon-copt-cu-lamaie|Lemon baked salmon with herb bulgur
+lomleta-cu-legume|Vegetable omelette
+lomleta-cu-sunca|Ham omelette
+lomleta-cu-piept-de-pui|Chicken omelette
+loua-coapte-in-avocado|Eggs baked in avocado
+lclatite-simple-reteta-video-pas-cu-pas|Crepes
+lpancakes-clatite-americane-cu-mure|Blackberry pancakes
+lpapanasi-prajiti-cu-smantana-si-dulceata-reteta-video|Papanasi cheese doughnuts with sour cream and jam
+lclatite-cu-spanac-si-ricotta-la-cuptor|Baked spinach ricotta crepes
+lpateu-de-casa-din-ficat-de-pui|Chicken liver pate
+lplacinte-la-tigaie-cu-branza-si-verdeturi-reteta-video|Pan fried cheese and herb flatbreads
+lbranzoaice-pufoase-cu-branza-sarata|Salty cheese pastries
+lbranzoaice-trandafir-cu-branza-dulce-sau-urda-proaspata|Sweet cheese rolls
+lbranzoaice-reteta-video-placinte-poale-n-brau|Sweet cheese danish pastries
+lplacinta-cu-branza-dulce-reteta-ca-la-mama-acasa|Sweet cheese strudel
+lplacinta-cu-branza-si-spanac|Spinach and cheese pie
+lplacinta-banateana-de-la-sat|Cheese spiral pie
+lplacinta-creata-cu-branza-si-spanac-reteta-usoara-explicata-|Crinkle phyllo spinach cheese pie
+lplacinta-greceasca-cu-dovlecei-si-branza|Zucchini cheese phyllo pie
+lplacinta-cu-varza-reteta-taraneasca|Cabbage pie
+lplacinta-cu-mere-cu-foi-cumparate|Apple phyllo pie
+lplacinta-simpla-cu-mere|Apple pie
+lplacinta-cu-dovleac-cu-foi-fragede-reteta-video|Pumpkin pie
+lplacinta-cu-carne-de-pui|Chicken pie
+lpateuri-cu-branza-sarata-reteta-video-pas-cu-pas|Cheese puff pastry triangles
+llangosi-umpluti-cu-branza-reteta-pas-cu-pas|Cheese stuffed fried dough
+lpogacele-cu-branza-si-unt-reteta-video-pas-cu-pas|Cheese scones
+lcovrigi-sarbesti|Homemade pretzels
+lgogosi-pripite-reteta-de-gogosi-cu-aluat-oparit-fara-drojdie|Choux doughnut balls
+lbudinca-de-paine-reteta-de-la-mama|Bread pudding
+lbudinca-de-orez-cu-lapte-fara-coacere-reteta-video|Rice pudding
+lbudinca-de-gris-cu-lapte-cu-dulceata-si-branza-de-vaci|Baked semolina pudding
+lmuffins-cu-mere-zahar-brun-si-scortisoara|Apple cinnamon muffins
+lbriose-aperitiv-cu-dovlecei|Savory zucchini muffins
+lbriose-aperitiv-cu-piept-de-pui|Savory chicken muffins
+lquiche-cu-gorgonzola-si-sunca|Ham and cheese quiche
+lpancakes-de-dovlecei-rasi-cu-verdeturi-si-usturoi|Zucchini fritters
+etoast-cu-ricotta-si-dovlecei|Ricotta zucchini toast
+eomleta-cu-malai|Cornmeal omelette
+ebol-de-orez-cu-oua-si-somon|Salmon and egg rice bowl
+eoua-cu-ciuperci-portobello-si-spanac|Eggs with mushrooms and spinach
+eghiveci-de-legume-cu-linte-si-oua-ochiuri|Lentil vegetable stew with fried eggs
+eomleta-cu-cartofi-dulci|Sweet potato omelette
+eclatite-cu-gem|Crepes with jam
+etoast-cu-ricotta-si-lamaie|Lemon ricotta toast
+eoua-ochiuri|Fried eggs
+efasole-verde-cu-jumari-de-oua|Green beans with scrambled eggs
+eoua-umplute-cu-tarhon|Deviled eggs with tarragon
+eclatite-de-branza|Cheese pancakes
+eclatite-cu-spanac|Spinach crepes
+efrittata-cu-somon|Salmon frittata
+eomleta-taraneasca-la-cuptor|Baked potato and bacon omelette
+eomleta-cu-ciuperci-si-cascaval|Mushroom cheese omelette
+eclatite-de-conopida|Cauliflower fritters
+eclatite-de-varza|Cabbage fritters
+eoua-in-sos-de-rosii-si-chorizo|Eggs in tomato sauce with chorizo
+eclatite-de-dovlecei-si-branza|Zucchini cheese fritters
+eplacinte-cu-urda-si-marar|Ricotta dill pastries
+efrittata-cu-ciuperci-si-branza-de-capra|Mushroom goat cheese frittata
+emuffins-cu-branza-de-capra|Savory cheese muffins
+eiaurt-cu-spanac|Spinach yogurt dip
+ecartofi-cu-chorizo-si-oua|Potatoes with chorizo and eggs
+eplacintele-cu-branza-gratinate|Baked cheese pastries
+esandwich-cu-vita-si-cascaval|Beef and cheese sandwich
+eplacinta-cu-carne|Meat pie
+eplacinta-cu-mere|Butter apple pie
+eclatita-la-cuptor|Dutch baby pancake
+eclatite-olandeze-cu-mere|Apple dutch pancake
+ejumari-de-oua-cu-dovlecei|Scrambled eggs with zucchini
+esandwich-cu-curcan|Turkey sandwich
+equiche-cu-rosii-si-branza-de-capra|Tomato goat cheese quiche
+egogosi-la-cuptor|Baked doughnuts
+eplacinta-cu-branza-si-smantana|Sweet cheese and cream pie
+eplacinta-rasturnata-cu-spanac-si-sunca|Upside down spinach ham pie
+eclatite-cu-cacao-si-mascarpone|Chocolate crepes with mascarpone
+epancakes-cu-sos-de-lamaie|Pancakes with lemon sauce
+eplacinta-cu-visine|Sour cherry pie
+ebudinca-de-orez-cu-sos-de-visine|Rice pudding with sour cherry sauce
+lmacrou-la-gratar-cu-salata-de-cartofi-si-sfecla-rosie|Grilled mackerel with potato beet salad
+lpeste-la-cuptor-cu-rosii-si-usturoi-reteta-simpla|Baked fish with tomatoes and garlic
+lcalamari-in-crusta-crocanta|Fried calamari
+lpaste-cu-sos-de-peste|Pasta with fish tomato sauce
+lpeste-in-crusta-aromata-la-tigaia-dry-cooker|Herb crusted fish fillet
+lmacrou-la-cuptor-cu-tarhon-si-sos-de-mustar|Baked mackerel with mustard sauce
+lsomon-marinat-cu-marar|Dill cured salmon
+lsomon-in-stil-mediteranean-o-reteta-delicioasa|Mediterranean baked salmon
+lpastrav-afumat-la-gratar|Smoked trout
+lsomon-in-crusta-aromata-la-cuptor|Herb crusted baked salmon
+lpastrav-cu-ciuperci-in-sos-de-vin-alb|Trout with mushrooms in white wine sauce
+lpastrav-la-cuptor-reteta-pas-cu-pas|Baked trout
+lcreveti-cu-usturoi-si-vin-alb|Garlic shrimp in white wine
+lpeste-prajit-in-crusta-crocanta-cu-bere|Beer battered fish
+lbiban-de-mare-la-cuptor-cu-sos-de-rosii-cu-usturoi|Baked sea bass in tomato sauce
+lpastrav-prajit-in-crusta-de-malai-reteta-simpla-si-rapida|Cornmeal fried trout
+lpastrav-la-cuptor-cu-legume-reteta-explicata-detaliat|Baked trout with vegetables
+lpastrav-la-gratar-reteta-simpla|Grilled trout
+lsomon-la-tigaie-cu-orez-brun-si-legume-reteta-video|Pan seared salmon with brown rice and vegetables
+lpeste-prajit-in-crusta-de-malai-cu-mujdei-si-mamaliga|Cornmeal fried fish with polenta and garlic sauce
+lpaste-cu-pui-si-varza-de-bruxelles|Pasta with chicken and brussels sprouts
+lpaste-cu-sos-de-ardei-copti|Pasta with roasted red pepper sauce
+lspaghete-a-la-norma|Pasta alla norma
+lpaste-cu-dovlecei-si-menta-reteta-de-bucatini-cu-dovlecei|Zucchini mint pasta
+lpenne-all-arrabbiata|Penne arrabbiata
+lspaghetti-alla-matriciana|Spaghetti amatriciana
+lspaghetti-alla-puttanesca|Spaghetti puttanesca
+lmacaroane-cu-varza-la-cuptor-cu-pesmet|Baked pasta with cabbage
+lmacaroane-cu-branza-la-cuptor-sarate|Baked macaroni and cheese
+lfettuccine-alfredo-reteta-de-paste-in-sos-de-unt-cu-parmezan|Fettuccine alfredo
+llasagne-alla-norma-cu-vinete-si-ricotta-reteta-video|Eggplant ricotta lasagna
+lturos-csusza-taitei-cu-branza-de-vaci-si-slanina-reteta-vide|Noodles with cottage cheese and bacon
+lpaste-la-cuptor-cu-ragu-de-carne-si-mozzarella-reteta-italia|Baked pasta with meat ragu and mozzarella
+lspaghete-cu-chiftelute-reteta-de-spaghetti-con-le-polpettine|Spaghetti and meatballs
+llaste-cu-varza-reteta-de-post-de-taitei-cu-varza-calita|Noodles with fried cabbage
+lspatzle-de-casa-cu-ciuperci-si-bacon-reteta-video-text-pas-c|Spaetzle with mushrooms and bacon
+epaste-cu-ton-si-rosii-cherry|Tuna pasta with cherry tomatoes
+epaste-caprese|Pasta caprese
+epaste-cu-sardine-si-dovlecei|Pasta with sardines and zucchini
+epaste-cu-ragu-de-ficatei-de-pui|Pasta with chicken liver ragu
+epaste-cu-ton-si-salsa-verde|Tuna pasta with green sauce
+epaste-cu-spanac-si-somon|Salmon spinach pasta
+epaste-cu-ricotta-usturoi-si-verdeturi|Ricotta herb pasta
+epaste-cu-carne-si-spanac|Pasta with ground meat and spinach
+epaste-cu-lamaie|Lemon parmesan pasta
+espaghete-cu-rosii-cherry|Spaghetti with cherry tomatoes
+epui-cu-paste-orzo|Chicken orzo
+epaste-cu-mazare-si-costita|Pasta with peas and bacon
+epaste-cu-crema-de-dovlecei|Pasta with zucchini cream sauce
+epaste-cu-ricotta-si-nuca|Pasta with ricotta and walnuts
+lsalata-de-castraveti-cu-marar-si-usturoi|Cucumber dill salad
+lsalata-verde-cu-ridichi-si-oua-fierte|Lettuce salad with radishes and eggs
+lsalata-de-pui-cu-telina-si-mar-reteta-video-lejera-rapida-de|Chicken celery apple salad
+lsalata-waldorf|Waldorf salad
+lsalata-de-paste-cu-legume-crude-si-naut|Pasta salad with chickpeas
+lsalata-de-ardei-copti-reteta-simpla-fara-pic-de-apa-si-fara-|Marinated roasted pepper salad
+lsalata-de-fasole-verde-cu-dressing-de-mustar|Green bean salad with mustard dressing
+lsalata-de-vinete-cu-dovlecei-reteta-simpla-si-ieftina|Roasted eggplant and zucchini salad
+lsalata-mimoza-reteta-festiva-de-salata-in-straturi-accesibil|Mimosa layered salad
+lsalata-orientala-reteta-simpla-de-post|Potato olive onion salad
+lsalata-de-cartofi-noi-cu-ciuperci-pleurotus-reteta-simpla|New potato and mushroom salad
+lsalata-cu-piept-de-pui-si-avocado-fara-maioneza-si-fara-lact|Chicken avocado salad
+lsalata-cu-piept-de-pui|Chicken breast salad
+lsalata-de-pui-cu-portocale-si-sfecla-rosie-reteta-video|Chicken beet orange salad
+lsalata-de-morcovi-coreeana-reteta-de-salata-delicioasa-plina|Korean carrot salad
+lsalata-de-morcovi-cu-iaurt-reteta-turceasca-simpla-si-gustoa|Carrot yogurt salad
+lsalata-nicoise|Salade nicoise
+lsalata-mediteraneana-cu-pui-la-grill-reteta-simpla-si-gustoa|Mediterranean grilled chicken salad
+lsalata-panzanella-salata-italiana-de-rosii-cu-paine-si-mozza|Panzanella salad
+lsalata-tabbouleh-cu-sau-fara-bulgur-cu-variante-cu-couscous-|Tabbouleh
+lsalata-bulgareasca|Shopska salad
+lsalata-de-vinete-cu-ardei-copti|Eggplant and roasted pepper salad
+lsalata-de-dovlecei-rasi-cu-maioneza-reteta-simpla-de-vara|Grated zucchini salad
+lsalata-bavareza-de-cartofi-reteta-detaliata|Bavarian potato salad
+lsalata-de-ton-cu-porumb-si-legume-reteta-detaliata|Tuna corn salad
+lsalata-de-linte-cu-somon-afumat|Lentil salad with smoked salmon
+esalata-japoneza-de-cartofi|Japanese potato salad
+esalata-de-morcovi-cu-piept-de-pui-in-air-fryer|Carrot salad with chicken
+esalata-de-fasole-antalya|White bean salad with eggs
+esalata-de-naut-cu-pui-si-ceapa-marinata|Chickpea chicken salad
+esalata-de-spanac-cu-pui-nuca-si-quinoa|Spinach chicken quinoa salad
+esalata-de-cartofi-si-fasole-verde-cu-sardine|Potato green bean sardine salad
+esalata-rusa|Russian salad
+esalata-de-ton-proaspat|Seared tuna salad
+esalata-verde-dreasa-in-stil-ardelenesc|Lettuce salad with garlic dressing
+emancarica-de-salata-verde-cu-carne-de-porc|Pork and lettuce stew
+esalata-de-rosii-cu-ceapa|Tomato onion salad
+esalata-de-varza-simpla|Cabbage salad
+esalata-de-vinete-cu-iaurt|Eggplant yogurt salad
+esalata-de-sfecla-rosie-si-telemea|Beetroot feta salad
+esalata-de-conopida|Cauliflower salad
+esalata-in-straturi|Layered salad
+esalata-cu-hering|Herring salad
+esalata-bavareza-de-varza-alba|Bavarian cabbage salad
+lrata-la-cuptor-cu-cartofi-si-varza-rosie-calita-reteta-video|Roast duck with potatoes and red cabbage
+lmusaca-cu-carne-vinete-si-cartofi|Eggplant potato moussaka
+lpulpe-de-pui-la-cuptor-cu-vin-si-usturoi-reteta-video|Chicken legs baked with wine and garlic
+lgulas-din-carne-tocata-de-porc-reteta-simpla-ieftina-si-gust|Ground pork goulash
+lgratin-de-broccoli-si-morcovi-cu-multa-branza-reteta-videote|Broccoli carrot cheese gratin
+lfricassee-de-pui-cu-ciuperci-reteta-video-de-pui-in-sos-de-c|Chicken fricassee with mushrooms
+lchili-fara-carne-reteta-vegana-cu-arome-mexicane-chili-sin-c|Vegan bean chili
+lrisotto-cu-ciuperci-reteta-video|Mushroom risotto
+lracitura-de-pui|Chicken aspic
+lpernute-din-piept-de-pui-chicken-nuggets-reteta-video|Chicken nuggets
+ldrob-de-pui-in-crusta-de-aluat|Chicken liver meatloaf in pastry
+ldrob-de-miel-reteta-video|Lamb offal meatloaf with green onions
+lchiftele-umplute-cu-oua-scotch-eggs|Scotch eggs
+lcascaval-pane-reteta-video|Fried breaded cheese
+lliptauer-pasta-aperitiv-din-branza-condimentata-si-usor-de-f|Liptauer cheese spread
+lcrochete-de-cartofi-umplute-cu-cascaval-reteta-video|Cheese stuffed potato croquettes
+lpasta-de-branza-feta-cu-iaurt-grecesc-si-masline-verzi-retet|Feta yogurt olive dip
+lbranza-cu-rosii-la-cuptor-saganaki-reteta-video|Baked feta with tomatoes
+lardei-kapia-umpluti-cu-branza-feta-la-airfryer-reteta-video|Cheese stuffed red peppers
+lvinete-coapte-cu-sos-de-iaurt-si-usturoi-reteta-lui-ottoleng|Roasted eggplant with garlic yogurt
+ltortilla-de-cartofi-reteta-ieftina-si-satioasa-inspirata-de-|Spanish potato omelette
+llegume-radacinoase-la-air-fryer-reteta-video|Air fried root vegetables
+lcartofi-noi-cu-parmezan-reteta-la-air-fryer-in-doar-25-de-mi|Parmesan baby potatoes
+lcartofi-zdrobiti-la-cuptor-cu-ceapa-verde-si-branza-reteta-v|Smashed potatoes with green onion and cheese
+lmazare-cu-sos-alb-cu-smantana-reteta-de-tuspais-de-mazare-ca|Creamed peas
+lmancare-de-dovlecei-tuspais-ciuspais-cu-smantana-si-marar|Creamed zucchini with dill
+lmancare-de-dovlecei-cu-rosii-si-ardei-reteta-simpla-de-vara-|Zucchini tomato pepper stew
+lcartofi-gratinati-cu-ceapa-reteta-frantuzeasca-pommes-de-ter|Potato onion gratin
+lpasca-cu-smantana-reteta-video|Easter sweet bread with sour cream filling
+lpasca-traditionala-cu-branza-dulce|Easter cheese bread
+lplacinte-coapte-pe-lespede-ca-in-ardeal-reteta-video|Griddle flatbreads
+lpide-turcesti-cu-vita-si-legume-pizza-turceasca|Turkish pide with beef
+llipii-cu-ceapa-verde-la-tigaie-se-desfac-foi-foite-reteta-vi|Scallion pancakes
+lcozonac-impletit|Braided sweet bread
+lsaratele-cu-branza-si-chimen|Cheese caraway sticks
+lcozonac-floare-pufoasa-cu-nuca-si-gem-de-caise|Walnut apricot star bread
+lcornuri-sarate-aperitiv-simple-sau-umplute-cu-sunca-reteta-v|Ham crescent rolls
+lmucenici-moldovenesti-din-aluat-de-cozonac-reteta-video|Honey walnut figure eight buns
+lcovrigi-pufosi-cu-unt-reteta-video|Soft butter pretzels
+lpovitica-cozonac-cu-foarte-multa-nuca-reteta-video-text|Povitica walnut bread
+lcozonac-de-post|Vegan sweet bread
+lburek-cu-branza-cu-foi-subtiri-facute-in-casa-reteta-video-t|Cheese burek
+lhencles-lichiu-cu-prune|Plum yeast cake
+lbascute-cu-branza-dulce-si-caise-reteta-video-text|Sweet cheese apricot pastries
+lhencles-cu-cirese-sau-visine-reteta-video-text|Cherry sour cream cake
+ltarta-fara-coacere-cu-crema-de-lamaie-si-lapte-condensat|No bake lemon tart
+lcrema-de-zahar-ars-reteta-video|Creme caramel
+llapte-de-pasare-reteta-video|Floating islands custard
+lgogosi-simple-si-rapide-cu-ricotta-reteta-video|Ricotta doughnut balls
+lpapanasi-fierti-cu-branza-dulce|Boiled cheese dumplings with breadcrumbs
+lgogosi-simple|Fried yeast doughnuts
+lsmora-coapta-sau-kaiserschmarrn-reteta-din-banat|Kaiserschmarrn
+lbrownie-reteta-autentica|Fudgy chocolate brownies
+lmucenici-muntenesti-de-casa-cu-nuca-si-scortisoara-reteta-vi|Dough figure eights in cinnamon walnut syrup
+lcrema-de-vanilie|Vanilla custard
+lcobbler-cu-capsuni-reteta-video-pentru-un-desert-rapid-si-de|Strawberry cobbler
+linghetata-de-ciocolata-fara-oua-reteta-simpla-cu-doar-3-ingr|Chocolate ice cream
+lmuffins-pufosi-foarte-gustosi|Fluffy muffins
+efriptura-de-miel-in-pergament-cu-legume-si-telemea|Lamb baked in parchment with vegetables and feta
+ecarne-de-porc-in-suc-propriu|Pork braised in its own juices
+elahmacun|Lahmacun
+lceafa-de-porc-marinata-la-gratar-reteta-detaliata-sa-ti-iasa|Grilled marinated pork neck
+lescalop-de-pui-cu-ciuperci-cu-grasimi-si-calorii-putine-rete|Light chicken escalope with mushrooms
+lkleftiko-de-miel-reteta-greceasca-a-celei-mai-fragede-friptu|Lamb kleftiko
+lmacaroane-cu-branza-si-broccoli|Broccoli mac and cheese
+lpui-cu-parmezan-reteta-de-pollo-alla-parmigiana|Chicken parmigiana
+lpui-picant-cu-orez|Spicy chicken and rice
+eardei-umpluti|Pork and rice stuffed peppers
+eardei-umpluti-cu-branza|Cheese stuffed peppers
+earipioare-picante-kfc|Spicy fried chicken wings
+ebulz|Polenta cheese balls
+eburek-de-cartofi-si-dovlecei-cu-branza|Potato zucchini cheese burek
+ecarne-de-porc-cu-usturoi-si-rosii|Pork with garlic tomatoes and potatoes
+ecarne-tocata-cu-naut|Ground meat with chickpeas
+ecartofi-taranesti|Country fried potatoes
+ecartofi-cu-ceapa-si-bacon|Potatoes with onion and bacon
+echiftele-cu-cartofi-noi-si-ardei-la-cuptor|Meatballs baked with new potatoes and peppers
+echiftelute-de-dovlecei-si-feta|Zucchini feta fritters
+echiftelute-lenese-cu-cartofi-copti|Meat patties with baked potatoes
+ecoaste-de-porc-la-cuptor-cu-piure-de-pastarnac|Roast pork ribs with parsnip mash
+ecoltunasi-cu-magiun-de-prune|Plum jam dumplings
+ecoltunasi-de-post|Potato pierogi
+ecotlete-de-porc-la-tava|Baked pork chops
+ecrema-ungureasca-de-branza|Paprika cheese spread
+ecurry-de-linte-cu-spanac|Lentil spinach curry
+ecurry-de-pui-cu-unt|Butter chicken
+edovlecei-pane|Breaded fried zucchini
+eescalop-zingara|Pork escalope zingara
+efasole-verde-cu-muschiulet-de-porc-la-cuptor|Green beans with roast pork tenderloin
+efile-de-peste-cu-linte-verde-si-bacon|Fish fillet with lentils and bacon
+efriptura-de-vita-in-vin-rosu|Beef braised in red wine
+egulas-de-porc-cu-varza|Pork goulash with sauerkraut
+egulas-de-ciuperci|Mushroom goulash
+egulas-austriac|Austrian beef goulash
+ehamburger-sarbesc|Serbian burger
+ejumatati-de-pui-la-cuptor|Roasted chicken halves with peppers
+ekebab-de-pui-la-farfurie-reteta-in-air-fryer|Chicken kebab plate
+elecso-cu-cartofi|Lecso pepper stew with potatoes
+elegume-umplute-cu-carne-si-orez|Stuffed vegetables with meat and rice
+elinte-verde-cu-ciuperci-la-cuptor|Baked lentils with mushrooms
+emacaroane-cu-carne-de-vitel|Macaroni with veal sauce
+emamaliguta-cu-branza|Polenta with cheese and bacon
+emancare-de-linte-verde|Green lentil stew
+emancarica-de-mazare-cu-carne-de-pui|Chicken and pea stew
+emazare-cu-carne-de-porc|Pea and pork stew
+emazare-cu-cartofi-si-morcovi-noi|Peas with new potatoes and carrots
+emenemen|Menemen
+emuschiulet-de-porc-la-gratar-cu-cartofi-noi|Grilled pork tenderloin with new potatoes
+emuschiulet-de-porc-la-tigaie-cu-mazare|Pork medallions with peas
+emuschiulet-marinat-la-gratar-cu-spanac|Grilled pork tenderloin with spinach
+enaut-cu-rosii|Chickpeas in tomato sauce
+eorez-cu-legume-la-wok|Vegetable fried rice
+eorez-cu-somon-la-cuptor|Baked salmon rice
+eorez-cu-mazare-si-somon|Salmon with pea rice
+ecrochete-de-cartofi|Potato cheese croquettes
+eciuperci-cu-branza-la-cuptor|Baked mushrooms with cheese
+eciuperci-gratinate|Creamy mushroom gratin
+emaakouda-frittata-tunisiana|Baked potato frittata
+emalai-dulce|Sweet cornbread with yogurt
+echec-simplu|Pound cake
+echec-cu-ciocolata|Chocolate loaf cake
+echec-cu-banane-si-scortisoara|Banana bread
+eiaurt-cu-mere|Yogurt with baked apples
+emere-umplute-cu-migdale|Baked apples with almonds
+eghiveci-de-legume-cu-branza|Baked vegetables with cheese
+eorez-indian-cu-creveti|Spiced shrimp rice
+eorzo-cu-dovlecei|Orzo with zucchini and feta
+epapricas-de-ciuperci|Mushroom paprikash
+epapricas-de-pui-cu-galuscute-de-faina|Chicken paprikash with dumplings
+epasta-aglio-olio-e-peperoncino|Spaghetti aglio e olio
+epaste-cu-iaurt-si-urzici|Pasta with yogurt and nettles
+epastitsio|Pastitsio
+epastrav-la-tigaie|Pan fried trout with lemon butter
+epastrav-umplut-cu-verdeturi-pe-piure-de-linte|Herb stuffed trout on lentil puree
+epeste-cu-legume-la-cuptor|Baked fish with vegetables
+eplachie-de-peste|Fish baked with onions and tomatoes
+epelmeni|Pelmeni dumplings
+epiept-de-pui-cu-salsa-de-rosii-cherry-coapte|Chicken breast with roasted cherry tomatoes
+epiept-de-pui-marinat-in-iaurt-si-curry|Yogurt curry chicken breast
+epilaf-cu-carne-de-porc|Pork rice pilaf
+epilaf-de-orez-cu-praz|Leek rice pilaf
+epilaf-de-orez-la-cuptor-cu-vinete|Baked eggplant rice
+epiure-cu-legume|Vegetable mash
+epiure-de-cartofi-cu-busuioc|Basil mashed potatoes
+epiure-de-conopida|Cauliflower mash
+epizza|Homemade pizza
+epizza-turceasca|Turkish ground meat bread pizza
+epui-cu-ardei|Chicken with peppers
+epui-cu-dovlecei|Chicken with zucchini in tomato sauce
+epui-cu-rosii-si-vinete|Chicken with tomatoes and eggplant
+epui-cu-tarhon|Tarragon chicken in cream sauce
+epui-cu-vinegreta-de-ceapa-verde-si-cartofi-copti|Chicken with roast potatoes and scallion vinaigrette
+epui-dulce-acrisor|Orange sweet and sour chicken
+epui-la-gratar|Grilled spatchcock chicken
+epui-manastiresc|Creamy mushroom chicken bake
+epui-cajun-la-cuptor|Cajun roast chicken
+epulpe-de-pui-la-cuptor-cu-naut-si-ceapa-marinata|Roast chicken thighs with chickpeas
+epulpe-de-pui-la-cuptor-fragede-si-aromate|Tender roast chicken legs
+epulpe-de-rata-cu-varza-rosie-calita|Duck legs with braised red cabbage
+erisotto-cu-rosii|Tomato risotto
+erosii-umplute-cu-orez|Rice stuffed tomatoes
+erulouri-de-carne-mozaic|Stuffed pork rolls
+esaramura-de-pui|Chicken in pepper garlic brine
+esarmale-sparte|Unstuffed cabbage roll casserole
+esarmale-de-post|Mushroom bulgur cabbage rolls
+eshakshouka-cu-carne-de-miel|Shakshuka with ground meat
+esnitele-de-porc|Pork schnitzel with cream sauce
+esomon-cu-broccoli-la-cuptor|Baked salmon with broccoli
+esomon-in-pergament|Salmon baked in parchment
+esomon-teriyaki|Salmon teriyaki
+espaghete-carbonara|Spaghetti carbonara
+espanac-cu-naut|Spinach with chickpeas
+espanac-si-cartofi-sote|Sauteed spinach and potatoes
+etocanita-de-cartofi-cu-carne-de-porc|Pork and potato stew
+etocanita-de-cartofi-cu-chorizo-si-leustean|Potato chorizo stew
+etocanita-de-peste-cu-legume|Fish and vegetable stew
+etocanita-de-vita-si-vinete|Beef and eggplant stew
+etocanita-din-carne-de-porc|Pork and pepper stew
+etocanita-irlandeza|Irish stew
+etocanita-ungureasca-porkolt|Hungarian porkolt
+epui-chinezesc-cu-ardei-si-ciuperci|Chicken stir fry with peppers and mushrooms
+esupa-de-conopida|Cauliflower vegetable soup
+esupa-de-mazare|Pea soup with croutons
+esupa-de-varza|Cabbage soup with bacon and sour cream
+esupa-de-ceapa|Onion soup
+epapanasi|Papanasi with sour cream
+etartine-cu-ton-si-fasole|Tuna and bean toast
+etartine-cu-rosii-si-branza-feta-dakos|Tomato feta toast
+etelemea-cu-rosii-la-cuptor|Baked feta with tomatoes and peppers
+epate-de-fasole-cu-legume|Bean vegetable spread
+epate-de-linte-rosie|Red lentil spread
+estrudel-cu-mere|Apple strudel
+etarta-cu-branza|Cheese tart
+etarta-rasturnata-cu-mere|Upside down apple tart
+etarta-cu-nuca|Walnut tart
+epavlova|Strawberry pavlova
+esorbet-de-iaurt|Strawberry yogurt sorbet
+eparfait-cu-nuca|Walnut parfait
+epanna-cotta-de-vanilie-cu-capsuni-si-sirop-de|Panna cotta with strawberries
+erosti|Rosti
+espanac-cu-iaurt|Spinach with yogurt
+eporumb-cu-bacon-si-smantana|Creamed corn with bacon
+erosii-cherry-provensale|Tomatoes provencale

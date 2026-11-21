@@ -12,6 +12,25 @@ export interface ReceiptItem {
   grams?: number;
   /** ingredientul propus */
   ingId?: string;
+  /** ce fel de produs e: mâncare (în cămară), altă mâncare/băutură (dulciuri, suc) sau nu e mâncare (detergent, hârtie, vase) */
+  kind: ItemKind;
+}
+
+export type ItemKind = 'aliment' | 'altele' | 'nealimentar';
+
+/*
+ * Pe același bon sunt și lucruri care nu se mănâncă: ele nu intră în cămară și nu se socotesc la mâncare.
+ * Cuvintele sunt cele de pe bonurile din România (prescurtate cum le scriu casele de marcat).
+ */
+const NON_FOOD = /(DETERG|ARIEL|PERSIL|\bDERO\b|BONUX|\bDASH\b|\bTIDE\b|BALSAM.*RUF|LENOR|COCCOLINO|SILAN|CALGON|VANISH|FAIRY|\bPUR\b.*(VASE|BALSAM|GEL)|\bJAR\b.*VASE|PRONTO|DOMESTOS|CIF\b|MR\.? ?PROPER|\bCLOR|INALBITOR|ODORIZ|SPRAY.*(CASA|MOBIL|GEAM|INSECT|PARFUM|CAMERA)|INSECTIC|HARTIE.*(IGIEN|COPT)|H\.? ?IGIEN|PROSOP.*HART|ROLA.*HART|SERVET|BATISTE|SAPUN|SAMPON|SHAMPOO|GEL.*DUS|DEODOR|ANTIPERSP|PASTA.*DINTI|PERIUT|COLGATE|BLEND-?A|SENSODYNE|SCUTEC|PAMPERS|HUGGIES|ABSORB|TAMPOAN|ALWAYS|DISCHETE|BETISOARE|LAME|GILLETTE|SPUMA.*RAS|CREMA.*(MAINI|FATA|CORP)|BURETE|LAVET|MOP|\bMATURA\b|SACI?\b.*(MENAJ|GUNOI)|SAC.*GUNOI|PUNGA|SACOSA|FOLIE.*(ALIM|ALUMIN)|CASOLET|PAHAR.*PLAST|FARFURI.*(UNIC|CARTON|PLAST)|TACAMURI|BATERI|ACUMULATOR|\bBEC\b|LUMANAR|CHIBRIT|BRICHET|TIGARI|TIGARETE|\bIQOS|HEETS|TERREA|NISIP.*PISIC|ASTERNUT|HRANA.*(PISIC|CAINI|CAINE)|WHISKAS|PEDIGREE|FRISKIES|PURINA|FELIX|SHEBA|ROYAL CANIN|OALA|TIGAIE|CRATITA|CUTIT|SPATULA|POLONIC|RAZATOARE|CASEROL|RECIPIENT|CUTIE.*DEPOZ|GARANTIE|SGR|AMBALAJ)/;
+/** băuturi: sunt mâncare, dar nu ingrediente („SUC PORTOCALE” nu e portocale) */
+const DRINK = /(\bSUC\b|NECTAR|\bAPA\b|AQUA|BORSEC|DORNA|COLA\b|PEPSI|FANTA|SPRITE|SCHWEPPES|ENERGIZ|RED ?BULL|\bBERE\b|\bVIN\b|CAFEA|ESPRESSO|NESCAFE|\bCEAI\b|LIMONAD|SMOOTHIE)/;
+
+export function itemKind(name: string, ingId?: string): ItemKind {
+  const n = norm(name);
+  if (NON_FOOD.test(n)) return 'nealimentar';
+  // ce nu e ingredient de gătit dar nici detergent (dulciuri, suc, cafea, salam): tot mâncare, doar că nu intră în cămară
+  return ingId ? 'aliment' : 'altele';
 }
 
 const PRICE_END = /(-?\d{1,4}[.,]\d{2})\s*[A-Z]?\s*$/;
@@ -72,13 +91,15 @@ function gramsFromName(n: string): number | undefined {
 export function parseReceipt(rows: string[]): ReceiptItem[] {
   const items: ReceiptItem[] = [];
   let pending: { qty: number; unit?: 'buc' | 'kg'; unitPrice: number } | null = null;
-  const finish = (it: ReceiptItem) => {
-    it.ingId = matchIngredient(it.name);
+  const finish = (it: Omit<ReceiptItem, 'kind'> & { kind?: ItemKind }) => {
+    const nonFood = NON_FOOD.test(norm(it.name));
+    it.ingId = nonFood || (DRINK.test(norm(it.name)) && !/OTET/.test(norm(it.name))) ? undefined : matchIngredient(it.name);
+    it.kind = itemKind(it.name, it.ingId);
     const inName = gramsFromName(it.name);
     if (it.unit === 'kg' && it.qty) it.grams = Math.round(it.qty * 1000);
     else if (inName) it.grams = Math.round(inName * (it.qty ?? 1));
     else if (it.ingId) it.grams = Math.round(ING[it.ingId].pkg * (it.qty ?? 1));
-    items.push(it);
+    items.push(it as ReceiptItem);
   };
   const cleanName = (x: string) => x.replace(/[^A-Z0-9%.,\s-]/g, ' ').replace(/\b\d{5,}\b/g, '').replace(/\s{2,}/g, ' ').trim();
 
@@ -118,7 +139,7 @@ export function parseReceipt(rows: string[]): ReceiptItem[] {
       continue;
     }
     if (!/[A-Z]{3,}/.test(name)) continue;
-    const it: ReceiptItem = { raw, name, total };
+    const it: Omit<ReceiptItem, 'kind'> = { raw, name, total };
     if (pending && Math.abs(pending.qty * pending.unitPrice - total) < 0.06 + total * 0.02) Object.assign(it, pending);
     pending = null;
     finish(it);
@@ -130,6 +151,15 @@ export function parseReceipt(rows: string[]): ReceiptItem[] {
 export function pricePerPackage(item: ReceiptItem): number | undefined {
   if (!item.ingId || !item.grams || item.total <= 0) return undefined;
   return Math.round(((item.total / item.grams) * ING[item.ingId].pkg) * 10) / 10;
+}
+
+/** cât din bon e mâncare și cât nu (detergent, hârtie, vase…); diferența până la total se socotește mâncare */
+export function splitReceipt(items: Pick<ReceiptItem, 'kind' | 'total'>[], paid?: number): { food: number; other: number; nonFood: number; total: number } {
+  const sum = (k: ItemKind) => Math.round(items.filter((i) => i.kind === k).reduce((a, i) => a + i.total, 0) * 100) / 100;
+  const nonFood = sum('nealimentar');
+  const total = paid && paid > 0 ? paid : Math.round(items.reduce((a, i) => a + i.total, 0) * 100) / 100;
+  const other = sum('altele');
+  return { food: Math.max(0, Math.round((total - nonFood) * 100) / 100), other, nonFood, total };
 }
 
 /** totalul de plată de pe bon (rândul TOTAL), dacă se poate citi */

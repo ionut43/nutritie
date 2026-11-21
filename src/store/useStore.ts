@@ -11,6 +11,7 @@ import {
   generatePlan, replaceSessionRecipe, replaceSingleMeal, SLOT_ORDER, setLabelSlots, withShopping, type PlanInput,
   trimPlanSlots,
   mealMacros, mealParts, sessionMeals, sidesLabel,
+  refitPlan,
 } from '../logic/planner';
 import type {
   Cuisine,
@@ -88,7 +89,7 @@ interface State {
   priceProducts: Record<string, number[]>;
   /** ultima săptămână pentru care ai văzut rezumatul */
   lastRecapISO?: string;
-  applyReceipt: (items: { ingId: string; g: number; price?: number; name?: string }[], store?: StoreId, total?: number) => void;
+  applyReceipt: (items: { ingId: string; g: number; price?: number; name?: string }[], store?: StoreId, total?: number, nonFood?: number) => void;
   setPlanStore: (planId: string, store: StoreId) => void;
   /** un ingredient de bază pe care nu-l ai: îl pun pe listă (sau îl scot) */
   toggleBasic: (planId: string, ingId: string) => void;
@@ -147,6 +148,10 @@ interface State {
   setPrice: (ingId: string, price?: number) => void;
   toggleLike: (recipeId: string) => void;
   toggleDislike: (recipeId: string) => void;
+  /** după o schimbare de preferințe: înlocuiește de azi înainte mesele care nu se mai potrivesc; întoarce câte s-au schimbat */
+  refitPlans: () => number;
+  /** ultima înlocuire automată (pentru mesajul din Azi / Săptămâna) */
+  lastRefit?: { atISO: string; count: number };
 
   addFood: (e: Omit<FoodLogEntry, 'id'>) => void;
   removeFood: (id: string) => void;
@@ -263,7 +268,7 @@ export const useStore = create<State>()(
           return { mealRatings: { ...s.mealRatings, [k]: v }, ratings: { ...s.ratings, [recipeId]: r } };
         }),
         setNotifyExpiry: (v) => set({ notifyExpiry: v }),
-        applyReceipt: (items, store, total) => set((s) => {
+        applyReceipt: (items, store, total, nonFood) => set((s) => {
           let pantry = s.pantry;
           const prices = { ...s.prices };
           const storePrices: StorePrices = { ...s.storePrices };
@@ -279,7 +284,7 @@ export const useStore = create<State>()(
           }
           if (store && sp) storePrices[store] = sp;
           const spend = total && total > 0 && store
-            ? [...s.spend, { id: uid('c'), dateISO: todayISO(), store, amount: Math.round(total * 100) / 100, source: 'bon' as const }]
+            ? [...s.spend, { id: uid('c'), dateISO: todayISO(), store, amount: Math.round(total * 100) / 100, source: 'bon' as const, nonFood: nonFood && nonFood > 0 ? Math.round(nonFood * 100) / 100 : undefined }]
             : s.spend;
           return { pantry, prices, storePrices, receiptAliases, spend, plans: refreshPlans(s.plans, pantry, prices, storePrices) };
         }),
@@ -332,23 +337,45 @@ export const useStore = create<State>()(
             weightLog: members.map((m) => ({ dateISO: todayISO(), kg: m.weightKg, memberId: m.id })),
           });
         },
-        upsertMember: (m) => set((s) => {
-          const exists = s.members.some((x) => x.id === m.id);
-          const weightLog = exists ? s.weightLog : [...s.weightLog, { dateISO: todayISO(), kg: m.weightKg, memberId: m.id }];
-          return { weightLog, members: exists ? s.members.map((x) => (x.id === m.id ? m : x)) : [...s.members, m] };
-        }),
+        upsertMember: (m) => {
+          set((s) => {
+            const exists = s.members.some((x) => x.id === m.id);
+            const weightLog = exists ? s.weightLog : [...s.weightLog, { dateISO: todayISO(), kg: m.weightKg, memberId: m.id }];
+            return { weightLog, members: exists ? s.members.map((x) => (x.id === m.id ? m : x)) : [...s.members, m] };
+          });
+          get().refitPlans();
+        },
         removeMember: (id) => set((s) => ({
           members: s.members.filter((m) => m.id !== id || m.isMain),
           activeMemberId: s.activeMemberId === id ? s.members.find((m) => m.isMain)?.id : s.activeMemberId,
         })),
-        updateSettings: (p) => set((s) => ({ settings: { ...s.settings, ...p } })),
-        setFeature: (f, on) => set((s) => {
+        updateSettings: (p) => {
+          set((s) => ({ settings: { ...s.settings, ...p } }));
+          if ('equipment' in p || 'fasting' in p || 'fishOnDispensation' in p) get().refitPlans();
+        },
+        refitPlans: () => {
+          const today = todayISO();
+          let total = 0;
+          for (const p of Object.values(get().plans)) {
+            if (toISO(addDays(fromISO(p.startISO), 6)) < today) continue;
+            const fromDay = Math.max(0, Math.round((fromISO(today).getTime() - fromISO(p.startISO).getTime()) / 86400000));
+            const s = get();
+            const { plan, changed } = refitPlan(p, s.planInput(p.startISO, p.household, p.seed, p.store), fromDay);
+            if (changed || plan !== p) { total += changed; set((st) => ({ plans: { ...st.plans, [p.id]: plan } })); }
+          }
+          if (total) set({ lastRefit: { atISO: new Date().toISOString(), count: total } });
+          return total;
+        },
+        setFeature: (f, on) => {
+          set((s) => {
           const settings: Settings = { ...s.settings, features: { ...s.settings.features, [f]: on } };
           if (f === 'post' && !on) settings.fasting = 'niciunul';
           if (f === 'post' && on && settings.fasting === 'niciunul') settings.fasting = 'miercuri_vineri';
           if (f === 'deserturi') settings.dessertsPerWeek = on ? Math.max(2, s.settings.dessertsPerWeek ?? 0) : 0;
           return { settings };
-        }),
+          });
+          if (f === 'post') get().refitPlans();
+        },
         setMealSlots: (slots) => {
           set((s) => ({ settings: { ...s.settings, slots, slotsAsked: true } }));
           const today = todayISO();
@@ -563,7 +590,10 @@ export const useStore = create<State>()(
           return { prices, plans: refreshPlans(s.plans, s.pantry, prices) };
         }),
         toggleLike: (rid) => set((s) => ({ liked: toggle(s.liked, rid), disliked: s.disliked.filter((x) => x !== rid) })),
-        toggleDislike: (rid) => set((s) => ({ disliked: toggle(s.disliked, rid), liked: s.liked.filter((x) => x !== rid) })),
+        toggleDislike: (rid) => {
+          set((s) => ({ disliked: toggle(s.disliked, rid), liked: s.liked.filter((x) => x !== rid) }));
+          if (get().disliked.includes(rid)) get().refitPlans();
+        },
 
         addFood: (e) => set((s) => ({ foodLog: [...s.foodLog, { ...e, id: uid('f') }] })),
         removeFood: (id) => set((s) => {

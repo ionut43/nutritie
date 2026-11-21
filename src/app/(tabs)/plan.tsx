@@ -13,6 +13,7 @@ import { planForDate, useActiveMember, useStore } from '../../store/useStore';
 import { ToggleRow } from '../../ui/forms';
 import { Btn, Chip, DISPLAY, FoodImage, Icon, NumberField, Progress, Row, Segmented, T, useTheme } from '../../ui/kit';
 import { MealSheet } from '../../ui/MealSheet';
+import { RefitBanner } from '../../ui/RefitBanner';
 
 /** Săptămâna: zilele una sub alta, cu pozele meselor. Fără tabele, fără cifre în plus. */
 export default function WeekScreen() {
@@ -38,6 +39,7 @@ export default function WeekScreen() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: t.bg }} edges={['top']}>
       <ScrollView contentContainerStyle={{ paddingHorizontal: 20, paddingTop: 8, paddingBottom: 40, gap: 20 }} showsVerticalScrollIndicator={false}>
+        <RefitBanner />
         <Row style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <View style={{ flex: 1 }}>
             <T v="h1">Săptămâna</T>

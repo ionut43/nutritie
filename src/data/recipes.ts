@@ -5,7 +5,10 @@ import { IMPORTATE } from './retete/importate';
 import { LEGUME } from './retete/legume';
 import { PESTE_PASTE } from './retete/peste_paste';
 import { PUI } from './retete/pui';
+import { ROMANESTI } from './retete/romanesti';
+import { CUISINE_DEFAULT, LESS_COMMON_INGREDIENTS, NOT_FAMILIAR, PLAIN_NAME, SIDE_DISH, SPRING_ONLY } from './curation';
 import { SIMPLE } from './retete/simple';
+import { EXTRA_CREDIT } from './photos_extra_credit';
 
 /*
  * Rețetele incluse. Cele cu poză sunt scrise după felul din imagine (poze TheMealDB),
@@ -21,7 +24,28 @@ export const SIDES: Recipe[] = [
     ing: [['varza', 150], ['morcov', 60], ['ulei', 8], ['otet', 5]], steps: ['Taie varza fideluță și freacă-o cu puțină sare.', 'Adaugă morcovul ras, uleiul și oțetul.'], tags: ['garnitura'], familiar: 1 },
 ];
 
-const BUILT_IN: Recipe[] = [...CARNE, ...PUI, ...PESTE_PASTE, ...LEGUME, ...DIMINEATA_DESERT, ...SIMPLE, ...IMPORTATE, ...SIDES];
+const RAW: Recipe[] = [...CARNE, ...PUI, ...PESTE_PASTE, ...LEGUME, ...DIMINEATA_DESERT, ...SIMPLE, ...IMPORTATE, ...ROMANESTI, ...SIDES];
+// numele pe înțeles și cât de cunoscut e felul (vezi curation.ts)
+const BUILT_IN: Recipe[] = RAW.map((r) => {
+  let familiar = r.familiar;
+  let rare = false;
+  const now = r.familiar ?? CUISINE_DEFAULT[r.cuisine ?? 'eu'] ?? 0.7;
+  if (NOT_FAMILIAR.has(r.id)) familiar = Math.min(now, 0.4);
+  else {
+    const main = r.ing.filter(([id]) => LESS_COMMON_INGREDIENTS.has(id)).reduce((a, [, g]) => a + g, 0);
+    const total = r.ing.reduce((a, [, g]) => a + g, 0) || 1;
+    if (main / total > 0.12) { rare = true; if (r.meal.includes('principal')) familiar = Math.min(now, 0.6); }
+  }
+  const name = PLAIN_NAME[r.id] ?? r.name;
+  const side = r.meal.length === 1 && r.meal[0] === 'gustare' && SIDE_DISH.test(name) && !r.tags?.includes('side');
+  const spring = SPRING_ONLY.test(name) && !r.tags?.includes('primavara');
+  // „mai_rar”: linte, năut, bulgur, quinoa… (cine mănâncă de toate le vede rar)
+  const tags = side || spring || rare ? [...(r.tags ?? []), ...(side ? ['side'] : []), ...(spring ? ['primavara'] : []), ...(rare ? ['mai_rar'] : [])] : r.tags;
+  // poză Openverse găsită mai târziu pentru o rețetă clasică (cu autorul și licența)
+  const photo = !r.img && EXTRA_CREDIT[r.id];
+  if (photo) return { ...r, name, familiar, tags, img: photo.img, credit: photo.credit };
+  return familiar === r.familiar && name === r.name && tags === r.tags ? r : { ...r, name, familiar, tags };
+});
 
 /** registrul complet: rețetele incluse + cele adăugate de utilizator */
 export const RECIPES: Recipe[] = [...BUILT_IN];

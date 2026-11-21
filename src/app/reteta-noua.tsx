@@ -8,7 +8,8 @@ import { RECIPE } from '../data/recipes';
 import { fmtQty } from '../logic/format';
 import { addMacros, recipeAllergens, recipeDiet, ZERO, ALLERGEN_LABEL, DIET_LABEL } from '../logic/nutrition';
 import { uid } from '../logic/pantry';
-import type { Equipment, Recipe, RecipeMeal } from '../logic/types';
+import { mealsFromMoments, MOMENT_LABEL, momentsOf, type Moment } from '../logic/recipeShare';
+import type { Equipment, Recipe } from '../logic/types';
 import { useStore } from '../store/useStore';
 import { EquipmentForm, IngredientPicker, ToggleRow } from '../ui/forms';
 import { Btn, Card, Chip, Divider, Field, Icon, MacroBar, NumberField, Notice, Row, Screen, Section, T, useTheme } from '../ui/kit';
@@ -19,11 +20,12 @@ export default function RecipeEditor() {
   const t = useTheme();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id?: string }>();
-  const { saveRecipe, deleteRecipe } = useStore();
+  const { saveRecipe, deleteRecipe, members } = useStore();
   const existing = id ? RECIPE[id] : undefined;
   const [name, setName] = useState(existing?.name ?? '');
   const [photo, setPhoto] = useState<string | undefined>(existing?.photo);
-  const [meal, setMeal] = useState<RecipeMeal[]>(existing?.meal ?? ['principal']);
+  const [moments, setMoments] = useState<Moment[]>(existing ? momentsOf(existing) : ['pranz', 'cina']);
+  const [author, setAuthor] = useState(existing?.author ?? members.find((m) => m.isMain)?.name ?? '');
   const [servings, setServings] = useState(existing?.servings ?? 4);
   const [prep, setPrep] = useState(existing?.prep ?? 30);
   const [keepsDays, setKeeps] = useState(existing?.keepsDays ?? 2);
@@ -34,10 +36,11 @@ export default function RecipeEditor() {
   const [picker, setPicker] = useState(false);
   const [rid] = useState(existing?.id ?? `u_${uid('r')}`);
 
+  const { meal, dessert } = mealsFromMoments(moments);
   const draft: Recipe = {
-    id: rid, name: name.trim(), photo, meal, servings, prep, keepsDays, freezable,
+    id: rid, name: name.trim(), photo, meal, moments, author: author.trim() || undefined, servings, prep, keepsDays, freezable,
     equipment: equipment.map((e) => [e]), ing, steps: steps.split('\n').map((x) => x.trim()).filter(Boolean), custom: true,
-    tags: ['rețeta mea'],
+    tags: ['rețeta mea', ...(dessert ? ['desert'] : []), ...(existing?.tags?.includes('primită') ? ['primită'] : [])],
   };
   const per = useMemo(() => {
     let m = { ...ZERO };
@@ -68,12 +71,13 @@ export default function RecipeEditor() {
     router.replace({ pathname: '/reteta/[id]', params: { id: draft.id } });
   };
 
-  const toggleMeal = (m: RecipeMeal) => setMeal((x) => (x.includes(m) ? (x.length > 1 ? x.filter((y) => y !== m) : x) : [...x, m]));
+  const toggleMoment = (m: Moment) => setMoments((x) => (x.includes(m) ? (x.length > 1 ? x.filter((y) => y !== m) : x) : [...x, m]));
 
   return (
     <Screen edges={['bottom']}>
       <Stack.Screen options={{ title: existing ? 'Editează rețeta' : 'Rețetă nouă', headerRight: () => <Btn title="Salvează" small variant="ghost" onPress={save} /> }} />
       <Notice tone="primary" icon="calculator" text="Scrii doar ingredientele în grame. Caloriile, proteinele, fibrele, sarea, alergenii, dieta și compatibilitatea cu postul se calculează automat." />
+      {!existing && <Btn title="Am primit o rețetă (lipesc linkul)" icon="link" small variant="ghost" onPress={() => router.push('/import')} />}
       <Field label="Nume" value={name} onChangeText={setName} placeholder="ex. Tocănița bunicii" />
 
       <Section title="Imagine">
@@ -90,11 +94,13 @@ export default function RecipeEditor() {
         {!photo && <T v="small">Fă o poză când o gătești: așa o recunoști ușor în plan și în jurnal.</T>}
       </Section>
 
-      <Section title="Pentru ce masă">
+      <Field label="Făcută de" value={author} onChangeText={setAuthor} placeholder="numele tău (apare când o trimiți cuiva)" />
+
+      <Section title="Când se mănâncă">
         <Row wrap>
-          <Chip label="Mic dejun" selected={meal.includes('mic_dejun')} onPress={() => toggleMeal('mic_dejun')} />
-          <Chip label="Prânz / cină" selected={meal.includes('principal')} onPress={() => toggleMeal('principal')} />
-          <Chip label="Gustare" selected={meal.includes('gustare')} onPress={() => toggleMeal('gustare')} />
+          {(Object.keys(MOMENT_LABEL) as Moment[]).map((m) => (
+            <Chip key={m} label={MOMENT_LABEL[m]} selected={moments.includes(m)} onPress={() => toggleMoment(m)} />
+          ))}
         </Row>
       </Section>
 

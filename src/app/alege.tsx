@@ -71,6 +71,11 @@ export default function Choose() {
     tap();
     if (like) {
       const w = [...wanted, r.id];
+      // ai apăsat înainte să apuc să verific prețul: verific acum, ca să nu treacă planul peste buget
+      if (withCur === null && estimate(w) > budget + BUDGET_SLACK * 0.3) {
+        setNoFit((n) => n + 1); setIdx((i) => i + 1); pos.setValue({ x: 0, y: 0 });
+        return;
+      }
       setWanted(w);
       if (w.length >= need) { success(); setDone(true); }
     } else setSkipped((x) => [...x, r.id]);
@@ -251,8 +256,10 @@ function Summary({ wanted, need, cost, budget, noFit, onMore, canMore, onFinish 
             : missing === 0
               ? 'Pun felurile astea în zilele potrivite, adaug micul dejun și gustările și fac lista pentru magazinul tău.'
               : `Pun felurile alese în plan și mai adaug ${missing === 1 ? 'unul' : missing} după gusturile tale.`}
-          {' '}Toată săptămâna, cu mic dejun și gustări, iese cam {fmtRon(cost)} din {fmtRon(budget)}.
-          {noFit > 0 ? ' Ți-am arătat doar mâncăruri care încap în buget.' : ''}
+          {cost > budget + BUDGET_SLACK
+            ? ` Cu ele, săptămâna iese cam ${fmtRon(cost)}, peste bugetul de ${fmtRon(budget)}. Restul planului îl aleg mai ieftin; dacă tot nu încape, îți spun.`
+            : ` Toată săptămâna, cu mic dejun și gustări, iese cam ${fmtRon(cost)} din ${fmtRon(budget)}.`}
+          {noFit > 0 && cost <= budget + BUDGET_SLACK ? ' Ți-am arătat doar mâncăruri care încap în buget.' : ''}
         </T>
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>
           {wanted.map((id) => RECIPE[id] && (

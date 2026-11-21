@@ -1,5 +1,7 @@
 // Generat de scripts/build_photos.py. Nu edita de mână.
+import { EXTRA_PHOTO } from './photos_extra';
 import { IMPORT_PHOTO } from './photos_import';
+import { RO_PHOTO } from './photos_ro';
 export const RECIPE_PHOTO: Record<string, number> = {
   "stroganoff_vita": require('../../assets/food/r/stroganoff_vita.jpg'),
   "tocana_vita_vin": require('../../assets/food/r/tocana_vita_vin.jpg'),
@@ -285,6 +287,8 @@ export const RECIPE_PHOTO: Record<string, number> = {
   "biscuiti_ovaz": require('../../assets/food/r/biscuiti_ovaz.jpg'),
   "batoane_curmale": require('../../assets/food/r/batoane_curmale.jpg'),
   ...IMPORT_PHOTO,
+  ...RO_PHOTO,
+  ...EXTRA_PHOTO,
 };
 
 /** fără decupaje de ingrediente: în liste folosim doar text și pictograme de raion */

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Alert, Modal, Pressable, View } from 'react-native';
 import { addDays, fmtDate, fromISO, todayISO, toISO, weekdayMon } from '../logic/dates';
 import { fmtRon } from '../logic/format';
+import { foodSpent } from '../logic/types';
 import { STORES, type StoreId } from '../logic/stores';
 import { useStore } from '../store/useStore';
 import { Btn, Card, Chip, DISPLAY, Divider, Icon, IconBtn, NumberField, Row, Screen, Section, T, useTheme } from '../ui/kit';
@@ -18,13 +19,13 @@ export default function Spending() {
     const s = toISO(addDays(monday, -7 * i));
     const e = toISO(addDays(monday, -7 * i + 6));
     const items = spend.filter((x) => x.dateISO >= s && x.dateISO <= e).sort((a, b) => b.dateISO.localeCompare(a.dateISO));
-    return { s, e, items, sum: items.reduce((a, x) => a + x.amount, 0) };
+    return { s, e, items, sum: items.reduce((a, x) => a + foodSpent(x), 0) };
   });
   const withData = weeks.filter((w) => w.items.length);
   const avg = withData.length ? withData.reduce((a, w) => a + w.sum, 0) / withData.length : 0;
   const maxW = Math.max(settings.budgetRon, ...weeks.map((w) => w.sum)) || 1;
   const byStore: Partial<Record<StoreId, number>> = {};
-  for (const w of weeks.slice(0, 4)) for (const x of w.items) byStore[x.store] = (byStore[x.store] ?? 0) + x.amount;
+  for (const w of weeks.slice(0, 4)) for (const x of w.items) byStore[x.store] = (byStore[x.store] ?? 0) + foodSpent(x);
 
   return (
     <Screen edges={['bottom']}>
@@ -72,8 +73,9 @@ export default function Spending() {
                   <StoreBadge id={x.store} small />
                   <View style={{ flex: 1 }}>
                     <T v="small">{fmtDate(fromISO(x.dateISO))} · {x.source === 'bon' ? 'bon scanat' : x.source === 'lista' ? 'din listă' : 'scris de mână'}</T>
+                    {!!x.nonFood && <T v="small">Bon de {fmtRon(x.amount)}, din care {fmtRon(x.nonFood)} nu e mâncare (detergent, hârtie…)</T>}
                   </View>
-                  <T style={{ fontFamily: DISPLAY }}>{fmtRon(x.amount)}</T>
+                  <T style={{ fontFamily: DISPLAY }}>{fmtRon(foodSpent(x))}</T>
                   <Pressable hitSlop={8} onPress={() => Alert.alert('Ștergi cheltuiala?', '', [{ text: 'Nu', style: 'cancel' }, { text: 'Șterge', style: 'destructive', onPress: () => removeSpend(x.id) }])}>
                     <Icon name="close" size={18} color={t.muted} />
                   </Pressable>

@@ -8,7 +8,7 @@ import { addDays, daysBetween, fmtDate, fromISO, todayISO, toISO, weekdayMon } f
 import { adaptiveSuggestion, computeTargets, weeksToTarget, weightTrend } from '../logic/energy';
 import { fmtRon, nf } from '../logic/format';
 import { buildTaste, topIngredients } from '../logic/taste';
-import type { WeightEntry } from '../logic/types';
+import { foodSpent, type WeightEntry } from '../logic/types';
 import { FEATURES, featureOn } from '../logic/features';
 import { ownedBy, useActiveMember, useStore } from '../store/useStore';
 import { autoBackups, exportBackup, pickBackup, readBackup } from '../ui/backup';
@@ -48,7 +48,7 @@ export default function Profile() {
   const weeks = Array.from({ length: 6 }, (_, i) => {
     const s = toISO(addDays(monday, -7 * (5 - i)));
     const e = toISO(addDays(monday, -7 * (5 - i) + 6));
-    return { s, sum: spend.filter((x) => x.dateISO >= s && x.dateISO <= e).reduce((a, x) => a + x.amount, 0) };
+    return { s, sum: spend.filter((x) => x.dateISO >= s && x.dateISO <= e).reduce((a, x) => a + foodSpent(x), 0) };
   });
   const maxW = Math.max(settings.budgetRon, ...weeks.map((x) => x.sum)) || 1;
 

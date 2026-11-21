@@ -1,0 +1,32 @@
+# poze găsite automat pe Openverse, dar care nu arată felul (verificate de mine, cu ochii)
+echili-con-carne-reteta-simpla  # fasole crudă
+eciorba-de-miel-cu-leustean  # supă asiatică cu tăiței
+esupa-crema-de-ardei-copti-cu-ricotta  # ardei cruzi
+esupa-crema-de-dovlecei-cu-crema-de-ricotta-si-tarhon  # pâine prăjită
+esupa-picanta-de-vita  # cârnați, nu supă
+lciorba-de-burta  # cutie de conservă
+lciorba-de-fasole-boabe-de-post  # găluște asiatice
+lciorba-de-perisoare-de-pui-si-dovlecei  # mai multe boluri, nu se vede felul
+lciorba-de-pleurotus-reteta-de-post-de-ciorba-falsa-de-burta  # fel asiatic
+lciorba-de-salata-cu-afumatura-reteta-ardeleneasca  # pui fiert pe farfurie
+lgazpacho-reteta-de-supa-rece-ideala-in-vremuri-fierbinti  # roșii crude
+lsupa-crema-de-cartofi-cu-praz-supa-vichyssoise  # cartofi cruzi în oală
+lsupa-crema-de-cartofi-si-sfecla-rosie  # legume crude
+lsupa-crema-de-dovleac-cu-mustar-dijon  # alt fel de mâncare
+lsupa-crema-de-vinete-cu-rosii-coapte  # sandviș
+ecarne-tocata-cu-naut  # taco
+eciorba-de-cartofi-cu-zeama-de-varza  # supă cu cheddar
+eciorba-de-fasole-cu-tarhon  # găluște asiatice
+eciorba-de-peste  # supă asiatică cu tăiței
+eciorba-de-peste-a-la-grec  # supă asiatică cu tăiței
+eghiveci-de-legume-cu-linte-si-oua-ochiuri  # linte cu carne, fără ouă
+elinte-verde-cu-ciuperci-la-cuptor  # plăcintă
+para_nuci # nuci de cocos
+ovaz_cacao # biscuit
+wrap_omleta # nu e wrap
+mar_migdale # croissante
+ciocolata_capsuni # tort
+branza_vaci_mar # ciuperci
+iaurt_banana_arahide # ambalaj cu marcă
+iaurt_nuci_miere # ambalaj cu marcă
+mamaliga_branza # cu cârnați

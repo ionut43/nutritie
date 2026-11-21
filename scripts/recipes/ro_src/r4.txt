@@ -1,0 +1,70 @@
+eciorba-de-perisoare-a-la-grec|P|Ciorbă de perișoare a la grec|Amestecă carnea tocată cu orezul, mărarul și ceapa rasă și formează perișoare.|Fierbe morcovul și ceapa 10 minute, apoi pune perișoarele și fierbe 25 de minute.|Bate ouăle cu zeamă de lămâie și leagă ciorba, fără să mai fiarbă.
+esupa-crema-de-conopida-cu-chorizo|P|Supă cremă de conopidă cu chorizo|Călește ceapa la foc mic 15 minute.|Adaugă conopida, usturoiul și apă și fierbe 20 de minute, apoi pasează.|Rumenește chorizo tăiat mărunt și pune-l deasupra cu crutoane.
+esupa-crema-de-dovleac-copt-cu-fenicul|P|Supă cremă de dovleac copt|Coace dovleacul și feniculul feliate 40 de minute.|Călește ceapa, adaugă legumele coapte, cartoful, vinul și apă și fierbe 15 minute.|Pasează și adaugă smântâna.
+esupa-crema-de-dovleac-cu-bulgur|P|Supă cremă de dovleac cu bulgur|Călește ceapa cu coriandru și chimion.|Adaugă dovleacul și apă și fierbe 15 minute, apoi pasează.|Pune bulgurul și fierbe încă 10 minute.
+esupa-crema-de-dovleac-cu-parmezan|P|Supă cremă de dovleac cu parmezan|Înăbușă dovleacul cuburi în unt 10 minute.|Adaugă apă și fierbe 15 minute.|Pasează și amestecă parmezanul.
+esupa-crema-de-dovleac-si-rosii|P|Supă cremă de dovleac și roșii|Călește ceapa și usturoiul în unt și ulei.|Adaugă dovleacul, roșiile, vinul și apă și fierbe 25 de minute.|Pasează și aromează cu nucșoară.
+esupa-crema-de-linte-cu-chimen|P|Supă cremă de linte cu chimion|Călește ceapa și morcovul, apoi usturoiul și pasta de ardei.|Adaugă lintea, condimentele și apă și fierbe 20 de minute.|Pasează și stropește cu lămâie.
+esupa-crema-de-sfecla-coapta-cu-mere|P|Supă cremă de sfeclă coaptă cu mere|Coace sfecla în folie o oră.|Călește ceapa, adaugă cartoful, morcovul, mărul și apă și fierbe 20 de minute.|Pune sfecla curățată și pasează totul.
+esupa-crema-de-telina-cu-nuca|P|Supă cremă de țelină cu nucă|Călește țelina, cartoful și ceapa 15 minute.|Adaugă para și apă și fierbe 20 de minute.|Pasează și servește cu nucă prăjită și pătrunjel.
+esupa-de-coada-de-vita|P|Supă de coadă de vită|Rumenește coada de vită la cuptor 45 de minute.|Fierbe-o cu legumele la foc mic 3 ore.|Strecoară, desfă carnea și pune-o înapoi cu morcovul.
+esupa-de-dovlecei|P|Supă de dovlecei cu parmezan|Călește ceapa și usturoiul în ulei.|Adaugă dovleceii feliați și apă și fierbe 10 minute.|Presară parmezan, busuioc și ceapă verde.
+esupa-de-legume-cu-iaurt|P|Supă de legume cu iaurt|Fierbe legumele tăiate mărunt 20 de minute.|Bate iaurtul cu puțină supă caldă.|Amestecă-l în supă, fără să mai fiarbă.
+-esupa-de-linte-rosie
+esupa-de-linte-verde|P|Supă de linte verde|Călește ceapa, apoi morcovul feliat.|Adaugă lintea, cartofii, usturoiul și condimentele și apă și fierbe 30 de minute.|Presară oregano.
+esupa-de-mazare-cu-galuste|P|Supă de mazăre cu găluște de griș|Călește ceapa și morcovul, adaugă mazărea și apă și fierbe 15 minute.|Bate oul cu grișul și puțin ulei și lasă 10 minute.|Fă găluște cu lingurița și fierbe-le în supă 10 minute.
+esupa-de-naut-cu-spanac|P|Supă de năut cu spanac|Înmoaie năutul peste noapte și fierbe-l o oră.|Adaugă morcovul, ceapa, usturoiul și rozmarinul și fierbe 15 minute.|Pune spanacul și măslinele și mai fierbe 2 minute.
+esupa-de-pui-cu-mazare-si-galuscute|P|Supă de pui cu mazăre și gălușcuțe|Pune supa de pui la fiert cu parmezanul și șunca.|Adaugă mazărea și fierbe 5 minute.|Fă gălușcuțe din ou și făină și fierbe-le în supă.|Stropește cu lămâie și presară pătrunjel.
+esupa-de-rosii-si-ardei-copti|P|Supă de roșii și ardei copți|Opărește și curăță roșiile, coace și curăță ardeii.|Pasează-le și fierbe-le cu ceapa călită 15 minute.|Pune bulgurul și fierbe încă 10 minute.|Presară mentă.
+esupa-de-varza-cu-carne-tocata|P|Supă de varză cu carne tocată|Călește ceapa și morcovul, apoi carnea tocată.|Adaugă varza fideluță, cartofii și apă și fierbe 25 de minute.|Aromează cu usturoi și ardei iute.
+-esupa-japoneza-cu-taietei-udon-si-carne-de-vita
+esupa-rece-de-rosii|P|Supă rece de roșii|Opărește și curăță roșiile.|Mixează-le cu pâinea, usturoiul și oțetul.|Ține la rece și servește cu măsline.
+-esupa-rece-de-rosii-cu-galuscute-de-urda
+esupa-rustica-de-rosii|P|Supă rustică de roșii coapte|Coace roșiile tăiate în două cu usturoi, cimbru și ulei de măsline o oră.|Călește ceapa și adaugă roșiile coapte și puțină apă.|Pasează grosier și fierbe 5 minute.
+lantricot-de-vita-la-gratar|P|Antricot de vită la grătar|Scoate carnea din frigider cu o oră înainte și sărează-o.|Frige-o pe grătar foarte încins 3–4 minute pe fiecare parte.|Las-o 5 minute să se odihnească și servește cu lămâie și salată.
+lardei-copti-cu-smantana-si-usturoi-reteta-pas-cu-pas-video|G|Ardei copți cu smântână și usturoi|Coace ardeii și curăță-i.|Amestecă smântâna cu usturoiul pisat și sare.|Pune ardeii în castron, toarnă sosul și presară mărar.
+lardei-umpluti|P|Ardei umpluți|Amestecă carnea tocată cu orezul, ceapa călită, oul și verdeața.|Umple ardeii și așază-i în oală.|Toarnă sos de roșii și apă cât să-i acopere și fierbe 50 de minute la foc mic.|Servește cu smântână.
+lardei-umpluti-cu-carne-de-pui-in-sos-de-rosii|P|Ardei umpluți cu pui în sos de roșii|Amestecă carnea de pui tocată cu orezul, ceapa și mărarul.|Umple ardeii și pune-i în tavă cu sosul de roșii.|Coace 50 de minute la 180°C.
+lardei-umpluti-de-post|P|Ardei umpluți de post|Călește ceapa, morcovul și ciupercile și amestecă-le cu bulgurul și verdeața.|Umple ardeii și pune-i în oală cu sosul de roșii.|Fierbe 40 de minute la foc mic.
+laripi-de-curcan-la-cuptor-marinate-reteta-detaliata|P|Aripi de curcan marinate la cuptor|Marinează aripile cu ulei, usturoi, cimbru și boia câteva ore.|Pune-le în tavă pe legume și toarnă puțină apă.|Coace acoperit o oră, apoi descoperit 40 de minute.
+laripioare-de-pui-la-cuptor-crocante-si-picante|P|Aripioare de pui crocante la cuptor|Amestecă aripioarele cu ulei, usturoi, boia și sare.|Coace-le pe grătarul cuptorului 50 de minute la 200°C.|Glasează-le cu miere, oțet balsamic și muștar și mai coace 10 minute.
+laripioare-de-pui-la-gratar|P|Aripioare de pui marinate la grătar|Marinează aripioarele cu lămâie, usturoi, ierburi și ulei 2 ore.|Frige-le pe grătar 20–25 de minute, întorcându-le des.|Presară ceapă verde.
+laripioare-la-friteuza-cu-aer-cald-gustoase-rumene-si-crocant|P|Aripioare la air fryer|Condimentează aripioarele cu usturoi, cimbru, boia și sare.|Coace-le în air fryer 25 de minute la 190°C, scuturând coșul la jumătate.
+lbeef-wellington|P|Beef Wellington|Rumenește mușchiul pe toate părțile și unge-l cu muștar.|Călește ciupercile tocate până se usucă.|Învelește carnea în șuncă și ciuperci, apoi în foietaj.|Unge cu ou și coace 40 de minute la 200°C.
+-lbibilica-cu-mere
+lboeuf-stroganoff|P|Vită Stroganoff|Taie carnea fâșii și rumenește-o repede în unt.|Călește ceapa și ciupercile.|Pune carnea înapoi cu pasta de roșii, muștarul și smântâna și fierbe 5 minute.|Servește cu orez sau piure.
+lbogracs-gulyas|P|Gulaș la ceaun (bogracs)|Călește multă ceapă, adaugă carnea cuburi și rumenește-o.|Pune boiaua, chimenul, usturoiul și vinul.|Fierbe la foc mic 2 ore, adăugând roșiile și apă când e nevoie.|Servește cu pâine.
+lbroccoli-cu-cartofi-la-cuptor-gratinati-reteta-video|P|Broccoli cu cartofi gratinați|Fierbe cartofii feliați și broccoli 5 minute.|Fă un sos bechamel din unt, făină și lapte.|Pune legumele în tavă, toarnă sosul, presară cașcaval și coace 25 de minute.
+lbudinca-de-cartofi-si-dovlecei-rasi-la-cuptor-reteta-de-kuge|P|Budincă de cartofi și dovlecei la cuptor|Dă cartofii și dovleceii pe răzătoare și stoarce-i.|Amestecă-i cu ouăle, ceapa și sare.|Întinde în tavă unsă și coace o oră la 200°C până se rumenește.
+lbudinca-de-dovlecei|P|Budincă de dovlecei cu brânză|Dă dovleceii pe răzătoare, sărează-i și stoarce-i.|Amestecă-i cu brânza, ouăle, orezul fiert, mălaiul și verdeața.|Coace în tavă unsă 50 de minute la 180°C.
+-lburta-de-vita-in-sos-de-rosii-trippa-alla-romana
+lcarnaciori-din-carne-de-pui|P|Cârnăciori de pui de casă|Toacă carnea de pui cu slănina și usturoiul.|Amestecă cu boia, busuioc, sare și puțină apă rece.|Formează cârnăciori și frige-i pe grătar sau în tigaie 12 minute.
+lcartofi-copti-umpluti-cu-branza-si-bacon|P|Cartofi copți umpluți cu brânză și bacon|Coace cartofii în coajă o oră.|Scobește-i și amestecă miezul cu brânzeturile și baconul prăjit.|Umple cojile, presară cașcaval și gratinează 15 minute.
+-lcartofi-copti-umpluti-si-gratinati-la-air-fryer-reteta-video
+lcartofi-copti-zdrobiti-cu-branza-si-bacon-reteta-simpla-si-d|P|Cartofi zdrobiți la cuptor cu brânză și bacon|Fierbe cartofii mici în coajă.|Zdrobește-i ușor în tavă, stropește cu ulei și coace 30 de minute la 220°C.|Presară bacon și brânză și mai coace 10 minute.
+lcartofi-cu-bacon-si-smantana-la-cuptor-reteta-video|P|Cartofi cu bacon și smântână la cuptor|Taie cartofii felii subțiri.|Așază-i în tavă în straturi cu bacon și ceapă.|Toarnă smântâna, presară parmezan și coace o oră la 180°C.
+lcartofi-frantuzesti-la-cuptor-reteta-simpla|P|Cartofi franțuzești la cuptor|Fierbe cartofii și ouăle și feliază-le.|Așază în tavă straturi de cartofi, ouă, brânză și costiță.|Toarnă smântâna și coace 40 de minute la 180°C.
+lcartofi-gratinati-cu-afumatura-si-ceapa-reteta-detaliata|P|Cartofi gratinați cu afumătură și ceapă|Rumenește afumătura și ceapa.|Pune în tavă straturi de cartofi feliați și afumătură.|Toarnă smântâna, presară cașcaval și coace o oră la 180°C.
+lcartofi-la-cuptor-cu-bacon-si-ceapa-reteta-rapida|P|Cartofi la cuptor cu bacon și ceapă|Taie cartofii felii și amestecă-i cu ulei, usturoi și sare.|Pune-i în tavă cu roșiile și baconul deasupra.|Coace 45 de minute la 200°C și presară pătrunjel.
+-lcartofi-dulci-umpluti-cu-carne-in-stil-mexican-reteta-video
+-lcassoulet-mancare-de-fasole-cu-pulpe-de-rata-la-cuptor-retet
+lceafa-de-porc-cu-moare-de-varza-gatita-la-slow-cooker|P|Ceafă de porc cu moare de varză|Freacă ceafa cu usturoi, boia și piper.|Pune-o în oală cu moarea de varză.|Gătește la foc mic (sau la slow cooker) 3–4 ore, până se frăgezește.|Servește cu mămăligă.
+lchiftele-de-legume|G|Chiftele de legume|Dă cartofii și ardeiul pe răzătoare și amestecă-i cu pesmetul, cașcavalul și verdeața.|Formează chiftele.|Coace-le la cuptor 25 de minute la 200°C.
+lchiftele-de-linte-la-cuptor-reteta-de-post-video|P|Chiftele de linte la cuptor|Fierbe lintea și scurge-o bine.|Amestec-o cu morcovul ras, ceapa, quinoa și verdeața.|Formează chiftele și coace-le 25 de minute la 200°C.|Servește cu salată.
+lchiftele-de-post-din-ciuperci-si-vinete-coapte|P|Chiftele de post din ciuperci și vinete|Coace vinetele și toacă-le.|Călește ciupercile tocate cu ceapa și ardeiul.|Amestecă totul cu pesmet și verdeață, formează chiftele și coace-le 25 de minute.
+lchiftele-gratinate-cu-cartofi-si-sos-de-rosii-cu-legume|P|Chiftele gratinate cu cartofi și sos de roșii|Fă chiftele din carne tocată cu pâine înmuiată și ou și rumenește-le.|Pune-le în tavă cu cartofi feliați și sos de roșii cu legume.|Presară cașcaval și coace 40 de minute.
+lchiftele-marinate-reteta-ca-la-mama|P|Chiftele marinate ca la mama|Amestecă carnea tocată cu pâinea înmuiată, oul, usturoiul și pătrunjelul.|Formează chiftele, tăvălește-le prin făină și prăjește-le.|Fierbe-le 15 minute într-un sos de roșii cu foi de dafin.|Servește cu piure.
+lchiftelute-de-naut-cu-sos-de-rosii-aromat|P|Chifteluțe de năut în sos de roșii|Mixează năutul fiert cu ceapa, făina, semințele și verdeața.|Formează chifteluțe și rumenește-le în puțin ulei.|Fierbe-le 10 minute într-un sos de roșii cu usturoi.
+lchiftelute-de-pui-cu-dovlecei|P|Chifteluțe de pui cu dovlecei|Amestecă carnea de pui tocată cu dovleceii rași și stoarși, ceapa și pesmetul.|Formează chifteluțe.|Coace-le 20 de minute la 200°C.
+lchiftelute-nemtesti-in-sos-de-mustar-si-smantana|P|Chifteluțe în sos de muștar și smântână|Fă chifteluțe din carne tocată cu pâine înmuiată, ou și ceapă și rumenește-le.|Fă sosul din smântână, muștar și puțină supă.|Fierbe chifteluțele în sos 10 minute.|Servește cu piure.
+-lchili-con-carne-reteta-video-simpla-si-rapida-cu-carne-tocat
+-lciulama-de-pui-cu-ciuperci
+lciulama-de-pui-cu-ciuperci-si-smantana|P|Ciulama de pui cu ciuperci|Fierbe puiul cu legumele și desfă-l bucăți.|Călește ciupercile și ceapa.|Fă un sos din făină, supă și smântână, pune puiul și ciupercile și fierbe 10 minute.|Servește cu mămăligă.
+lcoaste-de-porc-la-gratar-cu-marinada-picanta|P|Coaste de porc la grătar cu marinadă picantă|Coace coastele acoperite 2 ore la 150°C.|Fă marinada din ceapă, ardei iute, usturoi, zahăr și condimente.|Unge coastele și frige-le pe grătar 10 minute.
+-lcoban-kavurma
+-lconopida-cu-vinete-si-mazare-vegan
+lconopida-gratinata-budinca-de-conopida-fara-oua|P|Conopidă gratinată|Fierbe conopida buchete 5 minute.|Fă un sos bechamel din unt, făină și lapte și amestecă brânza.|Pune conopida în tavă, toarnă sosul și coace 30 de minute la 200°C.
+lconopida-la-cuptor-cu-crusta-de-pesmet|G|Conopidă la cuptor cu crustă de pesmet|Fierbe conopida întreagă 8 minute.|Unge-o cu ulei și lămâie și presară pesmet cu condimente.|Coace 25 de minute la 200°C.
+lcotlet-de-miel-in-crusta-de-ierburi-aromate|P|Cotlet de miel în crustă de ierburi|Rumenește cotletul pe toate părțile.|Toacă ierburile cu usturoi, pesmet și parmezan.|Unge carnea cu muștar, presară crusta și coace 15 minute la 200°C.
+lcotlet-de-porc-afumat-la-gratar|P|Cotlet de porc afumat la grătar|Freacă cotletul cu condimente și zahăr și lasă-l peste noapte.|Afumă-l la grătar cu capac, la foc indirect, 3–4 ore.|Lasă-l să se odihnească și feliază.
+lcotlet-de-porc-cu-sos-de-rosii-reteta-rapida-si-gustoasa|P|Cotlet de porc cu sos de roșii|Rumenește feliile de cotlet în tigaie.|Călește ceapa și usturoiul și adaugă roșiile.|Pune carnea în sos și fierbe acoperit 25 de minute.

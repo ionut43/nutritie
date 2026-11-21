@@ -1,0 +1,80 @@
+eciorba-de-peste-a-la-grec|P|Ciorbă de pește a la grec|Fierbe legumele și cartofii 15 minute.|Adaugă peștele bucăți și fierbe încet 10 minute.|Bate ouăle cu zeamă de lămâie și leagă ciorba, fără să mai fiarbă.
+eciorba-de-potroace|P|Ciorbă de potroace|Fierbe măruntaiele de pasăre spumând 40 de minute.|Adaugă legumele tăiate mărunt și orezul și fierbe 20 de minute.|Acrește cu borș și presară leuștean.
+eciorba-de-pui|P|Ciorbă de pui|Fierbe puiul spumând 40 de minute.|Adaugă legumele tăiate mărunt și roșiile și fierbe 20 de minute.|Leagă cu ou și smântână, acrește cu borș și presară leuștean.
+esupa-ceheasca-de-usturoi|P|Supă cehă de usturoi cu cartofi|Fierbe cartofii cuburi cu chimen și cimbru 20 de minute.|Adaugă usturoiul pisat la final.|Servește cu crutoane.
+esupa-crema-de-broccoli|P|Supă cremă de broccoli|Călește ceapa, morcovul și usturoiul.|Adaugă broccoli, cartoful și apă și fierbe 15 minute.|Pasează și presară parmezan.
+esupa-crema-de-cartofi|P|Supă cremă de cartofi cu bacon|Călește prazul, ceapa și morcovul.|Adaugă cartofii și apă și fierbe 20 de minute, apoi pasează cu smântână.|Servește cu bacon prăjit.
+esupa-crema-de-legume|P|Supă cremă de legume|Călește ceapa și prazul.|Adaugă cartofii, morcovul, roșiile și apă și fierbe 20 de minute.|Pasează și presară pătrunjel.
+-esupa-de-rosii-cu-mozzarella
+esupa-de-vita-cu-fidea|P|Supă de vită cu fidea|Fierbe carnea spumând 2 ore cu legumele.|Strecoară, taie carnea și pune-o înapoi cu morcovul.|Adaugă fideaua și fierbe 5 minute.|Presară pătrunjel.
+-esupa-spaniola-de-usturoi
+-lpui-la-air-fryer-cosori-dual-blaze-cu-garnitura-de-cartofi-c
+lrulouri-de-dovlecei-la-cuptor-cu-umplutura-de-sarmale-reteta|P|Rulouri de dovlecei cu umplutură de sarmale|Feliază dovleceii pe lung și opărește feliile.|Amestecă carnea tocată cu orezul, ceapa și condimentele.|Rulează umplutura în felii de dovlecel, pune-le în tavă cu sos de roșii și coace o oră.
+lrulouri-de-vinete-cu-carne-si-sos-de-rosii-la-cuptor-reteta-|P|Rulouri de vinete cu carne în sos de roșii|Feliază vinetele pe lung și rumenește-le.|Umple-le cu carne tocată călită cu ceapă și rulează.|Pune-le în tavă cu sos de roșii și coace 40 de minute.
+lrulouri-din-piept-de-pui-la-airfryer-cu-garnitura-de-fasole-|P|Rulouri de piept de pui cu fasole verde|Bate pieptul subțire și umple-l cu brânză și bacon.|Rulează și coace în air fryer 18 minute la 190°C.|Servește cu fasole verde sotată.
+lsarmale-cu-varza-dulce|P|Sarmale în foi de varză dulce|Opărește foile de varză.|Amestecă carnea tocată cu orezul, ceapa călită și condimentele.|Învelește sarmalele și așază-le în oală cu varză tocată și roșii.|Acoperă cu apă și borș și fierbe la foc mic 2 ore.
+-lsarmale-de-post-cu-ciuperci
+lsarmale-de-post-manastiresti-cu-nuca-si-stafide|P|Sarmale de post cu nucă și stafide|Călește ceapa, adaugă orezul, nuca și stafidele.|Învelește umplutura în foi de varză.|Fierbe-le în sos de roșii 1 oră și jumătate.
+lsarmale-in-foi-de-varza-murata|P|Sarmale în foi de varză murată|Desfă foile de varză și desară-le.|Amestecă carnea tocată cu orezul, ceapa și condimentele.|Învelește sarmalele, așază-le în oală cu varză tocată și roșii.|Fierbe la foc mic 3 ore sau coace la cuptor.
+lsarmale-in-foi-de-vita-cu-sos-de-marar-reteta-traditionala-d|P|Sărmăluțe în foi de viță cu sos de mărar|Opărește foile de viță.|Învelește umplutura de carne și orez în foi mici.|Fierbe-le 1 oră și jumătate.|Leagă sosul cu smântână și mărar.
+lsarmale-traditionale-in-foi-de-varza-murata-reteta-video|P|Sarmale tradiționale|Desară foile de varză.|Amestecă carnea cu orezul, ceapa călită, boiaua și cimbrul.|Învelește sarmalele și așază-le în oală, printre straturi de varză tocată și afumătură.|Fierbe la foc mic 3 ore și servește cu smântână și mămăligă.
+lshaorma-cu-pui-reteta-video|P|Shaorma de pui|Marinează pieptul fâșii cu usturoi, boia și iaurt.|Rumenește-l în tigaie.|Pune-l în lipie cu varză, roșii, cartofi prăjiți și sos de usturoi.
+lsnitel-de-porc|P|Șnițel de porc|Bate feliile de carne subțire și sărează-le.|Trece-le prin făină, ou și pesmet.|Prăjește-le 3 minute pe fiecare parte.|Servește cu piure și salată.
+lsnitel-din-piept-de-pui-in-pesmet-reteta-simpla|P|Șnițel de pui în pesmet|Feliază pieptul și bate-l ușor.|Trece-l prin făină, ou și pesmet.|Prăjește-l 3 minute pe fiecare parte.
+lsnitel-vienez-reteta-autentica|P|Șnițel vienez|Bate feliile de vițel foarte subțire.|Trece-le prin făină, ou și pesmet.|Prăjește-le în multă grăsime, clătinând tigaia, 2 minute pe parte.|Servește cu lămâie și salată de cartofi.
+lspanac-cu-usturoi-si-lapte-reteta-video-pas-cu-pas|P|Spanac cu usturoi și lapte|Opărește spanacul și toacă-l.|Fă un rântaș din unt și făină și stinge-l cu lapte.|Pune spanacul și usturoiul și fierbe 5 minute.|Servește cu ou ochi și piure.
+lsteak-de-conopida-la-cuptor-reteta-pas-cu-pas|G|Felii de conopidă la cuptor cu parmezan|Taie conopida în felii groase.|Unge-le cu ulei, usturoi și condimente.|Coace 25 de minute la 220°C și presară parmezan.
+-lsticks-de-dovlecei-in-crusta-crocanta-reteta-rapida-de-vara
+-lstufat-de-iepure-reteta-pas-cu-pas
+lstufat-de-miel-reteta-pas-cu-pas|P|Stufat de miel|Rumenește carnea de miel.|Adaugă multă ceapă verde și usturoi verde și călește-le.|Pune roșiile și puțină apă și fierbe la foc mic o oră.|Presară pătrunjel.
+lsufleu-de-conopida|P|Sufleu de conopidă|Fierbe conopida și pasează-o.|Fă un sos din unt, făină și lapte și amestecă gălbenușurile și conopida.|Încorporează albușurile bătute și coace 40 de minute la 180°C.
+-ltafelspitz-reteta-vieneza-rasol-de-vita-cu-legume-si-sosuri-
+-ltajine-de-miel-cu-lamai-murate
+-ltajine-de-pui
+ltocanita-de-porc-reteta-traditionala|P|Tocăniță de porc|Rumenește carnea cuburi.|Adaugă multă ceapă și călește-o.|Pune roșiile, boiaua și puțină apă și fierbe o oră și jumătate.|Servește cu mămăligă și murături.
+ltocanita-de-pui-cu-ceapa-reteta-simpla-traditionala|P|Tocăniță de pui cu ceapă|Rumenește puiul.|Adaugă ceapa și călește-o până se înmoaie.|Pune roșiile și puțină apă și fierbe 40 de minute.|Servește cu mămăligă.
+ltocanita-de-vita-cu-ciuperci|P|Tocăniță de vită cu ciuperci|Rumenește carnea cuburi.|Adaugă ceapa, morcovul și țelina, apoi apă, și fierbe 1 oră și jumătate.|Pune ciupercile și roșiile și mai fierbe 20 de minute.
+-ltofu-cu-legume-de-vara-la-tigaie
+lvarza-a-la-cluj|P|Varză à la Cluj|Călește varza murată.|Călește carnea tocată cu ceapa și orezul.|Pune straturi de varză și carne în tavă, cu smântână între ele.|Coace o oră la 180°C.
+lvarza-calita-cu-carnati-de-casa|P|Varză călită cu cârnați|Călește varza tocată cu ceapa.|Adaugă roșiile și fierbe 30 de minute.|Pune cârnații și coace 30 de minute la cuptor.
+lvarza-calita-cu-coaste-de-porc-la-cuptor|P|Varză călită cu coaste de porc la cuptor|Călește varza cu ceapa și roșiile.|Pune-o în tavă cu coastele deasupra.|Coace acoperit 1 oră și jumătate, apoi descoperit 20 de minute.
+lvarza-murata-cu-carne-de-porc-reteta-simpla-de-toros-ardelen|P|Varză murată cu carne de porc (toroș)|Rumenește carnea de porc cuburi.|Adaugă varza murată tocată și puțină apă.|Fierbe la foc mic o oră și jumătate.
+lvinete-a-la-parmigiana-vinete-cu-parmezan|P|Vinete à la parmigiana|Prăjește feliile de vinete.|Așază-le în tavă în straturi cu sos de roșii, mozzarella și parmezan.|Coace 30 de minute la 190°C.
+lvinete-alla-pizzaiola-vinete-cu-mozzarella-si-sos-de-rosii-r|P|Vinete cu mozzarella și sos de roșii|Rumenește feliile de vinete.|Pune peste fiecare sos de roșii, mozzarella și oregano.|Coace 15 minute la 200°C.
+lvinete-papoutsakia-la-air-fryer-sau-la-cuptor|P|Vinete umplute cu carne (papoutsakia)|Coace vinetele tăiate în două și scobește-le.|Umple-le cu carne tocată călită cu roșii și miezul vinetelor.|Acoperă cu sos alb și brânză și coace 20 de minute.
+lvinete-umplute-la-cuptor-reteta-turceasca-imam-bayildi|P|Vinete umplute cu legume (imam bayıldı)|Prăjește vinetele întregi și despică-le.|Umple-le cu ceapă, roșii și usturoi călite.|Coace 40 de minute la 180°C.
+ealivanca-cu-boabe-crocante-de-porumb|D|Alivancă cu brânză|Amestecă brânza cu ouăle, laptele, zahărul și mălaiul.|Toarnă în tavă și presară boabe de porumb.|Coace 45 de minute la 180°C.
+-ealuat-foietaj-rapid
+eardei-fripti-umpluti-cu-feta|G|Ardei copți umpluți cu telemea|Coace ardeii.|Umple-i cu telemea amestecată cu oregano.|Mai coace 10 minute și stropește cu ulei.
+-eardei-iute-macinat-in-ulei
+eardei-umpluti-cu-carne-si-bulgur|P|Ardei umpluți cu carne și bulgur|Amestecă carnea tocată cu bulgurul, ceapa și oul.|Umple ardeii și pune-i în oală cu sos de roșii.|Fierbe 50 de minute la foc mic.
+-earipioare-cu-ghimbir-si-ceapa-verde
+-earipioare-de-pui-cu-usturoi
+-earipioare-dulci-picante
+earipioare-in-stil-spaniol-cu-cartofi-la-cuptor|P|Aripioare cu cartofi la cuptor|Amestecă aripioarele și cartofii cu ulei, boia și usturoi.|Întinde-le în tavă.|Coace o oră la 200°C.
+-earipioare-picante-la-cuptor
+-ebagheta-umpluta-cu-branza
+ebaghete-umplute-cu-bacon-si-cascaval|G|Baghete umplute cu bacon și cașcaval|Scobește pâinea.|Umple-o cu bacon, cașcaval și smântână.|Coace 15 minute la 200°C și taie felii.
+-ebanana-split
+-ebanane-cu-smantana-nuci-si-miere
+ebanuti-de-cartofi-stil-pizza|G|Bănuți de cartofi ca pizza|Feliază cartofii rondele.|Coace-i 20 de minute la 200°C.|Pune roșii, bacon și brânză pe fiecare și mai coace 10 minute.
+ebatoane-de-ciocolata-si-unt-de-arahide|D|Batoane cu ciocolată și unt de arahide|Topește ciocolata cu untul de arahide și untul.|Amestecă nucile.|Întinde în tavă și ține la rece 3 ore, apoi taie batoane.
+-ebatoane-de-morcovi-caramelizati
+-ebaton-de-ciocolata-cu-lapte
+-ebiftec-tartar
+-ebilute-chia
+ebomboane-de-prune-uscate|D|Bomboane de prune uscate cu nucă|Toacă prunele cu biscuiții și nuca.|Formează bile.|Tăvălește-le prin cacao.
+-ebomboane-ferrero-rocher-de-casa
+-ebrioche-suisse
+ebrownie-cu-cacao-si-nuca|D|Brownie cu cacao și nucă|Topește untul și amestecă zahărul și cacaoa.|Adaugă ouăle, făina și nuca.|Coace 25 de minute la 180°C.
+ebruschetta-cu-ciuperci|G|Bruschetta cu ciuperci|Călește ciupercile cu usturoi și cimbru și stinge cu vin.|Prăjește feliile de pâine.|Pune ciupercile pe pâine și presară pătrunjel.
+-ebruschette-cu-naut
+ebudinca-de-orez-caramelizata|D|Budincă de orez caramelizată|Fierbe orezul în lapte cu zahăr până se îngroașă.|Toarnă în forme.|Presară zahăr și caramelizează-l.
+-ebudinca-de-orez-cu-lamaie
+ebudinca-de-ovaz-cu-cacao|D|Budincă de ovăz cu cacao|Amestecă ovăzul cu laptele, ouăle, cacaoa și zahărul.|Adaugă cartoful dulce ras.|Coace 40 de minute la 180°C.
+-ebudinca-turceasca-de-orez
+-ebulete-de-orez-prajite-umplute-cu-ton
+ebulgur-cu-naut|P|Bulgur cu năut și cârnați|Călește ceapa, ardeiul și cârnații.|Adaugă bulgurul, năutul și apă dublă.|Fierbe acoperit 15 minute și presară pătrunjel.
+ebulgur-cu-verdeturi|G|Salată de bulgur cu verdețuri|Opărește bulgurul și lasă-l să se umfle.|Amestecă-l cu pătrunjel, mentă și ceapă verde.|Stropește cu lămâie și ulei.
+ebulgur-cu-verdeturi-si-somon-copt-cu-lamaie|P|Somon copt cu lămâie și bulgur cu verdețuri|Coace somonul cu lămâie 15 minute la 200°C.|Fierbe bulgurul și amestecă-l cu verdețuri.|Servește împreună.
+-ebulion

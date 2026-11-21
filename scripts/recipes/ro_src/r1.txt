@@ -1,0 +1,32 @@
+# cheie|fel (P principal, M mic dejun, G gustare, D desert)|Nume|pași (rezumați de mine; rețeta completă e la sursă)
+# o linie care începe cu „-” = rețetă văzută și lăsată deoparte
+lpaturata-pe-crumpi|P|Păturată pe crumpi, cartofi cu ceapă în aluat|Fierbe cartofii și fă-i piure cu ceapa călită și costița.|Întinde aluatul subțire și pune umplutura pe jumătate din el.|Împăturește, taie bucăți și coace 40 de minute la 180°C.|Servește cu sos de roșii.
+lciorba-de-miel-a-la-grec-reteta-greceasca|P|Ciorbă de miel a la grec|Fierbe mielul cu ceapa și spumează.|Adaugă orezul, ceapa verde, salata și mărarul tocate.|Bate ouăle cu zeamă de lămâie și leagă ciorba cu ele, fără să mai fiarbă.
+lsupa-crema-de-cartofi-cu-praz-supa-vichyssoise|P|Supă cremă de cartofi cu praz|Călește prazul și ceapa în unt.|Adaugă cartofii și apă și fierbe 20 de minute.|Pasează și adaugă smântâna lichidă.|Presară pătrunjel.
+lsupa-crema-de-dovleac|P|Supă cremă de dovleac|Călește ceapa și țelina în unt.|Adaugă dovleacul, para și apă și fierbe 25 de minute.|Pasează cu smântână lichidă și nucșoară.|Servește cu telemea sfărâmată.
+eciorba-taraneasca-de-pui|P|Ciorbă țărănească de pui|Fierbe puiul, spumând, o oră la foc mic.|Adaugă morcovul, păstârnacul, țelina, ceapa și ardeiul tăiate mărunt.|Pune roșiile și fierbe până se înmoaie legumele.|Acrește cu zeamă de lămâie și presară verdeață.
+esupa-crema-de-ardei-copti-cu-ricotta|P|Supă cremă de ardei copți cu ricotta|Coace ardeii și roșia și curăță-i.|Călește usturoiul în ulei, adaugă legumele și puțină apă și fierbe 10 minute.|Pasează și servește cu ricotta, parmezan și busuioc.
+esupa-crema-de-conopida-cu-mustar|P|Supă cremă de conopidă cu muștar|Călește ceapa la foc mic până se înmoaie.|Adaugă conopida și apă și fierbe 25 de minute.|Pasează și amestecă muștarul.|Servește cu crutoane de pâine și măsline.
+esupa-crema-de-dovlecei-cu-crema-de-ricotta-si-tarhon|P|Supă cremă de dovlecei cu ricotta|Călește ceapa și usturoiul, apoi dovleceii tăiați cuburi.|Adaugă apă și fierbe 15 minute, apoi pasează.|Amestecă ricotta cu lămâie și verdeață și pune câte o lingură în fiecare castron.
+-esupa-de-pui-cu-taietei-si-broccoli
+-esupa-coreeana-de-pui-cu-kimchi
+-esupa-de-pui-vietnameza
+esupa-picanta-de-vita|P|Supă picantă de porc cu legume coapte|Rumenește carnea și legumele la cuptor 20 de minute.|Pune-le în oală cu apă și fierbe la foc mic 2 ore.|Adaugă roșiile și condimentele și mai fierbe 15 minute.
+-lpaturata-pe-crumpi-editia-2018
+lrata-pe-varza-la-cuptor|P|Rață pe varză la cuptor|Călește varza tocată cu ceapa, roșiile și vinul.|Pune varza în tavă și rața deasupra, unsă cu muștar și miere.|Coace acoperit 2 ore la 170°C, apoi descoperit până se rumenește.
+-lrulada-din-pulpa-de-miel-la-cuptor
+lsarmalute-de-gasca-in-foi-de-varza-rosie|P|Sărmăluțe în foi de varză roșie|Opărește foile de varză.|Amestecă carnea tocată cu orezul și ceapa călită.|Învelește sărmăluțele și fierbe-le în vin cu puțin oțet 2 ore.|Leagă sosul cu smântână.
+eardei-copti-cu-rosii-cherry-si-pesmet-aromat|P|Ardei copți cu roșii cherry și pesmet|Coace ardeii și curăță-i.|Prăjește pâinea cuburi și migdalele la cuptor și toacă-le cu pătrunjel și parmezan.|Pune ardeii cu roșiile în tavă, presară pesmetul și coace 15 minute.
+ebaba-ganoush|G|Salată de vinete cu iaurt (baba ganoush)|Coace vinetele și lasă-le să se scurgă.|Toacă-le și amestecă cu iaurtul, tahini, usturoi și lămâie.|Presară pătrunjel și stropește cu ulei de măsline.
+ebabka-cu-ciocolata|D|Babka cu ciocolată|Fă un aluat cu drojdie, ouă și unt și lasă-l să crească.|Întinde-l, unge cu cremă de ciocolată și rulează.|Taie rulada pe lung, împletește și coace 40 de minute la 175°C.
+-ebagels-covrigi-americani
+-ebatoane-cu-unt-si-sare
+eberbecut-cu-legume-la-tava|P|Berbecuț cu legume la tavă|Marinează carnea cu boia, oregano și ulei 2 ore.|Pune legumele tăiate mare în tavă și carnea deasupra.|Coace o oră și jumătate la 190°C.|Servește cu iaurt și lipie.
+-ebiryani-vegetarian
+-ebol-cu-somon-castraveti-marinati-si-taietei-de-orez-cu
+ebol-grecesc-cu-pulpe-de-pui-in-air-fryer|P|Bol grecesc cu pui la air fryer|Condimentează pulpele cu oregano și boia.|Coace-le în air fryer 10 minute la 200°C.|Servește cu castraveți, roșii, ceapă, telemea și iaurt cu mărar.
+ebroccoli-cu-iaurt|G|Broccoli cu iaurt și ceapă prăjită|Fierbe broccoli 3 minute.|Rumenește ceapa cu pătrunjel, ghimbir și usturoi.|Pune broccoli pe iaurt și ceapa deasupra.
+-ebulgogi-de-porc-cu-varza-murata-rapid
+ecarne-de-vita-cu-cartofi-la-tava|P|Carne tocată cu cartofi la tavă|Coace cartofii felii 30 de minute la 200°C.|Călește ceapa și ardeiul, adaugă carnea și roșiile.|Pune carnea peste cartofi și coace încă 20 de minute.
+-ecarpaccio-de-sfecla-rosie-cu-crema-de-ansoa
+ecartofi-copti-cu-ricotta-si-somon-afumat|G|Cartofi copți cu ricotta și somon afumat|Coace cartofii în coajă o oră la 180°C.|Despică-i și umple cu ricotta cu lămâie.|Pune somonul afumat și ceapă roșie deasupra.

@@ -1,0 +1,82 @@
+# mic dejun, plăcinte și dulciuri de casă
+lomleta-cu-legume|M|Omletă cu legume|Călește ceapa, ardeiul și roșiile cu puțină costiță.|Toarnă ouăle bătute cu sare.|Gătește la foc mic acoperit până se încheagă și presară pătrunjel.
+lomleta-cu-sunca|M|Omletă cu șuncă|Bate ouăle cu sare și piper.|Rumenește ușor șunca în unt.|Toarnă ouăle, gătește la foc mic și împăturește omleta.
+lomleta-cu-piept-de-pui|M|Omletă cu piept de pui|Rumenește pieptul tăiat cubulețe cu ceapa.|Toarnă ouăle bătute.|Gătește la foc mic până se încheagă și presară pătrunjel.
+loua-coapte-in-avocado|M|Ouă coapte în avocado|Taie avocado în două și scoate sâmburele.|Sparge câte un ou în fiecare jumătate.|Coace 15 minute la 200°C și presară sare, piper și pătrunjel.
+lclatite-simple-reteta-video-pas-cu-pas|M|Clătite simple|Bate ouăle cu laptele, zahărul și făina până nu mai ai cocoloașe.|Adaugă untul topit și lasă aluatul 20 de minute.|Coace clătitele subțiri în tigaie unsă ușor.|Servește cu gem sau brânză dulce.
+lpancakes-clatite-americane-cu-mure|M|Pancakes cu mure|Amestecă făina, zahărul și praful de copt cu laptele, ouăle și untul topit.|Toarnă câte un polonic în tigaie și coace până fac bule, apoi întoarce-le.|Servește cu mure.
+lpapanasi-prajiti-cu-smantana-si-dulceata-reteta-video|D|Papanași prăjiți cu smântână și dulceață|Amestecă brânza de vaci cu ouăle, zahărul, vanilia și făina.|Formează gogoși cu gaură și bile mici.|Prăjește-le în ulei la foc mediu.|Servește cu smântână și dulceață.
+lclatite-cu-spanac-si-ricotta-la-cuptor|P|Clătite cu spanac și ricotta la cuptor|Fă clătite subțiri.|Umple-le cu spanac călit amestecat cu ricotta și parmezan.|Rulează-le, pune-le în tavă cu smântână și mozzarella și coace 20 de minute.
+-lclatite-verzi-cu-spanac-reteta-pentru-aperitive-si-micul-dej
+lpateu-de-casa-din-ficat-de-pui|G|Pateu de casă din ficat de pui|Călește ceapa în unt, adaugă ficățeii și gătește-i 8 minute.|Mixează totul cu restul de unt până devine cremos.|Ține la rece și servește pe pâine.
+lplacinte-la-tigaie-cu-branza-si-verdeturi-reteta-video|M|Plăcinte la tigaie cu brânză și verdețuri|Frământă un aluat din făină, lapte, ou și unt.|Umple bucăți de aluat cu brânză și verdețuri și aplatizează-le.|Coace-le în tigaie, câte 3–4 minute pe fiecare parte.
+lbranzoaice-pufoase-cu-branza-sarata|G|Brânzoaice pufoase cu brânză sărată|Frământă un aluat fraged din făină, unt, iaurt și ou.|Taie pătrate, pune brânza amestecată cu ou și îndoaie colțurile.|Unge cu ou și coace 25 de minute la 180°C.
+lbranzoaice-trandafir-cu-branza-dulce-sau-urda-proaspata|D|Brânzoaice trandafir cu brânză dulce|Frământă un aluat dospit din făină, lapte, ou și drojdie.|Întinde-l, unge cu brânză dulce cu stafide și rulează.|Taie felii, așază-le în tavă, lasă-le să crească și coace 30 de minute la 180°C.
+lbranzoaice-reteta-video-placinte-poale-n-brau|D|Poale-n brâu (brânzoaice)|Frământă un aluat dospit și lasă-l să crească.|Taie pătrate, pune brânză dulce și îndoaie colțurile spre centru.|Unge cu ou și coace 25 de minute la 180°C.
+lplacinta-cu-branza-dulce-reteta-ca-la-mama-acasa|D|Plăcintă cu brânză dulce ca la mama|Întinde foi subțiri din aluat.|Unge-le cu ulei și umple-le cu brânză dulce cu ou și zahăr.|Rulează și coace 40 de minute la 180°C.
+-lplacinta-taraneasca-cu-branza
+lplacinta-cu-branza-si-spanac|G|Plăcintă cu brânză și spanac|Întinde aluatul în foi.|Umple-le cu spanac călit amestecat cu brânza și ouăle.|Coace 40 de minute la 180°C.
+lplacinta-banateana-de-la-sat|G|Plăcintă bănățeană de la sat|Frământă un aluat dospit cu lapte.|Întinde-l și umple-l cu brânza amestecată cu ouă.|Rulează în spirală și coace 45 de minute la 180°C.
+lplacinta-creata-cu-branza-si-spanac-reteta-usoara-explicata-|G|Plăcintă creață cu brânză și spanac|Încrețește foile de plăcintă în tavă, cu spanac și brânză printre ele.|Toarnă ouăle bătute cu smântână peste ele.|Coace 40 de minute la 180°C.
+lplacinta-greceasca-cu-dovlecei-si-branza|G|Plăcintă cu dovlecei și brânză|Dă dovleceii pe răzătoare și stoarce-i.|Amestecă-i cu brânza și ouăle.|Pune umplutura între foi unse cu unt și coace 50 de minute la 180°C.
+lplacinta-cu-varza-reteta-taraneasca|G|Plăcintă țărănească cu varză|Călește varza tocată până se înmoaie.|Întinde aluatul în foi și umple-l cu varza.|Rulează și coace 40 de minute la 190°C.
+lplacinta-cu-mere-cu-foi-cumparate|D|Plăcintă cu mere cu foi cumpărate|Dă merele pe răzătoare și călește-le cu zahăr și scorțișoară.|Pune straturi de foi unse cu ulei și mere în tavă.|Coace 40 de minute la 180°C și pudrează cu zahăr.
+lplacinta-simpla-cu-mere|D|Plăcintă simplă cu mere|Fă un aluat fraged din făină, ulei, ou și zahăr.|Pune jumătate în tavă, apoi merele rase cu grișul și scorțișoara.|Acoperă cu restul aluatului și coace 45 de minute la 180°C.
+lplacinta-cu-dovleac-cu-foi-fragede-reteta-video|D|Plăcintă cu dovleac|Dă dovleacul pe răzătoare și înăbușă-l cu zahăr și scorțișoară.|Întinde foi din aluatul fraged și umple-le.|Coace 45 de minute la 180°C.
+lplacinta-cu-carne-de-pui|P|Plăcintă cu carne de pui|Călește puiul cu ciupercile și ardeiul.|Pune umplutura pe aluat, cu smântână și mozzarella.|Acoperă cu aluat și coace 40 de minute la 190°C.
+lpateuri-cu-branza-sarata-reteta-video-pas-cu-pas|G|Pateuri cu brânză sărată|Amestecă brânza cu oul.|Taie foietajul pătrate, pune umplutura și închide-le în triunghi.|Unge cu ou, presară susan și coace 25 de minute la 200°C.
+llangosi-umpluti-cu-branza-reteta-pas-cu-pas|G|Langoși umpluți cu brânză|Frământă un aluat cu drojdie și lasă-l să crească.|Umple bucăți de aluat cu brânză și aplatizează-le.|Prăjește-le în ulei câte 2 minute pe parte.
+lpogacele-cu-branza-si-unt-reteta-video-pas-cu-pas|G|Pogăcele cu brânză și unt|Frământă un aluat cu drojdie, unt și brânză rasă.|Întinde-l, împăturește-l de câteva ori și taie pogăcele.|Unge cu ou și coace 20 de minute la 200°C.
+lcovrigi-sarbesti|G|Covrigi de casă cu sare|Frământă un aluat cu drojdie și lasă-l să crească.|Formează covrigi și opărește-i scurt în apă clocotită.|Presară sare și coace 20 de minute la 220°C.
+lgogosi-pripite-reteta-de-gogosi-cu-aluat-oparit-fara-drojdie|D|Gogoși pripite|Fierbe laptele cu untul, toarnă făina și amestecă până se desprinde aluatul.|Încorporează ouăle pe rând.|Prăjește gogoși mici cu lingurița și tăvălește-le prin zahăr.
+lbudinca-de-paine-reteta-de-la-mama|D|Budincă de pâine|Înmoaie pâinea în lapte.|Amestec-o cu brânza, ouăle, zahărul și stafidele.|Coace 45 de minute la 180°C.
+lbudinca-de-orez-cu-lapte-fara-coacere-reteta-video|D|Orez cu lapte|Fierbe orezul în apă 5 minute.|Adaugă laptele și fierbe la foc mic, amestecând, 30 de minute.|Pune zahărul și vanilia și servește cu scorțișoară.
+lbudinca-de-gris-cu-lapte-cu-dulceata-si-branza-de-vaci|D|Budincă de griș cu brânză și dulceață|Fierbe grișul în lapte cu zahăr.|Amestecă brânza și ouăle.|Coace 30 de minute la 180°C și servește cu dulceață.
+lmuffins-cu-mere-zahar-brun-si-scortisoara|D|Brioșe cu mere și scorțișoară|Amestecă făina, zahărul și praful de copt cu ouăle, uleiul și smântâna.|Adaugă merele cuburi și scorțișoara.|Coace în forme de brioșe 25 de minute la 180°C.
+lbriose-aperitiv-cu-dovlecei|G|Brioșe aperitiv cu dovlecei|Amestecă ouăle cu făina, uleiul și cașcavalul.|Adaugă dovleceii rași și verdeața.|Coace în forme 25 de minute la 180°C.
+lbriose-aperitiv-cu-piept-de-pui|G|Brioșe aperitiv cu pui|Amestecă ouăle cu făina, uleiul și cașcavalul.|Adaugă pieptul fiert și tocat și verdeața.|Coace în forme 25 de minute la 180°C.
+lquiche-cu-gorgonzola-si-sunca|M|Quiche cu șuncă și brânză|Întinde aluatul fraged în formă și coace-l 10 minute.|Pune șunca și brânza.|Toarnă ouăle bătute cu smântână și coace 30 de minute la 180°C.
+lpancakes-de-dovlecei-rasi-cu-verdeturi-si-usturoi|M|Clătite de dovlecei cu verdețuri|Dă dovleceii pe răzătoare și stoarce-i.|Amestecă-i cu ouăle, făina, verdețurile și usturoiul.|Coace clătite mici în puțin ulei și servește cu iaurt.
+etoast-cu-ricotta-si-dovlecei|M|Toast cu ricotta și dovlecei|Sotează dovleceii feliați cu usturoi.|Prăjește pâinea și unge-o cu ricotta.|Pune dovleceii deasupra.
+eomleta-cu-malai|M|Omletă cu mălai|Bate ouăle cu mălaiul și sare.|Toarnă-le în tigaie și presară cașcaval și ceapă verde.|Gătește acoperit la foc mic.
+ebol-de-orez-cu-oua-si-somon|P|Bol de orez cu ouă și somon|Fierbe orezul.|Rumenește somonul și fă ouăle ochiuri.|Pune totul în bol și stropește cu sos de soia.
+eoua-cu-ciuperci-portobello-si-spanac|M|Ouă cu ciuperci și spanac|Rumenește ciupercile.|Adaugă spanacul și lasă-l să scadă.|Sparge ouăle deasupra și gătește acoperit 3 minute.
+eghiveci-de-legume-cu-linte-si-oua-ochiuri|P|Ghiveci cu linte și ouă ochiuri|Călește ceapa și ardeiul, adaugă roșiile și lintea fiartă.|Fierbe 10 minute.|Sparge ouăle deasupra și gătește acoperit până se încheagă.
+eomleta-cu-cartofi-dulci|M|Omletă cu cartofi dulci|Rumenește cartofii dulci feliați subțire.|Toarnă ouăle bătute și presară telemea și ceapă verde.|Gătește acoperit la foc mic.
+-etoast-cu-ridichi-si-ou
+eclatite-cu-gem|M|Clătite cu gem|Bate ouăle cu laptele și făina.|Coace clătitele în tigaie.|Unge-le cu gem și rulează-le.
+etoast-cu-ricotta-si-lamaie|M|Toast cu ricotta și lămâie|Amestecă ricotta cu coajă de lămâie și puțin usturoi.|Unge pâinea prăjită.|Stropește cu ulei și presară piper.
+eoua-ochiuri|M|Ouă ochiuri|Încinge puțin ulei.|Sparge ouăle și gătește-le la foc mic până se încheagă albușul.|Presară sare.
+efasole-verde-cu-jumari-de-oua|P|Fasole verde cu jumări de ouă|Sotează fasolea verde cu usturoiul.|Adaugă ouăle bătute și amestecă până se încheagă.|Stropește cu puțin sos de soia.
+eoua-umplute-cu-tarhon|G|Ouă umplute cu tarhon|Fierbe ouăle tari și taie-le în două.|Pasează gălbenușurile cu unt, smântână, muștar și tarhon.|Umple albușurile.
+eclatite-de-branza|M|Clătite de brânză|Amestecă brânza cu ouăle, făina și puțin zahăr.|Coace clătite mici în puțin ulei.|Servește cu smântână.
+eclatite-cu-spanac|M|Clătite cu spanac|Mixează spanacul cu ouăle, laptele și făina.|Coace clătite subțiri.|Servește cu smântână și ceapă verde.
+efrittata-cu-somon|M|Frittata cu somon|Bate ouăle cu mărarul.|Pune somonul în tigaie și toarnă ouăle.|Gătește la foc mic, apoi termină la cuptor 5 minute.
+eomleta-taraneasca-la-cuptor|M|Omletă țărănească la cuptor|Rumenește cartofii cuburi cu costița și ceapa.|Toarnă ouăle bătute.|Coace 15 minute la 180°C și presară pătrunjel.
+eomleta-cu-ciuperci-si-cascaval|M|Omletă cu ciuperci și cașcaval|Rumenește ciupercile.|Toarnă ouăle bătute și presară cașcaval.|Gătește la foc mic și împăturește.
+eclatite-de-conopida|G|Clătite de conopidă|Fierbe conopida și toac-o mărunt.|Amestec-o cu ouăle, brânza și ceapa.|Coace clătite mici în puțin ulei.
+eclatite-de-varza|G|Clătite de varză|Toacă varza fin și amestec-o cu ouăle, morcovul și făina.|Coace clătite mici în puțin ulei.|Servește cu smântână.
+eoua-in-sos-de-rosii-si-chorizo|M|Ouă în sos de roșii cu chorizo|Călește ceapa și chorizo.|Adaugă roșiile și fierbe 15 minute.|Sparge ouăle în sos și gătește acoperit până se încheagă.
+eclatite-de-dovlecei-si-branza|M|Clătite de dovlecei cu brânză|Amestecă dovleceii rași cu brânza, oul, morcovul și verdețurile.|Coace clătite mici în puțin ulei.
+eplacinte-cu-urda-si-marar|G|Plăcinte cu urdă și mărar|Fă un aluat fraged din făină, unt și iaurt.|Umple-l cu urdă cu mărar și ou.|Coace 25 de minute la 180°C.
+efrittata-cu-ciuperci-si-branza-de-capra|M|Frittata cu ciuperci și brânză|Călește ciupercile și ceapa verde.|Toarnă ouăle bătute cu smântână și presară brânza.|Coace 15 minute la 180°C.
+emuffins-cu-branza-de-capra|M|Brioșe sărate cu brânză|Amestecă făina cu praful de copt, iaurtul, uleiul și brânza.|Adaugă pătrunjelul.|Coace în forme 25 de minute la 180°C.
+eiaurt-cu-spanac|G|Iaurt cu spanac și usturoi|Călește spanacul și lasă-l să se răcească.|Amestecă-l cu iaurtul, usturoiul și lămâia.|Stropește cu ulei.
+ecartofi-cu-chorizo-si-oua|M|Cartofi cu chorizo și ouă|Rumenește cartofii cuburi.|Adaugă chorizo și boiaua.|Sparge ouăle deasupra și gătește acoperit.
+eplacintele-cu-branza-gratinate|G|Plăcințele cu brânză gratinate|Umple aluatul cu brânză amestecată cu ou.|Unge cu smântână.|Coace 20 de minute la 200°C.
+esandwich-cu-vita-si-cascaval|P|Sandviș cald cu vită și cașcaval|Rumenește fâșiile de vită cu ceapa și ardeiul.|Pune-le în chiflă cu cașcaval.|Încălzește în tigaie până se topește cașcavalul.
+eplacinta-cu-carne|P|Plăcintă cu carne|Călește carnea tocată cu ceapa.|Întinde aluatul, pune carnea și rulează.|Coace 40 de minute la 190°C.
+-eplacinta-cu-branza-si-spanac
+eplacinta-cu-mere|D|Plăcintă cu mere și unt|Fă un aluat fraged cu unt.|Pune merele feliate cu scorțișoară.|Coace 40 de minute la 180°C.
+eclatita-la-cuptor|M|Clătită la cuptor cu scorțișoară|Bate oul cu laptele, făina și zahărul.|Toarnă în tigaia cu unt încins.|Coace 15 minute la 200°C și presară scorțișoară.
+eclatite-olandeze-cu-mere|M|Clătite olandeze cu mere|Bate oul cu laptele și făina.|Pune feliile de măr în tigaia cu unt.|Toarnă aluatul și coace la cuptor 15 minute la 200°C.
+ejumari-de-oua-cu-dovlecei|M|Jumări de ouă cu dovlecei|Călește ceapa și dovleceii.|Adaugă ouăle bătute și amestecă până se încheagă.|Presară pătrunjel și oregano.
+esandwich-cu-curcan|P|Sandviș cu curcan și legume|Rumenește fâșiile de curcan cu ceapa și ardeiul.|Pune-le în pâine cu roșii.|Presară susan.
+equiche-cu-rosii-si-branza-de-capra|M|Quiche cu roșii și brânză|Întinde aluatul fraged în formă.|Pune roșiile și brânza.|Toarnă ouăle bătute cu smântână și coace 35 de minute la 180°C.
+egogosi-la-cuptor|D|Gogoși la cuptor|Amestecă făina, zahărul, laptele, untul și oul.|Toarnă în forme de gogoși.|Coace 15 minute la 180°C și tăvălește prin zahăr cu scorțișoară.
+eplacinta-cu-branza-si-smantana|D|Plăcintă cu brânză și smântână|Amestecă brânza cu smântâna, ouăle și zahărul.|Pune-o între foi de aluat.|Toarnă lapte și coace 45 de minute la 180°C.
+eplacinta-rasturnata-cu-spanac-si-sunca|G|Plăcintă răsturnată cu spanac și șuncă|Pune spanacul și șunca în tavă.|Toarnă aluatul din făină, iaurt și lapte.|Coace 35 de minute și răstoarnă.
+eclatite-cu-cacao-si-mascarpone|D|Clătite cu cacao și mascarpone|Fă clătite cu cacao.|Umple-le cu mascarpone bătut cu zahăr.|Rulează și servește.
+epancakes-cu-sos-de-lamaie|M|Pancakes cu sos de lămâie|Amestecă smântâna cu ouăle, făina și praful de copt.|Coace pancakes mici.|Servește cu sos din zeamă de lămâie și zahăr.
+eplacinta-cu-visine|D|Plăcintă cu vișine|Fă un aluat fraged cu unt.|Pune vișinele amestecate cu zahăr și amidon.|Acoperă cu aluat și coace 45 de minute la 180°C.
+ebudinca-de-orez-cu-sos-de-visine|D|Orez cu lapte și sos de vișine|Fierbe orezul în lapte cu zahăr.|Fierbe vișinele cu zahăr și amidon până se îngroașă.|Servește orezul cu sosul.

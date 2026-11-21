@@ -182,17 +182,19 @@ for r in data['recipes']:
 
 # curăță pozele rămase de la rețete șterse
 for f in os.listdir(OUT_R):
-    if f[:-4] not in have:
+    if f.endswith('.jpg') and f[:-4] not in have:  # .webp: rețete importate/românești/clasice, au scripturile lor
         os.remove(os.path.join(OUT_R, f))
 
 with open(os.path.join(ROOT, 'src', 'data', 'photos.ts'), 'w') as f:
     f.write('// Generat de scripts/build_photos.py. Nu edita de mână.\n')
     f.write('/* eslint-disable */\n')
+    f.write("import { EXTRA_PHOTO } from './photos_extra';\n")
     f.write("import { IMPORT_PHOTO } from './photos_import';\n")
+    f.write("import { RO_PHOTO } from './photos_ro';\n")
     f.write('export const RECIPE_PHOTO: Record<string, number> = {\n')
     for r in data['recipes']:
         f.write(f"  {json.dumps(r['id'])}: require('../../assets/food/r/{r['id']}.jpg'),\n")
-    f.write('  ...IMPORT_PHOTO,\n};\n\nexport const INGREDIENT_PHOTO: Record<string, number> = {\n')
+    f.write('  ...IMPORT_PHOTO,\n  ...RO_PHOTO,\n  ...EXTRA_PHOTO,\n};\n\nexport const INGREDIENT_PHOTO: Record<string, number> = {\n')
     for iid in sorted(ing_ok):
         f.write(f"  {json.dumps(iid)}: require('../../assets/food/i/{iid}.webp'),\n")
     f.write('};\n')

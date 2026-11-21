@@ -381,6 +381,15 @@ export function MealsPerDay({ value, onChange }: { value: Slot[]; onChange: (v: 
   return (
     <View style={{ gap: 6 }}>
       <Segmented options={[2, 3, 4, 5].map((k) => ({ label: `${k} mese`, value: k }))} value={Math.min(5, Math.max(2, n))} onChange={(k) => onChange(MEAL_SETS[k])} />
+      {n === 2 && (
+        // la 2 mese alegi care: nu e obligatoriu ca amândouă să fie mâncare gătită
+        <Segmented options={[
+          { label: 'Prânz + cină', value: 'pranz' },
+          { label: 'Mic dejun + cină', value: 'mic_dejun' },
+          { label: 'Mic dejun + prânz', value: 'md_pranz' },
+        ]} value={value.includes('cina') ? (value.includes('pranz') ? 'pranz' : 'mic_dejun') : 'md_pranz'}
+          onChange={(v) => onChange(v === 'pranz' ? ['pranz', 'cina'] : v === 'mic_dejun' ? ['mic_dejun', 'cina'] : ['mic_dejun', 'pranz'])} />
+      )}
       <T v="small">{value.map((s) => SLOT_LABEL[s].replace(' (dimineața)', '').replace(' (după-amiaza)', '').toLowerCase()).join(', ')}. Caloriile zilei se împart între ele și suma nu trece de ținta ta.</T>
     </View>
   );
