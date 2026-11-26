@@ -102,6 +102,10 @@ export interface Recipe {
   photo?: string;
   /** cine a făcut rețeta (rețetele tale și cele primite) */
   author?: string;
+  /** ștearsă de tine, dar păstrată pentru mesele din planurile în care a fost (nu mai apare nicăieri) */
+  hidden?: boolean;
+  /** id-ul rețetei publicate la „Rețete de la alții” (dacă ai publicat-o) */
+  publicId?: string;
   /** pentru ce moment al zilei e (rețetele tale): mic dejun, prânz, cină, gustare, desert */
   moments?: ('mic_dejun' | 'pranz' | 'cina' | 'gustare' | 'desert')[];
 }
@@ -155,12 +159,19 @@ export interface Member {
   highProtein?: boolean;
   /** ajustare manuală din urmărirea greutății */
   kcalAdjust: number;
+  /** mesele la care nu e acasă (mănâncă la serviciu, la școală): planul nu-i pune porție */
+  away?: Slot[];
 }
 
 export type Slot = 'mic_dejun' | 'gustare1' | 'pranz' | 'gustare2' | 'cina';
 
 export type FastPref = 'niciunul' | 'miercuri_vineri' | 'posturile_mari' | 'toate';
 export type FastLevel = 'none' | 'no_meat' | 'fish_ok' | 'strict';
+
+export type MealStyle = 'acasa' | 'variat' | 'usor';
+/** cât de des același fel: proaspăt = fiecare masă alt fel; mare = cel mult de 2 ori… */
+export type Variety = 'proaspat' | 'mare' | 'echilibrat' | 'rar';
+export type SlotPref = 'orice' | 'ciorba' | 'fel' | 'usor';
 
 export interface Settings {
   equipment: Equipment[];
@@ -175,7 +186,16 @@ export interface Settings {
   fasting: FastPref;
   fishOnDispensation: boolean;
   /** cât de des accepți același fel: mare = maxim 2 mese, echilibrat = 3, rar = gătești mult odată */
-  variety?: 'mare' | 'echilibrat' | 'rar';
+  variety?: Variety;
+  /** felurile laborioase (sarmale, musaca, lasagna, colțunași): doar în weekend (implicit), oricând sau deloc */
+  effort?: 'weekend' | 'oricand' | 'simplu';
+  /** câte zile mănânci din aceeași oală de ciorbă: 1 = o dată și gata; implicit 2 */
+  soupDays?: 1 | 2 | 3;
+  /** ce vrei la o anumită masă (de ex. la prânz ciorbă, seara ceva ușor); lipsă = orice */
+  slotPrefs?: Partial<Record<Slot, SlotPref>>;
+  /** cum mâncați: „acasa” = ca acasă (ciorbă la prânz, carne cu garnitură seara, rețete românești),
+   *  „variat” = bucătării din toată lumea, „usor” = mese mai ușoare (supe, salate, carne slabă cu legume) */
+  mealStyle?: MealStyle;
   /** cât de des carne la mesele principale */
   meatStyle?: 'des' | 'echilibrat' | 'rar';
   /** bucătării preferate (+1) sau evitate (-1) */
@@ -270,6 +290,8 @@ export interface WeekPlan {
   skipped?: string[];
   /** mesele fixate cu lacătul („zi|masă”) */
   locked?: string[];
+  /** când a fost bifat sau debifat ultima oară fiecare produs de pe listă (pentru familia pe mai multe telefoane) */
+  shopAt?: Record<string, number>;
 }
 
 export interface PantryItem { id: string; ingId: string; g: number; expiresISO: string }

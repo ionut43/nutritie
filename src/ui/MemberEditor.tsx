@@ -2,11 +2,13 @@ import React from 'react';
 import { Modal, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import type { Member } from '../logic/types';
-import { ActivityForm, AvoidForm, BodyForm, DietForm, GoalForm, HealthForm, SportForm, TargetPreview } from './forms';
+import { useStore } from '../store/useStore';
+import { ActivityForm, AvoidForm, AwayForm, BodyForm, DietForm, GoalForm, HealthForm, SportForm, TargetPreview } from './forms';
 import { Btn, Row, Section, T, useTheme } from './kit';
 
 /** Formular complet pentru un membru (folosit în configurare și în Profil) */
 export function MemberFields({ m, onChange }: { m: Member; onChange: (m: Member) => void }) {
+  const slots = useStore((s) => s.settings.slots);
   return (
     <View style={{ gap: 18 }}>
       <BodyForm m={m} onChange={onChange} />
@@ -14,6 +16,7 @@ export function MemberFields({ m, onChange }: { m: Member; onChange: (m: Member)
       <Section title="O zi obișnuită"><ActivityForm m={m} onChange={onChange} /></Section>
       <Section title="Sport"><SportForm m={m} onChange={onChange} /></Section>
       <Section title="Detalii"><HealthForm m={m} onChange={onChange} /></Section>
+      <Section title="Mese acasă"><AwayForm m={m} slots={slots} onChange={onChange} /></Section>
       <Section title="Cum mănâncă"><DietForm m={m} onChange={onChange} /></Section>
       <Section title="Ce nu mănâncă"><AvoidForm m={m} onChange={onChange} /></Section>
       <Section title="Rezultat"><TargetPreview m={m} /></Section>

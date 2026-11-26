@@ -7,6 +7,7 @@ import { RECIPE } from '../data/recipes';
 import { addDays, daysBetween, fmtDate, fromISO, todayISO, toISO, weekdayMon } from '../logic/dates';
 import { adaptiveSuggestion, computeTargets, weeksToTarget, weightTrend } from '../logic/energy';
 import { fmtRon, nf } from '../logic/format';
+import { mealLabel } from '../logic/planner';
 import { buildTaste, topIngredients } from '../logic/taste';
 import { foodSpent, type WeightEntry } from '../logic/types';
 import { FEATURES, featureOn } from '../logic/features';
@@ -25,7 +26,7 @@ const GOAL_SHORT = { slabire: 'Slăbesc', mentinere: 'Mă mențin', masa: 'Iau �
 export default function Profile() {
   const t = useTheme();
   const router = useRouter();
-  const { members, weightLog: allWeights, addWeight, removeWeight, adjustKcal, resetAll, lockEnabled, setLock, notifyExpiry, setNotifyExpiry, ratings, importData, lastBackupISO, spend, settings, setFeature, updateSettings } = useStore();
+  const { members, weightLog: allWeights, addWeight, removeWeight, adjustKcal, resetAll, lockEnabled, setLock, notifyExpiry, setNotifyExpiry, ratings, importData, lastBackupISO, spend, settings, setFeature, updateSettings, family } = useStore();
   const st = useStore();
   const on = (f: Parameters<typeof featureOn>[1]) => featureOn(st, f);
   const main = useActiveMember();
@@ -156,6 +157,10 @@ export default function Profile() {
           <LinkRow icon="storefront" title="Magazinele tale" onPress={() => router.push('/magazine')} />
           <Divider />
           <LinkRow icon="pricetag" title="Prețuri" onPress={() => router.push('/preturi')} />
+          <Divider />
+          <LinkRow icon="people" title={family ? `Familia pe mai multe telefoane: ${family.name}` : 'Familia pe mai multe telefoane'} onPress={() => router.push('/familie')} />
+          <Divider />
+          <LinkRow icon="globe-outline" title="Rețete de la alții" onPress={() => router.push('/comunitate')} />
         </Card>
       </Section>
 
@@ -171,7 +176,7 @@ export default function Profile() {
                     <Avatar name={m.name} color={t.accent} size={38} />
                     <View style={{ flex: 1 }}>
                       <T style={{ fontWeight: '700' }}>{m.name}</T>
-                      <T v="small">{tgm.age} ani · {tgm.kcal} kcal/zi</T>
+                      <T v="small">{tgm.age} ani, {tgm.kcal} kcal/zi{m.away?.filter((x) => settings.slots.includes(x)).length ? `, nu e acasă la ${m.away.filter((x) => settings.slots.includes(x)).map((x) => mealLabel(x).toLowerCase()).join(' și ')}` : ', mănâncă acasă la toate mesele'}</T>
                     </View>
                     <Icon name="chevron-forward" color={t.muted} size={18} />
                   </Pressable>
@@ -180,6 +185,7 @@ export default function Profile() {
             })}
           </Card>
         )}
+        {others.length > 0 && <T v="small">Mâncați aceleași feluri, fiecare în porția lui; lista și cămara sunt comune. Pe „Azi”, alege numele cuiva ca să-i vezi porțiile.</T>}
       </Section>}
 
       <Section title={Platform.OS === 'web' ? 'Siguranță' : 'Notificări și siguranță'}>

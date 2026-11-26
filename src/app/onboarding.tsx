@@ -8,7 +8,7 @@ import { uid } from '../logic/pantry';
 import type { Member, Settings } from '../logic/types';
 import { DEFAULT_SETTINGS, newMember, useStore } from '../store/useStore';
 import {
-  ActivityForm, AvoidForm, BodyForm, DietStyleForm, MealsPerDay, FastingForm, GoalForm, HealthForm, SportForm, StoresForm, TargetPreview,
+  ActivityForm, AvoidForm, BodyForm, DietStyleForm, MealStyleForm, MealsPerDay, FastingForm, GoalForm, HealthForm, SportForm, StoresForm, TargetPreview,
 } from '../ui/forms';
 import { Btn, Card, DISPLAY, Icon, type IconName, NumberField, Row, Segmented, T, useTheme } from '../ui/kit';
 import { pickBackup } from '../ui/backup';
@@ -110,6 +110,8 @@ export default function Onboarding() {
       body: (
         <View style={{ gap: 18 }}>
           <MealsPerDay value={settings.slots} onChange={(slots) => patch({ slots, slotsAsked: true })} />
+          <T v="h3">Cum mâncați de obicei?</T>
+          <MealStyleForm s={settings} onSettings={patch} />
           <Pressable onPress={() => setAvoid(!avoid)} hitSlop={6}>
             <Row gap={6}>
               <Icon name={avoid ? 'chevron-up' : 'chevron-down'} color={t.primary} size={18} />

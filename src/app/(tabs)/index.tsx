@@ -14,9 +14,9 @@ import { daysLeft } from '../../logic/pantry';
 import { mealLabel, mealMacros, sessionMeals, sidesLabel, SLOT_ORDER } from '../../logic/planner';
 import { UpdateBanner } from '../../ui/UpdateBanner';
 import { RefitBanner } from '../../ui/RefitBanner';
-import type { FoodLogEntry, PlannedMeal, Slot, WeekPlan } from '../../logic/types';
+import type { FoodLogEntry, Member, PlannedMeal, Slot, WeekPlan } from '../../logic/types';
 import { eatenKey, ownedBy, planForDate, useActiveMember, useFeature, useStore } from '../../store/useStore';
-import { Btn, DISPLAY, DISPLAY_X, FoodImage, Icon, Row, T, useTheme } from '../../ui/kit';
+import { Btn, Chip, DISPLAY, DISPLAY_X, FoodImage, Icon, Row, T, useTheme } from '../../ui/kit';
 import { MealSheet } from '../../ui/MealSheet';
 import { Avatar } from '../../ui/shared';
 import { MealArc } from '../../ui/MealArc';
@@ -77,6 +77,8 @@ export default function Today() {
   for (const slot of SLOT_ORDER) {
     const m = plan?.meals.find((x) => x.day === day && x.slot === slot);
     const slotExtras = extras.filter((f) => f.slot === slot);
+    // la masa asta nu e acasă (serviciu, școală): nu apare în ziua lui
+    if (m && plan && !m.shares.some((x) => x.memberId === main.id)) continue;
     if (m && plan) {
       const key = eatenKey(main.id, m.day, m.slot);
       const state = plan.eaten.includes(key) ? 'done' : slotExtras.length ? 'replaced' : plan.skipped?.includes(key) ? 'skipped' : 'todo';
@@ -126,6 +128,8 @@ export default function Today() {
             <Avatar name={main.name} color={t.primary} size={40} />
           </Pressable>
         </Row>
+
+        {members.length > 1 && plan && <FamilyDay plan={plan} day={day} members={members} onOpen={(meal) => setOpen({ plan, meal })} />}
 
         <UpdateBanner />
         <RefitBanner />
@@ -231,6 +235,41 @@ export default function Today() {
 
       <MealSheet open={open} mainId={main.id} onClose={() => setOpen(null)} />
     </SafeAreaView>
+  );
+}
+
+/** ce mănâncă fiecare din casă azi: aceleași feluri, porții diferite; cine nu e acasă la o masă */
+function FamilyDay({ plan, day, members, onOpen }: { plan: WeekPlan; day: number; members: Member[]; onOpen: (m: PlannedMeal) => void }) {
+  const t = useTheme();
+  const [who, setWho] = useState<string | null>(null);
+  const meals = SLOT_ORDER.map((s) => plan.meals.find((m) => m.day === day && m.slot === s)).filter((m): m is PlannedMeal => !!m);
+  const first = (m: Member) => m.name.trim().split(' ')[0] || 'Membru';
+  const sel = members.find((m) => m.id === who);
+  return (
+    <View style={{ gap: 8 }}>
+      <Row wrap gap={8}>
+        <T v="small" style={{ fontWeight: '700' }}>Ce mănâncă azi</T>
+        {members.filter((m) => !m.isMain).map((m) => (
+          <Chip key={m.id} label={first(m)} icon="person" selected={m.id === who} onPress={() => { tick(); setWho(m.id === who ? null : m.id); }} />
+        ))}
+      </Row>
+      {sel && (
+        <View style={[st.card, { borderColor: t.border, backgroundColor: t.card, gap: 6 }]}>
+          {meals.map((m) => {
+            const sh = m.shares.find((x) => x.memberId === sel.id);
+            return (
+              <Pressable key={m.slot} onPress={() => onOpen(m)}>
+                <T v="small">
+                  <T v="small" style={{ fontWeight: '700' }}>{mealLabel(m.slot)}: </T>
+                  {sh ? `${RECIPE[m.recipeId]?.name ?? ''}${sidesLabel(m) ? ` ${sidesLabel(m)}` : ''}, ${Math.round(mealMacros(m, sel.id).kcal)} kcal` : 'nu e acasă'}
+                </T>
+              </Pressable>
+            );
+          })}
+          <T v="small" color={t.muted}>Aceleași feluri ca tine, în porția potrivită pentru {first(sel)}. Atinge o masă ca să vezi porțiile.</T>
+        </View>
+      )}
+    </View>
   );
 }
 

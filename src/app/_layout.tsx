@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Stack, useRouter } from 'expo-router';
 import { VisionHost } from '../ui/VisionHost';
 import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, Platform, View } from 'react-native';
+import { ActivityIndicator, AppState, Platform, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useStore } from '../store/useStore';
 import { DISPLAY, useTheme } from '../ui/kit';
@@ -17,6 +17,7 @@ import { autoBackup } from '../ui/backup';
 import { installWebShims } from '../ui/webShims';
 import { rescheduleExpiry, setupNotifications } from '../ui/notify';
 import { useEffect } from 'react';
+import { startSync, stopSync, syncNow } from '../sync/family';
 
 installWebShims();
 
@@ -42,6 +43,14 @@ export default function RootLayout() {
     }).catch(() => {});
   }, [hydrated]);
   // o copie automată pe telefon, o dată pe săptămână
+  // familia pe mai multe telefoane: pornește sincronizarea și o reia când revii în aplicație
+  const familyId = useStore((s) => s.family?.id);
+  useEffect(() => {
+    if (!hydrated || !familyId) return;
+    void startSync();
+    const sub = AppState.addEventListener('change', (st) => { if (st === 'active') syncNow().catch(() => {}); });
+    return () => { sub.remove(); stopSync(); };
+  }, [hydrated, familyId]);
   useEffect(() => {
     if (!hydrated) return;
     const h = setTimeout(() => { autoBackup(); }, 4000);
@@ -84,6 +93,8 @@ export default function RootLayout() {
         <Stack.Screen name="preturi" options={{ title: 'Prețuri ingrediente' }} />
         <Stack.Screen name="reteta-noua" options={{ title: 'Rețetă nouă' }} />
         <Stack.Screen name="import" options={{ title: 'Rețetă primită' }} />
+        <Stack.Screen name="familie" options={{ title: 'Familia pe mai multe telefoane' }} />
+        <Stack.Screen name="comunitate" options={{ title: 'Rețete de la alții' }} />
         <Stack.Screen name="gatit/[id]" options={{ title: 'Mod de gătit', presentation: 'fullScreenModal', headerShown: false }} />
         <Stack.Screen name="scanare" options={{ title: 'Scanează', headerShown: false }} />
         <Stack.Screen name="adauga" options={{ headerShown: false, presentation: 'modal' }} />

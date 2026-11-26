@@ -11,6 +11,9 @@ import {
 import { pantryTotals } from '../../logic/pantry';
 import { costPerPortion } from '../../logic/planner';
 import { MOMENT_LABEL, shareLink, shareText } from '../../logic/recipeShare';
+import type { Recipe } from '../../logic/types';
+import { friendly } from '../../sync/family';
+import { publishRecipe, unpublishRecipe } from '../../sync/publicRecipes';
 import { STORE } from '../../logic/stores';
 import { useStore } from '../../store/useStore';
 import { Btn, Card, Chip, DISPLAY, Divider, FoodImage, Icon, IconBtn, MacroBar, Notice, NumberField, Pill, Row, Section, T, useTheme } from '../../ui/kit';
@@ -75,6 +78,7 @@ export default function RecipeDetail() {
             <Btn title="Trimite rețeta" icon="share-social-outline" variant="secondary"
               onPress={() => Share.share({ message: shareText(r, shareLink(r, useStore.getState().customIngredients)) }).catch(() => {})} />
           )}
+          {r.custom && <PublishBlock r={r} />}
           {(r.video || r.source) && (
             <Row>
               {r.video && <Btn title="Video" icon="logo-youtube" variant="secondary" small style={{ flex: 1 }}
@@ -168,6 +172,39 @@ function Stat({ label, v, color }: { label: string; v: string | number; color?: 
     <View style={{ alignItems: 'center' }}>
       <T v="h2" color={color}>{v}</T>
       <T v="small">{label}</T>
+    </View>
+  );
+}
+
+/** rețeta ta la „Rețete de la alții”: o publici, o actualizezi sau o retragi */
+function PublishBlock({ r }: { r: Recipe }) {
+  const t = useTheme();
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const author = r.author?.trim() || useStore.getState().members.find((m) => m.isMain)?.name.trim() || '';
+  const run = async (f: () => Promise<string>) => {
+    setBusy(true); setMsg(null);
+    try { setMsg({ ok: true, text: await f() }); } catch (e) { setMsg({ ok: false, text: friendly(e) }); } finally { setBusy(false); }
+  };
+  const publish = () => run(async () => {
+    const id = await publishRecipe(r, useStore.getState().customIngredients, author, r.publicId);
+    useStore.getState().saveRecipe({ ...r, publicId: id });
+    return r.publicId ? 'Am actualizat rețeta publicată.' : `Rețeta e la „Rețete de la alții”, cu „făcută de ${author || 'Anonim'}”.`;
+  });
+  const unpublish = () => run(async () => {
+    if (r.publicId) await unpublishRecipe(r.publicId);
+    const { publicId: _p, ...rest } = r;
+    useStore.getState().saveRecipe(rest);
+    return 'Am retras-o. Rămâne la rețetele tale.';
+  });
+  return (
+    <View style={{ gap: 6 }}>
+      <Row>
+        <Btn title={r.publicId ? 'Actualizează rețeta publicată' : 'Publică pentru toți'} icon="globe-outline" variant="secondary" small style={{ flex: 1 }} disabled={busy} onPress={publish} />
+        {r.publicId && <Btn title="Retrage" icon="eye-off-outline" variant="ghost" small disabled={busy} onPress={unpublish} />}
+      </Row>
+      {!r.publicId && <T v="small">O vede oricine are aplicația, cu numele „{author || 'Anonim'}”. Poza nu se trimite.</T>}
+      {msg && <T v="small" color={msg.ok ? t.primary : t.danger}>{msg.text}</T>}
     </View>
   );
 }

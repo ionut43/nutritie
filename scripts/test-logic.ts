@@ -9,8 +9,8 @@ import { computeTargets } from '../src/logic/energy';
 import { fastInfo, orthodoxEaster } from '../src/logic/fasting';
 import { fastAllows, perServing, recipeAllergens, recipeDiet } from '../src/logic/nutrition';
 import { addToPantry, consumeFromPantry, recipesFromPantry } from '../src/logic/pantry';
-import { generatePlan, replaceSessionRecipe, alternativesFor, replaceSingleMeal, refitPlan, type PlanInput } from '../src/logic/planner';
-import type { Member, Settings } from '../src/logic/types';
+import { eatersAt, generatePlan, isHomely, isSoup, mealMacros, needsGarnish, replaceSessionRecipe, alternativesFor, replaceSingleMeal, refitPlan, slotShares, type PlanInput } from '../src/logic/planner';
+import type { Member, Settings, Slot } from '../src/logic/types';
 
 let passed = 0;
 const t = (name: string, fn: () => void) => { fn(); passed++; console.log('✓', name); };
@@ -313,7 +313,8 @@ t('de la o săptămână la alta nu se repetă', () => {
   const m2 = new Set(w2.meals.filter((m) => m.slot === 'pranz' || m.slot === 'cina').map((m) => m.recipeId));
   const same = [...m2].filter((id) => m1.has(id)).length;
   assert.ok(same <= 1, `${same} feluri principale repetate din săptămâna trecută`);
-  const again = generatePlan({ ...noFast, seed: 99 });
+  // „Alt plan” (din aplicație) trimite felurile de acum ca să le evite
+  const again = generatePlan({ ...noFast, seed: 99, previousRecipeIds: [...m1] });
   const m3 = new Set(again.meals.filter((m) => m.slot === 'pranz' || m.slot === 'cina').map((m) => m.recipeId));
   assert.ok([...m3].filter((id) => m1.has(id)).length < m1.size, '„Alt plan” dă exact același plan');
 });
@@ -413,8 +414,8 @@ t('fără ore: „Ieri: ai mâncat ce era în plan?” notează tot, doar prima 
   const st = useStore.getState();
   st.resetAll?.();
   useStore.setState({ members: [{ ...me, isMain: true }], onboarded: true, settings: { ...settings, fasting: 'niciunul', slots: ['pranz', 'cina'] } });
-  assert.equal(mealLabel('pranz'), 'Prima masă');
-  assert.equal(mealLabel('cina'), 'A doua masă');
+  assert.equal(mealLabel('pranz'), 'Prânz');
+  assert.equal(mealLabel('cina'), 'Cină');
   const plan = useStore.getState().generate('2026-11-16', { memberIds: ['me'], guests: 0, applyFasting: false }, 3);
   useStore.setState({ plans: { [plan.id]: { ...useStore.getState().plans[plan.id], createdAt: '2026-11-15T20:00:00' } } });
   const s2 = useStore.getState();
@@ -695,6 +696,136 @@ t('mic dejun variat și puțină linte la cine mănâncă de toate', () => {
   assert.ok(top / total <= 0.2, `un mic dejun e ${Math.round((100 * top) / total)}% din toate`);
   assert.ok(rare <= 16, `${rare} mese cu linte/năut/bulgur din ${mains}`);
   console.log(`   12 săptămâni: ${kinds.size} feluri de mic dejun (cel mai des ${top}/${total}), ${rare}/${mains} mese cu linte, năut sau bulgur`);
+});
+
+t('„ca acasă”: ciorbă de câteva ori pe săptămână (nu zilnic), seara rar ciorbă, carnea cu garnitură, fără bucătării exotice', () => {
+  let mains = 0, soups = 0, dinners = 0, soupDinner = 0, meatNoGarnish = 0, exotic = 0, wkLunch = 0, wkLunchSoup = 0;
+  for (const budget of [300, 450, 600]) for (const seed of [1, 2, 3]) {
+    const p = generatePlan({ ...base, members: [me, partner], household: { memberIds: ['me', 'p'], guests: 0, applyFasting: false },
+      settings: { ...settings, slots: ['mic_dejun', 'pranz', 'cina'], budgetRon: budget, fasting: 'niciunul', mealStyle: 'acasa' }, seed });
+    for (const m of p.meals) {
+      const r = RECIPE[m.recipeId];
+      if (m.slot === 'mic_dejun') continue;
+      mains++;
+      if (isSoup(r)) soups++;
+      if (!isHomely(r)) exotic++;
+      const dow = new Date(Date.parse(p.startISO) + m.day * 864e5).getUTCDay();
+      if (m.slot === 'pranz' && (dow === 0 || dow === 6)) { wkLunch++; if (isSoup(r) || m.sides?.some((x) => isSoup(RECIPE[x.recipeId]))) wkLunchSoup++; }
+      if (m.slot === 'cina') {
+        dinners++;
+        if (isSoup(r)) soupDinner++;
+        if (needsGarnish(r) && !m.sides?.some((x) => x.recipeId.startsWith('garnitura_') && x.recipeId !== 'garnitura_paine' && x.recipeId !== 'garnitura_salata')) meatNoGarnish++;
+      }
+    }
+  }
+  assert.ok(soups / mains >= 0.12 && soups / mains <= 0.45, `ciorbă la ${soups}/${mains} mese principale`);
+  assert.ok(soupDinner / dinners <= 0.2, `ciorbă seara la ${soupDinner}/${dinners}`);
+  assert.ok(wkLunchSoup / wkLunch >= 0.6, `în weekend ciorbă la prânz doar ${wkLunchSoup}/${wkLunch}`);
+  assert.equal(meatNoGarnish, 0, `${meatNoGarnish} cine cu carne fără garnitură`);
+  assert.equal(exotic, 0, `${exotic} mese din bucătării pe care nu le-ai ales`);
+  console.log(`   ciorbă la ${soups}/${mains} mese principale, seara ${soupDinner}/${dinners}, în weekend la prânz ${wkLunchSoup}/${wkLunch}`);
+});
+
+t('ce alegi tu contează: „fiecare masă alt fel” și „la prânz ciorbă”', () => {
+  for (const seed of [1, 2, 3]) {
+    const fresh = generatePlan({ ...base, settings: { ...settings, slots: ['mic_dejun', 'pranz', 'cina'], variety: 'proaspat', fasting: 'niciunul', budgetRon: 600 }, seed });
+    const ids = fresh.meals.filter((m) => m.slot !== 'mic_dejun').map((m) => m.recipeId);
+    assert.equal(new Set(ids).size, ids.length, `același fel de mai multe ori: ${ids.filter((x, i) => ids.indexOf(x) !== i).map((x) => RECIPE[x].name)}`);
+    const soupy = generatePlan({ ...base, settings: { ...settings, slots: ['mic_dejun', 'pranz', 'cina'], slotPrefs: { pranz: 'ciorba', cina: 'fel' }, fasting: 'niciunul', budgetRon: 600 }, seed });
+    const l = soupy.meals.filter((m) => m.slot === 'pranz');
+    assert.ok(l.filter((m) => isSoup(RECIPE[m.recipeId]) || m.sides?.some((x) => isSoup(RECIPE[x.recipeId]))).length >= 6, 'ai cerut ciorbă la prânz');
+    assert.ok(soupy.meals.filter((m) => m.slot === 'cina').every((m) => !isSoup(RECIPE[m.recipeId])), 'ai cerut fel principal seara');
+  }
+});
+
+t('„variat”: bucătăriile din toată lumea rămân posibile', () => {
+  const p = generatePlan({ ...base, settings: { ...settings, mealStyle: 'variat', budgetRon: 900 }, seed: 5 });
+  assert.ok(p.meals.length > 0);
+  assert.ok(!p.meals.filter((m) => m.slot === 'pranz').every((m) => isSoup(RECIPE[m.recipeId])), 'și la variat e doar ciorbă la prânz');
+});
+
+t('cine nu e acasă la prânz: n-are porție acolo, iar ziua lui de acasă iese cât restul țintei', () => {
+  const away = { ...partner, away: ['pranz'] as Slot[] };
+  const input: PlanInput = { ...base, members: [me, away], household: { memberIds: ['me', 'p'], guests: 0, applyFasting: false },
+    settings: { ...settings, slots: ['mic_dejun', 'pranz', 'cina'], fasting: 'niciunul' }, seed: 8 };
+  const p = generatePlan(input);
+  for (const m of p.meals) {
+    const has = m.shares.some((x) => x.memberId === 'p');
+    assert.equal(has, m.slot !== 'pranz', `${m.slot}: porția Partenerului`);
+    for (const sd of m.sides ?? []) assert.equal(sd.shares.some((x) => x.memberId === 'p'), m.slot !== 'pranz');
+  }
+  const tg = computeTargets(away).kcal;
+  const home = tg * (1 - slotShares(['mic_dejun', 'pranz', 'cina']).pranz);
+  for (let d = 0; d < 7; d++) {
+    const k = p.meals.filter((m) => m.day === d).reduce((a, m) => a + mealMacros(m, 'p').kcal, 0);
+    assert.ok(k <= home * 1.06, `ziua ${d}: ${Math.round(k)} kcal acasă, ținta de acasă ${Math.round(home)}`);
+  }
+  // îl pui înapoi acasă la prânz: planul îi pune din nou porție
+  const back = refitPlan(p, { ...input, members: [me, partner] }, 0).plan;
+  assert.ok(back.meals.filter((m) => m.slot === 'pranz').every((m) => m.shares.some((x) => x.memberId === 'p')), 'nu i s-a pus porție înapoi');
+  assert.deepEqual(eatersAt([{ id: 'x', away: ['pranz'] as Slot[] }], 'pranz').map((x) => x.id), ['x']);
+});
+
+t('ciorba „o dată și gata” nu se repetă; felurile grele (sarmale, musaca) doar în weekend sau deloc', () => {
+  for (const seed of [1, 2, 3, 4]) {
+    const p = generatePlan({ ...base, settings: { ...settings, slots: ['mic_dejun', 'pranz', 'cina'], soupDays: 1, fasting: 'niciunul', budgetRon: 600, mealStyle: 'acasa' }, seed });
+    const soupIds = p.meals.flatMap((m) => [m.recipeId, ...(m.sides ?? []).map((x) => x.recipeId)]).filter((id) => isSoup(RECIPE[id]));
+    assert.equal(new Set(soupIds).size, soupIds.length, `ciorbă repetată: ${soupIds.map((x) => RECIPE[x].name)}`);
+    for (const effort of ['weekend', 'simplu'] as const) {
+      const q = generatePlan({ ...base, settings: { ...settings, effort, cookingDays: [0, 1, 2, 3, 4, 5, 6], maxPrepWeekday: 240, maxPrepWeekend: 240, fasting: 'niciunul', budgetRon: 800 }, seed });
+      for (const sess of q.sessions) {
+        if (!RECIPE[sess.recipeId]?.tags?.includes('greu')) continue;
+        const dow = new Date(Date.parse(q.startISO) + sess.day * 864e5).getUTCDay();
+        assert.ok(effort === 'weekend' && (dow === 0 || dow === 6), `${RECIPE[sess.recipeId].name} gătit ${effort === 'simplu' ? 'deși ai zis deloc' : 'în timpul săptămânii'}`);
+      }
+    }
+  }
+});
+
+t('familia pe două telefoane: planul, lista, cămara și rețetele ajung la celălalt; bifele de pe amândouă rămân', () => {
+  const { docsFromState, applyDocs, renameMemberId, hash } = require('../src/sync/docs');
+  const plan = generatePlan({ ...noFast, seed: 7 });
+  // telefonul lui Cosmin (eu = „me” → id de cont), telefonul Alexiei (are și ea „me”)
+  const A0 = { members: [{ ...me, id: 'me', isMain: true }], plans: { [plan.id]: plan }, pantry: [{ id: 'x', ingId: 'oua', g: 300, expiresISO: '2026-12-01' }], settings: { ...settings, budgetRon: 500 }, customRecipes: [], customIngredients: [] };
+  const A = renameMemberId(A0, 'me', 'u_cosmin');
+  assert.equal(A.members[0].id, 'u_cosmin');
+  assert.ok(A.plans[plan.id].meals.every((m: { shares: { memberId: string }[] }) => !m.shares.some((x) => x.memberId === 'me')), 'a rămas „me” în plan');
+  const B = { members: [{ ...partner, id: 'u_alexia', isMain: true }], plans: {}, pantry: [], settings: { ...settings, budgetRon: 300 }, customRecipes: [{ ...RECIPE[plan.meals[0].recipeId], id: 'c_mama', name: 'Ciorba mamei', custom: true }], customIngredients: [] };
+  const toDocs = (st: object) => [...docsFromState(st).values()].map((d: { kind: string; key: string; json: string }) => ({ kind: d.kind, key: d.key, data: JSON.parse(d.json) }));
+  // Alexia intră: primește tot de la Cosmin
+  const r1 = applyDocs(B, toDocs(A), 'u_alexia', new Set());
+  const B1 = { ...B, ...r1.patch };
+  assert.ok(B1.plans[plan.id], 'planul n-a ajuns');
+  assert.equal(B1.pantry.length, 1);
+  assert.equal(B1.settings.budgetRon, 500, 'setările casei');
+  assert.deepEqual(r1.added, ['u_cosmin']);
+  assert.ok(B1.members.find((m: { id: string }) => m.id === 'u_cosmin')?.isMain === false);
+  assert.ok(B1.members.find((m: { id: string }) => m.id === 'u_alexia')?.isMain, 'Alexia rămâne „eu” pe telefonul ei');
+  // Cosmin primește rețeta Alexiei și profilul ei
+  const r2 = applyDocs(A, toDocs(B1), 'u_cosmin', new Set());
+  assert.ok(r2.patch.customRecipes?.some((x: { id: string }) => x.id === 'c_mama'));
+  assert.deepEqual(r2.added, ['u_alexia']);
+  // amândoi bifează în același timp: Cosmin un produs, Alexia o masă mâncată
+  const pa = { ...A.plans[plan.id], shopping: A.plans[plan.id].shopping.map((x: object, i: number) => (i === 0 ? { ...x, checked: true } : x)) };
+  const pb = { ...B1.plans[plan.id], eaten: ['u_alexia|0|pranz'] };
+  const merged = applyDocs({ ...A, plans: { [plan.id]: pa } }, [{ kind: 'plan', key: plan.id, data: pb }], 'u_cosmin', new Set([`plan:${plan.id}`])).patch.plans[plan.id];
+  assert.ok(merged.shopping[0].checked && merged.eaten.includes('u_alexia|0|pranz'), 's-a pierdut o bifă');
+  // Alexia a bifat un produs, Cosmin l-a debifat după ea: rămâne debifat (câștigă ultima atingere)
+  const it0 = pa.shopping[1].ingId;
+  const pa2 = { ...pa, shopping: pa.shopping.map((x: { ingId: string }) => (x.ingId === it0 ? { ...x, checked: undefined } : x)), shopAt: { [it0]: 2000 } };
+  const pb2 = { ...pb, shopping: pb.shopping.map((x: { ingId: string }) => (x.ingId === it0 ? { ...x, checked: true } : x)), shopAt: { [it0]: 1000 } };
+  const m2 = applyDocs({ ...A, plans: { [plan.id]: pa2 } }, [{ kind: 'plan', key: plan.id, data: pb2 }], 'u_cosmin', new Set([`plan:${plan.id}`])).patch.plans[plan.id];
+  assert.ok(!m2.shopping.find((x: { ingId: string }) => x.ingId === it0).checked, 'debifarea mai nouă s-a pierdut');
+  const m3 = applyDocs({ ...B1, plans: { [plan.id]: pb2 } }, [{ kind: 'plan', key: plan.id, data: pa2 }], 'u_alexia', new Set([`plan:${plan.id}`])).patch.plans[plan.id];
+  assert.ok(!m3.shopping.find((x: { ingId: string }) => x.ingId === it0).checked, 'pe celălalt telefon, debifarea mai nouă s-a pierdut');
+  // „Alt plan” pe un telefon înlocuiește planul vechi pe celălalt
+  const newer = { ...pb, createdAt: '2099-01-01T00:00:00', meals: [] };
+  assert.equal(applyDocs({ ...A, plans: { [plan.id]: pa } }, [{ kind: 'plan', key: plan.id, data: newer }], 'u_cosmin', new Set([`plan:${plan.id}`])).patch.plans[plan.id].meals.length, 0);
+  // cine iese din familie dispare de pe celălalt telefon
+  const r3 = applyDocs(B1, [{ kind: 'member', key: 'u_cosmin', data: null, deleted: true }], 'u_alexia', new Set());
+  assert.deepEqual(r3.removed, ['u_cosmin']);
+  assert.equal(hash('abc'), hash('abc'));
+  assert.notEqual(hash('abc'), hash('abd'));
 });
 
 console.log(`\n${passed} teste trecute`);

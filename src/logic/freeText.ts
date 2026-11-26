@@ -43,13 +43,24 @@ function bestMatch(words: string[]): FoodItem | undefined {
 }
 
 export function parseMealText(text: string): ParsedFood[] {
-  const parts = norm(text).split(/\s*(?:,|\+|;|\bsi\b|\bplus\b|\bapoi\b)\s*/).filter((p) => p.length > 1);
+  const parts = norm(text).split(/\s*(?:(?<!\d),|,(?!\d)|\+|;|\bsi\b|\bplus\b|\bapoi\b)\s*/).filter((p) => p.length > 1);
   const out: ParsedFood[] = [];
   for (const part of parts) {
     let q = 1;
     let size = 1;
+    let grams: number | undefined;
     const words: string[] = [];
-    for (const w of part.split(/\s+/)) {
+    // „500 g de pui”, „300g pui”, „0,5 l lapte”, „1 kg cartofi”: cantitatea în grame (cel mult 3 kg, peste e o greșeală de scris)
+    const unitRx = /^(\d+(?:[.,]\d+)?)\s*(g|gr|grame|gram|kg|kile|kilograme|ml|l|litri|litru)$/;
+    const toks = part.replace(/(\d)\s+(g|gr|grame|gram|kg|kile|kilograme|ml|l|litri|litru)\b/g, '$1$2').split(/\s+/);
+    for (const w of toks) {
+      const u = unitRx.exec(w);
+      if (u && !words.length) {
+        const v = Number(u[1].replace(',', '.'));
+        const g = /^k/.test(u[2]) || /^l/.test(u[2]) ? v * 1000 : v;
+        if (g > 0) grams = Math.min(3000, g);
+        continue;
+      }
       const num = Number(w.replace(',', '.'));
       if (!Number.isNaN(num) && num > 0 && num < 50 && !words.length) { q = num; continue; }
       if (QTY[w] !== undefined && !words.length) { q = QTY[w]; continue; }
@@ -62,7 +73,9 @@ export function parseMealText(text: string): ParsedFood[] {
     const item = bestMatch(words);
     if (!item) continue;
     const per = PIECES[item.ref];
-    const amount = item.per === 'portie' ? (per ? q / per : q) * size : (item.piece ? item.piece * q : item.amount * q) * size;
+    const amount = grams !== undefined
+      ? (item.per === 'portie' ? grams / (item.portionG ?? 250) : grams)
+      : item.per === 'portie' ? (per ? q / per : q) * size : (item.piece ? item.piece * q : item.amount * q) * size;
     out.push({ text: part, item, amount, kcal: Math.round(macrosFor(item, amount).kcal) });
   }
   return out;

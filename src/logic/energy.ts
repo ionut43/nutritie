@@ -87,6 +87,8 @@ export function bmiOf(m: Member): number {
 
 const round10 = (x: number) => Math.round(x / 10) * 10;
 
+const clampN = (x: number, a: number, b: number) => Math.min(b, Math.max(a, x));
+
 export function computeTargets(m: Member, at = new Date()): Targets {
   const age = ageOf(m, at);
   const w = m.weightKg;
@@ -131,7 +133,7 @@ export function computeTargets(m: Member, at = new Date()): Targets {
   if (!isChild && m.sex === 'f' && m.pregnancy !== 'nu') {
     if (goal !== 'mentinere') warnings.push('În sarcină sau alăptare nu se recomandă deficit caloric. Ținta e pentru menținere plus necesarul suplimentar.');
     goal = 'mentinere';
-    kcal += { nu: 0, t1: 0, t2: 340, t3: 452, alaptare: 330 }[m.pregnancy];
+    kcal += ({ nu: 0, t1: 0, t2: 340, t3: 452, alaptare: 330 } as Record<string, number>)[m.pregnancy] ?? 0;
   }
 
   if (!isChild && goal === 'slabire' && bmi < 18.5) {
@@ -153,7 +155,12 @@ export function computeTargets(m: Member, at = new Date()): Targets {
     kcal = tdee + Math.min(m.rateKg * 1100, 500);
   }
 
-  kcal += m.kcalAdjust;
+  kcal += Number.isFinite(m.kcalAdjust) ? m.kcalAdjust : 0;
+  // date greșite sau extreme (vârstă, înălțime, ajustare manuală): ținta rămâne într-un interval omenesc
+  if (!Number.isFinite(kcal)) kcal = isChild ? 1400 : 2000;
+  kcal = isChild ? clampN(kcal, 600, 3500) : clampN(kcal, goal === 'slabire' ? (m.sex === 'm' ? 1500 : 1200) : 1000, 6000);
+  if (!Number.isFinite(tdee)) tdee = kcal;
+  if (!Number.isFinite(bmr)) bmr = kcal / 1.4;
   kcal = round10(kcal);
 
   // Proteine: peste IMC 25 se socotesc pe greutatea ajustată (nu pe tot surplusul), și cel mult ~32% din calorii,

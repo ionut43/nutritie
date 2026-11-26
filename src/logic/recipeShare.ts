@@ -11,7 +11,7 @@ export const SHARE_BASE = 'https://ionut43.github.io/nutritie/import';
 export type Moment = 'mic_dejun' | 'pranz' | 'cina' | 'gustare' | 'desert';
 export const MOMENT_LABEL: Record<Moment, string> = { mic_dejun: 'Mic dejun', pranz: 'Prânz', cina: 'Cină', gustare: 'Gustare', desert: 'Desert' };
 
-interface Payload {
+export interface Payload {
   v: 1;
   n: string; a?: string; m: Moment[]; s: number; p: number; k: number; f?: 1;
   e: string[][]; i: [string, number][]; st: string[];
@@ -48,7 +48,8 @@ export function mealsFromMoments(ms: Moment[]): { meal: Recipe['meal']; dessert:
   return { meal: meal.length ? meal : ['principal'], dessert: ms.includes('desert') };
 }
 
-export function shareLink(r: Recipe, customIngredients: Ingredient[]): string {
+/** rețeta ca date de trimis (link sau rețete publice) */
+export function recipePayload(r: Recipe, customIngredients: Ingredient[]): Payload {
   const own = new Set(customIngredients.map((x) => x.id));
   const p: Payload = {
     v: 1, n: r.name, a: r.author, m: momentsOf(r), s: r.servings, p: r.prep, k: r.keepsDays, f: r.freezable ? 1 : undefined,
@@ -56,7 +57,14 @@ export function shareLink(r: Recipe, customIngredients: Ingredient[]): string {
     ci: customIngredients.filter((x) => own.has(x.id) && r.ing.some(([id]) => id === x.id)),
   };
   if (!p.ci?.length) delete p.ci;
-  return `${SHARE_BASE}?r=${b64url(JSON.stringify(p))}`;
+  return p;
+}
+
+/** parametrul `r` din link (pentru ecranul de import) */
+export const payloadParam = (p: object) => b64url(JSON.stringify(p));
+
+export function shareLink(r: Recipe, customIngredients: Ingredient[]): string {
+  return `${SHARE_BASE}?r=${payloadParam(recipePayload(r, customIngredients))}`;
 }
 
 export function shareText(r: Recipe, link: string): string {

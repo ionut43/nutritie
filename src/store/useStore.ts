@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { renameMemberId } from '../sync/docs';
 import { ING, setCustomIngredients } from '../data/ingredients';
 import { RECIPE, setCustomRecipes } from '../data/recipes';
 import { clearNutritionCache , perServing } from '../logic/nutrition';
@@ -53,6 +54,9 @@ export function newMember(isMain: boolean, name = ''): Member {
   };
 }
 
+export interface FamilyInfo { id: string; name: string; code: string; userId: string; people: { userId: string; name: string }[] }
+export interface SyncStatus { state: 'off' | 'syncing' | 'ok' | 'offline' | 'error'; atISO?: string; msg?: string }
+
 interface State {
   hydrated: boolean;
   onboarded: boolean;
@@ -89,6 +93,20 @@ interface State {
   priceProducts: Record<string, number[]>;
   /** ultima săptămână pentru care ai văzut rezumatul */
   lastRecapISO?: string;
+  /** familia pe mai multe telefoane (listă, cămară, plan comune) */
+  family?: FamilyInfo;
+  /** amprenta fiecărui document la ultima sincronizare (ce s-a schimbat de atunci pleacă pe server) */
+  syncBase: Record<string, string>;
+  /** starea sincronizării (nu se salvează) */
+  syncStatus: SyncStatus;
+  setFamily: (f: FamilyInfo | undefined) => void;
+  setSyncBase: (b: Record<string, string>) => void;
+  setSyncStatus: (s: SyncStatus) => void;
+  /** aplică ce a venit de pe celelalte telefoane (fără să pornească refacerea planului) */
+  applyRemote: (patch: Partial<Pick<State, 'members' | 'plans' | 'pantry' | 'settings' | 'customRecipes' | 'customIngredients'>>) => void;
+  /** un membru primește alt id peste tot (profilul tău la intrarea în familie; un membru adăugat de mână care
+   *  e de fapt cineva din familie cu telefonul lui); dacă există deja cineva cu id-ul nou, rămâne acela */
+  renameMember: (from: string, to: string) => void;
   applyReceipt: (items: { ingId: string; g: number; price?: number; name?: string }[], store?: StoreId, total?: number, nonFood?: number) => void;
   setPlanStore: (planId: string, store: StoreId) => void;
   /** un ingredient de bază pe care nu-l ai: îl pun pe listă (sau îl scot) */
@@ -177,6 +195,9 @@ const initial = {
   livePrices: undefined as LivePrices | undefined,
   priceProducts: {} as Record<string, number[]>,
   lastRecapISO: undefined as string | undefined,
+  family: undefined as FamilyInfo | undefined,
+  syncBase: {} as Record<string, string>,
+  syncStatus: { state: 'off' } as SyncStatus,
   onboarded: false,
   members: [] as Member[],
   settings: DEFAULT_SETTINGS,
@@ -211,7 +232,9 @@ const bumpSkip = (ratings: Ratings, id: string): Ratings => {
 /** datele pentru backup (fără stări temporare) */
 export function exportData() {
   const s = useStore.getState();
-  const state = Object.fromEntries(Object.keys(initial).map((k) => [k, (s as unknown as Record<string, unknown>)[k]]));
+  // familia și sincronizarea nu intră în backup (pe alt telefon intri din nou cu codul)
+  const skip = new Set(['family', 'syncBase', 'syncStatus']);
+  const state = Object.fromEntries(Object.keys(initial).filter((k) => !skip.has(k)).map((k) => [k, (s as unknown as Record<string, unknown>)[k]]));
   return { app: 'nutritie', version: 1, exportedAt: new Date().toISOString(), state: { ...state, lockEnabled: s.lockEnabled } };
 }
 
@@ -243,11 +266,15 @@ export const useStore = create<State>()(
           syncRegistry(customRecipes, s.customIngredients);
           return { customRecipes };
         }),
-        deleteRecipe: (id) => set((s) => {
-          const customRecipes = s.customRecipes.filter((x) => x.id !== id);
-          syncRegistry(customRecipes, s.customIngredients);
-          return { customRecipes };
-        }),
+        deleteRecipe: (id) => {
+          // dacă e în vreun plan, rămâne ascunsă (mesele vechi o găsesc); cele de azi încolo primesc altă rețetă
+          const s0 = get();
+          const used = Object.values(s0.plans).some((p) => p.sessions.some((x) => x.recipeId === id));
+          const customRecipes = used ? s0.customRecipes.map((x) => (x.id === id ? { ...x, hidden: true } : x)) : s0.customRecipes.filter((x) => x.id !== id);
+          syncRegistry(customRecipes, s0.customIngredients);
+          set({ customRecipes, liked: s0.liked.filter((x) => x !== id) });
+          if (used) get().refitPlans();
+        },
         saveIngredient: (i) => set((s) => {
           const customIngredients = s.customIngredients.some((x) => x.id === i.id) ? s.customIngredients.map((x) => (x.id === i.id ? i : x)) : [...s.customIngredients, i];
           syncRegistry(s.customRecipes, customIngredients);
@@ -313,11 +340,25 @@ export const useStore = create<State>()(
         },
         toggleFavFood: (ref) => set((s) => ({ favFoods: toggle(s.favFoods, ref) })),
         markRecap: (iso) => set({ lastRecapISO: iso }),
+        setFamily: (family) => set(family ? { family } : { family: undefined, syncBase: {}, syncStatus: { state: 'off' } }),
+        setSyncBase: (syncBase) => set({ syncBase }),
+        setSyncStatus: (syncStatus) => set({ syncStatus }),
+        applyRemote: (patch) => {
+          set(patch);
+          if (patch.customRecipes || patch.customIngredients) { const s = get(); syncRegistry(s.customRecipes, s.customIngredients); }
+        },
+        renameMember: (from, to) => {
+          const s = get();
+          if (!from || from === to || !s.members.some((m) => m.id === from)) return;
+          const exists = s.members.some((m) => m.id === to);
+          const slice = { members: exists ? s.members.filter((m) => m.id !== from) : s.members, plans: s.plans, foodLog: s.foodLog, weightLog: s.weightLog, mealRatings: s.mealRatings, activeMemberId: s.activeMemberId };
+          set(renameMemberId(slice, from, to));
+        },
         markBackup: () => set({ lastBackupISO: new Date().toISOString() }),
         importData: (data) => {
           const d = (data as { app?: string; state?: Record<string, unknown> }) ?? {};
           if (d.app !== 'nutritie' || !d.state || !Array.isArray(d.state.members)) return false;
-          const next = { ...initial, ...(d.state as Partial<typeof initial>), onboarded: true };
+          const next = { ...initial, ...(d.state as Partial<typeof initial>), onboarded: true, family: get().family, syncBase: {}, syncStatus: get().syncStatus };
           // backup-uri din versiuni mai vechi: aceleași reparații ca la actualizare
           next.settings = { ...DEFAULT_SETTINGS, ...next.settings };
           next.members = next.members.map((m) => ({ avoid: [], ...m }));
@@ -341,14 +382,20 @@ export const useStore = create<State>()(
           set((s) => {
             const exists = s.members.some((x) => x.id === m.id);
             const weightLog = exists ? s.weightLog : [...s.weightLog, { dateISO: todayISO(), kg: m.weightKg, memberId: m.id }];
-            return { weightLog, members: exists ? s.members.map((x) => (x.id === m.id ? m : x)) : [...s.members, m] };
+            // cine intră acum în casă mănâncă și din planul de acum (de azi încolo), nu abia de săptămâna viitoare
+            const plans = exists ? s.plans : withHousehold(s.plans, (ids) => (ids.includes(m.id) ? ids : [...ids, m.id]));
+            return { weightLog, plans, members: exists ? s.members.map((x) => (x.id === m.id ? m : x)) : [...s.members, m] };
           });
           get().refitPlans();
         },
-        removeMember: (id) => set((s) => ({
-          members: s.members.filter((m) => m.id !== id || m.isMain),
-          activeMemberId: s.activeMemberId === id ? s.members.find((m) => m.isMain)?.id : s.activeMemberId,
-        })),
+        removeMember: (id) => {
+          set((s) => ({
+            members: s.members.filter((m) => m.id !== id || m.isMain),
+            plans: withHousehold(s.plans, (ids) => ids.filter((x) => x !== id || s.members.find((m) => m.id === x)?.isMain)),
+            activeMemberId: s.activeMemberId === id ? s.members.find((m) => m.isMain)?.id : s.activeMemberId,
+          }));
+          get().refitPlans();
+        },
         updateSettings: (p) => {
           set((s) => ({ settings: { ...s.settings, ...p } }));
           if ('equipment' in p || 'fasting' in p || 'fishOnDispensation' in p) get().refitPlans();
@@ -421,8 +468,12 @@ export const useStore = create<State>()(
           };
         },
         generate: (startISO, household, seed = Math.floor(Math.random() * 1e9), store, picks) => {
+          // „Alt plan” pentru aceeași săptămână: alte feluri decât cele de acum (în afară de ce ai ales sau fixat tu)
+          const keep = new Set([...(picks?.wanted ?? []), ...(picks?.locked ?? []).map((l) => l.recipeId)]);
+          const current = Object.values(get().plans).find((p) => p.startISO === startISO);
+          const previousRecipeIds = current ? [...new Set(current.meals.map((m) => m.recipeId))].filter((id) => !keep.has(id)) : [];
           const plan = {
-            ...generatePlan({ ...get().planInput(startISO, household, seed, store), wanted: picks?.wanted, skipped: picks?.skipped, weekCuisines: picks?.cuisines, locked: picks?.locked }),
+            ...generatePlan({ ...get().planInput(startISO, household, seed, store), previousRecipeIds, wanted: picks?.wanted, skipped: picks?.skipped, weekCuisines: picks?.cuisines, locked: picks?.locked }),
             wanted: picks?.wanted, cuisines: picks?.cuisines,
             locked: picks?.locked?.map((l) => `${l.day}|${l.slot}`),
           };
@@ -472,7 +523,8 @@ export const useStore = create<State>()(
         toggleShopItem: (planId, ingId) => set((s) => {
           const p = s.plans[planId];
           if (!p) return {};
-          return { plans: { ...s.plans, [planId]: { ...p, shopping: p.shopping.map((i) => (i.ingId === ingId ? { ...i, checked: !i.checked } : i)) } } };
+          // ora bifării: pe două telefoane câștigă ultima bifă sau debifare a fiecărui produs
+          return { plans: { ...s.plans, [planId]: { ...p, shopping: p.shopping.map((i) => (i.ingId === ingId ? { ...i, checked: !i.checked } : i)), shopAt: { ...p.shopAt, [ingId]: Date.now() } } } };
         }),
         buyItems: (planId, ingIds, paid) => set((s) => {
           const p = s.plans[planId];
@@ -621,7 +673,7 @@ export const useStore = create<State>()(
           const mid = activeId(s);
           return { members: s.members.map((m) => (m.id === mid ? { ...m, kcalAdjust: m.kcalAdjust + delta } : m)) };
         }),
-        resetAll: () => set({ ...initial }),
+        resetAll: () => { syncRegistry([], []); set({ ...initial }); },
       };
     },
     {
@@ -649,7 +701,7 @@ export const useStore = create<State>()(
         activeMemberId: s.activeMemberId, lockEnabled: s.lockEnabled, customRecipes: s.customRecipes,
         customIngredients: s.customIngredients, ratings: s.ratings, mealRatings: s.mealRatings, notifyExpiry: s.notifyExpiry,
         lastBackupISO: s.lastBackupISO, receiptAliases: s.receiptAliases, storePrices: s.storePrices, spend: s.spend,
-        favFoods: s.favFoods, lastRecapISO: s.lastRecapISO, swipes: s.swipes, livePrices: s.livePrices, priceProducts: s.priceProducts,
+        favFoods: s.favFoods, lastRecapISO: s.lastRecapISO, family: s.family, syncBase: s.syncBase, swipes: s.swipes, livePrices: s.livePrices, priceProducts: s.priceProducts,
       }),
       onRehydrateStorage: () => (state) => {
         if (state) { syncRegistry(state.customRecipes ?? [], state.customIngredients ?? []); const own = state.livePrices; const bundledNewer = !!BUNDLED_PRICES.fetchedAt && (!own || String(BUNDLED_PRICES.fetchedAt) > own.fetchedAt); setLivePrices(bundledNewer ? BUNDLED_PRICES.prices as never : own?.prices); }
@@ -659,7 +711,7 @@ export const useStore = create<State>()(
   ),
 );
 
-// numele meselor („Prima masă”, „A doua masă”) urmează mereu câte mese ai ales
+// numele meselor urmează mereu mesele alese
 setLabelSlots(useStore.getState().settings.slots);
 setThemeId(useStore.getState().settings.theme);
 useStore.subscribe((s, prev) => {
@@ -677,6 +729,14 @@ const mainId = (s: { members: Member[] }) => s.members.find((m) => m.isMain)?.id
 const activeId = (s: { members: Member[] }) => mainId(s);
 
 /** membrul ale cărui date personale sunt afișate (jurnal, greutate, țintă) */
+/** schimbă cine mănâncă în planurile care nu s-au terminat încă */
+function withHousehold(plans: Record<string, WeekPlan>, fn: (ids: string[]) => string[]): Record<string, WeekPlan> {
+  const today = todayISO();
+  return Object.fromEntries(Object.entries(plans).map(([k, p]) => (
+    toISO(addDays(fromISO(p.startISO), 6)) < today ? [k, p] : [k, { ...p, household: { ...p.household, memberIds: fn(p.household.memberIds) } }]
+  )));
+}
+
 export function useActiveMember(): Member | undefined {
   return useStore((s) => s.members.find((m) => m.id === activeId(s)));
 }

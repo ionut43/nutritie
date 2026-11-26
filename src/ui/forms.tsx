@@ -12,7 +12,7 @@ import { ALLERGEN_LABEL, AVOID_LABEL, EQUIPMENT_LABEL } from '../logic/nutrition
 import { SLOT_LABEL, SLOT_ORDER } from '../logic/planner';
 import { STORES, type StoreId } from '../logic/stores';
 import type {
-  Allergen, AvoidKind, Cuisine, Diet, Equipment, FastPref, Goal, JobActivity, Member, Pregnancy, Settings, Slot, TrainType,
+  Allergen, AvoidKind, Cuisine, Diet, Equipment, FastPref, Goal, JobActivity, MealStyle, Member, SlotPref, Pregnancy, Settings, Slot, TrainType,
 } from '../logic/types';
 import type { IlloName } from './illustrations';
 import { Btn, Card, Chip, DISPLAY, Field, Icon, type IconName, IngImage, NumberField, Option, Row, Segmented, T, Tile, TileGrid, useTheme } from './kit';
@@ -156,6 +156,67 @@ const DIET_OPT: [Diet, IconName, string, string][] = [
   ['vegetarian', 'egg', 'Vegetarian', 'fără carne și pește, cu lactate și ouă'],
   ['vegan', 'leaf', 'Vegan', 'doar din plante'],
 ];
+
+/** la ce mese e acasă: unde nu e (serviciu, școală), planul nu-i pune porție și lista nu cumpără pentru el */
+export function AwayForm({ m, slots, onChange }: { m: Member; slots: Slot[]; onChange: (m: Member) => void }) {
+  const away = m.away ?? [];
+  const first = m.name.trim().split(' ')[0] || 'Membrul';
+  return (
+    <View style={{ gap: 8 }}>
+      <Row wrap gap={8}>
+        {SLOT_ORDER.filter((x) => slots.includes(x)).map((x) => {
+          const home = !away.includes(x);
+          return <Chip key={x} label={SLOT_LABEL[x]} icon={home ? 'home' : 'briefcase'} selected={home}
+            onPress={() => onChange({ ...m, away: home ? [...away, x] : away.filter((y) => y !== x) })} />;
+        })}
+      </Row>
+      <T v="small">{away.filter((x) => slots.includes(x)).length
+        ? `${first} mănâncă în oraș la ${away.filter((x) => slots.includes(x)).map((x) => SLOT_LABEL[x].toLowerCase()).join(' și ')}: nu gătești și nu cumperi pentru acele mese. La celelalte mănâncă la fel ca voi, în porția lui/ei.`
+        : `${first} mănâncă acasă la toate mesele: aceleași feluri ca voi, în porția lui/ei. Atinge o masă ca s-o scoți (de ex. prânzul, dacă mănâncă la serviciu).`}</T>
+    </View>
+  );
+}
+
+const MEAL_STYLE_OPT: [MealStyle, IconName, string, string][] = [
+  ['acasa', 'home', 'Ca acasă', 'mâncare românească de zi cu zi: ciorbă de câteva ori pe săptămână, seara de obicei masa caldă (carne cu garnitură, tocănițe), în weekend ciorbă și fel doi la prânz'],
+  ['variat', 'earth', 'Variat', 'rețete din toate bucătăriile: italienești, asiatice, mexicane…'],
+  ['usor', 'leaf', 'Mai ușor', 'supe, salate, carne slabă cu legume în loc de cartofi prăjiți'],
+];
+
+const SLOT_PREF_OPT: [SlotPref, string][] = [['orice', 'Orice'], ['ciorba', 'Ciorbă / supă'], ['fel', 'Fel principal'], ['usor', 'Ceva ușor']];
+
+/** ce vrei la fiecare masă principală: lipsă = orice (planul alege după stilul de mai sus) */
+export function SlotPrefsForm({ s, onSettings }: { s: Settings; onSettings: (p: Partial<Settings>) => void }) {
+  const mains = SLOT_ORDER.filter((x) => (x === 'pranz' || x === 'cina') && s.slots.includes(x));
+  if (!mains.length) return null;
+  return (
+    <View style={{ gap: 12 }}>
+      {mains.map((slot) => (
+        <View key={slot} style={{ gap: 6 }}>
+          <T v="small" style={{ fontWeight: '700' }}>{SLOT_LABEL[slot]}</T>
+          <Row wrap gap={8}>
+            {SLOT_PREF_OPT.map(([v, label]) => (
+              <Chip key={v} label={label} selected={(s.slotPrefs?.[slot] ?? 'orice') === v}
+                onPress={() => onSettings({ slotPrefs: { ...s.slotPrefs, [slot]: v === 'orice' ? undefined : v } })} />
+            ))}
+          </Row>
+        </View>
+      ))}
+      <T v="small">„Orice” lasă planul să aleagă după stil. Ce alegi aici e o preferință, nu o regulă: dacă nu încape în buget sau în post, îți dau ce se potrivește cel mai bine.</T>
+    </View>
+  );
+}
+
+/** cum arată mesele: ca acasă (românesc), variat sau mai ușor */
+export function MealStyleForm({ s, onSettings }: { s: Settings; onSettings: (p: Partial<Settings>) => void }) {
+  return (
+    <View style={{ gap: 10 }}>
+      {MEAL_STYLE_OPT.map(([v, icon, title, desc]) => (
+        <Option key={v} icon={icon} title={title} desc={desc} selected={(s.mealStyle ?? 'acasa') === v} onPress={() => onSettings({ mealStyle: v })} />
+      ))}
+    </View>
+  );
+}
 
 export function DietStyleForm({ m, s, onMember, onSettings }: { m: Member; s: Settings; onMember: (m: Member) => void; onSettings: (p: Partial<Settings>) => void }) {
   return (
@@ -435,9 +496,26 @@ export function CookingForm({ s, onChange }: { s: Settings; onChange: (p: Partia
       </View>
       <View style={{ gap: 8 }}>
         <T v="h3">Cât de des poți mânca același fel?</T>
+        <Option icon="sparkles" title="Fiecare masă alt fel" desc="Fără resturi: nu mănânci același fel de două ori în aceeași săptămână. Gătești mai des sau mai multe feluri odată." selected={v === 'proaspat'} onPress={() => onChange({ variety: 'proaspat' })} />
         <Option icon="shuffle" title="Cât mai variat" desc="Același fel cel mult de 2 ori (ex. cina și prânzul de a doua zi). Gătești mai multe feluri odată." selected={v === 'mare'} onPress={() => onChange({ variety: 'mare' })} />
         <Option icon="repeat" title="Echilibrat" desc="Același fel de cel mult 3 ori." selected={v === 'echilibrat'} onPress={() => onChange({ variety: 'echilibrat' })} />
         <Option icon="time" title="Gătesc rar, mult odată" desc="Accept același fel 4–5 mese. Mai puțin timp la aragaz." selected={v === 'rar'} onPress={() => onChange({ variety: 'rar' })} />
+      </View>
+      <View style={{ gap: 8 }}>
+        <T v="h3">Din aceeași oală de ciorbă mănânci…</T>
+        <Row wrap gap={8}>
+          {([[1, 'O dată și gata'], [2, '2 zile'], [3, '3 zile']] as const).map(([n, label]) => (
+            <Chip key={n} label={label} selected={(v === 'proaspat' ? 1 : s.soupDays ?? 2) === n} onPress={() => onChange({ soupDays: n, ...(v === 'proaspat' && n > 1 ? { variety: 'mare' } : {}) })} />
+          ))}
+        </Row>
+        <T v="small">La „o dată” gătești ciorbă doar cât pentru o masă.</T>
+      </View>
+      <View style={{ gap: 8 }}>
+        <T v="h3">Feluri care cer multă muncă</T>
+        <T v="small">Sarmale, musaca, lasagna, colțunași, cozonac.</T>
+        <Option icon="calendar" title="Doar în weekend" desc="În timpul săptămânii, doar feluri simple." selected={(s.effort ?? 'weekend') === 'weekend'} onPress={() => onChange({ effort: 'weekend' })} />
+        <Option icon="time" title="Oricând am timp" desc="Contează doar timpul maxim de gătit de mai jos." selected={s.effort === 'oricand'} onPress={() => onChange({ effort: 'oricand' })} />
+        <Option icon="flash" title="Deloc" desc="Doar dacă le aleg eu." selected={s.effort === 'simplu'} onPress={() => onChange({ effort: 'simplu' })} />
       </View>
       <NumberField label="Timp maxim de gătit într-o zi lucrătoare" value={s.maxPrepWeekday} step={5} min={5} max={300} suffix="min"
         onChange={(maxPrepWeekday) => onChange({ maxPrepWeekday })} />

@@ -35,7 +35,8 @@ export function itemKind(name: string, ingId?: string): ItemKind {
 
 const PRICE_END = /(-?\d{1,4}[.,]\d{2})\s*[A-Z]?\s*$/;
 const QTY = /(?:^|\s)(\d{1,3}(?:[.,]\d{1,3})?)\s*(BUC|BC|KG|KGM)?\s*[X*]\s*(\d{1,4}[.,]\d{2})/;
-const SKIP = /(TOTAL|SUBTOTAL|TVA|CARD|NUMERAR|CASH|REST\b|BON FISCAL|C\.?I\.?F|COD FISCAL|NR\.?\s*BON|PLATA|DATA|ORA|CASIER|CASA|MULTUMIM|PUNCTE|SUMA|ACHITAT|VISA|MASTERCARD|LEI\s*$)/;
+// cuvinte întregi: „BRANZA DE CASA”, „FLORA” sau „PORTOCALE” sunt produse, nu „CASA 2”, „ORA 12:30”
+const SKIP = /\b(TOTAL|SUBTOTAL|TVA|CARD|NUMERAR|CASH|REST|BON FISCAL|C\.?I\.?F|COD FISCAL|NR\.?\s*BON|PLATA|DATA|ORA|CASIER|CASA\s*(?:NR|\d)|MULTUMIM|PUNCTE|SUMA|ACHITAT|VISA|MASTERCARD)\b|\bLEI\s*$/;
 
 /** denumiri de pe bonuri → ingredient (ordinea contează: întâi cele mai specifice) */
 const MAP: [RegExp, string][] = [
@@ -47,10 +48,10 @@ const MAP: [RegExp, string][] = [
   [/SOMON/, 'somon'], [/PASTRAV/, 'pastrav'], [/MACROU|SCRUMBIE/, 'macrou'], [/\bCOD\b|MERLUCIU|HEK|PANGASIUS/, 'cod'],
   [/CREVETI/, 'creveti'], [/SARDIN/, 'sardine'], [/\bTON\b/, 'ton'],
   [/\bOUA\b|\bOUE\b|OUA /, 'oua'], [/(LAPTE|BAUTURA).*(SOIA|SOYA)/, 'lapte_soia'], [/KEFIR|\bSANA\b|LAPTE BATUT/, 'kefir'],
-  [/IAURT.*GREC|GREEK/, 'iaurt_grec'], [/IAURT/, 'iaurt'], [/BR.*VACI/, 'branza_vaci'], [/RICOTTA/, 'ricotta'],
+  [/IAURT.*GREC|GREEK/, 'iaurt_grec'], [/IAURT/, 'iaurt'], [/BR.*VACI|BRANZA (DE )?CASA|BRANZA PROASPATA/, 'branza_vaci'], [/RICOTTA/, 'ricotta'],
   [/CREMA.*BRANZ|PHILADELPHIA|CREMA DE BR/, 'crema_branza'], [/TELEMEA|\bFETA\b/, 'telemea'],
   [/MOZZARELLA/, 'mozzarella'], [/PARMEZAN|PARMIGIANO|GRANA/, 'parmezan'], [/CASCAVAL|GOUDA|EDAM|CHEDDAR|SVAIT/, 'cascaval'],
-  [/SMANTANA/, 'smantana'], [/\bUNT\b/, 'unt'], [/LAPTE/, 'lapte'], [/TOFU/, 'tofu'],
+  [/SMANTANA/, 'smantana'], [/\bUNT\b|MARGARIN|\bFLORA\b|\bRAMA\b/, 'unt'], [/LAPTE/, 'lapte'], [/TOFU/, 'tofu'],
   [/ULEI.*MASLIN|OLIVE/, 'ulei_masline'], [/ULEI/, 'ulei'], [/FAINA/, 'faina'], [/OREZ/, 'orez'],
   [/PASTE|SPAGHET|PENNE|FUSILLI|TAGLIATELL|MACAROANE|FARFALLE|LASAGN/, 'paste'], [/OVAZ/, 'ovaz'], [/MALAI|MAMALIG/, 'malai'],
   [/BULGUR/, 'bulgur'], [/CUSCUS|COUSCOUS/, 'cuscus'], [/QUINOA/, 'quinoa'], [/HRISCA/, 'hrisca'], [/\bGRIS\b/, 'gris'], [/PESMET/, 'pesmet'],
@@ -91,6 +92,9 @@ function gramsFromName(n: string): number | undefined {
 export function parseReceipt(rows: string[]): ReceiptItem[] {
   const items: ReceiptItem[] = [];
   let pending: { qty: number; unit?: 'buc' | 'kg'; unitPrice: number } | null = null;
+  // OCR-ul desparte des coloanele: numele pe un rând, „2 x 6,49” pe următorul, totalul pe încă unul
+  let nameOnly: string | null = null;
+  let skipPrice: number | null = null;
   const finish = (it: Omit<ReceiptItem, 'kind'> & { kind?: ItemKind }) => {
     const nonFood = NON_FOOD.test(norm(it.name));
     it.ingId = nonFood || (DRINK.test(norm(it.name)) && !/OTET/.test(norm(it.name))) ? undefined : matchIngredient(it.name);
@@ -117,7 +121,15 @@ export function parseReceipt(rows: string[]): ReceiptItem[] {
       if (/[A-Z]{3,}/.test(before) && !SKIP.test(before)) {
         // totul pe un rând: „PIEPT PUI 0,856 KG X 32,99 28,24 B”
         finish({ raw, name: before, total: tp ? toNum(tp[1]) : Math.round(qty * info.unitPrice * 100) / 100, ...info });
-        pending = null;
+        pending = null; nameOnly = null;
+        continue;
+      }
+      if (nameOnly) {
+        // numele a fost pe rândul de deasupra: „PIEPT PUI” / „0,850 KG x 29,99 25,49”
+        const total = tp ? toNum(tp[1]) : Math.round(qty * info.unitPrice * 100) / 100;
+        finish({ raw, name: nameOnly, total, ...info });
+        skipPrice = tp ? null : total; // totalul poate veni singur pe rândul următor
+        nameOnly = null; pending = null;
         continue;
       }
       const last = items[items.length - 1];
@@ -128,11 +140,22 @@ export function parseReceipt(rows: string[]): ReceiptItem[] {
       } else pending = info;
       continue;
     }
-    if (SKIP.test(n)) { pending = null; continue; }
+    if (SKIP.test(n)) { pending = null; nameOnly = null; skipPrice = null; continue; }
     const p = PRICE_END.exec(n);
-    if (!p) continue;
+    if (!p) {
+      const nm = cleanName(n);
+      nameOnly = /[A-Z]{3,}/.test(nm) && nm.length <= 60 ? nm : null;
+      continue;
+    }
     const total = toNum(p[1]);
     const name = cleanName(n.slice(0, p.index));
+    if (!/[A-Z]{3,}/.test(name)) {
+      // un preț singur pe rând: totalul produsului de deasupra (dacă nu l-am luat deja)
+      if (skipPrice !== null && Math.abs(skipPrice - total) < 0.06) { skipPrice = null; continue; }
+      if (nameOnly && total > 0) { finish({ raw, name: nameOnly, total }); nameOnly = null; }
+      continue;
+    }
+    nameOnly = null; skipPrice = null;
     if (total < 0 || /DISCOUNT|REDUCERE|RED\.|PROMO/.test(name)) {
       const last = items[items.length - 1];
       if (last) last.total = Math.max(0, Math.round((last.total + total) * 100) / 100);

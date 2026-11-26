@@ -11,12 +11,20 @@ import { eatenKey, useStore } from '../store/useStore';
 import { success, tick } from './haptics';
 import { Btn, FoodImage, Row, T, useTheme } from './kit';
 
+const portionText = (f: number) => {
+  const whole = Math.floor(f);
+  const frac = f - whole;
+  const q = frac >= 0.7 ? '¾' : frac >= 0.45 ? '½' : frac >= 0.2 ? '¼' : '';
+  if (!whole) return `${q} de porție`;
+  return `${whole}${q ? ` ${q}` : ''} ${whole === 1 && !q ? 'porție' : 'porții'}`;
+};
+
 /** Ce poți face cu o masă: aceleași 4 acțiuni, mereu în același loc */
 export function MealSheet({ open, mainId, onClose }: { open: { plan: WeekPlan; meal: PlannedMeal } | null; mainId: string; onClose: () => void }) {
   const t = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { toggleEaten, skipMeal, toggleLock } = useStore();
+  const { toggleEaten, skipMeal, toggleLock, members } = useStore();
   const plan = useStore((s) => (open ? s.plans[open.plan.id] : undefined));
   if (!open || !plan) return null;
   const m = open.meal;
@@ -38,6 +46,21 @@ export function MealSheet({ open, mainId, onClose }: { open: { plan: WeekPlan; m
             <T v="small">{DAY_NAMES[weekdayMon(addDays(fromISO(plan.startISO), m.day))]}, {mealLabel(m.slot).toLowerCase()}, {Math.round(mealMacros(m, mainId).kcal)} kcal{f !== 1 ? `, felul principal ×${String(f).replace('.', ',')}` : ''}</T>
           </View>
         </Row>
+        {members.length > 1 && (
+          <View style={{ gap: 4, padding: 12, borderRadius: 14, backgroundColor: t.chip }}>
+            <T v="small" style={{ fontWeight: '700' }}>Cine mănâncă</T>
+            {members.map((p) => {
+              const sh = m.shares.find((x) => x.memberId === p.id);
+              const first = p.name.trim().split(' ')[0] || 'Membru';
+              return (
+                <T key={p.id} v="small">
+                  {sh ? `${first}: ${portionText(sh.factor)} din felul principal, ${Math.round(mealMacros(m, p.id).kcal)} kcal cu tot cu garnituri` : `${first}: nu e acasă la masa asta`}
+                </T>
+              );
+            })}
+            {m.shares.filter((x) => x.memberId.startsWith('guest_')).length > 0 && <T v="small">și musafirii, câte o porție</T>}
+          </View>
+        )}
         {(m.sides ?? []).length > 0 && (
           <View style={{ gap: 8 }}>
             {(m.sides ?? []).map((sd) => {
@@ -45,7 +68,7 @@ export function MealSheet({ open, mainId, onClose }: { open: { plan: WeekPlan; m
               if (!sr) return null;
               const sf = sd.shares.find((x) => x.memberId === mainId)?.factor ?? 1;
               const sses = plan.sessions.find((x) => x.id === sd.sessionId);
-              const tappable = !sr.tags?.includes('garnitura');
+              const tappable = sr.id !== 'garnitura_paine';
               return (
                 <Pressable key={sd.recipeId} disabled={!tappable} onPress={() => go(() => router.push({ pathname: '/reteta/[id]', params: { id: sr.id, portions: String(sses?.portions ?? 1) } }))}>
                   <Row gap={12}>

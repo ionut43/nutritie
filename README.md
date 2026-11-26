@@ -115,7 +115,8 @@ Versiunile noi: în SideStore, **+** → noul `Nutritie.ipa`. Se instalează pes
 
 ```bash
 npm install
-npm test               # 35 de teste: calorii, suma zilei în țintă, mese fără ore, text liber, post, planificator, varietate, magazine, jurnal, OCR, recunoaștere
+npm test               # 52 de teste + 200 de planuri la întâmplare + fuzz pe parsere (bon, text, linkuri) + 2.500 de acțiuni la întâmplare în aplicație
+npm run fuzz           # fuzz mare: 150 de case × 150 de acțiuni (plan, schimb, bifez, cumpăr, gătesc, membri, bonuri, backup…)
 npx tsc --noEmit       # verificare TypeScript
 npx expo start --web   # previzualizare rapidă în browser (fără cameră, OCR, Face ID)
 ```
@@ -140,3 +141,12 @@ Doar fotografii reale de mâncare (nicio imagine generată); rețetele fără po
 - În aplicație: Cumpărături → „Prețuri de azi” (alegi orașul sau sectorul). Telefonul ia direct de la monitorulpreturilor.info prețurile din magazinele de pe o rază de 1,5 km, pentru produsele potrivite fiecărui ingredient (`src/data/price_products.json`, căutările în `scripts/prices/mapping.py`).
 - Pe GitHub: workflow-ul „Prețuri de azi” rulează lunea și pune prețurile în `src/data/prices_live.json`, folosite până le iei tu din aplicație.
 - Serverul nu trimite certificatul intermediar Sectigo; Android îl primește prin `plugins/withPriceCert.js`, doar pentru domeniul acela.
+
+## Familia pe mai multe telefoane și rețetele publice (Supabase)
+
+- Serverul: proiectul Supabase „Baza de date nutrition” (plan gratuit). Structura și regulile de acces sunt în `supabase/schema.sql` (se rulează în SQL Editor; se poate rula din nou fără să strice nimic).
+- Telefoanele intră fără email și parolă (Authentication → Allow anonymous sign-ins); familia se leagă cu un cod de 6 caractere.
+- Se împart: planurile (cu lista), cămara, membrii, setările casei, rețetele și ingredientele voastre (`src/sync/docs.ts`). Jurnalul, greutatea și preferințele rămân pe telefon.
+- Fiecare telefon are toate datele; serverul doar le duce între telefoane (`src/sync/family.ts`), în timp real.
+- Rețete de la alții: tabelul `public_recipes` (oricine citește, autorul publică/șterge, 5 raportări o ascund).
+- Cheia din `src/sync/config.ts` e cea „publishable” (publică). Cheia secretă și parola bazei de date nu stau în proiect.

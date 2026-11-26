@@ -96,6 +96,7 @@ function verifyPlan(name: string, input: PlanInput, p: WeekPlan) {
       const k = day.reduce((a, m) => a + mealMacros(m, per.id).kcal, 0);
       wp += day.reduce((a, m) => a + mealMacros(m, per.id).p, 0);
       check(k <= tg.kcal * 1.06 + 5, `${name}: ${per.id} ziua ${d} ${Math.round(k)} > ${tg.kcal}`);
+      if (process.argv.includes("--over") && k > tg.kcal * 1.06 + 5) console.log(`OVER ${name} ${input.settings.slots.join(",")} ${JSON.stringify(input.settings.mealStyle)} ${day.map((m) => `${m.slot}:${RECIPE[m.recipeId].name}×${m.shares.find((x) => x.memberId === per.id)?.factor}[${Math.round(mealMacros(m, per.id).kcal)}] ${(m.sides ?? []).map((x) => RECIPE[x.recipeId].name + "×" + x.shares.find((y) => y.memberId === per.id)?.factor).join(",")}`).join(" | ")}`);
       check(Number.isFinite(k), `${name}: kcal NaN`);
       if (input.settings.slots.length > 1) {
         stats.days++;
@@ -157,6 +158,14 @@ for (const r of RECIPES) {
 
 // ── fluxurile din aplicație, prin store, pe câteva profiluri ──
 {
+  // magazinul lucrează cu „azi”: îl fixez în săptămâna planului de test, ca testul să nu depindă de ziua în care rulează
+  const RealDate = Date;
+  const NOW = new RealDate('2026-11-17T12:00:00').getTime();
+  class FixedDate extends RealDate {
+    constructor(...a: unknown[]) { if (a.length) super(...(a as [string])); else super(NOW); }
+    static now() { return NOW; }
+  }
+  (globalThis as Record<string, unknown>).Date = FixedDate;
   const mem: Record<string, string> = {};
   (globalThis as Record<string, unknown>).window = { localStorage: { getItem: (k: string) => mem[k] ?? null, setItem: (k: string, v: string) => { mem[k] = v; }, removeItem: (k: string) => { delete mem[k]; } } };
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -206,7 +215,7 @@ for (const r of RECIPES) {
       if (slots.length > 2) {
         useStore.getState().setMealSlots(['pranz', 'cina']);
         const p4 = Object.values(useStore.getState().plans)[0] as WeekPlan;
-        check(p4.meals.every((x) => x.slot === 'pranz' || x.slot === 'cina'), `${name}: au rămas mese vechi`);
+        check(p4.meals.every((x) => x.slot === "pranz" || x.slot === "cina"), `${name}: au rămas mese vechi ${JSON.stringify(slots)} ${[...new Set(p4.meals.map((x) => x.slot))]} planuri ${Object.keys(useStore.getState().plans).length}`);
       }
       // backup și restaurare
       const data = JSON.parse(JSON.stringify(exportData()));
@@ -217,6 +226,7 @@ for (const r of RECIPES) {
       check(false, `${name}: a căzut: ${(e as Error).stack?.split('\n').slice(0, 4).join(' ')}`);
     }
   }
+  (globalThis as Record<string, unknown>).Date = RealDate;
   console.log('fluxuri din aplicație: 25 de profiluri');
 }
 
